@@ -1,0 +1,12 @@
+26c26
+<   Let AT     = Eval Cbv Beta Delta [A] Iota in (A FT)
+---
+>   Let AT     = Eval Cbv Beta Delta [A] Iota in (Field_Theory.A FT)
+51c51
+<   Let AT = Eval Cbv Beta Delta [A] Iota in (A FT) In
+---
+>   Let AT = Eval Cbv Beta Delta [A] Iota in (Field_Theory.A FT) In
+76c76
+<   Let AT     = Eval Cbv Beta Delta [A] Iota in (A FT)
+---
+>   Let AT     = Eval Cbv Beta Delta [A] Iota in (Field_Theory.A FT)
