@@ -115,7 +115,7 @@ apply
 apply centre_gravite_homothetie with (1 := H1); auto.
 Qed.
 Comments Image
-  "file://C:/Documents and Settings/Frédérique Guilhot/.pcoq/figures/f1043165035.gif".
+  "file://C:/Documents and Settings/FrÃ©dÃ©rique Guilhot/.pcoq/figures/f1043165035.gif".
  
 Lemma symetrique_milieu_cercle :
  forall A B C A' B' C' O G H I J : PO,
@@ -156,12 +156,12 @@ Lemma symetrique_milieu_milieu :
  I = milieu O H -> J = milieu A H -> J = symetrie I A'.
 unfold symetrie in |- *; intros.
 Comments Image
-  "file://C:/Documents and Settings/Frédérique Guilhot/.pcoq/figures/f1043312519.gif".
+  "file://C:/Documents and Settings/FrÃ©dÃ©rique Guilhot/.pcoq/figures/f1043312519.gif".
 elim existence_homothetique with (k := -1) (I := I) (A := A'); intros L H13.
 rewrite <- H13.
 apply vecteur_nul_conf.
 Comments Image
-  "file://C:/Documents and Settings/Frédérique Guilhot/.pcoq/figures/f1043312668.gif".
+  "file://C:/Documents and Settings/FrÃ©dÃ©rique Guilhot/.pcoq/figures/f1043312668.gif".
 cut (vec H L = vec H J); intros.
 replace (vec J L) with (add_PP (vec H L) (mult_PP (-1) (vec H J)));
  [ idtac | Ringvec ].
@@ -303,7 +303,7 @@ apply
  (symetrique_milieu_milieu (A:=A) (B:=B) (C:=C) (A':=A') (B':=B') (C':=C')
     (O:=O) (G:=G) (H:=H) (I:=I) (J:=J)); auto.
 Comments Image
-  "file://C:/Documents and Settings/Frédérique Guilhot/.pcoq/figures/f1043314145.gif".
+  "file://C:/Documents and Settings/FrÃ©dÃ©rique Guilhot/.pcoq/figures/f1043314145.gif".
 apply
  (pied_hauteur_cercle (A:=A) (B:=B) (C:=C) (A':=A') (B':=B') (C':=C') (O:=O)
     (G:=G) (H:=H) (I:=I) (J:=J) (HA:=H1)); auto.

@@ -17,7 +17,7 @@
 Require Export angles_vecteurs.
 Set Implicit Arguments.
 Unset Strict Implicit.
-(* Le plan est orienté et on utilise le cercle trigonométrique*)
+(* Le plan est orientÃ© et on utilise le cercle trigonomÃ©trique*)
  
 Definition repere_orthonormal_direct (O I J : PO) :=
   image_angle pisurdeux = cons_AV (vec O I) (vec O J) /\
@@ -26,8 +26,8 @@ Parameter cos : R -> R.
 Parameter sin : R -> R.
 Parameter Cos : AV -> R.
 Parameter Sin : AV -> R.
-(* cosinus et sinus d'un angle (ou d'un réel) sont obtenus par projections
-   du point image du cercle trigonométrique sur les axes de coordonnées*)
+(* cosinus et sinus d'un angle (ou d'un rÃ©el) sont obtenus par projections
+   du point image du cercle trigonomÃ©trique sur les axes de coordonnÃ©es*)
  
 Axiom
   def_cos :

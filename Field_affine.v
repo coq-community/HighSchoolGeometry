@@ -38,7 +38,7 @@ Parameter fPO : PO -> AM.
 Parameter fPP : PP -> AM.
  
 Axiom fPP_inj : forall A B : PP, fPP A = fPP B -> A = B.
-(* Transports des opérations *)
+(* Transports des opÃ©rations *)
 Axiom fRadd : forall x y : R, fR (x + y) = plusAM (fR x) (fR y).
 Axiom fRmult : forall x y : R, fR (x * y) = multAM (fR x) (fR y).
 Axiom fRopp : forall x : R, fR (- x) = oppAM (fR x).

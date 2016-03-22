@@ -235,7 +235,7 @@ Ltac soit_circonscrit A B C O :=
       intros toto; elim toto; clear toto;
       [ intros; applatit_and | auto | auto ]
    | auto ].
-(* deroule_circonscrit ne marche que si on a (cisrconscrit O A B C) dans les hypothèses*)
+(* deroule_circonscrit ne marche que si on a (cisrconscrit O A B C) dans les hypothÃ¨ses*)
  
 Ltac deroule_circonscrit A B C O :=
   elim (circonscrit_triangle_non_point (O:=O) (A:=A) (B:=B) (C:=C));

@@ -24,14 +24,14 @@ Parameter opp : AV -> AV.
  
 Axiom
   existence_AB_unitaire : exists A : PO, (exists B : PO, distance A B = 1).
-(* Tout angle a un représentant non unique parmi les angles orientés de vecteurs unitaires*)
+(* Tout angle a un reprÃ©sentant non unique parmi les angles orientÃ©s de vecteurs unitaires*)
  
 Axiom
   existence_representant_cons :
     forall (a : AV) (A B C : PO),
     distance A B = 1 ->
     exists D : PO, distance C D = 1 /\ a = cons_AV (vec A B) (vec C D).
-(* Tout angle orienté de vecteurs non nuls est égal à l'angle orienté des vecteurs unitaires correspondants*)
+(* Tout angle orientÃ© de vecteurs non nuls est Ã©gal Ã  l'angle orientÃ© des vecteurs unitaires correspondants*)
  
 Axiom
   angles_representants_unitaires :
@@ -57,7 +57,7 @@ Axiom
     A <> B ->
     C <> D -> opp (cons_AV (vec A B) (vec C D)) = cons_AV (vec C D) (vec A B).
 Parameter AV0 : AV.
-(* Enroulement de R sur le cercle trigonométrique*)
+(* Enroulement de R sur le cercle trigonomÃ©trique*)
 Parameter image_angle : R -> AV.
  
 Axiom AV0_zero : AV0 = image_angle 0.
@@ -74,7 +74,7 @@ Axiom
     A <> B :>PO ->
     C <> D :>PO ->
     exists x : R, image_angle x = cons_AV (vec A B) (vec C D) :>AV.
-(* Compatibilité des opérations *)
+(* CompatibilitÃ© des opÃ©rations *)
  
 Axiom
   add_mes_compatible :
