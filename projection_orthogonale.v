@@ -88,7 +88,7 @@ Ltac soit_projete A B C H :=
 Lemma existence_perpendiculaire :
  forall A B C : PO, A <> B -> exists D : PO, orthogonal (vec A B) (vec C D).
 intros A B C H0; try assumption.
-soit_projete A B C ipattern:H.
+soit_projete A B C H.
 exists H.
 auto with geo.
 Qed.

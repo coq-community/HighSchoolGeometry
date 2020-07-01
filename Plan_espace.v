@@ -320,9 +320,9 @@ intros.
 elim H9; intros c H10; elim H10; intros d H11; try clear H10 H9;
  try exact H11.
 elim H8; intros a H9; elim H9; intros b H10; try clear H9 H8; try exact H10.
-hcoplanaires H5 ipattern:x ipattern:k'.
-hcoplanaires H6 ipattern:x0 ipattern:k'0.
-hcoplanaires H7 ipattern:x1 ipattern:k'1.
+hcoplanaires H5 x k'.
+hcoplanaires H6 x0 k'0.
+hcoplanaires H7 x1 k'1.
 apply
  (vecteur_def_coplanaires
     (k:=x1 + -1 * (x0 * a + k'0 * c) + (x * a + k' * c))

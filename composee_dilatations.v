@@ -188,28 +188,19 @@ elim
  intros; auto with *.
 rewrite H4; rewrite H30; auto.
 rewrite H2.
+rewrite H1.
 pattern 1 at 1 in |- *.
 replace 1 with (-1 + 2); [ idtac | try ring ].
-rewrite <- add_PP_barycentre; auto.
-rewrite <- add_PP_barycentre; auto.
-pattern 1 at 3 in |- *.
-replace 1 with (k + (1 + - k)); [ idtac | try ring ].
-rewrite H1.
-rewrite <- add_PP_barycentre; auto.
-pattern 1 at 4 in |- *.
-replace 1 with (k + (1 + - k)); [ idtac | try ring ].
-rewrite <- add_PP_barycentre; auto.
-pattern (1 + - k) at 2 in |- *.
-replace (1 + - k) with (1 + (-1 + (1 + - k))); [ idtac | try ring ].
-rewrite <- add_PP_barycentre; auto.
-rewrite <- add_PP_barycentre; auto.
+rewrite <- add_PP_barycentre; try lra.
+replace 2 with (1 + 1) by ring.
+rewrite <- add_PP_barycentre; try lra.
+replace 1 with (k + (1 + - k)) at 2; try ring.
+rewrite <- add_PP_barycentre; try lra.
+replace 1 with (k + (1 + - k)) at 3; try ring.
+rewrite <- add_PP_barycentre; try lra.
+replace (1 + - k) with  (1 + (-1 + (1 + - k))) at 2; try ring.
+rewrite <-!add_PP_barycentre; try lra.
 RingPP.
-replace (-1 + (1 + - k)) with (- k); try ring; auto with *.
-replace (1 + (-1 + (1 + - k))) with (1 + - k); try ring; auto with *.
-replace (k + (1 + - k)) with 1; try ring; auto with *.
-replace (k + (1 + - k)) with 1; try ring; auto with *.
-discrR.
-replace (-1 + 2) with 1; try ring; auto with *.
 Qed.
  
 Lemma composee_homothetie_translation_exists :
@@ -238,6 +229,7 @@ Lemma composee_translation_homothetie :
  barycentre (cons (- k) A)
    (cons (k + (1 + - k)) (barycentre (cons k A') (cons (1 + - k) I))) :>PO ->
  B' = homothetie k J B.
+Proof.
 unfold translation, homothetie in |- *;
  intros k A A' B B' B1 I J H H0 H1 H2 H30.
 elim
@@ -254,37 +246,20 @@ elim
  intros; auto with *.
 rewrite H4; rewrite H30; auto.
 rewrite H2.
-cut (cons k B1 = add_PP (cons (- k) A) (add_PP (cons k A') (cons k B)));
- intros.
-pattern 1 at 1 in |- *.
-replace 1 with (k + (1 + - k)); [ idtac | try ring ].
-rewrite <- add_PP_barycentre; auto.
-rewrite H3.
-pattern 1 at 2 in |- *.
-replace 1 with (k + (1 + - k)); [ idtac | try ring ].
-rewrite <- add_PP_barycentre; auto.
-pattern (1 + - k) at 2 in |- *.
-replace (1 + - k) with (- k + (k + (1 + - k))); [ idtac | try ring ].
-rewrite <- add_PP_barycentre; auto.
-rewrite <- add_PP_barycentre; auto.
-RingPP.
-replace (k + (1 + - k)) with 1; try ring; auto with *.
-replace (- k + (k + (1 + - k))) with (1 + - k); try ring; auto with *.
-replace (k + (1 + - k)) with 1; try ring; auto with *.
-replace (k + (1 + - k)) with 1; try ring; auto with *.
-apply mult_PP_regulier with (/ k); auto with real.
-replace
- (mult_PP (/ k) (add_PP (cons (- k) A) (add_PP (cons k A') (cons k B)))) with
- (add_PP (cons (-1) A) (add_PP (cons 1 A') (cons 1 B))).
-replace (mult_PP (/ k) (cons k B1)) with (cons 1 B1).
 rewrite H1.
-pattern 1 at 1 in |- *.
-replace 1 with (-1 + 2); [ idtac | try ring ].
-rewrite <- add_PP_barycentre; auto with real.
-rewrite <- add_PP_barycentre; auto with real.
-discrR.
-Fieldvec k.
-Fieldvec k.
+replace 1 with (k + (1 + - k)) at 1; [ idtac | try ring ].
+rewrite <- add_PP_barycentre; try lra.
+rewrite <- (homogene_barycentre (a:=(- 1)) (b:=2) (k:=k)); try lra.
+replace k with (k * -1 + k * 2) at 1 by ring.
+rewrite <- add_PP_barycentre; try lra.
+rewrite <- (homogene_barycentre (a:=1) (b:=1) (k:=k)); try lra.
+replace (k * 2) with (k * 1 + k * 1) at 1 by ring.
+rewrite <- add_PP_barycentre; try lra.
+replace 1 with (k + (1 + - k)) at 4; try lra.
+rewrite <- add_PP_barycentre; try lra.
+replace (1 + - k) with ((- k) + (k + (1 + - k))) at 2; try lra.
+rewrite <-!add_PP_barycentre; try lra.
+RingPP.
 Qed.
  
 Lemma composee_translation_homothetie_exists :

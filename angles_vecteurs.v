@@ -609,7 +609,7 @@ intros.
 replace (vec B C) with (mult_PP 2 (vec B I)); auto with geo.
 apply angle_produit_positif_l; auto.
 rewrite H1; apply milieu_distinct; auto.
-fourier.
+lra.
 rewrite <- (milieu_vecteur_double (A:=B) (B:=C) (M:=I)); auto.
 Qed.
  
@@ -623,7 +623,7 @@ intros.
 replace (vec C B) with (mult_PP 2 (vec C I)); auto with geo.
 apply angle_produit_positif_r2; auto.
 rewrite H1; apply milieu_distinct2; auto.
-fourier.
+lra.
 rewrite <- (milieu_vecteur_double (A:=C) (B:=B) (M:=I)); auto with geo.
 Qed.
  
@@ -641,7 +641,7 @@ apply angle_produit_negatif_l; auto.
 cut (B <> M); intros; auto.
 rewrite H1; apply milieu_distinct; auto.
 rewrite H1; apply milieu_distinct2; auto.
-fourier.
+lra.
 Qed.
  
 Axiom
@@ -672,7 +672,7 @@ replace (distance A B * k0) with (distance A C) by (rewrite H3 in |- *;  ring).
 rewrite H2 in |- *;  ring.
 replace k0 with (Rabs k0); auto with geo real.
 apply Rabs_right; auto with real.
-fourier.
+lra.
 Qed.
  
 Lemma angle_pi_negatif_colineaire :

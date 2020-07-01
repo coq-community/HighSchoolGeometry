@@ -107,7 +107,7 @@ Theorem paralleles_homothetie :
  exists k : R, I = homothetie k A B :>PO /\ J = homothetie k A C :>PO.
 intros.
 deroule_triangle A B C.
-halignes H1 ipattern:x.
+halignes H1 x.
 cut (triangle B C A); intros; auto with geo.
 elim (classic (x = 0)); intros.
 cut (A = I); intros.

@@ -31,26 +31,25 @@ Qed.
 Lemma add_PP_milieu :
  forall A B : PO, add_PP (cons 1 A) (cons 1 B) = cons 2 (milieu A B) :>PP.
 unfold milieu in |- *; intros.
+replace 2 with (1 + 1) by ring.
 repeat rewrite <- add_PP_barycentre; auto.
-discrR.
+lra.
 Qed.
  
 Lemma milieu_trivial : forall A : PO, A = milieu A A :>PO.
 intros.
 apply conversion_PP with (a := 2) (b := 2); auto.
 rewrite <- add_PP_milieu; RingPP.
-discrR.
 Qed.
  
 Lemma prop_vecteur_milieu :
  forall B C A' O : PO,
  A' = milieu B C :>PO -> add_PP (vec O B) (vec O C) = mult_PP 2 (vec O A').
 unfold milieu in |- *; intros.
-generalize (prop_vecteur_bary (a:=1) (b:=1) (A:=B) (B:=C) (G:=A') O);
- intros H5.
+replace 2 with (1 + 1) by ring.
 rewrite <- (prop_vecteur_bary (a:=1) (b:=1) (A:=B) (B:=C) (G:=A') O); auto.
 Ringvec.
-discrR.
+lra.
 Qed.
  
 Lemma alignes_milieu :
@@ -58,7 +57,7 @@ Lemma alignes_milieu :
 unfold milieu in |- *; intros.
 rewrite H.
 apply barycentre_alignes.
-discrR.
+lra.
 Qed.
  
 Lemma add_PP_milieu_asso :
@@ -200,7 +199,7 @@ deroule_triangle A B C.
 red in |- *; intros; apply H3.
 assert (A' <> B').
 apply (deux_milieux_distincts (A:=B) (B:=C) (C:=A)); auto with geo.
-halignes H7 ipattern:k.
+halignes H7 k.
 apply colineaire_alignes with k; auto.
 rewrite <- (droite_milieu (A:=B) (B:=A) (C:=C) (I:=C') (J:=A'));
  auto with geo.
@@ -227,6 +226,7 @@ Lemma centre_gravite_ordre_cycle :
 unfold centre_gravite in |- *; intros.
 generalize (add_PP_milieu_permute A B C); intros.
 apply conversion_PP with (a := 3) (b := 3); auto with *.
+replace 3 with (1 + 2) by ring.
 rewrite <- add_PP_barycentre; try discrR; auto with *.
 rewrite <- add_PP_barycentre; try discrR; auto with *.
 rewrite H.
@@ -239,6 +239,7 @@ Lemma centre_gravite_ordre_cycle2 :
 unfold centre_gravite in |- *; intros.
 generalize (add_PP_milieu_asso A B C); intros.
 apply conversion_PP with (a := 3) (b := 3); auto with *.
+replace 3 with (1 + 2) by ring.
 rewrite <- add_PP_barycentre; try discrR; auto with *.
 rewrite <- add_PP_barycentre; try discrR; auto with *.
 rewrite H.
@@ -261,7 +262,7 @@ intros.
 deroule_triangle A B C.
 red in |- *; intros; apply H2.
 cut (A <> J); intros.
-halignes H6 ipattern:k.
+halignes H6 k.
 cut (k <> 0); intros.
 apply colineaire_alignes with ((1 + - k) * / k).
 replace (vec A C) with (mult_PP 2 (vec J I)).
@@ -284,6 +285,7 @@ unfold centre_gravite in |- *; intros.
 rewrite <- H in H0.
 cut (3 <> 0); intros; auto with real.
 apply mult_PP_regulier with 3; auto.
+replace 3 with (1 + 2) by ring.
 rewrite <- (prop_vecteur_bary (a:=1) (b:=2) (A:=A) (B:=I) (G:=G) A); auto.
 Fieldvec 3.
 Qed.

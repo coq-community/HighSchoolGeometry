@@ -132,7 +132,7 @@ rewrite H14.
 cut (~ orthogonal (vec A C) (vec B C)); intros.
 red in |- *; intros; apply H15.
 assert (alignes B K C); auto with geo.
-halignes H17 ipattern:k.
+halignes H17 k.
 apply ortho_sym.
 rewrite H18.
 Simplortho.
@@ -143,7 +143,7 @@ auto with geo.
 apply unicite_projete_orthogonal with (2 := H7) (3 := H8); auto with geo.
 left.
 red in |- *; intros; apply H13.
-halignes H14 ipattern:k.
+halignes H14 k.
 apply ortho_sym.
 replace (vec B C) with (mult_PP (-1) (vec C B)); [ idtac | Ringvec ].
 rewrite H15.
@@ -233,8 +233,8 @@ cut (B <> K); intros.
 cut (~ alignes C H B \/ ~ alignes C H K); intros.
 elim def_pt_intersection2 with (A := C) (B := H) (C := B) (D := K) (I := I);
  [ try clear def_pt_intersection2; intros | auto | auto | auto | auto ].
-halignes H16 ipattern:k.
-halignes H15 ipattern:k0.
+halignes H16 k.
+halignes H15 k0.
 cut (orthogonal (vec I B) (vec A C) /\ orthogonal (vec I C) (vec A B));
  intros.
 elim H19; intros H20 H21; try clear H19; try exact H21.

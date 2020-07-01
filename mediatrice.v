@@ -38,7 +38,7 @@ Lemma alignes_mediatrice_milieu :
  forall A B M : PO,
  A <> B -> alignes A B M -> mediatrice A B M -> M = milieu A B :>PO.
 unfold mediatrice in |- *; intros.
-halignes H0 ipattern:k.
+halignes H0 k.
 cut (k = / 2); intros.
 rewrite H3 in H2.
 apply vecteur_milieu; auto.
@@ -207,8 +207,8 @@ Lemma existence_mediatrice :
  forall A B : PO,
  A <> B :>PO -> ex (fun J : PO => milieu A B <> J :>PO /\ mediatrice A B J).
 intros.
-soit_milieu A B ipattern:M.
-soit_orthogonal M A ipattern:J.
+soit_milieu A B M.
+soit_orthogonal M A J.
 exists J.
 split; [ try assumption | idtac ].
 apply orthogonale_segment_milieu_mediatrice with M; auto.

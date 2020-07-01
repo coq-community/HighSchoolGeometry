@@ -45,7 +45,7 @@ Lemma vec_OAplusOBplusOC_orthocentre :
  M = orthocentre A B C.
 intros.
 deroule_triangle A B C.
-soit_milieu B C ipattern:A'.
+soit_milieu B C A'.
 lapply
  (vec_OAplusOBplusOC_orthogonal (A:=A) (B:=B) (C:=C) (A':=A') (O:=O) (M:=M));
  intros; auto.
@@ -53,14 +53,14 @@ cut (orthogonal (vec C M) (vec A B)); intros.
 cut (orthogonal (vec B M) (vec C A)); intros.
 apply orthocentre_def; auto with geo.
 cut (orthogonal (vec A M) (vec B C)); intros; auto with geo.
-soit_milieu A C ipattern:B'.
+soit_milieu A C B'.
 apply
  (vec_OAplusOBplusOC_orthogonal (A:=B) (B:=C) (C:=A) (A':=B') (O:=O) (M:=M));
  auto with geo.
 apply circonscrit_permute; auto.
 apply circonscrit_permute; auto.
 rewrite H1; Ringvec.
-soit_milieu A B ipattern:C'.
+soit_milieu A B C'.
 apply
  (vec_OAplusOBplusOC_orthogonal (A:=C) (B:=A) (C:=B) (A':=C') (O:=O) (M:=M));
  auto.
@@ -74,12 +74,14 @@ Lemma centre_gravite_prop_vecteur :
  add_PP (vec O A) (add_PP (vec O B) (vec O C)) = mult_PP 3 (vec O G).
 unfold centre_gravite in |- *; intros.
 discrimine B C.
+replace 3 with (1 + 2) by ring.
 rewrite <- (prop_vecteur_bary (a:=1) (b:=2) (A:=A) (B:=C) (G:=G) O); auto.
 Ringvec.
 discrR.
 rewrite H; rewrite H0; rewrite <- (milieu_trivial C); auto.
-soit_milieu B C ipattern:A'.
+soit_milieu B C A'.
 rewrite (prop_vecteur_milieu (B:=B) (C:=C) (A':=A') O); auto.
+replace 3 with (1 + 2) by ring.
 rewrite <- (prop_vecteur_bary (a:=1) (b:=2) (A:=A) (B:=A') (G:=G) O); auto.
 Ringvec.
 discrR.

@@ -105,8 +105,8 @@ Lemma Sin_angles_alignes :
  forall A B C : PO,
  A <> B -> A <> C -> alignes A B C -> Sin (cons_AV (vec A B) (vec A C)) = 0.
 intros.
-deroule_representant_unitaire A B ipattern:D.
-deroule_representant_unitaire A C ipattern:E.
+deroule_representant_unitaire A B D.
+deroule_representant_unitaire A C E.
 rewrite angles_representants_unitaires; auto.
 elim alignes_representant_unitaire with (A := A) (B := B) (C := C);
  [ intros H12 | intros H12 | auto | auto | auto ].
@@ -193,8 +193,8 @@ cut (A <> E); intros.
 elim existence_representant_vecteur with (A := A) (B := C) (C := D);
  [ intros F H4; rewrite <- H4; intros ].
 cut (A <> F); intros.
-deroule_representant_unitaire A B ipattern:G.
-deroule_representant_unitaire A F ipattern:L.
+deroule_representant_unitaire A B G.
+deroule_representant_unitaire A F L.
 rewrite def_aire; auto.
 rewrite def_aire; auto.
 rewrite angles_representants_unitaires; auto.
@@ -273,8 +273,8 @@ discrimine C D.
 exists 0.
 Ringvec.
 cut (Sin (cons_AV (vec A B) (vec C D)) = 0); intros.
-deroule_representant_unitaire A B ipattern:E.
-deroule_representant_unitaire C D ipattern:J.
+deroule_representant_unitaire A B E.
+deroule_representant_unitaire C D J.
 elim existence_representant_vecteur with (A := A) (B := C) (C := J);
  [ intros F H14; intros ].
 elim existence_ROND_AB with (A := A) (B := E);
@@ -284,9 +284,9 @@ cut
   add_PP (mult_PP (Cos (cons_AV (vec A E) (vec A F))) (vec A E))
     (mult_PP (Sin (cons_AV (vec A E) (vec A F))) (vec A G))); 
  intros.
-halignes H4 ipattern:k.
+halignes H4 k.
 assert (alignes C J D); auto with geo.
-halignes H17 ipattern:k'.
+halignes H17 k'.
 cut (Sin (cons_AV (vec A E) (vec A F)) = 0); intros.
 rewrite H18; rewrite <- H14; rewrite H15.
 pattern (vec A E) at 2 in |- *; rewrite H16; rewrite H19.

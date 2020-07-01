@@ -228,7 +228,7 @@ Lemma composantes_projete_orthogonal :
 intros.
 elim def_projete_orthogonal2 with (A := O) (B := I) (C := M) (H := H);
  [ intros | auto with geo | auto ].
-halignes H2 ipattern:k.
+halignes H2 k.
 absurd (O = I); auto with geo.
 cut (vec H M = add_PP (mult_PP (a + - k) (vec O I)) (mult_PP b (vec O J)));
  intros.
@@ -279,7 +279,7 @@ rewrite <- H; auto with geo.
 elim (classic (alignes O I M)); intros.
 rewrite <- reflexion_axe; auto with geo.
 apply egalite_affixe_point with (1 := H2) (2 := H1); auto.
-halignes H0 ipattern:k.
+halignes H0 k.
 absurd (O = I); auto with geo.
 cut (z = cons_cart k 0); intros.
 2: apply cart_point_complexe with M; auto.

@@ -81,8 +81,8 @@ intros.
 apply def_orthogonales; auto.
 lapply (def_orthogonales2 (A:=A) (B:=B) (C:=D) (D:=E)); auto; intros.
 lapply (def_orthogonales2 (A:=A) (B:=C) (C:=D) (D:=E)); auto; intros.
-hcoplanaires H3 ipattern:k ipattern:k'.
-hcoplanaires H4 ipattern:k0 ipattern:k'0.
+hcoplanaires H3 k k'.
+hcoplanaires H4 k0 k'0.
 replace (vec F G) with (add_PP (mult_PP (-1) (vec A F)) (vec A G)).
 rewrite H4.
 rewrite H3.

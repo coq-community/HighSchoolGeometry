@@ -482,6 +482,7 @@ Lemma duplication_cos : forall a : R, cos (2 * a) = 2 * Rsqr (cos a) + -1.
 intros.
 repeat rewrite double.
 rewrite cos_som.
+replace (-1) with (-(1)) by ring.
 rewrite <- (trigo_Pythagore a).
 unfold Rsqr; ring.
 Qed.

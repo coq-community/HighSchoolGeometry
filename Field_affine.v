@@ -42,9 +42,16 @@ Axiom fPP_inj : forall A B : PP, fPP A = fPP B -> A = B.
 Axiom fRadd : forall x y : R, fR (x + y) = plusAM (fR x) (fR y).
 Axiom fRmult : forall x y : R, fR (x * y) = multAM (fR x) (fR y).
 Axiom fRopp : forall x : R, fR (- x) = oppAM (fR x).
+Axiom fR2x : forall x : positive, 
+  fR (IZR (Z.pos x~0)) = multAM (plusAM unAM unAM) (fR (IZR (Z.pos x))).
+Axiom fR2x1 : forall x : positive, 
+  fR (IZR (Z.pos x~1)) = 
+    plusAM (fR 1) (multAM (plusAM unAM unAM) (fR (IZR (Z.pos x)))).
+Axiom fRZN : forall x : positive, 
+  fR (IZR (Z.neg x)) = oppAM (fR (IZR (Z.pos x))).
 Axiom fR0 : fR 0 = zeroAM.
 Axiom fR1 : fR 1 = unAM.
-Hypothesis
+Axiom
   fcons : forall (x : R) (A : PO), fPP (cons x A) = multAM (fR x) (fPO A).
 Axiom
   fmult : forall (x : R) (A : PP), fPP (mult_PP x A) = multAM (fR x) (fPP A).
@@ -79,15 +86,17 @@ Ltac RewriteAM :=
            rewrite fRadd ||
              rewrite fRmult ||
                rewrite fR0 ||
+               rewrite fRZN ||
+               rewrite fR2x||
+               rewrite fR2x1 ||
                  rewrite fzeroPP ||
                    (rewrite fRinv; [ idtac | auto ]) || rewrite fR1.
  
 Ltac RingPP := apply fPP_inj; RewriteAM; (ring || ring_simplify).
- 
+
 Lemma l1 : forall A B C : PP, add_PP A B = C -> A = add_PP C (mult_PP (-1) B).
 intros.
-rewrite <- H.
-RingPP.
+rewrite <- H; RingPP.
 Qed.
  
 Lemma l2 : forall A B C : PP, add_PP A B = C -> B = add_PP C (mult_PP (-1) A).
@@ -101,8 +110,10 @@ Ltac RingPP1 H := rewrite (l1 H).
 Ltac RingPP2 H := rewrite (l2 H).
  
 Ltac FieldPP k :=
-  apply fPP_inj; RewriteAM; field; generalize (nonzeroAM (k:=k)); RewriteAM;
-   auto.
+  apply fPP_inj; RewriteAM; field; 
+  let H := fresh "H" in intro H;
+  case (@nonzeroAM k);
+   [try lra | RewriteAM; rewrite <- H; try (ring || ring_simplify); auto].
  
 Lemma add_PP_zero : forall (P : PP) (A : PO), add_PP P (cons 0 A) = P.
 intros; RingPP.
@@ -150,7 +161,7 @@ Qed.
  
 Lemma mult_PP_regulier :
  forall (k : R) (P Q : PP), k <> 0 -> mult_PP k P = mult_PP k Q -> P = Q :>PP.
-intros.
+intros k P Q Hk H0.
 replace P with (mult_PP (/ k) (mult_PP k P)).
 rewrite H0.
 FieldPP k.

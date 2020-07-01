@@ -62,7 +62,7 @@ Lemma hauteur_isocele_mediane :
  orthogonal (vec B C) (vec I A) ->
  isocele A B C -> alignes B C I -> I = milieu B C.
 intros A B C I H0 H1 H2 H3; try assumption.
-soit_projete B C A ipattern:H.
+soit_projete B C A H.
 apply mediatrice_projete_milieu with A; auto.
 rewrite <- H4.
 apply unicite_projete_orthogonal with (3 := H1); auto.
@@ -85,7 +85,7 @@ Lemma isocele_angles_base :
  B <> C ->
  isocele A B C -> cons_AV (vec B C) (vec B A) = cons_AV (vec C A) (vec C B).
 intros A B C H H0 H1; try assumption.
-soit_milieu B C ipattern:K.
+soit_milieu B C K.
 elim (classic (A = K)); intros.
 apply permute_angles; auto.
 rewrite <- H6 in H5.

@@ -511,7 +511,6 @@ Lemma argument_module_un :
  forall a : R, argument (cons_pol 1 a) = image_angle a.
 intros.
 rewrite (complexe_polaire_argument (r:=1) a); intros; auto with geo.
-discrR.
 Qed.
  
 Lemma polaire_produit :

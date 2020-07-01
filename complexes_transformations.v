@@ -129,9 +129,9 @@ rewrite affixe_transforme; rewrite affixe_image; auto with geo.
 Qed.
 Parameters (a : C) (b : C).
 Parameter f : C -> C.
-Hypothesis f_def : forall z : C, f z = Cplus (Cmult a z) b.
+Axiom f_def : forall z : C, f z = Cplus (Cmult a z) b.
 Parameter g : PO -> PO.
-Hypothesis g_def : forall M : PO, g M = transforme f M.
+Axiom g_def : forall M : PO, g M = transforme f M.
  
 Lemma explicitation :
  forall (z z' : C) (M M' : PO),

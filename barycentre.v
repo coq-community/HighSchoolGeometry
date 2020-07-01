@@ -187,12 +187,11 @@ Lemma existence_representant_vecteur :
  forall A B C : PO, ex (fun D : PO => vec A D = vec B C :>PP).
 unfold vec in |- *; intros.
 exists (barycentre (cons (-1) B) (cons 2 (barycentre (cons 1 A) (cons 1 C)))).
-pattern 1 at 2 in |- *.
+replace 2 with (1 + 1) by ring.
+pattern 1 at 1 in |- *.
 RReplace 1 (-1 + 2).
-repeat rewrite <- add_PP_barycentre; auto.
+rewrite <-!add_PP_barycentre; try lra.
 RingPP.
-discrR.
-discrR.
 Qed.
  
 Lemma existence_representant_mult_vecteur :
@@ -209,31 +208,25 @@ rewrite H0; Ringvec.
 unfold vec in |- *.
 exists
  (barycentre (cons (- k) B) (cons (1 + k) (barycentre (cons 1 A) (cons k C)))).
-pattern 1 at 2 in |- *.
+pattern 1 at 1 in |- *.
 RReplace 1 (- k + (1 + k)).
-repeat rewrite <- add_PP_barycentre; auto.
+repeat rewrite <- add_PP_barycentre; try lra.
 RingPP.
-unfold not in |- *; intros; apply H.
-RReplace k (1 + k + -1).
-rewrite H0.
-ring.
-RReplace (- k + (1 + k)) 1.
-auto with *.
 Qed.
- 
+
+
 Lemma existence_representant_som_vecteur :
  forall A B C D : PO,
  ex (fun E : PO => vec A E = add_PP (vec A B) (vec C D) :>PP).
 intros.
 unfold vec in |- *.
 exists (barycentre (cons (-1) C) (cons 2 (barycentre (cons 1 B) (cons 1 D)))).
-pattern 1 at 2 in |- *.
+pattern 1 at 1 in |- *.
 RReplace 1 (-1 + 2).
-repeat rewrite <- add_PP_barycentre; auto.
+rewrite <- add_PP_barycentre; try lra.
+RReplace 2 (1 + 1).
+rewrite <- add_PP_barycentre; try lra.
 RingPP.
-discrR.
-RReplace (-1 + 2) 1.
-discrR.
 Qed.
  
 Lemma existence_representant_comb_lin_vecteur :
@@ -441,11 +434,11 @@ assert (vec A1 A = vec B1 B).
 unfold vec in |- *.
 RingPP1 H2.
 RingPP.
-halignes H1 ipattern:k.
+halignes H1 k.
 assert (A1 = A); auto with geo.
 apply vecteur_nul_conf.
 rewrite H3; rewrite H1; Ringvec.
-halignes H0 ipattern:k0.
+halignes H0 k0.
 apply colineaire_alignes with (k0 + - k).
 VReplace (vec A B) (add_PP (vec A S) (mult_PP (-1) (vec B S))).
 rewrite H5; rewrite H4.
@@ -478,9 +471,6 @@ rewrite H5 in H4.
 apply conversion_PP with (a := 1) (b := 1); auto.
 rewrite H4; auto.
 auto with *.
-replace k0 with (k2 + (k0 + - k2)); auto.
-rewrite H0; ring.
-ring.
 cut
  (cons (k0 + - k2) B =
   add_PP (cons (k0 * k3 + - (k2 * k1)) A)

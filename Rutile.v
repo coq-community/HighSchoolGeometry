@@ -17,7 +17,9 @@
 Require Export Rbase.
 Require Export Rfunctions.
 Require Export R_sqrt.
-Require Export Fourier.
+Require Export Lra.
+
+Open Scope R_scope.
  
 Lemma def_sqrt : forall x : R, x >= 0 -> sqrt x * sqrt x = x.
 intros.
@@ -107,7 +109,7 @@ Qed.
 Lemma deux_demi : 2 * / 2 = 1.
 cut (2 <> 0); intros.
 auto with real.
-try discrR.
+try lra.
 Qed.
 Hint Resolve deux_demi: real.
  
@@ -121,11 +123,14 @@ Hint Resolve deux_demi_a: real.
  
 Lemma integre_not : forall a b : R, a <> 0 -> b <> 0 -> a * b <> 0.
 intros.
-apply Rmult_integral_contrapositive; (split; auto; try discrR).
+apply Rmult_integral_contrapositive; (split; auto; try lra).
 Qed.
 Hint Resolve integre_not: real.
  
-Axiom lR14 : 1 + - / 2 = / 2.
+Lemma lR14 : 1 + - / 2 = / 2.
+Proof.
+field.
+Qed.
 Hint Resolve lR14: real.
  
 Lemma lR15 : forall k : R, k * k = (1 + - k) * (1 + - k) -> k = / 2.
@@ -151,21 +156,14 @@ replace (- (- (2 * k) + (k * k + 1))) with (2 * k + - (k * k + 1)).
 ring.
 ring.
 ring.
-discrR.
+lra.
 Qed.
 Hint Resolve lR15: real.
  
 Lemma lR20 : forall a : R, ~ a >= 0 -> -1 * a >= 0.
 intros.
-replace (-1 * a) with (- a).
-cut (0 <= - a); intros.
-auto with real.
-apply Ropp_0_ge_le_contravar.
-cut (0 > a); intros.
-fourier.
-apply Rfourier_not_le_gt; intros.
-apply H; auto with real.
-ring.
+replace (-1 * a) with (- a) by ring.
+lra.
 Qed.
 Hint Resolve lR20: real.
  
@@ -181,42 +179,40 @@ Lemma opp_inv_demi_nonzero : - / 2 <> 0.
 cut (-2 <> 0); intros.
 replace (- / 2) with (/ -2); auto with real.
 rewrite Ropp_inv_permute; auto with real.
-discrR.
+lra.
 Qed.
 Hint Resolve opp_inv_demi_nonzero: real.
  
 Lemma nonzero_un : 1 <> 0.
-discrR.
+lra.
 Qed.
  
 Lemma nonzero_oppun : -1 <> 0.
-discrR.
+lra.
 Qed.
  
 Lemma nonzero_deux : 2 <> 0.
-discrR.
+lra.
 Qed.
  
 Lemma nonzero_oppdeux : -2 <> 0.
-discrR.
+lra.
 Qed.
  
 Lemma nonzero_invdeux : / 2 <> 0.
-cut (2 <> 0); intros; auto with real.
-discrR.
+lra.
 Qed.
  
 Lemma nonzero_trois : 3 <> 0.
-discrR.
+lra.
 Qed.
  
 Lemma nonzero_opptrois : -3 <> 0.
-discrR.
+lra.
 Qed.
  
 Lemma nonzero_invtrois : / 3 <> 0.
-cut (3 <> 0); intros; auto with real.
-discrR.
+lra.
 Qed.
 Hint Resolve nonzero_invtrois nonzero_opptrois nonzero_trois nonzero_invdeux
   nonzero_oppdeux nonzero_deux nonzero_oppun nonzero_un: real.

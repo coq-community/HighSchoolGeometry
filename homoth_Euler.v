@@ -227,9 +227,9 @@ generalize
 deroule_triangle A B C.
 elim def_projete_orthogonal2 with (A := B) (B := C) (C := A) (H := HA);
  [ intros | auto | auto ].
-halignes H15 ipattern:k.
+halignes H15 k.
 cut (alignes B C A'); intros; auto with geo.
-halignes H18 ipattern:k0.
+halignes H18 k0.
 cut (orthogonal (vec B C) (vec HA J)); intros.
 replace (vec HA A') with (add_PP (vec B A') (mult_PP (-1) (vec B HA)));
  [ idtac | Ringvec ].
@@ -240,11 +240,11 @@ Simplortho.
 apply ortho_sym.
 cut (alignes A H J); intros; auto with geo.
 cut (alignes A HA H); intros.
-halignes H20 ipattern:x.
+halignes H20 x.
 assert (J = A).
 rewrite H8; rewrite <- H20; auto with geo.
 rewrite H22; auto with geo.
-halignes H21 ipattern:y.
+halignes H21 y.
 absurd (A = HA); auto.
 red in |- *; intros; apply H10.
 rewrite H21; auto with geo.

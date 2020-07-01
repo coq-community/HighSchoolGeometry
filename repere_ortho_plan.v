@@ -30,7 +30,7 @@ intros; red in |- *.
 cut (scalaire (vec O I) (vec O J) = 0); intros.
 split; [ idtac | try assumption ].
 red in |- *; red in |- *; red in |- *; intros.
-halignes H3 ipattern:k.
+halignes H3 k.
 rewrite H4 in H2.
 rewrite scalaire_mult_d in H2.
 elim (classic (k = 0)); intros.

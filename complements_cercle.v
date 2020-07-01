@@ -25,8 +25,8 @@ Lemma triangle_rectangle_demi_cercle :
  ex
    (fun O : PO =>
     circonscrit O A B C /\ cons_AV (vec O B) (vec O C) = image_angle pi).
-intros; deroule_triangle A ipattern:B ipattern:C.
-soit_circonscrit A B C ipattern:D.
+intros; deroule_triangle A B C.
+soit_circonscrit A B C D.
 exists D.
 split; [ try assumption | idtac ].
 rewrite <- (angle_inscrit (O:=D) (A:=A) (B:=B) (C:=C)); auto.
@@ -39,7 +39,7 @@ Lemma triangle_demi_cercle_rectangle :
  circonscrit O A B C ->
  cons_AV (vec O B) (vec O C) = image_angle pi ->
  orthogonal (vec A B) (vec A C).
-intros; deroule_triangle A ipattern:B ipattern:C.
+intros; deroule_triangle A B C.
 deroule_circonscrit A B C O.
 apply angles_orthogonal; auto.
 rewrite (angle_inscrit (O:=O) (A:=A) (B:=B) (C:=C)); auto.
@@ -238,7 +238,7 @@ intros.
 generalize H; unfold sont_cocycliques, diametre_circonscrit in |- *; intros.
 elim H0;
  [ intros O H1; elim H1; [ intros H2 H3; try clear H1 H0; try exact H3 ] ].
-symetrique O A ipattern:A'.
+symetrique O A A'.
 exists A'; exists O.
 tauto.
 Qed.

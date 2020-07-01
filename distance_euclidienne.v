@@ -72,7 +72,7 @@ cut
   scalaire (vec A C) (vec A C) = 1 /\ scalaire (vec A B) (vec A C) >= 0);
  intros.
 elim H1; intros H2 H3; elim H3; intros H4 H5; try clear H3 H1; try exact H5.
-halignes H2 ipattern:k.
+halignes H2 k.
 rewrite H1 in H4.
 cut (/ scalaire (vec A B) (vec A B) = k * k); intros.
 cut (k = sqrt (/ scalaire (vec A B) (vec A B))); intros.

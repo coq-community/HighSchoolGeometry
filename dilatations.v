@@ -25,9 +25,11 @@ Lemma translation_vecteur :
  forall I J A A' : PO, A' = translation I J A -> vec I J = vec A A'.
 unfold vec, translation in |- *; intros.
 rewrite H.
-pattern 1 at 4 in |- *.
+pattern 1 at 2 in |- *.
 replace 1 with (-1 + 2); try ring.
-repeat rewrite <- add_PP_barycentre; try discrR; auto.
+rewrite <- add_PP_barycentre; try discrR.
+replace 2 with (1 + 1) by ring.
+rewrite <- add_PP_barycentre; try discrR.
 RingPP.
 Qed.
  
@@ -41,6 +43,7 @@ Qed.
  
 Lemma rec_translation_vecteur :
  forall I J A A' : PO, vec I J = vec A A' :>PP -> A' = translation I J A :>PO.
+Proof.
 unfold vec, translation in |- *; intros.
 elim
  cons_inj
@@ -50,7 +53,8 @@ elim
     (A := A')
     (B := barycentre (cons (-1) I)
             (cons 2 (barycentre (cons 1 J) (cons 1 A)))); 
- intros; auto with *.
+intros; auto with *.
+replace 2 with (1 + 1) at 2 by ring.
 repeat rewrite <- add_PP_barycentre; try discrR.
 RingPP1 H.
 RingPP.
@@ -139,7 +143,7 @@ intros I J A A' B B' C C' H H0 H1 H2; try assumption.
 discrimine A B.
 assert (A' = B'); auto with geo.
 rewrite H0; rewrite <- H3; auto.
-halignes H2 ipattern:k.
+halignes H2 k.
 apply colineaire_alignes with k.
 rewrite <-
  (translation_bipoint (I:=I) (J:=J) (A:=A) (A':=A') (B:=B) (B':=B'))
@@ -230,7 +234,7 @@ Definition homothetie (k : R) (I A : PO) :=
  
 Lemma homothetie_identite : forall I A : PO, A = homothetie 1 I A.
 unfold homothetie, vec in |- *; intros.
-replace (1 + -1) with 0; try ring; auto.
+replace (1 + -(1)) with 0; try ring; auto.
 rewrite barycentre_zero; auto with *.
 Qed.
  
@@ -264,7 +268,7 @@ Lemma homothetie_vecteur :
  A' = homothetie k I A -> vec I A' = mult_PP k (vec I A).
 unfold homothetie, vec in |- *; intros.
 rewrite H.
-pattern 1 at 2 in |- *.
+pattern 1 at 1 in |- *.
 replace 1 with (k + (1 + - k)); try ring.
 repeat rewrite <- add_PP_barycentre; try discrR.
 RingPP.
@@ -353,16 +357,10 @@ rewrite H0.
 replace (cons (-1) (barycentre (cons k A) (cons (1 + - k) I))) with
  (mult_PP (-1) (cons 1 (barycentre (cons k A) (cons (1 + - k) I)))); 
  try ring; auto.
-pattern 1 at 2 in |- *.
+pattern 1 at 1 3 in |- *.
 replace 1 with (k + (1 + - k)); try ring.
-pattern 1 at 4 in |- *.
-replace 1 with (k + (1 + - k)); try ring.
-repeat rewrite <- add_PP_barycentre; try discrR.
+repeat rewrite <- add_PP_barycentre; try lra.
 RingPP.
-replace (k + (1 + - k)) with 1; try ring.
-try discrR.
-replace (k + (1 + - k)) with 1; try ring.
-try discrR.
 RingPP.
 Qed.
  
@@ -372,6 +370,7 @@ Lemma homothetie_milieu :
  A' = homothetie k I A :>PO ->
  B' = homothetie k I B :>PO ->
  M = milieu A B :>PO -> N = milieu A' B' :>PO -> homothetie k I M = N.
+Proof.
 unfold homothetie, milieu in |- *; intros.
 rewrite H2; rewrite H3; rewrite H1; rewrite H0.
 elim
@@ -384,30 +383,17 @@ elim
     (B := barycentre (cons 1 (barycentre (cons k A) (cons (1 + - k) I)))
             (cons 1 (barycentre (cons k B) (cons (1 + - k) I))));
  (intros; auto); try discrR.
-repeat rewrite <- add_PP_barycentre; try discrR.
-replace 2 with (2 * (k + (1 + - k))); try ring; auto.
-rewrite <-
- (homogene_barycentre (a:=k) (b:=1 + - k) (k:=2)
-    (barycentre (cons 1 A) (cons 1 B)) I); try discrR.
-replace (2 * (k + (1 + - k))) with (2 * k + 2 * (1 + - k)); try ring;
- try discrR.
-repeat rewrite <- add_PP_barycentre; try discrR.
-rewrite <- (homogene_barycentre (a:=1) (b:=1) (k:=k) A B); auto; try discrR.
-replace (2 * k) with (k * 1 + k * 1); try ring; auto.
-repeat rewrite <- add_PP_barycentre; auto; try discrR.
-pattern 1 at 6 in |- *.
-replace 1 with (k + (1 + - k)); try ring; auto.
-repeat rewrite <- add_PP_barycentre; try discrR.
-pattern 1 at 7 in |- *.
-replace 1 with (k + (1 + - k)); try ring; auto.
-repeat rewrite <- add_PP_barycentre; try discrR.
+rewrite <- (homogene_barycentre (a:=k) (b:=1 + - k) (k:=2)); try lra.
+replace 2 with (2 * k + 2 * (1 + - k)) at 1 by lra.
+rewrite <- add_PP_barycentre; auto; try lra.
+rewrite <- (homogene_barycentre (a:=1) (b:=1) (k:=k)); try lra.
+replace (2 * k) with (k * 1 + k * 1) by ring.
+rewrite <- add_PP_barycentre; auto; try lra.
+replace 2 with (1 + 1) at 2 by ring.
+rewrite <- add_PP_barycentre; auto; try lra.
+replace 1 with (k + (1 + - k)) at 4 6 by ring.
+rewrite <-!add_PP_barycentre; auto; try lra.
 RingPP.
-replace (k + (1 + - k)) with 1; try ring; try discrR.
-replace (k + (1 + - k)) with 1; try ring; try discrR.
-replace (k * 1 + k * 1) with (k * 2); try ring; auto.
-apply Rmult_integral_contrapositive; (split; auto; try discrR).
-replace (2 * k + 2 * (1 + - k)) with (2 * 1); try ring; try discrR.
-replace (k + (1 + - k)) with 1; try ring; try discrR.
 Qed.
  
 Lemma image_homothetie_distincts :
@@ -458,7 +444,7 @@ intros k I A B A' B' C C' H H0 H1 H2; try assumption.
 discrimine A B.
 assert (A' = B'); auto with geo.
 rewrite H0; rewrite <- H3; auto.
-halignes H2 ipattern:k0.
+halignes H2 k0.
 apply colineaire_alignes with k0.
 rewrite (homothetie_bipoint (k:=k) (I:=I) (A:=A) (B:=B) (A':=A') (B':=B'));
  auto.

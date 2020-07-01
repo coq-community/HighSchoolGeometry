@@ -207,7 +207,7 @@ Lemma alignes_non_orthogonal :
  A <> B :>PO ->
  A <> C :>PO -> alignes A B C -> ~ orthogonal (vec A B) (vec A C).
 intros.
-halignes H1 ipattern:x.
+halignes H1 x.
 cut (x <> 0); intros.
 2: apply distinct_col_nonzero with (2 := H2); auto.
 apply non_orthogonal_def.
@@ -234,7 +234,7 @@ Lemma orthogonal_alignement :
  alignes A B C ->
  orthogonal (vec A B) (vec C D) -> orthogonal (vec C D) (vec C B).
 intros.
-halignes H0 ipattern:x.
+halignes H0 x.
 apply ortho_sym.
 replace (vec C B) with (add_PP (vec A B) (mult_PP (-1) (vec A C))).
 rewrite H2.
@@ -251,7 +251,7 @@ Lemma orthogonal_alignement2 :
  alignes A B C ->
  orthogonal (vec A B) (vec C D) -> orthogonal (vec C D) (vec C A).
 intros.
-halignes H0 ipattern:x.
+halignes H0 x.
 apply ortho_sym.
 replace (vec C A) with (mult_PP (-1) (vec A C)).
 rewrite H2.
@@ -280,7 +280,7 @@ Lemma alignes_unitaire :
  vec A C = mult_PP (scalaire (vec A B) (vec A C)) (vec A B).
 intros.
 assert (A <> B); auto with geo.
-halignes H ipattern:x.
+halignes H x.
 pattern (vec A C) at 2 in |- *.
 rewrite H2.
 Simplscal.
@@ -297,7 +297,7 @@ intros.
 discrimine A B.
 VReplace (vec B B) (mult_PP 0 (vec B C)).
 Simplscal.
-halignes H0 ipattern:k.
+halignes H0 k.
 replace (vec A C) with (add_PP (vec A H) (vec H C)).
 Simplscal.
 replace (scalaire (vec A B) (vec H C)) with 0.
@@ -314,8 +314,8 @@ Lemma scalaire_alignes :
  alignes A B D ->
  scalaire (vec A B) (vec A C) = scalaire (vec A B) (vec A D) -> C = D.
 intros A B C D H H0 H10 H1; try assumption.
-halignes H0 ipattern:k.
-halignes H10 ipattern:k'.
+halignes H0 k.
+halignes H10 k'.
 rewrite H2 in H1.
 rewrite H3 in H1.
 repeat rewrite scalaire_mult_d in H1.

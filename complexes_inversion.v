@@ -70,7 +70,7 @@ rewrite (passage_algebrique_module H).
 rewrite Rsqr_sqrt; auto.
 assert (0 <= Rsqr x); auto with real.
 assert (0 <= Rsqr y); auto with real.
-fourier.
+lra.
 Qed.
  
 Lemma produit_Conj_module :
@@ -89,7 +89,7 @@ unfold Rsqr, Rinj in |- *.
 RReplace (x * x + - (y * - y)) (x * x + y * y); auto.
 assert (0 <= Rsqr x); auto with real.
 assert (0 <= Rsqr y); auto with real.
-fourier.
+lra.
 Qed.
  
 Lemma Rinj_Cmult : forall x y : R, Rinj (x * y) = Cmult (Rinj x) (Rinj y).
@@ -330,12 +330,13 @@ Theorem inversion_negatif_complexe :
  z = affixe_vec (vec O M) :>C ->
  z' = affixe_vec (vec O M') :>C ->
  M' = inversion O k M :>PO -> z' = Cmult (Rinj k) (Cinv (Conj z)).
+Proof.
 intros.
 assert (k <> 0); auto with real.
 assert (z <> zeroC).
 apply points_distincts_non_zeroC with (1 := H); auto with geo.
 assert (Conj z <> zeroC); auto with geo.
-symetrique O M ipattern:N.
+let N := fresh "N" in symetrique O M N.
 assert (M' = inversion O (- k) N).
 apply inversion_oppose_puissance with (3 := H3); auto.
 assert (- k > 0); auto with real.
@@ -414,7 +415,6 @@ rewrite Cinv_def; auto.
 ring.
 unfold Rsqr in |- *.
 assert (module z <> 0); auto with geo.
-auto with real.
 Qed.
  
 Theorem ecriture_complexe_inversion_pole_origine :

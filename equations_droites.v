@@ -321,7 +321,7 @@ Lemma existence_vec_normal :
  forall A B : PO,
  A <> B -> exists C : PO, (exists D : PO, vec_normal (vec C D) (droite A B)).
 intros.
-soit_orthogonal A B ipattern:D.
+soit_orthogonal A B D.
 exists A; exists D; auto with geo.
 Qed.
  

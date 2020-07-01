@@ -114,7 +114,7 @@ Lemma cercle_diametre_trivial : forall A B : PO, cercle_diametre A B A.
 icercle.
 discrimine A B.
 exists B; split; auto with geo.
-soit_milieu A B ipattern:M.
+soit_milieu A B M.
 exists M.
 split; auto.
 split; auto with geo.
@@ -124,7 +124,7 @@ Lemma cercle_diametre_trivial2 : forall A B : PO, cercle_diametre A B B.
 icercle.
 discrimine A B.
 exists B; split; auto with geo.
-soit_milieu A B ipattern:M.
+soit_milieu A B M.
 exists M.
 split; auto.
 split; auto with geo.
@@ -168,7 +168,7 @@ Lemma existence_rayon_diametre :
  forall A B O : PO,
  cercle_rayon O A B -> exists C : PO, cercle_diametre A C B.
 unfold cercle_rayon, isocele in |- *; intros.
-symetrique O A ipattern:M.
+symetrique O A M.
 exists M.
 icercle.
 exists O.
@@ -202,7 +202,7 @@ rewrite <- H5.
 symmetry  in |- *.
 assert (distance O B = 0); auto with geo.
 rewrite <- H4; rewrite <- H5; auto with geo.
-halignes H ipattern:k.
+halignes H k.
 elim (classic (k = 0)); intros.
 left; symmetry  in |- *.
 apply (produit_zero_conf H5); auto.

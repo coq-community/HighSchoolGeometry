@@ -494,7 +494,7 @@ Lemma angles_orthogonal :
  double_AV (cons_AV (vec A B) (vec C D)) = image_angle pi :>AV ->
  orthogonal (vec A B) (vec C D).
 intros.
-soit_orthogonal A B ipattern:E.
+soit_orthogonal A B E.
 apply ortho_sym.
 apply paralleles_orthogonal with (A := A) (B := E); auto with geo.
 apply droites_paralleles_angle; auto.

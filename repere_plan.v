@@ -32,7 +32,7 @@ Lemma existence_coordonnees :
       vec O M = add_PP (mult_PP x (vec O I)) (mult_PP y (vec O J))).
 unfold repere, triangle in |- *; intros.
 assert (coplanaires O I J M); auto with geo.
-hcoplanaires H0 ipattern:k ipattern:k'.
+hcoplanaires H0 k k'.
 exists k; exists k'; auto.
 Qed.
  
@@ -63,9 +63,9 @@ Lemma composantes_vecteur :
       vec M N = add_PP (mult_PP x (vec O I)) (mult_PP y (vec O J))).
 unfold repere, triangle in |- *; intros.
 assert (coplanaires O I J M); auto with geo.
-hcoplanaires H0 ipattern:k ipattern:k'.
+hcoplanaires H0 k k'.
 assert (coplanaires O I J N); auto with geo.
-hcoplanaires H1 ipattern:k0 ipattern:k'0.
+hcoplanaires H1 k0 k'0.
 replace (vec M N) with (add_PP (vec O N) (mult_PP (-1) (vec O M))).
 rewrite H1; rewrite H0.
 exists (k0 + -1 * k); exists (k'0 + -1 * k').

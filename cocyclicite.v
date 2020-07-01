@@ -159,8 +159,8 @@ Theorem existence_cercle_circonscrit :
  forall A B C : PO, triangle A B C -> ex (fun O : PO => circonscrit O A B C).
 intros.
 deroule_triangle A B C.
-soit_mediatrice A B ipattern:M ipattern:K.
-soit_mediatrice B C ipattern:J ipattern:L.
+soit_mediatrice A B M K.
+soit_mediatrice B C J L.
 lapply
  (mediatrices_triangle_concours (A:=A) (B:=B) (C:=C) (I:=M) (J:=J) (K:=K)
     (L:=L)); auto; intros.
@@ -201,7 +201,7 @@ intros.
 elim existence_cercle_circonscrit with (A := A) (B := B) (C := C);
  [ unfold circonscrit, isocele in |- *; intros O H0; try exact H0 | auto ].
 exists O.
-symetrique O A ipattern:D.
+symetrique O A D.
 exists D.
 split; [ try assumption | idtac ].
 applatit_and.
@@ -401,8 +401,8 @@ Theorem unicite_circonscrit_triangle :
  triangle A B C -> circonscrit O A B C -> circonscrit O1 A B C -> O = O1.
 intros.
 deroule_triangle A B C.
-soit_mediatrice A B ipattern:M ipattern:K.
-soit_mediatrice B C ipattern:J ipattern:L.
+soit_mediatrice A B M K.
+soit_mediatrice B C J L.
 lapply
  (mediatrices_triangle_concours (A:=A) (B:=B) (C:=C) (I:=M) (J:=J) (K:=K)
     (L:=L)); auto; intros.
@@ -434,7 +434,7 @@ apply alignes_angle; auto.
 rewrite <- H36.
 apply angle_alignes; auto.
 rewrite <- H101.
-halignes H34 ipattern:x.
+halignes H34 x.
 absurd (J = M); auto.
 cut (vec J L = mult_PP (- x) (vec M J)); intros.
 cut (vec M K = mult_PP 1 (vec M K)); intros.
@@ -492,8 +492,8 @@ Theorem reciproque_cocyclicite :
 unfold sont_cocycliques in |- *; intros.
 deroule_triangle A B C.
 deroule_triangle A B D.
-soit_circonscrit A B C ipattern:O2.
-soit_circonscrit A B D ipattern:O1.
+soit_circonscrit A B C O2.
+soit_circonscrit A B D O1.
 mesure C A C B.
 lapply (angle_inscrit2 (O:=O2) (A:=A) (B:=B) (C:=C)); auto; intros.
 lapply (angle_inscrit2 (O:=O1) (A:=A) (B:=B) (C:=D)); auto; intros.
@@ -507,7 +507,7 @@ cut (double_AV (cons_AV (vec C A) (vec C B)) <> image_angle 0);
 cut (O2 = O1); intros.
 rewrite H21.
 elim H12; auto.
-soit_mediatrice A B ipattern:M ipattern:J.
+soit_mediatrice A B M J.
 elim (circonscrit_mediatrice (O:=O2) (A:=A) (B:=B) (C:=C)); try assumption;
  intros H60 H61.
 elim H61; clear H61; intros H61 H62.

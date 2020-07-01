@@ -412,7 +412,7 @@ VReplace (cons (-1) I) (mult_PP (-1) (cons 1 I)).
 RingPP2 H11.
 Ringvec.
 unfold coplanaires in |- *.
-hPPalignes H9 ipattern:k.
+hPPalignes H9 k.
 right; try assumption.
 exists k; exists 0.
 rewrite H9; RingPP.
@@ -530,8 +530,6 @@ cut (add_PP (cons (-1) E) (cons 1 F) = add_PP (cons (-1) I) (cons 1 K));
 RingPP2 H16.
 rewrite H15; RingPP.
 auto with *.
-unfold not in |- *; intros; apply H0.
-rewrite H14; auto with geo.
 elim H12; [ intros H13 H14; try clear H12; try exact H14 ].
 elim def_contact2 with (A := A) (B := B) (C := C) (D := E) (E := F);
  [ intros K H12; try clear def_perce2; try exact H8

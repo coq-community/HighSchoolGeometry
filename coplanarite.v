@@ -117,7 +117,7 @@ Qed.
 Lemma alignes_coplanaires :
  forall A B C D : PO, alignes A B C -> coplanaires A B D C.
 intros.
-halignes H ipattern:a.
+halignes H a.
 apply vecteur_def_coplanaires with (k := a) (k' := 0).
 rewrite H0.
 Ringvec.

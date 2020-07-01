@@ -433,7 +433,7 @@ rewrite <- H13; auto.
 apply conversion_PP with (a := 1) (b := 1); auto.
 RingPP2 H6; Ringvec.
 auto with real.
-halignes H9 ipattern:x0.
+halignes H9 x0.
 apply colineaire_alignes with (x0 + / x).
 replace (vec C M1) with (add_PP (vec C M) (vec M M1)).
 rewrite H12.

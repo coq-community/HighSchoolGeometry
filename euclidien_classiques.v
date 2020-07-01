@@ -145,7 +145,7 @@ Lemma Pythagore_projete_orthogonal :
 intros.
 elim def_projete_orthogonal2 with (A := A) (B := B) (C := C) (H := H);
  [ intros; auto | auto | auto ].
-halignes H2 ipattern:k.
+halignes H2 k.
 split; [ try assumption | idtac ].
 elim (Pythagore H A C); intros.
 apply H5.
@@ -215,7 +215,7 @@ cut (0 <= distance H B); auto with geo real.
 RReplace (Rsqr (distance H B) + Rsqr (distance H C))
  (Rsqr (distance H C) + Rsqr (distance H B)).
 rewrite distance_sym; auto with real.
-halignes H3 ipattern:k.
+halignes H3 k.
 VReplace (vec H B) (add_PP (vec A B) (mult_PP (-1) (vec A H))).
 rewrite H7.
 VReplace (add_PP (vec A B) (mult_PP (-1) (mult_PP k (vec A B))))

@@ -105,7 +105,7 @@ generalize
 generalize (reflexion_def (A:=A) (B:=B) (M:=M) (M':=M') (H:=H)); intros.
 elim def_projete_orthogonal2 with (A := A) (B := B) (C := M) (H := H);
  [ intros | auto | auto ].
-halignes H7 ipattern:k.
+halignes H7 k.
 split; [ try assumption | idtac ].
 elim (classic (H = A)); intros.
 rewrite <- H10.
@@ -238,13 +238,13 @@ Lemma axe_reflexion_droite :
 intros A B C M M' H10 H0 H1 H2; try assumption.
 elim existence_projete_orthogonal with (A := A) (B := B) (C := M);
  [ intros H H4; try clear existence_projete_orthogonal; try exact H3 | auto ].
-halignes H1 ipattern:k.
+halignes H1 k.
 elim def_projete_orthogonal2 with (A := A) (B := B) (C := M) (H := H);
  [ intros | auto | auto ].
 apply reflexion_def2 with H; auto.
 apply def_projete_orthogonal.
 auto.
-halignes H5 ipattern:k0.
+halignes H5 k0.
 elim (classic (k = 0)); intros.
 absurd (A = C); auto.
 rewrite H8 in H3.
@@ -700,7 +700,7 @@ Lemma mediatrices_reflexion :
  mediatrice M M' A -> mediatrice M M' B -> M' = reflexion A B M.
 intros A B M M' H0 H1 H2 H3; try assumption.
 cut (A <> B); intros H; [ idtac | auto with geo ].
-soit_milieu M M' ipattern:K.
+soit_milieu M M' K.
 apply reflexion_def2 with K; auto with geo.
 apply def_projete_orthogonal; auto.
 discrimine K A.

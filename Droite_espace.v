@@ -56,8 +56,8 @@ elim def_concours2 with (A := A) (B := B) (C := C) (D := D);
  | auto
  | auto
  | auto ].
-hPPalignes H2 ipattern:k.
-hPPalignes H1 ipattern:k0.
+hPPalignes H2 k.
+hPPalignes H1 k0.
 cut
  (add_PP (cons k C) (cons (1 + - k) D) =
   add_PP (cons k0 A) (cons (1 + - k0) B)); intros.
@@ -88,7 +88,7 @@ Lemma droites_non_paralleles :
 intros A B C D H20 H21 H; try assumption.
 elim (classic (coplanaires A B C D)); intros.
 left; try assumption.
-hPPcoplanaires H0 ipattern:a ipattern:b.
+hPPcoplanaires H0 a b.
 apply def_concours with C; auto with geo.
 cut (a + b <> 0); intros.
 apply def_concours with (barycentre (cons a A) (cons b B)); auto.

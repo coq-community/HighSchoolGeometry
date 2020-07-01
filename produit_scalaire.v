@@ -181,8 +181,8 @@ Lemma egalite_scalaire_alignes :
  alignes A B D ->
  scalaire (vec A B) (vec A C) = scalaire (vec A B) (vec A D) -> C = D.
 intros.
-halignes H0 ipattern:x.
-halignes H1 ipattern:x0.
+halignes H0 x.
+halignes H1 x0.
 assert (x = x0).
 apply Rmult_eq_reg_l with (scalaire (vec A B) (vec A B)); auto with geo real.
 replace (scalaire (vec A B) (vec A B) * x) with

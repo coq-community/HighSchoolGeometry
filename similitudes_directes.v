@@ -56,7 +56,7 @@ cut (distance I M' = Rabs k * distance I M1); intros.
 2: apply distance_homothetie with I; auto with geo.
 apply similitude_def2; auto.
 rewrite H5; rewrite H3; rewrite Rabs_right; auto.
-fourier.
+lra.
 rewrite H4; auto.
 cut (vec I M' = mult_PP k (vec I M1)); intros.
 symmetry  in |- *;
@@ -85,7 +85,7 @@ elim rotation_def with (I := I) (A := M1) (B := M') (a := a);
  [ intros | auto | auto ].
 apply similitude_def2; auto.
 rewrite <- H7; rewrite H4; rewrite Rabs_right; auto.
-fourier.
+lra.
 rewrite H8.
 apply permute_angles; auto.
 rewrite (angle_produit_positif_r (k:=k) (A:=I) (B:=M) (C:=M1) (D:=I) (E:=M'));
@@ -112,13 +112,13 @@ Lemma similitude_rapport_un :
 intros.
 discrimine I A.
 rewrite <- rotation_def_centre; rewrite <- similitude_def_centre; auto.
-fourier.
+lra.
 elim existence_rotation_Ia with (I := I) (M := A) (a := a); intros B; intros.
 cut (B = homothetie 1 I B); intros.
 2: apply homothetie_identite.
 rewrite <- H0.
 apply composee_rotation_homothetie_pos with B; auto.
-fourier.
+lra.
 Qed.
  
 Lemma similitude_angle_nul :
@@ -263,7 +263,7 @@ intros I M M' k H; try assumption.
 discrimine I M.
 rewrite <- homothetie_centre.
 rewrite <- similitude_def_centre; auto.
-fourier.
+lra.
 intros.
 cut (vec I M' = mult_PP k (vec I M)); intros.
 cut (distance I M' = Rabs k * distance I M); intros.
@@ -271,7 +271,7 @@ cut (distance I M' = Rabs k * distance I M); intros.
 2: apply homothetie_vecteur; auto.
 cut (I <> M'); intros.
 apply similitude_def2; auto.
-fourier.
+lra.
 rewrite <- Rabs_left; auto.
 rewrite (angle_produit_negatif_r (k:=k) (A:=I) (B:=M) (C:=M') (D:=I) (E:=M));
  auto.
@@ -310,12 +310,12 @@ repeat (rewrite homothetie_neg2; auto).
 intros.
 apply similitudes_meme_centre_commutent with (3 := H0) (4 := H1); auto.
 auto with real.
-fourier.
+lra.
 absurd (k = 0); auto with real.
 repeat (rewrite similitude_angle_nul; auto).
 intros.
 apply similitudes_meme_centre_commutent with (3 := H0) (4 := H1); auto.
-fourier.
+lra.
 Qed.
  
 Lemma similitude_conserve_angle :

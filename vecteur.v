@@ -193,7 +193,6 @@ Lemma vecteur_nul_conf : forall A B : PO, vec A B = zero -> A = B.
 unfold vec in |- *; intros.
 apply conversion_PP with (a := 1) (b := 1); auto.
 RingPP2 H; RingPP.
-discrR.
 Qed.
  
 Lemma distinct_egalite_vecteur :

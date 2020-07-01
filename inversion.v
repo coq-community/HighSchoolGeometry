@@ -85,9 +85,9 @@ deroule_inversion I A A' k.
 assert (A = inversion I k A'); auto with geo.
 deroule_inversion I A' A k.
 split; [ try assumption | idtac ].
-halignes H12 ipattern:a.
-halignes H5 ipattern:b.
-halignes H2 ipattern:c.
+halignes H12 a.
+halignes H5 b.
+halignes H2 c.
 apply colineaire_alignes with (a * (b * c)).
 rewrite H16; rewrite H17; rewrite H15.
 Ringvec.
@@ -101,7 +101,7 @@ Lemma inversion_homothetie :
 intros.
 deroule_inversion I A B k.
 apply vecteur_homothetie.
-halignes H2 ipattern:k0.
+halignes H2 k0.
 assert (k0 = / Rsqr (distance I A) * k).
 apply Rmult_eq_reg_l with (scalaire (vec I A) (vec I A)); auto with geo.
 replace (scalaire (vec I A) (vec I A) * k0) with
@@ -233,8 +233,8 @@ elim existence_projete_orthogonal with (A := I) (B := A) (C := M');
  | auto ].
 elim def_projete_orthogonal2 with (A := I) (B := A) (C := M') (H := H');
  [ intros; try clear def_projete_orthogonal2; try exact H17 | auto | auto ].
-halignes H14 ipattern:x.
-halignes H18 ipattern:y.
+halignes H14 x.
+halignes H18 y.
 assert (scalaire (vec I M') (vec I A) = scalaire (vec I M') (vec I M)).
 apply (scalaire_avec_projete (A:=I) (B:=M') (C:=A) (H:=M)); auto with geo.
 rewrite H20; Simplortho.
@@ -265,22 +265,22 @@ Theorem inversion_droite_non_pole :
  exists C : PO, orthogonal (vec A B) (vec I C) /\ cercle_diametre I C M'.
 intros.
 deroule_triangle A B I.
-soit_projete A B I ipattern:K.
+soit_projete A B I K.
 assert (I <> K).
 red in |- *; intros; apply H4.
 rewrite H11; auto.
-image_inversion I K ipattern:K' k.
+image_inversion I K K' k.
 exists K'.
 unfold cercle_diametre in |- *.
-soit_milieu I K' ipattern:D.
+soit_milieu I K' D.
 deroule_inversion I M M' k.
-soit_projete I M K' ipattern:L.
-halignes H2 ipattern:x.
-halignes H9 ipattern:y.
+soit_projete I M K' L.
+halignes H2 x.
+halignes H9 y.
 assert (vec K M = mult_PP (x + - y) (vec A B)).
 VReplace (vec K M) (add_PP (vec A M) (mult_PP (-1) (vec A K))).
 rewrite H26; rewrite H25; Ringvec.
-halignes H13 ipattern:z.
+halignes H13 z.
 assert (orthogonal (vec I K') (vec A B)).
 rewrite H28; Simplortho.
 split; [ auto with geo | idtac ].
@@ -300,7 +300,7 @@ rewrite <- H33; auto with geo.
 discrimine L K'.
 icercle.
 assert (orthogonal (vec L I) (vec L K')).
-halignes H23 ipattern:t.
+halignes H23 t.
 VReplace (vec L I) (mult_PP (-1) (vec I L)).
 rewrite H35.
 VReplace (mult_PP (-1) (mult_PP t (vec I M))) (mult_PP (- t) (vec I M)).
@@ -339,9 +339,9 @@ deroule_triangle A B I.
 deroule_triangle A A' B.
 assert (alignes I A A'); auto with geo.
 assert (alignes I B B'); auto with geo.
-halignes H18 ipattern:x.
+halignes H18 x.
 absurd (I = A); auto.
-halignes H19 ipattern:y.
+halignes H19 y.
 absurd (I = B); auto.
 assert (distance I A <> 0); auto with geo real.
 assert (distance I A * distance I A <> 0).
@@ -431,7 +431,7 @@ assert (O0 = O).
 rewrite H4; auto.
 rewrite <- H12; rewrite H17; auto.
 assert (alignes I A B); auto with geo.
-halignes H13 ipattern:x.
+halignes H13 x.
 assert (distance I A <> 0); auto with geo real.
 assert (distance I A * distance I A <> 0).
 unfold Rsqr in |- *; auto with real.
@@ -500,10 +500,10 @@ elim H5;
  [ intros O H11; elim H11;
     [ intros H12 H13; elim H12;
        [ intros H14 H15; try clear H12 H11 H5; try exact H15 ] ] ].
-soit_projete M I O ipattern:K.
+soit_projete M I O K.
 assert (scalaire (vec I A) (vec I B) <> 0); [ idtac | auto with real ].
 assert (alignes I A B); auto with geo.
-halignes H16 ipattern:x.
+halignes H16 x.
 rewrite H17.
 Simplscal.
 apply integre_not; auto with geo.
@@ -561,11 +561,11 @@ elim intersection2_cercle_droite with (A := M) (B := I) (O := O) (H := K);
  | auto ].
 assert (triangle A B M).
 unfold triangle in |- *; auto.
-halignes H1 ipattern:y.
+halignes H1 y.
 assert (triangle A M I); unfold triangle in |- *.
 red in |- *; intros; apply H9.
 assert (alignes A I M); auto with geo.
-halignes H25 ipattern:x.
+halignes H25 x.
 absurd (A = I); auto.
 apply colineaire_alignes with (x * y).
 rewrite H26; rewrite H20; Ringvec.
@@ -645,7 +645,7 @@ rewrite <- H14; rewrite <- H31; rewrite <- H32; auto.
 unfold triangle in |- *.
 red in |- *; intros; apply H9.
 assert (alignes I B M); auto with geo.
-halignes H30 ipattern:x.
+halignes H30 x.
 apply colineaire_alignes with (x * (1 + - y) + y).
 VReplace (vec A M) (add_PP (vec A I) (vec I M)).
 rewrite H31.

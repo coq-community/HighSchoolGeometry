@@ -65,7 +65,7 @@ Lemma scalaire_non_nul :
  scalaire (vec A C) (vec A C) = 1 ->
  scalaire (vec A B) (vec A C) >= 0 -> scalaire (vec A B) (vec A C) <> 0.
 intros.
-halignes H0 ipattern:k.
+halignes H0 k.
 rewrite H3.
 replace (scalaire (vec A B) (mult_PP k (vec A B))) with
  (k * scalaire (vec A B) (vec A B)).
@@ -96,8 +96,8 @@ Lemma unicite_representant_unitaire :
  scalaire (vec A D) (vec A D) = 1 ->
  scalaire (vec A B) (vec A D) >= 0 -> C = D.
 intros.
-halignes H0 ipattern:k.
-halignes H3 ipattern:k0.
+halignes H0 k.
+halignes H3 k0.
 cut (k = k0); intros.
 apply conversion_PP with (a := 1) (b := 1); auto with *.
 RingPP2 H6.
@@ -193,7 +193,7 @@ Lemma produit_positif_representant_unitaire :
 intros.
 cut (A <> C); intros.
 2: apply distinct_produit_vecteur with (3 := H1); auto with real.
-deroule_representant_unitaire A B ipattern:B'.
+deroule_representant_unitaire A B B'.
 rewrite <- H3.
 cut (scalaire (vec A C) (vec A B') >= 0); intros.
 apply def_representant_unitaire; auto.
@@ -226,8 +226,8 @@ elim def_representant_unitaire2 with (A := A) (B := C) (C := C');
 elim H8; intros H9 H10; try clear H8; try exact H10.
 cut (alignes A C' C); intros; auto with geo.
 assert (A <> C'); auto with geo.
-halignes H8 ipattern:k.
-halignes H2 ipattern:k0.
+halignes H8 k.
+halignes H2 k0.
 exists (k * k0).
 split; [ idtac | try assumption ].
 apply Rmult_gt_0_compat.
@@ -282,7 +282,7 @@ elim def_representant_unitaire2 with (A := A) (B := B') (C := C');
  [ intros | auto | auto ].
 elim H7; intros H8 H9; try clear H7; try exact H9.
 cut (A <> C'); intros; auto with geo.
-halignes H6 ipattern:k.
+halignes H6 k.
 elim Rtotal_order with (r1 := k) (r2 := 0);
  [ intros H13
  | intros H13;
@@ -382,7 +382,7 @@ elim
 apply def_representant_unitaire; auto.
 apply alignes_trans with B; auto.
 apply colineaire_alignes with k; auto.
-halignes H4 ipattern:k0.
+halignes H4 k0.
 apply colineaire_alignes with (- k0); auto.
 rewrite H9; rewrite H8; Ringvec.
 rewrite H9; Simplscal; auto.
@@ -402,7 +402,7 @@ Lemma alignes_representant_unitaire :
  representant_unitaire (vec A C) =
  mult_PP (-1) (representant_unitaire (vec A B)).
 intros.
-halignes H1 ipattern:k.
+halignes H1 k.
 elim Rtotal_order with (r1 := k) (r2 := 0);
  [ intros H3; try clear total_order
  | intros H3; elim H3;

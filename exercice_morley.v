@@ -126,7 +126,7 @@ rewrite (distance_sym A' B).
 RReplace 2 (Rabs 2).
 apply colinearite_distance; auto.
 rewrite Rabs_right; auto.
-fourier.
+lra.
 Qed.
 (* corollaire du theoreme de l'angle inscrit et de l'angle au centre
    on utilise le triangle rectangle forme par un cote et sa mediatrice*)
@@ -186,13 +186,13 @@ rewrite <- (egalite_sin_Sin (A:=A) (B:=B) (C:=C) (x:=pisurdeux)); auto.
 rewrite sin_pisurdeux.
 rewrite Rabs_right; auto.
 rewrite (distance_double_milieu H0); ring.
-fourier.
+lra.
 rewrite <- (egalite_sin_Sin (A:=A) (B:=B) (C:=C) (x:=- pisurdeux)); auto.
 rewrite sin_impaire.
 rewrite sin_pisurdeux.
 rewrite Rabs_left; auto.
 rewrite (distance_double_milieu H0); ring.
-fourier.
+lra.
 Qed.
 (* cas general*)
  
@@ -335,8 +335,8 @@ Lemma pisurtrois_utile:
 intros.
 rewrite <- pisurtrois_def.
 split.
-fourier.
-fourier.
+lra.
+lra.
 Qed.
  
 Lemma pisurtrois_utile1:
@@ -345,8 +345,8 @@ Lemma pisurtrois_utile1:
 intros.
 rewrite <- pisurtrois_def.
 split.
-fourier.
-fourier.
+lra.
+lra.
 Qed.
  
 Lemma pisurtrois_utile2:
@@ -355,8 +355,8 @@ Lemma pisurtrois_utile2:
 intros.
 rewrite <- pisurtrois_def.
 split.
-fourier.
-fourier.
+lra.
+lra.
 Qed.
 Hint Resolve pisurtrois_utile sin_pos pisurtrois_utile1 pisurtrois_utile2 :geo.
  
@@ -372,8 +372,8 @@ intros.
 apply non_multiple_pi_triangle with (3 * a); auto.
 rewrite <- pisurtrois_def.
 split.
-fourier.
-fourier.
+lra.
+lra.
 Qed.
  
 Lemma pisurtrois_triangle_utile2:
@@ -387,9 +387,9 @@ Lemma pisurtrois_triangle_utile2:
 intros.
 apply non_multiple_pi_triangle with b; auto.
 split.
-fourier.
+lra.
 rewrite <- pisurtrois_def.
-fourier.
+lra.
 Qed.
  
 Lemma Rabs_neg: forall (r : R), r <= 0 ->  Rabs r = - r.
@@ -473,9 +473,9 @@ rewrite <- H26.
 apply (triangle_sin_not_0 (A:=P) (B:=C) (C:=B) (x:=pi + (b + c))); auto with geo.
 auto with real.
 assert (sin (b + c) >= 0); eauto with geo.
-fourier.
+lra.
 assert (sin c >= 0); eauto with geo.
-fourier.
+lra.
 Qed.
 (* application de la formule sin 3 a  qui utilise pisurtrois dons le calcul de BP*)
  
@@ -603,12 +603,12 @@ rewrite <- H26.
 apply (triangle_sin_not_0 (A:=P) (B:=C) (C:=B) (x:=pi + (b + c))); auto with geo.
 auto with real.
 assert (sin (b + c) >= 0); eauto with geo.
-fourier.
+lra.
 assert (sin b >= 0).
 apply sin_pos.
 apply (pisurtrois_utile2 H H1 H0); auto with real.
 rewrite <- H2; ring.
-fourier.
+lra.
 rewrite H14.
 rewrite sin_3_a_pisurtrois; auto.
 field.
@@ -769,97 +769,97 @@ Theorem Morley:
  image_angle a = cons_AV (vec A T) (vec A C) ->  equilateral P Q T.
 intros.
 assert (triangle B C P).
-apply (pisurtrois_triangle_utile2 (a:=a) (b:=b) (c:=c) (B:=B) (C:=C) (P:=P));
- auto.
+  apply (pisurtrois_triangle_utile2 (a:=a) (b:=b) (c:=c) (B:=B) (C:=C) (P:=P));
+  auto.
 deroule_triangle B C P.
 assert (triangle B Q A).
-apply (pisurtrois_triangle_utile2 (a:=a) (b:=b) (c:=c) (B:=B) (C:=Q) (P:=A));
- auto.
+  apply (pisurtrois_triangle_utile2 (a:=a) (b:=b) (c:=c) (B:=B) (C:=Q) (P:=A));
+  auto.
 deroule_triangle B Q A.
 assert (image_angle (3 * a) = cons_AV (vec A B) (vec A C)).
-RReplace (3 * a) (a + (a + a)).
-replace (cons_AV (vec A B) (vec A C))
+  RReplace (3 * a) (a + (a + a)).
+  replace (cons_AV (vec A B) (vec A C))
      with (plus (cons_AV (vec A B) (vec A Q)) (cons_AV (vec A Q) (vec A C))).
-replace (cons_AV (vec A Q) (vec A C))
+  replace (cons_AV (vec A Q) (vec A C))
      with (plus (cons_AV (vec A Q) (vec A T)) (cons_AV (vec A T) (vec A C))).
-rewrite <- H15; rewrite <- H16; rewrite <- H17.
-rewrite <- add_mes_compatible.
-rewrite <- add_mes_compatible; auto.
-apply Chasles; auto.
-apply Chasles; auto.
+  rewrite <- H15; rewrite <- H16; rewrite <- H17.
+  rewrite <- add_mes_compatible.
+  rewrite <- add_mes_compatible; auto.
+  apply Chasles; auto.
+  apply Chasles; auto.
 assert (triangle A B C).
-apply (pisurtrois_triangle_utile (a:=a) (b:=b) (c:=c) (A:=A) (B:=B) (C:=C));
- auto.
+  apply (pisurtrois_triangle_utile (a:=a) (b:=b) (c:=c) (A:=A) (B:=B) (C:=C));
+  auto.
 assert (image_angle (3 * b) = cons_AV (vec B C) (vec B A)).
-RReplace (3 * b) (b + (b + b)).
-replace (cons_AV (vec B C) (vec B A))
+  RReplace (3 * b) (b + (b + b)).
+  replace (cons_AV (vec B C) (vec B A))
      with (plus (cons_AV (vec B C) (vec B P)) (cons_AV (vec B P) (vec B A))).
-replace (cons_AV (vec B P) (vec B A))
+  replace (cons_AV (vec B P) (vec B A))
      with (plus (cons_AV (vec B P) (vec B Q)) (cons_AV (vec B Q) (vec B A))).
-rewrite <- H12; rewrite <- H11; rewrite <- H10.
-rewrite <- add_mes_compatible.
-rewrite <- add_mes_compatible; auto.
-apply Chasles; auto.
-apply Chasles; auto.
+  rewrite <- H12; rewrite <- H11; rewrite <- H10.
+  rewrite <- add_mes_compatible.
+  rewrite <- add_mes_compatible; auto.
+  apply Chasles; auto.
+  apply Chasles; auto.
 assert (image_angle (3 * c) = cons_AV (vec C A) (vec C B)).
-rewrite <- (angle_triangle (A:=A) (B:=B) (C:=C)); auto.
-rewrite <- H28.
-rewrite <- H30.
-rewrite <- add_mes_compatible.
-rewrite <- mes_opp.
-rewrite <- add_mes_compatible.
-rewrite <- pisurtrois_def.
-rewrite <- H2.
-RReplace (3 * ((a + b) + c) + - (3 * a + 3 * b)) (3 * c); auto.
+  rewrite <- (angle_triangle (A:=A) (B:=B) (C:=C)); auto.
+  rewrite <- H28.
+  rewrite <- H30.
+  rewrite <- add_mes_compatible.
+  rewrite <- mes_opp.
+  rewrite <- add_mes_compatible.
+  rewrite <- pisurtrois_def.
+  rewrite <- H2.
+  RReplace (3 * ((a + b) + c) + - (3 * a + 3 * b)) (3 * c); auto.
 assert (image_angle c = cons_AV (vec C A) (vec C T)).
-RReplace c ((3 * c + - c) + - c).
-rewrite add_mes_compatible.
-rewrite add_mes_compatible.
-rewrite H31.
-assert (image_angle (- c) = cons_AV (vec C B) (vec C P)).
-apply mes_oppx; auto.
-pattern (image_angle (- c)) at 1.
-rewrite H32.
-replace (plus (cons_AV (vec C A) (vec C B)) (cons_AV (vec C B) (vec C P)))
+  RReplace c ((3 * c + - c) + - c).
+  rewrite add_mes_compatible.
+  rewrite add_mes_compatible.
+  rewrite H31.
+  assert (image_angle (- c) = cons_AV (vec C B) (vec C P)).
+    apply mes_oppx; auto.
+  pattern (image_angle (- c)) at 1.
+  rewrite H32.
+  replace (plus (cons_AV (vec C A) (vec C B)) (cons_AV (vec C B) (vec C P)))
      with (cons_AV (vec C A) (vec C P)).
-assert (image_angle (- c) = cons_AV (vec C P) (vec C T)).
-apply mes_oppx; auto.
-rewrite H33.
-apply Chasles; auto.
-symmetry; apply Chasles; auto.
+  assert (image_angle (- c) = cons_AV (vec C P) (vec C T)).
+    apply mes_oppx; auto.
+  rewrite H33.
+  apply Chasles; auto.
+  symmetry; apply Chasles; auto.
 elim existence_rayon_circonscrit with ( A := A ) ( B := B ) ( C := C );
  [intros O [H33 [r H34]] | auto].
 assert (rayon_circonscrit A B C r).
-unfold rayon_circonscrit.
-exists O; (split; auto).
+  unfold rayon_circonscrit.
+  exists O; (split; auto).
 assert
  (and
    (Rsqr (distance P Q) = Rsqr (distance T P))
    (Rsqr (distance P Q) = Rsqr (distance Q T))).
-rewrite (Morley_6 (a:=a) (b:=b) (c:=c) (r:=r) (A:=A) (B:=B) (C:=C) (P:=P) (Q:=Q));
- auto.
-rewrite (Morley_6 (a:=b) (b:=c) (c:=a) (r:=r) (A:=B) (B:=C) (C:=A) (P:=T) (Q:=P));
- auto.
-rewrite (Morley_6 (a:=c) (b:=a) (c:=b) (r:=r) (A:=C) (B:=A) (C:=B) (P:=Q) (Q:=T));
- auto.
-split; ring.
-rewrite <- H2; ring.
-exists O.
-rewrite H34.
-generalize H33; unfold circonscrit, isocele; intros.
-elim H36; [intros; (split; auto)].
-rewrite <- H38; auto.
-rewrite <- H37; auto.
-rewrite <- H2; ring.
-exists O.
-rewrite H34.
-generalize H33; unfold circonscrit, isocele; intros.
-elim H36; [intros; (split; auto)].
-rewrite <- H38; auto.
+  rewrite (Morley_6 (a:=a) (b:=b) (c:=c) (r:=r) (A:=A) (B:=B) (C:=C) (P:=P) (Q:=Q));
+  auto.
+  rewrite (Morley_6 (a:=b) (b:=c) (c:=a) (r:=r) (A:=B) (B:=C) (C:=A) (P:=T) (Q:=P));
+  auto.
+  rewrite (Morley_6 (a:=c) (b:=a) (c:=b) (r:=r) (A:=C) (B:=A) (C:=B) (P:=Q) (Q:=T));
+  auto.
+  split; ring.
+  rewrite <- H2; ring.
+  exists O.
+  rewrite H34.
+  generalize H33; unfold circonscrit, isocele; intros.
+  elim H36; [intros; (split; auto)].
+  rewrite <- H38; auto.
+  rewrite <- H37; auto.
+  rewrite <- H2; ring.
+  exists O.
+  rewrite H34.
+  generalize H33; unfold circonscrit, isocele; intros.
+  elim H36; [intros; (split; auto)].
+  rewrite <- H38; auto.
 unfold equilateral, isocele.
 elim H36; [intros].
 split.
-rewrite (distance_sym P T); auto with geo.
+  rewrite (distance_sym P T); auto with geo.
 rewrite (distance_sym Q P); auto with geo.
 Qed.
 

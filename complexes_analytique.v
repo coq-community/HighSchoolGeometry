@@ -24,9 +24,9 @@ Lemma translation_analytique :
  abscisse M' = abscisse M + abscisse A /\
  ordonnee M' = ordonnee M + ordonnee A.
 intros.
-paffixe M ipattern:z.
-paffixe A ipattern:a.
-paffixe M' ipattern:z'.
+paffixe M z.
+paffixe A a.
+paffixe M' z'.
 assert (z' = Cplus z a).
 apply rec_complexe_translation with (4 := H); auto.
 generalize H0 H1 H2.
@@ -41,9 +41,9 @@ Lemma homothetie_analytique :
  abscisse M' + - abscisse J = k * (abscisse M + - abscisse J) /\
  ordonnee M' + - ordonnee J = k * (ordonnee M + - ordonnee J).
 intros.
-paffixe M ipattern:z.
-paffixe J ipattern:j.
-paffixe M' ipattern:z'.
+paffixe M z.
+paffixe J j.
+paffixe M' z'.
 assert (Cplus z' (Copp j) = Cmult (Rinj k) (Cplus z (Copp j))).
 apply rec_complexe_homothetie with (4 := H); auto.
 generalize H0 H1 H2.
@@ -83,9 +83,9 @@ rewrite H1; rewrite H4; rewrite H3.
 RReplace (1 * cos a) (cos a).
 RReplace (1 * sin a) (sin a).
 auto.
-paffixe M ipattern:z.
-paffixe J ipattern:j.
-paffixe M' ipattern:z'.
+paffixe M z.
+paffixe J j.
+paffixe M' z'.
 assert (Cplus z' (Copp j) = Cmult (cons_pol 1 a) (Cplus z (Copp j))).
 apply rotation_complexe with (4 := H); auto.
 generalize H3 H1 H2.
@@ -120,9 +120,9 @@ apply passage_polaire_algebrique with (cons_pol k a); auto with geo.
 elim H4; [ intros H5 H6; try clear H4; try exact H6 ].
 rewrite H3; rewrite H5; rewrite H6.
 auto.
-paffixe M ipattern:z.
-paffixe J ipattern:j.
-paffixe M' ipattern:z'.
+paffixe M z.
+paffixe J j.
+paffixe M' z'.
 assert (Cplus z' (Copp j) = Cmult (cons_pol k a) (Cplus z (Copp j))).
 apply similitude_complexe with (5 := H0); auto.
 generalize H3 H4 H5.
@@ -155,8 +155,8 @@ Lemma inversion_pole_origine_analytique :
  abscisse M' = k * abscisse M / (Rsqr (abscisse M) + Rsqr (ordonnee M)) /\
  ordonnee M' = k * ordonnee M / (Rsqr (abscisse M) + Rsqr (ordonnee M)).
 intros.
-paffixe M ipattern:z.
-paffixe M' ipattern:z'.
+paffixe M z.
+paffixe M' z'.
 assert (z <> zeroC).
 apply points_distincts_non_zeroC with (1 := H); auto with geo.
 assert (module z <> 0); auto with geo.

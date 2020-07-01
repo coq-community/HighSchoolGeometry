@@ -59,7 +59,7 @@ apply alignes_ordre_cycle2; auto.
 assert (orthogonal (vec B A) (vec B A')).
 apply triangle_diametre with O; auto with geo.
 apply circonscrit_permute; auto.
-halignes H3 ipattern:k.
+halignes H3 k.
 replace (vec M A) with (mult_PP k (vec B A)).
 Simplortho.
 VReplace (vec M A) (mult_PP (-1) (vec A M)).
@@ -92,7 +92,7 @@ deroule_circonscrit A B C O.
 rewrite (scalaire_diametre (A:=A) (A':=A') (B:=B) (O:=O) (M:=M)); auto.
 hcercle H9; hcercle H6.
 replace (Rsqr (distance O A)) with (Rsqr (distance O C)).
-symetrique O C ipattern:C'.
+symetrique O C C'.
 rewrite (scalaire_diametre (A:=C) (A':=C') (B:=D) (O:=O) (M:=M)); auto.
 apply changement_diametre with (2 := H6); auto.
 rewrite <- H18; auto.
@@ -107,7 +107,7 @@ Theorem puissance_cercle_tangente :
  tangente_cercle O A C M ->
  Rsqr (distance M C) = scalaire (vec M A) (vec M B).
 unfold tangente_cercle in |- *; intros; applatit_and.
-symetrique O A ipattern:A'.
+symetrique O A A'.
 deroule_triangle A B C.
 deroule_circonscrit A B C O.
 hcercle H0.
@@ -139,8 +139,8 @@ elim existence_projete_orthogonal with (A := M) (B := C) (C := O);
 elim def_projete_orthogonal2 with (A := M) (B := C) (C := O) (H := H);
  [ intros; auto | auto | auto ].
 assert (alignes M C D); auto with geo.
-halignes H8 ipattern:k'.
-halignes H5 ipattern:k.
+halignes H8 k'.
+halignes H5 k.
 discrimine H C.
 assert (Rsqr (distance M C) = scalaire (vec M A) (vec M B)).
 apply puissance_cercle_tangente with O; auto.
@@ -181,7 +181,7 @@ rewrite <- H3.
 apply puissance_cercle; auto.
 auto with geo.
 assert (alignes M C E); auto with geo.
-halignes H18 ipattern:k1.
+halignes H18 k1.
 assert (k' = k1).
 apply Rmult_eq_reg_l with (scalaire (vec M C) (vec M C)); auto with geo.
 replace (scalaire (vec M C) (vec M C) * k') with
@@ -216,7 +216,7 @@ intros.
 deroule_circonscrit A B C O.
 deroule_triangle A B C.
 hcercle H0.
-symetrique O A ipattern:A'.
+symetrique O A A'.
 rewrite (scalaire_diametre (A:=A) (A':=A') (B:=B) (O:=O) (M:=M)) in H2; auto.
 elim (Pythagore C M O); intros.
 apply H15.

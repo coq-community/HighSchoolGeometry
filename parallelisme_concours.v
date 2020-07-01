@@ -137,7 +137,7 @@ Lemma alignes_paralleles :
  A <> B -> A <> C -> alignes A B C -> paralleles (droite A B) (droite A C).
 intros.
 apply paralleles_sym; auto.
-halignes H1 ipattern:x.
+halignes H1 x.
 apply colineaires_paralleles with x; intros; auto.
 Qed.
  
@@ -170,7 +170,7 @@ Lemma paralleles_alignes :
  paralleles (droite A B) (droite C D) -> alignes A B C -> alignes A B D.
 intros.
 elim (paralleles_vecteur (A:=C) (B:=D) (C:=A) (D:=B)); intros; auto with geo.
-halignes H2 ipattern:x0.
+halignes H2 x0.
 apply colineaire_alignes with (x + x0).
 VReplace (vec A D) (add_PP (vec A C) (vec C D)).
 rewrite H3; rewrite H4; Ringvec.
@@ -184,7 +184,7 @@ Lemma paralleles_alignes1 :
  paralleles (droite A B) (droite C D) -> alignes C D E -> alignes C D F.
 intros A B C D E F H H0 H1 H2 H3; try assumption.
 elim (paralleles_vecteur (A:=A) (B:=B) (C:=C) (D:=D)); intros; auto.
-halignes H3 ipattern:x0.
+halignes H3 x0.
 apply colineaire_alignes with (x0 + x).
 VReplace (vec C F) (add_PP (vec C E) (vec E F)).
 rewrite H5; rewrite H1; rewrite H4.
@@ -199,7 +199,7 @@ Lemma paralleles_alignes2 :
  paralleles (droite A B) (droite C D) -> alignes C D E -> alignes F C E.
 intros A B C D E F H H0 H1 H2 H3; try assumption.
 elim (paralleles_vecteur (A:=C) (B:=D) (C:=A) (D:=B)); intros; auto with geo.
-halignes H3 ipattern:x0.
+halignes H3 x0.
 rewrite H4 in H5.
 discrimine F C.
 cut (1 + x0 * x <> 0); intros.
@@ -228,7 +228,7 @@ intros A B C D H H0 H1 H2; try assumption.
 elim (paralleles_vecteur (A:=A) (B:=B) (C:=C) (D:=D)); intros; auto.
 discrimine C A.
 assert (alignes C A D); auto with geo.
-halignes H5 ipattern:x0.
+halignes H5 x0.
 rewrite H6 in H3.
 apply colineaire_alignes with (- (x * x0)).
 rewrite H3; Ringvec.

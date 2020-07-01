@@ -62,7 +62,7 @@ Hint Resolve mes_alg_conf mes_alg_nulle: geo.
 Lemma Chasles_mes_alg :
  forall A B C : PO, alignes A B C -> mes_alg A B + mes_alg B C = mes_alg A C.
 intros.
-halignes H ipattern:k.
+halignes H k.
 rewrite (mes_alg_conf (A:=B) (B:=B)); auto; ring.
 replace (mes_alg A B) with (1 * mes_alg A B).
 replace (mes_alg B C) with ((k + -1) * mes_alg A B).

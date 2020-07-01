@@ -546,7 +546,7 @@ apply egalite_angle_trigo.
 rewrite sin_zero; rewrite H5; ring.
 rewrite H2; rewrite <- H1; rewrite cos_zero; field; trivial.
 rewrite module_reel_pos in H3; auto.
-fourier.
+lra.
 auto with real.
 Qed.
 Hint Resolve argument_reel_pos: geo.

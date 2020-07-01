@@ -130,7 +130,7 @@ Ltac halignes H k :=
  
 Lemma permute_alignes : forall A B C : PO, alignes A B C -> alignes B A C.
 intros.
-halignes H ipattern:x.
+halignes H x.
 apply colineaire_alignes with (1 + - x).
 VReplace (vec B C) (add_PP (vec B A) (vec A C)).
 rewrite H0; Ringvec.
@@ -139,7 +139,7 @@ Hint Immediate permute_alignes: geo.
  
 Lemma alignes_ordre_cycle : forall A B C : PO, alignes A B C -> alignes B C A.
 intros.
-halignes H ipattern:x.
+halignes H x.
 discrimine B C; auto with geo.
 cut (1 + - x <> 0); intros.
 apply colineaire_alignes with (/ (1 + - x)).
@@ -152,7 +152,7 @@ Qed.
 Lemma alignes_ordre_permute :
  forall A B C : PO, alignes A B C -> alignes A C B.
 intros.
-halignes H ipattern:x.
+halignes H x.
 discrimine A C; auto with geo.
 apply colineaire_alignes with (/ x); auto with geo.
 Qed.
@@ -175,7 +175,7 @@ Hint Resolve alignes_ordre_cycle3: geo.
 Lemma non_alignes_permute :
  forall A B C : PO, ~ alignes A B C -> ~ alignes B A C.
 intros.
-contrapose ipattern:H0.
+contrapose H0.
 apply permute_alignes; auto.
 Qed.
 Hint Resolve non_alignes_permute: geo.
@@ -217,8 +217,8 @@ Lemma alignes_trans :
  A <> B :>PO -> alignes A B C -> alignes A B D -> alignes A C D.
 intros.
 assert (alignes A C B); auto with geo.
-halignes H2 ipattern:k.
-halignes H1 ipattern:k0.
+halignes H2 k.
+halignes H1 k0.
 apply colineaire_alignes with (k0 * k).
 rewrite H4; rewrite H3.
 Ringvec.
@@ -229,11 +229,11 @@ Lemma alignes_trans2 :
  A <> B -> alignes A B C -> alignes A B D -> alignes B C D.
 intros.
 assert (alignes B A D); auto with geo.
-halignes H2 ipattern:k.
+halignes H2 k.
 assert (A = B); auto.
 tauto.
 assert (alignes B C A); auto with geo.
-halignes H4 ipattern:k0.
+halignes H4 k0.
 apply colineaire_alignes with (k * k0).
 rewrite H3; rewrite H5.
 Ringvec.

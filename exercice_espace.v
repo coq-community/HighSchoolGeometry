@@ -111,8 +111,12 @@ VReplace
     (cons 1
        (barycentre (cons 1 A) (cons 2 (barycentre (cons 1 B) (cons 1 C))))))
  (cons 3 (barycentre (cons 1 A) (cons 2 (barycentre (cons 1 B) (cons 1 C))))).
-repeat rewrite <- add_PP_barycentre; auto with real.
+replace 3 with (1 + 2) by ring.
+rewrite <- add_PP_barycentre; auto with real.
+replace 2 with (1 + 1) by ring.
+rewrite <- add_PP_barycentre; auto with real.
 Qed.
+
 Hint Resolve centre_gravite_coplanaire: geo.
  
 Lemma exercice :
@@ -156,8 +160,8 @@ rewrite
  (prop_vecteur_bary (a:=1) (b:=1) (A:=B) (B:=G)
     (G:=barycentre (cons 1 B) (cons 1 G)) F); auto.
 VReplace (vec F E) (mult_PP 1 (vec F E)).
-rewrite
- (prop_vecteur_bary (a:=1) (b:=2) (A:=E)
+replace (1 + 1) with 2 by ring.
+rewrite (prop_vecteur_bary (a:=1) (b:=2) (A:=E)
     (B:=barycentre (cons 1 B) (cons 1 G))
     (G:=barycentre (cons 1 E) (cons 2 (barycentre (cons 1 B) (cons 1 G)))) F)
  ; auto.
@@ -302,7 +306,7 @@ Lemma equilateral_non_alignes :
  scalaire (vec A B) (vec A B) = scalaire (vec B C) (vec B C) ->
  ~ alignes A B C.
 intros A B C H H0 H1; red in |- *; intros H2; try exact H2.
-halignes H2 ipattern:k.
+halignes H2 k.
 rewrite H3 in H0.
 cut (vec B C = mult_PP (k + -1) (vec A B)); intros.
 rewrite H4 in H1.

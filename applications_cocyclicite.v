@@ -404,7 +404,8 @@ Lemma projete_ortho_cote :
  double_AV (cons_AV (vec P Q) (vec P R)) =
  plus (double_AV (cons_AV (vec C A) (vec C M)))
    (double_AV (cons_AV (vec B M) (vec B A))) :>AV.
-intros.
+Proof.
+intros A  B C M P Q R H H0 H1 H2 H3 H4 H5.
 deroule_triangle A B C.
 deroule_triangle B C M.
 cut (M <> P); intros.
@@ -430,7 +431,7 @@ red in |- *; intros; apply H21; rewrite H23; auto with geo.
 apply orthogonal_alignement2 with C; auto with geo.
 replace (double_AV (cons_AV (vec B M) (vec B A))) with
  (double_AV (cons_AV (vec B M) (vec B R))).
-rewrite <- (def_opp (A:=P) (B:=R) (C:=P) (D:=M)); auto.
+rewrite <- (def_opp (A:=P) (B:= R) (C:=P) (D:=M)); auto.
 rewrite double_opp; auto.
 rewrite <- (triangles_meme_hypotenuse (A:=M) (B:=B) (C:=R) (D:=P)); auto.
 rewrite <- double_opp; auto.
@@ -472,7 +473,8 @@ Theorem droite_Simson :
  P = projete_orthogonal B C M ->
  Q = projete_orthogonal A C M ->
  R = projete_orthogonal A B M -> (sont_cocycliques A B C M <-> alignes P Q R).
-unfold iff in |- *; intros.
+Proof.
+unfold iff in |- *; intros A B C M P Q R H H0 H1 H2 H3 H4 H5.
 lapply (projete_ortho_cote (A:=A) (B:=B) (C:=C) (M:=M) (P:=P) (Q:=Q) (R:=R));
  auto; intros.
 deroule_triangle A B C.

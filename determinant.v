@@ -19,7 +19,7 @@ Require Export metrique_triangle.
 Set Implicit Arguments.
 Unset Strict Implicit.
 Parameters (O : PO) (I : PO) (J : PO).
-Hypothesis OIJ : repere_orthonormal_direct O I J.
+Axiom OIJ : repere_orthonormal_direct O I J.
 Hint Resolve OIJ: geo.
  
 Lemma OIJ_repere_ortho : repere_orthonormal O I J.
