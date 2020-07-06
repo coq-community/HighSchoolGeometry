@@ -1,0 +1,30 @@
+opam-version: "2.0"
+maintainer: "palmskog@gmail.com"
+version: "dev"
+
+homepage: "https://github.com/coq-community/HighSchoolGeometry"
+dev-repo: "git+https://github.com/coq-community/HighSchoolGeometry.git"
+bug-reports: "https://github.com/coq-community/HighSchoolGeometry/issues"
+license: "LGPL-2.1-or-later"
+
+synopsis: "Geometry in Coq for French high-school"
+description: """
+This Coq library is dedicated to high-shool geometry teaching.
+The axiomatisation for affine Euclidean space is in a non analytic setting."""
+
+build: [make "-j%{jobs}%" ]
+install: [make "install"]
+depends: [
+  "coq" {(>= "8.11" & < "8.13~") | (= "dev")}
+]
+
+tags: [
+  "category:Mathematics/Geometry/General"
+  "keyword:geometry"
+  "keyword:teaching"
+  "keyword:high school"
+  "logpath:HighSchoolGeometry"
+]
+authors: [
+  "Frédérique Guilhot"
+]

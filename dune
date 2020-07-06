@@ -1,0 +1,4 @@
+(coq.theory
+ (name HighSchoolGeometry)
+ (package coq-high-school-geometry)
+ (synopsis "Geometry in Coq for French high-school"))
