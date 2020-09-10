@@ -18,7 +18,7 @@ Require Export angles_vecteurs.
 Set Implicit Arguments.
 Unset Strict Implicit.
 (* Le plan est orienté et on utilise le cercle trigonométrique*)
- 
+
 Definition repere_orthonormal_direct (O I J : PO) :=
   image_angle pisurdeux = cons_AV (vec O I) (vec O J) /\
   scalaire (vec O I) (vec O I) = 1 /\ scalaire (vec O J) (vec O J) = 1.
@@ -28,7 +28,7 @@ Parameter Cos : AV -> R.
 Parameter Sin : AV -> R.
 (* cosinus et sinus d'un angle (ou d'un réel) sont obtenus par projections
    du point image du cercle trigonométrique sur les axes de coordonnées*)
- 
+
 Axiom
   def_cos :
     forall (A B C : PO) (x : R),
@@ -36,7 +36,7 @@ Axiom
     distance A C = 1 ->
     image_angle x = cons_AV (vec A B) (vec A C) ->
     cos x = scalaire (vec A B) (vec A C).
- 
+
 Axiom
   def_sin :
     forall (A B C D : PO) (x : R),
@@ -44,14 +44,14 @@ Axiom
     distance A C = 1 ->
     image_angle x = cons_AV (vec A B) (vec A C) ->
     repere_orthonormal_direct A B D -> sin x = scalaire (vec A C) (vec A D).
- 
+
 Axiom
   def_Cos :
     forall A B C : PO,
     distance A B = 1 ->
     distance A C = 1 ->
     Cos (cons_AV (vec A B) (vec A C)) = scalaire (vec A B) (vec A C).
- 
+
 Axiom
   def_Sin :
     forall A B C D : PO,
@@ -59,7 +59,7 @@ Axiom
     distance A C = 1 ->
     repere_orthonormal_direct A B D ->
     Sin (cons_AV (vec A B) (vec A C)) = scalaire (vec A C) (vec A D).
- 
+
 Lemma ROND_RON :
  forall O I J : PO,
  repere_orthonormal_direct O I J -> repere_orthonormal O I J.
@@ -68,11 +68,11 @@ elim H; intros H0 H1; try clear H; try exact H1.
 split; [ auto with geo | try assumption ].
 Qed.
 Hint Resolve ROND_RON: geo.
- 
+
 Definition repere_orthonormal_indirect (O I J : PO) :=
   image_angle pisurdeux = cons_AV (vec O J) (vec O I) /\
   scalaire (vec O I) (vec O I) = 1 /\ scalaire (vec O J) (vec O J) = 1.
- 
+
 Lemma ROND_RONI :
  forall O I J : PO,
  repere_orthonormal_direct O I J -> repere_orthonormal_indirect O J I.
@@ -82,7 +82,7 @@ elim H; intros H0 H1; try clear H; try exact H1.
 elim H1; intros H H2; try clear H1; try exact H2.
 split; [ auto | split; [ auto | try assumption ] ].
 Qed.
- 
+
 Lemma ROND_new :
  forall O I J K : PO,
  repere_orthonormal_direct O I J ->
@@ -106,7 +106,7 @@ unfold pi in |- *; ring.
 rewrite H0.
 Simplscal; rewrite H3; ring.
 Qed.
- 
+
 Lemma existence_ROND_AB :
  forall A B : PO,
  distance A B = 1 -> exists C : PO, repere_orthonormal_direct A B C.
@@ -119,7 +119,7 @@ exists C; unfold repere_orthonormal_direct in |- *.
 split; [ try assumption | idtac ].
 split; auto with geo.
 Qed.
- 
+
 Lemma cos_deux_mes :
  forall x y : R, image_angle x = image_angle y -> cos x = cos y.
 intros.
@@ -130,7 +130,7 @@ rewrite (def_cos (A:=A) (B:=B) (C:=C) (x:=x)); auto.
 rewrite (def_cos (A:=A) (B:=B) (C:=C) (x:=y)); auto.
 rewrite <- H3; auto.
 Qed.
- 
+
 Lemma cos_paire : forall x : R, cos (- x) = cos x.
 intros.
 elim existence_AB_unitaire; intros A H; elim H; intros B H0; try clear H;
@@ -143,7 +143,7 @@ rewrite (def_cos (A:=A) (B:=C) (C:=B) (x:=- x)); auto.
 rewrite scalaire_sym; auto.
 apply mes_oppx; auto with geo.
 Qed.
- 
+
 Lemma cos_periodique : forall x : R, cos (x + deuxpi) = cos x.
 intros.
 elim existence_AB_unitaire; intros A H; elim H; intros B H0; try clear H;
@@ -155,7 +155,7 @@ cut (image_angle (x + deuxpi) = cons_AV (vec A B) (vec A C)); intros.
 rewrite (def_cos (A:=A) (B:=B) (C:=C) (x:=x + deuxpi)); auto.
 apply mesure_mod_deuxpi; auto with geo.
 Qed.
- 
+
 Lemma sin_deux_mes :
  forall x y : R, image_angle x = image_angle y -> sin x = sin y.
 intros.
@@ -167,7 +167,7 @@ rewrite (def_sin (A:=A) (B:=B) (C:=C) (D:=D) (x:=x)); auto.
 rewrite (def_sin (A:=A) (B:=B) (C:=C) (D:=D) (x:=y)); auto.
 rewrite <- H3; auto.
 Qed.
- 
+
 Lemma sin_periodique : forall x : R, sin (x + deuxpi) = sin x.
 intros.
 elim existence_AB_unitaire; intros A H; elim H; intros B H0; try clear H;
@@ -180,7 +180,7 @@ cut (image_angle (x + deuxpi) = cons_AV (vec A B) (vec A C)); intros.
 rewrite (def_sin (A:=A) (B:=B) (C:=C) (D:=D) (x:=x + deuxpi)); auto.
 apply mesure_mod_deuxpi; auto with geo.
 Qed.
- 
+
 Lemma sin_cos_pisurdeux_moins_x : forall x : R, sin x = cos (pisurdeux + - x).
 intros.
 elim existence_AB_unitaire; intros A H; elim H; intros B H0; try clear H;
@@ -199,20 +199,20 @@ rewrite add_mes_compatible.
 rewrite H3; rewrite H4; rewrite Chasles; auto with geo.
 apply mes_oppx; auto with geo.
 Qed.
- 
+
 Lemma cos_sin_pisurdeux_moins_x : forall x : R, cos x = sin (pisurdeux + - x).
 intros.
 rewrite sin_cos_pisurdeux_moins_x.
 replace (pisurdeux + - (pisurdeux + - x)) with x; try ring.
 Qed.
- 
+
 Lemma cos_zero : cos 0 = 1.
 elim existence_AB_unitaire; intros A H; elim H; intros B H0; try clear H;
  try exact H0.
 rewrite (def_cos (A:=A) (B:=B) (C:=B) (x:=0)); auto with geo.
 rewrite <- angle_nul; auto with geo.
 Qed.
- 
+
 Lemma sin_zero : sin 0 = 0.
 elim existence_AB_unitaire; intros A H; elim H; intros B H0; try clear H;
  try exact H0.
@@ -221,7 +221,7 @@ elim H; intros.
 rewrite (def_sin (A:=A) (B:=B) (C:=B) (D:=D) (x:=0)); auto with geo.
 rewrite <- angle_nul; auto with geo.
 Qed.
- 
+
 Lemma cos_pisurdeux : cos pisurdeux = 0.
 elim existence_AB_unitaire; intros A H; elim H; intros B H0; try clear H;
  try exact H0.
@@ -230,7 +230,7 @@ elim H; intros.
 elim H2; intros H3 H4; try clear H2; try exact H4.
 rewrite (def_cos (A:=A) (B:=B) (C:=D) (x:=pisurdeux)); auto with geo.
 Qed.
- 
+
 Lemma sin_pisurdeux : sin pisurdeux = 1.
 elim existence_AB_unitaire; intros A H; elim H; intros B H0; try clear H;
  try exact H0.
@@ -239,7 +239,7 @@ elim H; intros.
 elim H2; intros H3 H4; try clear H2; try exact H4.
 rewrite (def_sin (A:=A) (B:=B) (C:=D) (D:=D) (x:=pisurdeux)); auto with geo.
 Qed.
- 
+
 Lemma cos_pi : cos pi = -1.
 elim existence_AB_unitaire; intros A H; elim H; intros B H0; try clear H;
  try exact H0.
@@ -257,7 +257,7 @@ Ringvec.
 rewrite H1.
 Simplscal; rewrite carre_scalaire_distance; rewrite H0; ring.
 Qed.
- 
+
 Lemma sin_pi : sin pi = 0.
 elim existence_AB_unitaire; intros A H; elim H; intros B H0; try clear H;
  try exact H0.
@@ -279,7 +279,7 @@ rewrite <- angle_plat; auto with geo.
 rewrite H3.
 Ringvec.
 Qed.
- 
+
 Lemma coordonnees_cos_sin :
  forall (x : R) (O I J M : PO),
  repere_orthonormal_direct O I J ->
@@ -296,7 +296,7 @@ pattern (vec O M) at 1 in |- *.
 rewrite (coordonnees_scalaire_base (O:=O) (I:=I) (J:=J) M); auto with geo.
 rewrite scalaire_sym; auto.
 Qed.
- 
+
 Lemma calcul_cos_sin :
  forall (x a b : R) (O I J M : PO),
  repere_orthonormal_direct O I J ->
@@ -308,7 +308,7 @@ intros.
 apply unicite_coordonnees with (2 := H2); auto with geo.
 apply coordonnees_cos_sin; auto.
 Qed.
- 
+
 Lemma trigo_Pythagore : forall x : R, Rsqr (cos x) + Rsqr (sin x) = 1.
 unfold Rsqr in |- *; intros.
 elim existence_AB_unitaire; intros A H; elim H; intros B H0; try clear H;
@@ -331,7 +331,7 @@ rewrite (pisurdeux_scalaire_nul (A:=A) (B:=B) (C:=D)); auto.
 ring.
 apply coordonnees_cos_sin; auto.
 Qed.
- 
+
 Lemma pisurdeux_plus_x :
  forall x : R, cos (pisurdeux + x) = - sin x /\ sin (pisurdeux + x) = cos x.
 intros.
@@ -349,7 +349,7 @@ elim
   with (A := A) (B := A) (C := B) (k := -1); intros E H4.
 cut (image_angle x = cons_AV (vec A D) (vec A C)); intros.
 generalize
- (coordonnees_cos_sin (x:=pisurdeux + x) (O:=A) (I:=B) (J:=D) (M:=C)); 
+ (coordonnees_cos_sin (x:=pisurdeux + x) (O:=A) (I:=B) (J:=D) (M:=C));
  intros.
 generalize (coordonnees_cos_sin (x:=x) (O:=A) (I:=D) (J:=E) (M:=C)); intros.
 cut
@@ -369,7 +369,7 @@ apply add_mes_compatible.
 apply mes_oppx; auto with geo.
 apply Chasles; auto with geo.
 Qed.
- 
+
 Lemma sin_impaire : forall x : R, sin (- x) = - sin x.
 intros.
 elim pisurdeux_plus_x with (x := - x); intros H H0;
@@ -382,7 +382,7 @@ ring.
 ring.
 ring.
 Qed.
- 
+
 Lemma pi_moins_x :
  forall x : R, cos (pi + - x) = - cos x /\ sin (pi + - x) = sin x.
 intros.
@@ -396,7 +396,7 @@ rewrite cos_sin_pisurdeux_moins_x; auto.
 rewrite sin_cos_pisurdeux_moins_x; auto.
 ring.
 Qed.
- 
+
 Lemma pi_plus_x :
  forall x : R, cos (pi + x) = - cos x /\ sin (pi + x) = - sin x.
 intros.
@@ -409,7 +409,7 @@ rewrite cos_paire; auto.
 rewrite sin_impaire; auto.
 ring.
 Qed.
- 
+
 Theorem cos_diff :
  forall a b : R, cos (a + - b) = cos a * cos b + sin a * sin b.
 intros.
@@ -445,7 +445,7 @@ rewrite H9; rewrite H8; rewrite H7.
 rewrite scalaire_sym; rewrite H7.
 ring.
 Qed.
- 
+
 Lemma cos_som :
  forall a b : R, cos (a + b) = cos a * cos b + - (sin a * sin b).
 intros.
@@ -456,7 +456,7 @@ rewrite sin_impaire.
 ring.
 ring.
 Qed.
- 
+
 Lemma sin_som : forall a b : R, sin (a + b) = sin a * cos b + sin b * cos a.
 intros.
 replace (sin (a + b)) with (cos (pisurdeux + - (a + b))).
@@ -468,7 +468,7 @@ ring.
 ring.
 rewrite <- sin_cos_pisurdeux_moins_x; auto.
 Qed.
- 
+
 Lemma sin_diff :
  forall a b : R, sin (a + - b) = sin a * cos b + - (sin b * cos a).
 intros.
@@ -477,7 +477,7 @@ rewrite cos_paire.
 rewrite sin_impaire.
 ring.
 Qed.
- 
+
 Lemma duplication_cos : forall a : R, cos (2 * a) = 2 * Rsqr (cos a) + -1.
 intros.
 repeat rewrite double.
@@ -486,7 +486,7 @@ replace (-1) with (-(1)) by ring.
 rewrite <- (trigo_Pythagore a).
 unfold Rsqr; ring.
 Qed.
- 
+
 Lemma duplication_cos2 : forall a : R, cos (2 * a) = 1 + - (2 * Rsqr (sin a)).
 intros.
 repeat rewrite double.
@@ -494,13 +494,13 @@ rewrite cos_som.
 rewrite <- (trigo_Pythagore a).
 unfold Rsqr; ring.
 Qed.
- 
+
 Lemma duplication_sin : forall a : R, sin (2 * a) = 2 * (sin a * cos a).
 intros.
 repeat rewrite double.
 rewrite sin_som; auto.
 Qed.
- 
+
 Lemma coordonnees_polaires_cartesiennes :
  forall (x y a r : R) (O I J M : PO),
  repere_orthonormal_direct O I J ->
@@ -530,7 +530,7 @@ elim def_representant_unitaire2 with (A := O) (B := M) (C := C);
  | auto
  | auto ].
 Qed.
- 
+
 Lemma trivial_cos_Cos :
  forall (A B C : PO) (x : R),
  distance A B = 1 ->
@@ -541,7 +541,7 @@ intros.
 rewrite (def_cos (A:=A) (B:=B) (C:=C) (x:=x)); auto.
 rewrite (def_Cos (A:=A) (B:=B) (C:=C)); auto.
 Qed.
- 
+
 Lemma egalite_cos_Cos :
  forall (A B C : PO) (x : R),
  A <> B ->
@@ -567,7 +567,7 @@ elim H5; auto with geo.
 rewrite H2; rewrite H3; rewrite H1; rewrite angles_representants_unitaires;
  auto with geo.
 Qed.
- 
+
 Lemma trivial_sin_Sin :
  forall (A B C D : PO) (x : R),
  distance A B = 1 ->
@@ -578,7 +578,7 @@ intros.
 rewrite (def_sin (A:=A) (B:=B) (C:=C) (D:=D) (x:=x)); auto.
 rewrite (def_Sin (A:=A) (B:=B) (C:=C) (D:=D)); auto.
 Qed.
- 
+
 Lemma egalite_sin_Sin :
  forall (A B C : PO) (x : R),
  A <> B ->
@@ -608,7 +608,7 @@ elim def_representant_unitaire2 with (A := A) (B := B) (C := B');
  auto with geo; intros.
 elim H4; auto with geo.
 Qed.
- 
+
 Lemma coordonnees_Cos_Sin :
  forall O I J M : PO,
  repere_orthonormal_direct O I J ->
@@ -626,7 +626,7 @@ rewrite <- (trivial_sin_Sin (A:=O) (B:=I) (C:=M) (D:=J) (x:=x));
 rewrite <- (trivial_cos_Cos (A:=O) (B:=I) (C:=M) (x:=x)); auto with geo.
 apply coordonnees_cos_sin; auto.
 Qed.
- 
+
 Lemma calcul_Cos_Sin :
  forall (a b : R) (O I J M : PO),
  repere_orthonormal_direct O I J ->
@@ -644,9 +644,21 @@ rewrite <- (trivial_sin_Sin (A:=O) (B:=I) (C:=M) (D:=J) (x:=x));
 rewrite <- (trivial_cos_Cos (A:=O) (B:=I) (C:=M) (x:=x)); auto with geo.
 apply (calcul_cos_sin (x:=x) (a:=a) (b:=b) (O:=O) (I:=I) (J:=J) (M:=M)); auto.
 Qed.
- 
+
 Axiom
   egalite_angle_trigo :
     forall x y : R,
     sin x = sin y -> cos x = cos y -> image_angle x = image_angle y.
+
 Hint Resolve egalite_angle_trigo: geo.
+
+Lemma egalite_angle_PiPres_trigo:
+    forall x y :R,
+    sin x = -sin y ->cos x = -cos y -> image_angle x = image_angle (y+pi).
+intros x y H H0.
+destruct (@pi_plus_x y) as [H1 H2].
+rewrite <-H2 in H.
+rewrite <-H1 in H0.
+replace (y+pi) with (pi +y);auto with real.
+apply egalite_angle_trigo;auto.
+Qed.

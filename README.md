@@ -26,6 +26,7 @@ The axiomatisation for affine Euclidean space is in a non analytic setting.
 
 - Author(s):
   - Frédérique Guilhot (initial)
+  - Tuan-Minh Pham (concept of orientation and Ptolemy's theorem)
 - Coq-community maintainer(s):
   - Laurent Théry ([**@thery**](https://github.com/thery))
 - License: [GNU Lesser General Public License v2.1 or later](LICENSE)
