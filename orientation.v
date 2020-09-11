@@ -3,6 +3,7 @@ Require Export angles_droites.
 Require Export angles_vecteurs.
 Require Export Droite_espace.
 Require Export triangles_semblables.
+
 Definition orient ( A B C :PO) : Prop :=
      aire (vec A B) (vec A C) >0.
 
