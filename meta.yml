@@ -6,19 +6,24 @@ organization: coq-community
 community: true
 travis: true
 
-synopsis: Geometry in Coq for French high-school
+synopsis: Geometry in Coq for French high school
 
 description: |-
-  This Coq library is dedicated to high-shool geometry teaching.
-  The axiomatisation for affine Euclidean space is in a non analytic setting.
+  This Coq library is dedicated to high-shool geometry teaching. The
+  axiomatisation for affine Euclidean space is in a non analytic setting.
+  Includes a proof of Ptolemy's theorem.
 
 publications:
 - pub_url: https://hal.inria.fr/inria-00071689/
   pub_title: Premiers pas vers un cours de géométrie en Coq pour le lycée
+- pub_url: https://hal.inria.fr/inria-00585203/
+  pub_title: Similar Triangles and Orientation in Plane Elementary Geometry for Coq-based Proofs
+  pub_doi: 10.1145/1774088.1774358
 
 authors:
 - name: Frédérique Guilhot
   initial: true
+- name: Tuan-Minh Pham
 
 maintainers:
 - name: Laurent Théry
@@ -50,11 +55,12 @@ keywords:
 - name: geometry
 - name: teaching
 - name: high school
+- name: Ptolemy's theorem
 
 categories:
 - name: Mathematics/Geometry/General
 
-documentation: |-  
+documentation: |-
   ## Documentation in English
 
   See also the [documentation in French](#Documentation-en-français) below.
@@ -120,7 +126,7 @@ documentation: |-
     (applications_cocyclicite.v)
   - circle power and plane inversion (puissance_cercle.v, inversion.v) 
   - Euler line theorem and nine point circle theorem
-    (droite_Euler.v et homoth_Euler.v).
+    (droite_Euler.v, homoth_Euler.v).
   
   The eighth part "complex numbers", deals with formalising:
   - the field properties of complex numbers
@@ -128,6 +134,10 @@ documentation: |-
   - application to geometry of complex numbers
     (complexes_dilations.v, complexes_similitudes.v, complexes_transformations.v, complexes_exercice.v,
      complexes_inversion.v, complexes_analytique.v)
+
+  Tuan-Minh Pham introduced the concept of orientation and proved Ptolemy's theorem
+  (orientation.v, triangles_semblables.v, Ptolemee.v). This work is described in
+  a [separate paper][ptolemy-link].
 
   ## Documentation en français
 
@@ -206,4 +216,5 @@ documentation: |-
   - l'écriture analytique de toutes les transformations étudiées (complexes_analytique.v)
 
   [report-link]: https://hal.inria.fr/inria-00071689/
+  [ptolemy-link]: https://hal.inria.fr/inria-00585203/
 ---

@@ -1,11 +1,8 @@
-
 Require Export triangles_semblables.
 Require Export orientation.
 
+(* Main proof of Ptolemy's theorem *)
 
-(***********************************************************************)
-                              (*Main proof of Ptoleme *)
-(***********************************************************************)
 Lemma EntreDeuxVec_sym :
 forall (A B C M N :PO),
          vecEntreDeuxVec A B C M -> A<>N->
