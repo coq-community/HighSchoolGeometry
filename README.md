@@ -19,14 +19,15 @@
 
 
 
-This Coq library is dedicated to high-shool geometry teaching.
-The axiomatisation for affine Euclidean space is in a non analytic setting.
+This Coq library is dedicated to high-shool geometry teaching. The
+axiomatisation for affine Euclidean space is in a non analytic setting.
+Includes a proof of Ptolemy's theorem.
 
 ## Meta
 
 - Author(s):
   - Frédérique Guilhot (initial)
-  - Tuan-Minh Pham (concept of orientation and Ptolemy's theorem)
+  - Tuan-Minh Pham
 - Coq-community maintainer(s):
   - Laurent Théry ([**@thery**](https://github.com/thery))
 - License: [GNU Lesser General Public License v2.1 or later](LICENSE)
@@ -35,6 +36,7 @@ The axiomatisation for affine Euclidean space is in a non analytic setting.
 - Coq namespace: `HighSchoolGeometry`
 - Related publication(s):
   - [Premiers pas vers un cours de géométrie en Coq pour le lycée](https://hal.inria.fr/inria-00071689/) 
+  - [Similar Triangles and Orientation in Plane Elementary Geometry for Coq-based Proofs](https://hal.inria.fr/inria-00585203/) doi:[10.1145/1774088.1774358](https://doi.org/10.1145/1774088.1774358)
 
 ## Building and installation instructions
 
@@ -121,7 +123,7 @@ In the seventh part "applications", we prove:
   (applications_cocyclicite.v)
 - circle power and plane inversion (puissance_cercle.v, inversion.v) 
 - Euler line theorem and nine point circle theorem
-  (droite_Euler.v et homoth_Euler.v).
+  (droite_Euler.v, homoth_Euler.v).
 
 The eighth part "complex numbers", deals with formalising:
 - the field properties of complex numbers
@@ -129,6 +131,10 @@ The eighth part "complex numbers", deals with formalising:
 - application to geometry of complex numbers
   (complexes_dilations.v, complexes_similitudes.v, complexes_transformations.v, complexes_exercice.v,
    complexes_inversion.v, complexes_analytique.v)
+
+Tuan-Minh Pham introduced the concept of orientation and proved Ptolemy's theorem
+(orientation.v, triangles_semblables.v, Ptolemee.v). This work is described in
+a [separate paper][ptolemy-link].
 
 ## Documentation en français
 
@@ -207,3 +213,4 @@ Dans la partie  "nombres complexes", sont démontrées
 - l'écriture analytique de toutes les transformations étudiées (complexes_analytique.v)
 
 [report-link]: https://hal.inria.fr/inria-00071689/
+[ptolemy-link]: https://hal.inria.fr/inria-00585203/
