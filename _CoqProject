@@ -64,4 +64,6 @@ complexes_inversion.v
 complexes_analytique.v
 complements_cercle.v
 exercice_morley.v
-
+triangles_semblables.v
+orientation.v
+Ptolemee.v
