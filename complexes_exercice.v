@@ -92,10 +92,10 @@ Lemma deux_iso_rec_dir_complexe :
  isocele_rectangle_direct A B C ->
  isocele_rectangle_direct A D E ->
  Cplus e (Copp c) = Cmult i (Cplus d (Copp b)).
-intros.
-generalize (iso_rec_dir_complexe (a:=a) (b:=b) (c:=c) (A:=A) (B:=B) (C0:=C));
+intros a b c d e A B C D E aA bB cC dD eE ABC ADE.
+generalize (iso_rec_dir_complexe aA bB cC ABC);
  intros H11.
-generalize (iso_rec_dir_complexe (a:=a) (b:=d) (c:=e) (A:=A) (B:=D) (C0:=E));
+generalize (iso_rec_dir_complexe aA dD eE ADE);
  intros H12.
 replace (Cplus e (Copp c)) with
  (Cplus (Cplus e (Copp a)) (Copp (Cplus c (Copp a)))); 
@@ -103,7 +103,7 @@ replace (Cplus e (Copp c)) with
 rewrite H12; auto.
 rewrite H11; auto.
 replace (Cplus d (Copp b)) with
- (Cplus (Cplus d (Copp a)) (Copp (Cplus b (Copp a)))); 
+ (Cplus (Cplus d (Copp a)) (Copp (Cplus b (Copp a))));
  ring.
 Qed.
  
@@ -146,6 +146,5 @@ rewrite <- (module_difference H4 H6).
 rewrite H7; rewrite forme_polaire_i; rewrite Cmult_module;
  rewrite complexe_polaire_module; ring.
 apply
- (deux_iso_rec_dir_complexe (a:=a) (b:=b) (c:=c) (d:=d) (e:=e) (A:=A) (B:=B)
-    (C0:=C) (D:=D) (E:=E)); auto.
+ (@deux_iso_rec_dir_complexe a b c d e A B C D E); auto.
 Qed.
