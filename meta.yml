@@ -4,7 +4,7 @@ shortname: HighSchoolGeometry
 opam_name: coq-high-school-geometry
 organization: coq-community
 community: true
-travis: true
+action: true
 
 synopsis: Geometry in Coq for French high school
 
@@ -43,11 +43,11 @@ supported_coq_versions:
 
 tested_coq_nix_versions:
 - version_or_url: https://github.com/coq/coq-on-cachix/tarball/master
-- version_or_url: '8.12'
-- version_or_url: '8.11'
 
 tested_coq_opam_versions:
 - version: dev
+- version: '8.12'
+- version: '8.11'
 
 namespace: HighSchoolGeometry
 
