@@ -131,7 +131,7 @@ elim (tout_angle_a_une_mesure (A:=A) (B:=B) (C:=A) (D:=D)); auto with geo;
 exists x.
 rewrite H4; auto.
 Qed.
-Hint Resolve mes_opp add_mes_compatible: geo.
+#[export] Hint Resolve mes_opp add_mes_compatible: geo.
  
 Ltac mes a :=
   elim (tout_angle_mesure a); intros;
@@ -140,7 +140,7 @@ Ltac mes a :=
        try rewrite h; repeat rewrite <- mes_opp;
         repeat rewrite <- add_mes_compatible; repeat rewrite <- mes_opp
    end.
-Hint Resolve def_opp Chasles angles_representants_unitaires: geo.
+#[export] Hint Resolve def_opp Chasles angles_representants_unitaires: geo.
  
 Ltac mesure A B C D :=
   elim (tout_angle_a_une_mesure (A:=A) (B:=B) (C:=C) (D:=D)); auto with geo;
@@ -173,7 +173,7 @@ mes b.
 mes c.
 replace (x + (x0 + x1)) with (x + x0 + x1); [ auto | ring ].
 Qed.
-Hint Resolve plus_angle_zero: geo.
+#[export] Hint Resolve plus_angle_zero: geo.
  
 Lemma opp_angle :
  forall a b : AV, plus a b = image_angle 0 :>AV -> b = opp a :>AV.
@@ -235,7 +235,7 @@ rewrite <- def_opp; auto.
 rewrite <- (def_opp (A:=E) (B:=F) (C:=G) (D:=I)); auto.
 rewrite <- H3; auto.
 Qed.
-Hint Resolve permute_angles: geo.
+#[export] Hint Resolve permute_angles: geo.
  
 Lemma opp_plus_plus_opp :
  forall A B C D E F G I : PO,
@@ -252,7 +252,7 @@ mesure E F G I.
 replace (- (x + x0)) with (- x + - x0); auto.
 ring.
 Qed.
-Hint Resolve opp_plus_plus_opp: geo.
+#[export] Hint Resolve opp_plus_plus_opp: geo.
  
 Lemma Chasles_diff :
  forall A B C D E F : PO,
@@ -265,7 +265,7 @@ intros.
 rewrite def_opp; auto.
 rewrite plus_commutative; auto with geo.
 Qed.
-Hint Resolve pisurdeux_droit: geo.
+#[export] Hint Resolve pisurdeux_droit: geo.
  
 Lemma pisurdeux_scalaire_nul :
  forall A B C : PO,
@@ -275,7 +275,7 @@ intros.
 apply def_orthogonal.
 apply pisurdeux_droit; auto.
 Qed.
-Hint Resolve pisurdeux_scalaire_nul: geo.
+#[export] Hint Resolve pisurdeux_scalaire_nul: geo.
  
 Lemma orthogonal_pisurdeux_or :
  forall A B C D : PO,
@@ -357,7 +357,7 @@ rewrite (mesure_mod_deuxpi (x:=x) (A:=A) (B:=B) (C:=C) (D:=D)); auto.
 unfold deuxpi in |- *; ring.
 repeat rewrite Chasles; auto.
 Qed.
-Hint Resolve angle_oppu_oppv: geo.
+#[export] Hint Resolve angle_oppu_oppv: geo.
  
 Theorem somme_triangle :
  forall A B C : PO,
@@ -396,7 +396,7 @@ mesure A B A C.
 replace (x1 + (x + x0) + (- x1 + - x)) with x0; auto.
 ring.
 Qed.
-Hint Resolve angle_triangle: geo.
+#[export] Hint Resolve angle_triangle: geo.
  
 Lemma angles_complementaires_triangle_rectangle :
  forall (A B C : PO) (a : R),
@@ -454,7 +454,7 @@ rewrite (produit_positif_representant_unitaire (k:=k) (A:=A) (B:=B) (C:=C));
  auto.
 auto with real.
 Qed.
-Hint Resolve angles_representants_unitaires: geo.
+#[export] Hint Resolve angles_representants_unitaires: geo.
  
 Lemma angle_produit_negatif_r :
  forall (k : R) (A B C D E : PO),
@@ -744,4 +744,4 @@ rewrite H2 in |- *;  ring.
 replace (- k0) with (Rabs k0); auto with geo.
 apply Rabs_left; auto with real.
 Qed.
-Hint Resolve plus_angle_zero: geo.
+#[export] Hint Resolve plus_angle_zero: geo.

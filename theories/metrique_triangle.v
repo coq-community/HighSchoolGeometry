@@ -76,7 +76,7 @@ intros.
 rewrite produit_scalaire_Cosinus; auto.
 rewrite (egalite_cos_Cos (A:=A) (B:=B) (C:=C) (x:=a)); auto.
 Qed.
-Hint Resolve carre_scalaire_distance: geo.
+#[export] Hint Resolve carre_scalaire_distance: geo.
  
 Lemma triangle_rectangle_Cos :
  forall (A B C : PO) (a : R),

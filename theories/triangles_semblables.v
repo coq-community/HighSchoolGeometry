@@ -102,7 +102,7 @@ expand_triangles_semblables.
 repeat split; auto with geo.
 Qed.
 
-Hint Resolve trianglesSD_ordre_cycle
+#[export] Hint Resolve trianglesSD_ordre_cycle
                       trianglesSI_ordre_cycle
                       trianglesSD_ordre_permute
                       trianglesSI_ordre_permute

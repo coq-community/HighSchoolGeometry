@@ -38,14 +38,13 @@ license:
   identifier: LGPL-2.1-or-later
 
 supported_coq_versions:
-  text: 8.11 or later
-  opam: '{(>= "8.11" & < "8.15~") | (= "dev")}'
+  text: 8.12 or later
+  opam: '{(>= "8.12" & < "8.15~") | (= "dev")}'
 
 tested_coq_opam_versions:
 - version: dev
 - version: '8.13'
 - version: '8.12'
-- version: '8.11'
 
 namespace: HighSchoolGeometry
 

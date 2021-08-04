@@ -23,7 +23,7 @@ Definition isocele (A B C : PO) : Prop := distance A B = distance A C.
 Lemma isocele_permute : forall A B C : PO, isocele A B C -> isocele A C B.
 unfold isocele in |- *; intros; auto.
 Qed.
-Hint Immediate isocele_permute: geo.
+#[export] Hint Immediate isocele_permute: geo.
  
 Lemma isocele_mediatrice :
  forall A B C : PO, isocele A B C -> mediatrice B C A.

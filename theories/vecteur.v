@@ -44,10 +44,10 @@ unfold vec in |- *; intros.
 RingPP1 H.
 RingPP.
 Qed.
-Hint Resolve egalite_vecteur: geo.
+#[export] Hint Resolve egalite_vecteur: geo.
  
 Definition parallelogramme (A B C D : PO) := vec A B = vec D C.
-Hint Unfold parallelogramme: geo.
+#[export] Hint Unfold parallelogramme: geo.
  
 Lemma parallelogramme_ordre_cycle :
  forall A B C D : PO, parallelogramme A B C D -> parallelogramme B C D A.
@@ -60,8 +60,8 @@ Lemma parallelogramme_ordre_permute :
 unfold parallelogramme in |- *; intros.
 auto with geo.
 Qed.
-Hint Immediate parallelogramme_ordre_permute: geo.
-Hint Resolve parallelogramme_ordre_cycle: geo.
+#[export] Hint Immediate parallelogramme_ordre_permute: geo.
+#[export] Hint Resolve parallelogramme_ordre_cycle: geo.
  
 Lemma add_PP_vecteur :
  forall (a b : R) (A B C M : PO),
@@ -213,7 +213,7 @@ contrapose H.
 apply vecteur_nul_conf.
 rewrite H0; rewrite H1; Ringvec.
 Qed.
-Hint Resolve inversion_colineaire: geo.
+#[export] Hint Resolve inversion_colineaire: geo.
  
 Ltac subst_ A B :=
   match goal with

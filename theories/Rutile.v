@@ -59,7 +59,7 @@ apply Rinv_le_pos; auto.
 apply non_sqrt_zero; auto.
 apply sqrt_pos; auto.
 Qed.
-Hint Resolve non_sqrt_zero Rinv_sqrt_pos Rinv_le_pos Rmult_pos sqrt_pos
+#[export] Hint Resolve non_sqrt_zero Rinv_sqrt_pos Rinv_le_pos Rmult_pos sqrt_pos
   def_sqrt: real.
  
 Lemma resolution : forall x y : R, x >= 0 -> y >= 0 -> x * x = y * y -> x = y.
@@ -111,7 +111,7 @@ cut (2 <> 0); intros.
 auto with real.
 try lra.
 Qed.
-Hint Resolve deux_demi: real.
+#[export] Hint Resolve deux_demi: real.
  
 Lemma deux_demi_a : forall a : R, a = / 2 * a + / 2 * a.
 intros.
@@ -119,19 +119,19 @@ replace (/ 2 * a + / 2 * a) with (2 * / 2 * a).
 replace (2 * / 2) with 1; auto with real.
 ring.
 Qed.
-Hint Resolve deux_demi_a: real.
+#[export] Hint Resolve deux_demi_a: real.
  
 Lemma integre_not : forall a b : R, a <> 0 -> b <> 0 -> a * b <> 0.
 intros.
 apply Rmult_integral_contrapositive; (split; auto; try lra).
 Qed.
-Hint Resolve integre_not: real.
+#[export] Hint Resolve integre_not: real.
  
 Lemma lR14 : 1 + - / 2 = / 2.
 Proof.
 field.
 Qed.
-Hint Resolve lR14: real.
+#[export] Hint Resolve lR14: real.
  
 Lemma lR15 : forall k : R, k * k = (1 + - k) * (1 + - k) -> k = / 2.
 intros.
@@ -158,14 +158,14 @@ ring.
 ring.
 lra.
 Qed.
-Hint Resolve lR15: real.
+#[export] Hint Resolve lR15: real.
  
 Lemma lR20 : forall a : R, ~ a >= 0 -> -1 * a >= 0.
 intros.
 replace (-1 * a) with (- a) by ring.
 lra.
 Qed.
-Hint Resolve lR20: real.
+#[export] Hint Resolve lR20: real.
  
 Lemma non_produit_un : forall k k' : R, k' * k <> 1 -> 1 + - (k' * k) <> 0.
 intros; red in |- *; intros.
@@ -173,7 +173,7 @@ apply H.
 replace 1 with (1 + - (k' * k) + k' * k); [ idtac | ring ].
 rewrite H0; ring.
 Qed.
-Hint Resolve non_produit_un: real.
+#[export] Hint Resolve non_produit_un: real.
  
 Lemma opp_inv_demi_nonzero : - / 2 <> 0.
 cut (-2 <> 0); intros.
@@ -181,7 +181,7 @@ replace (- / 2) with (/ -2); auto with real.
 rewrite Ropp_inv_permute; auto with real.
 lra.
 Qed.
-Hint Resolve opp_inv_demi_nonzero: real.
+#[export] Hint Resolve opp_inv_demi_nonzero: real.
  
 Lemma nonzero_un : 1 <> 0.
 lra.
@@ -214,7 +214,7 @@ Qed.
 Lemma nonzero_invtrois : / 3 <> 0.
 lra.
 Qed.
-Hint Resolve nonzero_invtrois nonzero_opptrois nonzero_trois nonzero_invdeux
+#[export] Hint Resolve nonzero_invtrois nonzero_opptrois nonzero_trois nonzero_invdeux
   nonzero_oppdeux nonzero_deux nonzero_oppun nonzero_un: real.
  
 Lemma double_zero : forall a : R, 2 * a = 0 -> a = 0.
@@ -226,7 +226,7 @@ Qed.
 Lemma zero_double : forall a : R, a = 0 -> 2 * a = 0.
 intuition.
 Qed.
-Hint Resolve double_zero zero_double: real.
+#[export] Hint Resolve double_zero zero_double: real.
  
 Lemma nonzero_oppinvtrois : - / 3 <> 0.
 cut (-3 <> 0); intros; auto with real.
@@ -235,7 +235,7 @@ Qed.
 Lemma nonzero_oppinvdeux : - / 2 <> 0.
 cut (-2 <> 0); intros; auto with real.
 Qed.
-Hint Resolve nonzero_oppinvtrois nonzero_oppinvdeux: real.
+#[export] Hint Resolve nonzero_oppinvtrois nonzero_oppinvdeux: real.
  
 Lemma Rgt_inv : forall k : R, k > 0 -> / k > 0.
 intros.
@@ -248,9 +248,9 @@ absurd (/ k = 0); auto with real.
 red in |- *.
 left; try assumption.
 Qed.
-Hint Resolve Rgt_inv: real.
+#[export] Hint Resolve Rgt_inv: real.
  
 Definition R2 := 2.
  
 Definition R4 := 2 + 2.
-Hint Unfold R2 R4: real geo.
+#[export] Hint Unfold R2 R4: real geo.

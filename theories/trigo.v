@@ -67,7 +67,7 @@ unfold repere_orthonormal_direct, repere_orthonormal in |- *; intros.
 elim H; intros H0 H1; try clear H; try exact H1.
 split; [ auto with geo | try assumption ].
 Qed.
-Hint Resolve ROND_RON: geo.
+#[export] Hint Resolve ROND_RON: geo.
 
 Definition repere_orthonormal_indirect (O I J : PO) :=
   image_angle pisurdeux = cons_AV (vec O J) (vec O I) /\
@@ -650,7 +650,7 @@ Axiom
     forall x y : R,
     sin x = sin y -> cos x = cos y -> image_angle x = image_angle y.
 
-Hint Resolve egalite_angle_trigo: geo.
+#[export] Hint Resolve egalite_angle_trigo: geo.
 
 Lemma egalite_angle_PiPres_trigo:
     forall x y :R,

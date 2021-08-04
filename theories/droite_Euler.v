@@ -87,7 +87,7 @@ Ringvec.
 discrR.
 rewrite H1; auto.
 Qed.
-Hint Resolve centre_gravite_prop_vecteur: geo.
+#[export] Hint Resolve centre_gravite_prop_vecteur: geo.
  
 Theorem droite_Euler_fort :
  forall A B C O G H : PO,

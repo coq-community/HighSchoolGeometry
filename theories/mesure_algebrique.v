@@ -57,7 +57,7 @@ apply def_mes_alg.
 Ringvec.
 ring.
 Qed.
-Hint Resolve mes_alg_conf mes_alg_nulle: geo.
+#[export] Hint Resolve mes_alg_conf mes_alg_nulle: geo.
  
 Lemma Chasles_mes_alg :
  forall A B C : PO, alignes A B C -> mes_alg A B + mes_alg B C = mes_alg A C.
@@ -113,7 +113,7 @@ RReplace (mes_alg C D) (mes_alg C D / mes_alg A B * mes_alg A B).
 rewrite H1; auto.
 field; auto.
 Qed.
-Hint Resolve def_mes_alg2 def_mes_alg: geo.
+#[export] Hint Resolve def_mes_alg2 def_mes_alg: geo.
  
 Lemma colineaire_mes_alg_conf :
  forall (A B C D : PO) (k : R),

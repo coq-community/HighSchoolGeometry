@@ -64,7 +64,7 @@ Lemma translation_trivial : forall I J : PO, J = translation I J I.
 intros.
 apply rec_translation_vecteur; auto.
 Qed.
-Hint Resolve translation_trivial: geo.
+#[export] Hint Resolve translation_trivial: geo.
  
 Lemma translation_bipoint :
  forall I J A A' B B' : PO,
@@ -163,7 +163,7 @@ VReplace (vec J I) (mult_PP (-1) (vec I J)).
 rewrite (translation_vecteur (I:=I) (J:=J) (A:=A) (A':=A')); auto.
 Ringvec.
 Qed.
-Hint Resolve translation_inverse: geo.
+#[export] Hint Resolve translation_inverse: geo.
  
 Lemma translation_intersection :
  forall I J A A' B B' C C' D D' K K' : PO,
@@ -261,7 +261,7 @@ intros.
 apply vecteur_homothetie.
 Ringvec.
 Qed.
-Hint Resolve homothetie_centre: geo.
+#[export] Hint Resolve homothetie_centre: geo.
  
 Lemma homothetie_vecteur :
  forall (k : R) (I A A' : PO),
@@ -297,7 +297,7 @@ rewrite H0.
 cut (2 <> 0); intros; auto with real.
 Fieldvec 2.
 Qed.
-Hint Resolve milieu_symetrie symetrie_milieu: geo.
+#[export] Hint Resolve milieu_symetrie symetrie_milieu: geo.
  
 Lemma symetrie_involution :
  forall A B I : PO, B = symetrie I A :>PO -> A = symetrie I B :>PO.
@@ -433,7 +433,7 @@ apply vecteur_homothetie.
 rewrite (homothetie_vecteur (k:=k) (I:=I) (A:=A) (A':=A')); auto.
 Fieldvec k.
 Qed.
-Hint Resolve homothetie_inverse: geo.
+#[export] Hint Resolve homothetie_inverse: geo.
  
 Lemma homothetie_alignement :
  forall (k : R) (I A B A' B' C C' : PO),

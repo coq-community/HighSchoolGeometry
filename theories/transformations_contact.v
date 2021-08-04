@@ -19,7 +19,7 @@ Require Export reflexion_plane.
 Require Export similitudes_directes.
 Set Implicit Arguments.
 Unset Strict Implicit.
-Hint Resolve translation_trivial rec_translation_vecteur: geo.
+#[export] Hint Resolve translation_trivial rec_translation_vecteur: geo.
  
 Lemma translation_isometrie :
  forall A A' B B' C C' : PO,

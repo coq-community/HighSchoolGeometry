@@ -27,7 +27,7 @@ unfold tetraedre in |- *; intros.
 elim non_coplanaires_expl with (A := A) (B := B) (C := C) (D := D);
  [ intros H0 H1; try clear non_coplanaires_expl; try exact H0 | auto ].
 Qed.
-Hint Resolve tetraedre_non_alignes: geo.
+#[export] Hint Resolve tetraedre_non_alignes: geo.
  
 Lemma deux_milieux_tetraedre :
  forall A B C D I J K L : PO,
@@ -117,7 +117,7 @@ replace 2 with (1 + 1) by ring.
 rewrite <- add_PP_barycentre; auto with real.
 Qed.
 
-Hint Resolve centre_gravite_coplanaire: geo.
+#[export] Hint Resolve centre_gravite_coplanaire: geo.
  
 Lemma exercice :
  forall A B C D E F G H I : PO,

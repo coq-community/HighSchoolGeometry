@@ -224,7 +224,7 @@ split; [ try assumption | idtac ].
 split; [ idtac | auto ].
 elim H0; intros H1 H2; try clear H0; try exact H1.
 Qed.
-Hint Resolve cocycliques_trivial: geo.
+#[export] Hint Resolve cocycliques_trivial: geo.
 (* soit_circonscrit construit le centre du cercle circonscrit du triangle ABC 
    et ne marche que si on a (triangle A B C) dans les hypotheses*)
  

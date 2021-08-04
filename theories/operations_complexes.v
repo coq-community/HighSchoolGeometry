@@ -24,7 +24,7 @@ intros.
 apply Rmult_eq_reg_l with x; auto.
 rewrite H0; auto with real.
 Qed.
-Hint Resolve Rinv_calcul: real.
+#[export] Hint Resolve Rinv_calcul: real.
 Parameter Cplus : C -> C -> C.
  
 Axiom
@@ -41,7 +41,7 @@ rewrite
  (Cplus_def (z1:=cons_cart x1 y1) (z2:=cons_cart x2 y2) (x1:=x1) (y1:=y1)
     (x2:=x2) (y2:=y2)); auto.
 Qed.
-Hint Resolve Cplus_algebrique: geo.
+#[export] Hint Resolve Cplus_algebrique: geo.
  
 Lemma Cplus_commutative : forall z1 z2 : C, Cplus z1 z2 = Cplus z2 z1.
 intros.
@@ -113,7 +113,7 @@ unfold zeroC in |- *; rewrite H0; rewrite Copp_algebrique;
 replace (x1 + - x1) with 0; [ idtac | ring ].
 replace (y1 + - y1) with 0; [ auto | ring ].
 Qed.
-Hint Resolve Cplus_z_oppz Copp_algebrique Cplus_commutative Cplus_z_zeroC:
+#[export] Hint Resolve Cplus_z_oppz Copp_algebrique Cplus_commutative Cplus_z_zeroC:
   geo.
 Parameter Cmult : C -> C -> C.
  
@@ -146,7 +146,7 @@ rewrite Cmult_module.
 apply Rmult_integral_contrapositive.
 split; auto with geo.
 Qed.
-Hint Resolve Cmult_module Cmult_argument nonzero_produit Cmult_z_zeroC
+#[export] Hint Resolve Cmult_module Cmult_argument nonzero_produit Cmult_z_zeroC
   Cmult_zeroC_z: geo.
  
 Lemma Cmult_z_z' :
@@ -164,7 +164,7 @@ rewrite Cmult_argument; auto with geo.
 rewrite (complexe_pol_argument (z:=z) (r:=r) (a:=a)); auto with geo.
 rewrite (complexe_pol_argument (z:=z') (r:=r') (a:=a')); auto with geo.
 Qed.
-Hint Resolve Cmult_z_z': geo.
+#[export] Hint Resolve Cmult_z_z': geo.
  
 Lemma Cmult_commutative : forall z z' : C, Cmult z z' = Cmult z' z.
 intros.
@@ -229,7 +229,7 @@ rewrite argument_oneC; auto with geo.
 Qed.
  
 Definition Csqr (z : C) := Cmult z z.
-Hint Unfold Csqr: geo.
+#[export] Hint Unfold Csqr: geo.
  
 Lemma i_carre : Csqr i = Rinj (-1).
 unfold Csqr in |- *.
@@ -299,7 +299,7 @@ apply forme_polaire_def; auto with geo.
 rewrite H2; auto.
 rewrite <- add_mes_compatible; auto.
 Qed.
-Hint Resolve Cmult_algebrique: geo.
+#[export] Hint Resolve Cmult_algebrique: geo.
  
 Theorem Cmult_distributive :
  forall z1 z2 z3 : C,
@@ -325,7 +325,7 @@ Lemma Cplus_zeroC_z : forall z : C, Cplus zeroC z = z.
 intros.
 rewrite Cplus_commutative; auto with geo.
 Qed.
-Hint Resolve Cmult_z_oneC: geo.
+#[export] Hint Resolve Cmult_z_oneC: geo.
  
 Lemma Cmult_oneC_z : forall z : C, Cmult oneC z = z.
 intros.
@@ -431,7 +431,7 @@ intros.
 rewrite <- (Cinv_def (z:=z)); auto.
 ring.
 Qed.
-Hint Resolve Cinv_def Cinv_def2 Cinv_l: geo.
+#[export] Hint Resolve Cinv_def Cinv_def2 Cinv_l: geo.
  
 Lemma Cinv_module : forall z : C, z <> zeroC -> module (Cinv z) = / module z.
 intros.
@@ -441,7 +441,7 @@ apply Rmult_eq_reg_l with (module z); auto.
 rewrite H0; auto with real.
 rewrite <- Cmult_module; rewrite Cinv_def; auto with geo.
 Qed.
-Hint Resolve Cinv_module: geo.
+#[export] Hint Resolve Cinv_module: geo.
  
 Lemma inv_nonzero : forall z : C, z <> zeroC -> Cinv z <> zeroC.
 intros.
@@ -450,7 +450,7 @@ rewrite Cinv_module; auto with geo.
 cut (module z <> 0); intros; auto with geo.
 auto with real.
 Qed.
-Hint Resolve inv_nonzero: geo.
+#[export] Hint Resolve inv_nonzero: geo.
  
 Lemma Cinv_argument :
  forall z : C, z <> zeroC -> argument (Cinv z) = opp (argument z).
@@ -462,7 +462,7 @@ rewrite <- argument_oneC.
 rewrite <- Cmult_argument; auto with geo.
 rewrite Cinv_def; auto with geo.
 Qed.
-Hint Resolve Cinv_argument: geo.
+#[export] Hint Resolve Cinv_argument: geo.
 Parameter Cdiv : C -> C -> C.
  
 Axiom
@@ -474,7 +474,7 @@ intros.
 rewrite Cdiv_def; auto with geo.
 rewrite Cmult_module; rewrite Cinv_module; auto.
 Qed.
-Hint Resolve Cdiv_module: geo.
+#[export] Hint Resolve Cdiv_module: geo.
  
 Lemma Cdiv_argument :
  forall z z' : C,
@@ -485,7 +485,7 @@ rewrite Cdiv_def; auto with geo.
 rewrite Cmult_argument; auto with geo.
 rewrite Cinv_argument; auto with geo.
 Qed.
-Hint Resolve Cdiv_argument: geo.
+#[export] Hint Resolve Cdiv_argument: geo.
  
 Lemma Cintegre :
  forall z z' : C, z <> zeroC -> Cmult z z' = zeroC -> z' = zeroC.
@@ -501,7 +501,7 @@ Lemma module_un_nonzero : forall a : R, cons_pol 1 a <> zeroC.
 intros.
 apply polaire_non_nul; try discrR.
 Qed.
-Hint Resolve module_un_nonzero: geo.
+#[export] Hint Resolve module_un_nonzero: geo.
  
 Lemma module_un_trivial : forall a : R, module (cons_pol 1 a) = 1.
 intros; auto with geo.
@@ -572,7 +572,7 @@ elim existence_affixe_point with (M := B); intros b; intros.
 symmetry  in |- *; rewrite <- H; rewrite <- H0.
 apply affixe_vec_AB; auto.
 Qed.
-Hint Resolve egalite_vecteur_distance: geo.
+#[export] Hint Resolve egalite_vecteur_distance: geo.
  
 Lemma module_difference :
  forall (a b : C) (A B : PO),
@@ -607,7 +607,7 @@ cut (Cplus b (Copp a) = affixe_vec (vec O D)); intros; auto with geo.
 rewrite H2; rewrite H3; auto with geo.
 apply affixe_vec_AB; auto.
 Qed.
-Hint Resolve module_difference argument_difference: geo.
+#[export] Hint Resolve module_difference argument_difference: geo.
  
 Lemma diff_nonzero :
  forall (a b : C) (A B : PO),
@@ -616,7 +616,7 @@ intros.
 apply nonzero_module.
 rewrite (module_difference (a:=a) (b:=b) (A:=A) (B:=B)); auto with geo.
 Qed.
-Hint Resolve diff_nonzero: geo.
+#[export] Hint Resolve diff_nonzero: geo.
  
 Lemma module_quotient :
  forall (a b d e : C) (A B D E : PO),
@@ -635,7 +635,7 @@ rewrite (module_difference (a:=d) (b:=e) (A:=D) (B:=E)); auto with geo.
 apply diff_nonzero with (3 := H); auto.
 apply diff_nonzero with (3 := H); auto.
 Qed.
-Hint Resolve module_quotient Chasles_diff: geo.
+#[export] Hint Resolve module_quotient Chasles_diff: geo.
  
 Lemma argument_quotient :
  forall (a b d e : C) (A B D E : PO),

@@ -575,7 +575,7 @@ elim (paralleles_vecteur (A:=A) (B:=B) (C:=A) (D:=C)); auto; intros.
 lapply (colineaire_alignes (k:=x) (A:=A) (B:=C) (C:=B)); auto with geo.
 apply droites_paralleles_angle; auto.
 Qed.
-Hint Resolve alignes_angle: geo.
+#[export] Hint Resolve alignes_angle: geo.
  
 Lemma non_alignes_angle :
  forall A B C : PO,

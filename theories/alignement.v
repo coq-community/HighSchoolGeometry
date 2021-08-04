@@ -73,7 +73,7 @@ Lemma alignes_trivial3 : forall A B : PO, alignes A A B.
 unfold alignes, alignes1 in |- *; intros.
 tauto.
 Qed.
-Hint Resolve alignes_trivial alignes_trivial2 alignes_trivial3: geo.
+#[export] Hint Resolve alignes_trivial alignes_trivial2 alignes_trivial3: geo.
  
 Lemma existence_point_droite : forall A B : PO, 
 exists C, alignes A B C.
@@ -108,7 +108,7 @@ Lemma non_alignes_distincts3 : forall A B C : PO, ~ alignes A B C -> A <> B.
 unfold alignes in |- *; intros.
 intuition.
 Qed.
-Hint Resolve non_alignes_distincts non_alignes_distincts2
+#[export] Hint Resolve non_alignes_distincts non_alignes_distincts2
   non_alignes_distincts3: geo.
  
 Lemma colineaire_alignes :
@@ -117,7 +117,7 @@ unfold alignes in |- *; intros.
 right; try assumption.
 apply colineaire_alignes1 with k; auto.
 Qed.
-Hint Unfold alignes: geo.
+#[export] Hint Unfold alignes: geo.
  
 Ltac hPPalignes H x :=
   elim H; clear H; intros H;
@@ -135,7 +135,7 @@ apply colineaire_alignes with (1 + - x).
 VReplace (vec B C) (add_PP (vec B A) (vec A C)).
 rewrite H0; Ringvec.
 Qed.
-Hint Immediate permute_alignes: geo.
+#[export] Hint Immediate permute_alignes: geo.
  
 Lemma alignes_ordre_cycle : forall A B C : PO, alignes A B C -> alignes B C A.
 intros.
@@ -156,21 +156,21 @@ halignes H x.
 discrimine A C; auto with geo.
 apply colineaire_alignes with (/ x); auto with geo.
 Qed.
-Hint Resolve alignes_ordre_permute alignes_ordre_cycle: geo.
+#[export] Hint Resolve alignes_ordre_permute alignes_ordre_cycle: geo.
  
 Lemma alignes_ordre_cycle2 :
  forall A B C : PO, alignes A B C -> alignes C A B.
 intros.
 apply permute_alignes; auto with geo.
 Qed.
-Hint Resolve alignes_ordre_cycle2: geo.
+#[export] Hint Resolve alignes_ordre_cycle2: geo.
  
 Lemma alignes_ordre_cycle3 :
  forall A B C : PO, alignes A B C -> alignes C B A.
 intros.
 apply permute_alignes; auto with geo.
 Qed.
-Hint Resolve alignes_ordre_cycle3: geo.
+#[export] Hint Resolve alignes_ordre_cycle3: geo.
  
 Lemma non_alignes_permute :
  forall A B C : PO, ~ alignes A B C -> ~ alignes B A C.
@@ -178,7 +178,7 @@ intros.
 contrapose H0.
 apply permute_alignes; auto.
 Qed.
-Hint Resolve non_alignes_permute: geo.
+#[export] Hint Resolve non_alignes_permute: geo.
  
 Lemma non_alignes_ordre_permute :
  forall A B C : PO, A <> B -> ~ alignes A B C -> ~ alignes A C B.
@@ -186,7 +186,7 @@ intros.
 contrapose H0.
 apply alignes_ordre_permute; auto.
 Qed.
-Hint Resolve non_alignes_ordre_permute: geo.
+#[export] Hint Resolve non_alignes_ordre_permute: geo.
  
 Lemma non_alignes_ordre_cycle :
  forall A B C : PO, ~ alignes B C A -> ~ alignes A B C.
@@ -194,7 +194,7 @@ intros.
 contrapose H.
 apply alignes_ordre_cycle; auto.
 Qed.
-Hint Resolve non_alignes_ordre_cycle: geo.
+#[export] Hint Resolve non_alignes_ordre_cycle: geo.
  
 Lemma non_alignes_ordre_cycle2 :
  forall A B C : PO, ~ alignes C A B -> ~ alignes A B C.
@@ -202,7 +202,7 @@ intros.
 contrapose H.
 apply alignes_ordre_cycle2; auto.
 Qed.
-Hint Resolve non_alignes_ordre_cycle2: geo.
+#[export] Hint Resolve non_alignes_ordre_cycle2: geo.
  
 Lemma non_alignes_ordre_cycle3 :
  forall A B C : PO, ~ alignes C B A -> ~ alignes A B C.
@@ -210,7 +210,7 @@ intros.
 contrapose H.
 apply alignes_ordre_cycle3; auto.
 Qed.
-Hint Resolve non_alignes_ordre_cycle3: geo.
+#[export] Hint Resolve non_alignes_ordre_cycle3: geo.
  
 Lemma alignes_trans :
  forall A B C D : PO,
@@ -238,7 +238,7 @@ apply colineaire_alignes with (k * k0).
 rewrite H3; rewrite H5.
 Ringvec.
 Qed.
-Hint Resolve alignes_trans alignes_trans2: geo.
+#[export] Hint Resolve alignes_trans alignes_trans2: geo.
  
 Definition triangle (A B C : PO) : Prop := ~ alignes A B C.
  
@@ -264,7 +264,7 @@ intros.
 contrapose H0.
 eauto with geo.
 Qed.
-Hint Resolve alignes_non_alignes_trans: geo.
+#[export] Hint Resolve alignes_non_alignes_trans: geo.
  
 Lemma alignes_non_alignes_trans2 :
  forall A B C D : PO,
@@ -280,7 +280,7 @@ intros.
 contrapose H0.
 eauto with geo.
 Qed.
-Hint Resolve alignes_non_alignes_trans3: geo.
+#[export] Hint Resolve alignes_non_alignes_trans3: geo.
  
 Lemma alignes_non_alignes_trans4 :
  forall A B C D : PO,
@@ -311,7 +311,7 @@ Lemma triangle_ordre_permute :
  forall A B C : PO, triangle A B C -> triangle A C B.
 unfold triangle in |- *; intros; auto with geo.
 Qed.
-Hint Resolve triangle_ordre_cycle triangle_ordre_permute: geo.
+#[export] Hint Resolve triangle_ordre_cycle triangle_ordre_permute: geo.
  
 Lemma triangle_ordre_cycle2 :
  forall A B C : PO, triangle A B C -> triangle C A B.

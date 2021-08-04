@@ -51,7 +51,7 @@ Axiom
     C <> D ->
     perpendiculaires (droite A B) (droite C D) ->
     coplanaires A B C D /\ orthogonales (droite A B) (droite C D).
-Hint Resolve ortho_somme ortho_combinaison_lineaire def_orthogonales2
+#[export] Hint Resolve ortho_somme ortho_combinaison_lineaire def_orthogonales2
   def_orthogonales def_perpendiculaires: geo.
  
 Lemma perpendiculaires_orthogonales :

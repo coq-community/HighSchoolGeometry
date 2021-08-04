@@ -29,7 +29,7 @@ elim H;
  [ intros H0 H1; elim H1; [ intros H2 H3; try clear H1 H; try exact H2 ] ].
 apply isometrie_distinct with (2 := H2); auto.
 Qed.
-Hint Resolve iso_rec_dir_distinct: geo.
+#[export] Hint Resolve iso_rec_dir_distinct: geo.
  
 Lemma iso_rec_dir_complexe :
  forall (a b c : C) (A B C : PO),

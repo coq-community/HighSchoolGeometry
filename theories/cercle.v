@@ -108,7 +108,7 @@ exists O; split; auto with geo.
 split; [ auto | idtac ].
 rewrite <- H3; auto.
 Qed.
-Hint Immediate cercle_diametre_permute: geo.
+#[export] Hint Immediate cercle_diametre_permute: geo.
  
 Lemma cercle_diametre_trivial : forall A B : PO, cercle_diametre A B A.
 icercle.
@@ -129,7 +129,7 @@ exists M.
 split; auto.
 split; auto with geo.
 Qed.
-Hint Resolve cercle_diametre_trivial2 cercle_diametre_trivial: geo.
+#[export] Hint Resolve cercle_diametre_trivial2 cercle_diametre_trivial: geo.
  
 Lemma circonscrit_diametre :
  forall A B C D O : PO,

@@ -17,7 +17,7 @@
 Require Export representant_unitaire.
 Set Implicit Arguments.
 Unset Strict Implicit.
-Hint Resolve distance_non_nulle scalaire_positif: geo.
+#[export] Hint Resolve distance_non_nulle scalaire_positif: geo.
  
 Definition distance (A B : PO) := sqrt (scalaire (vec A B) (vec A B)).
  
@@ -59,7 +59,7 @@ Lemma distance_refl2 : forall A B : PO, A = B :>PO -> distance A B = 0 :>R.
 intros.
 elim (distance_refl A B); auto.
 Qed.
-Hint Resolve distance_refl1 distance_refl2: geo.
+#[export] Hint Resolve distance_refl1 distance_refl2: geo.
  
 Lemma caract_representant_unitaire :
  forall A B C : PO,
@@ -120,7 +120,7 @@ replace (vec B B) with (mult_PP 0 (vec A B)).
 Simplscal.
 Ringvec.
 Qed.
-Hint Resolve distance_pos dist_non_nulle: geo.
+#[export] Hint Resolve distance_pos dist_non_nulle: geo.
  
 Lemma distincts_dist_non_nulle : forall A B : PO, A <> B -> distance A B <> 0.
 unfold distance in |- *; intros; red in |- *; intros.
@@ -129,7 +129,7 @@ apply distance_nulle.
 rewrite <- (def_sqrt (scalaire (vec A B) (vec A B))); auto with geo.
 rewrite H0; ring.
 Qed.
-Hint Resolve distincts_dist_non_nulle: geo.
+#[export] Hint Resolve distincts_dist_non_nulle: geo.
  
 Lemma isometrie_distinct :
  forall A B A' B' : PO, A <> B -> distance A B = distance A' B' -> A' <> B'.
@@ -157,7 +157,7 @@ Lemma distance_carre :
 unfold Rsqr in |- *; intros.
 apply carre_egalite_distance; auto with geo.
 Qed.
-Hint Resolve carre_egalite_distance distance_carre: geo.
+#[export] Hint Resolve carre_egalite_distance distance_carre: geo.
  
 Lemma carre_scalaire_egalite_distance :
  forall A B C D : PO,
@@ -174,7 +174,7 @@ apply dist_non_nulle.
 rewrite H.
 discrR.
 Qed.
-Hint Resolve unitaire_distincts2: geo.
+#[export] Hint Resolve unitaire_distincts2: geo.
  
 Lemma distance_1_representant :
  forall A B : PO,
@@ -198,7 +198,7 @@ unfold distance in |- *.
 rewrite H.
 rewrite sqrt_1; auto with geo.
 Qed.
-Hint Resolve carre_scalaire_1_distance distance_1_carre_scalaire
+#[export] Hint Resolve carre_scalaire_1_distance distance_1_carre_scalaire
   distance_1_representant: geo.
  
 Lemma milieu_distance :
@@ -209,7 +209,7 @@ rewrite <- (milieu_vecteur (A:=A) (B:=B) (M:=I)); auto with geo.
 replace (vec I A) with (mult_PP (-1) (vec A I)); [ idtac | Ringvec ].
 Simplscal.
 Qed.
-Hint Resolve milieu_distance: geo.
+#[export] Hint Resolve milieu_distance: geo.
  
 Lemma egalite_vecteur_distance :
  forall A B C D : PO, vec A B = vec C D -> distance A B = distance C D :>R.
@@ -227,4 +227,4 @@ replace (k * k) with (Rsqr k); auto with real.
 rewrite sqrt_mult; auto with real geo.
 rewrite sqrt_Rsqr_abs; ring.
 Qed.
-Hint Resolve colinearite_distance: geo.
+#[export] Hint Resolve colinearite_distance: geo.

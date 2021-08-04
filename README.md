@@ -35,7 +35,7 @@ Includes a proof of Ptolemy's theorem.
 - Coq-community maintainer(s):
   - Laurent Théry ([**@thery**](https://github.com/thery))
 - License: [GNU Lesser General Public License v2.1 or later](LICENSE)
-- Compatible Coq versions: 8.11 or later
+- Compatible Coq versions: 8.12 or later
 - Additional dependencies: none
 - Coq namespace: `HighSchoolGeometry`
 - Related publication(s):

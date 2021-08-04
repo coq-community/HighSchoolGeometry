@@ -249,7 +249,7 @@ replace k with (-1 + (1 + k)).
 rewrite H5; ring.
 ring.
 Qed.
-Hint Immediate paralleles_ABBA paralleles_sym: geo.
+#[export] Hint Immediate paralleles_ABBA paralleles_sym: geo.
  
 Lemma trapeze_complet_expl2 :
  forall A B C D I J : PO,

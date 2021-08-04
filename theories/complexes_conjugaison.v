@@ -29,7 +29,7 @@ Lemma Conj_algebrique :
 intros.
 rewrite (Conj_def (z:=cons_cart x y) (x:=x) (y:=y)); auto.
 Qed.
-Hint Resolve Conj_algebrique: geo.
+#[export] Hint Resolve Conj_algebrique: geo.
  
 Lemma Conj_Conj : forall z : C, Conj (Conj z) = z.
 intros.
@@ -86,7 +86,7 @@ unfold Rinj in |- *; intros.
 repeat rewrite Conj_algebrique.
 replace (-0) with 0; [ auto | ring ].
 Qed.
-Hint Resolve Conj_zeroC Conj_oneC Conj_reel: geo.
+#[export] Hint Resolve Conj_zeroC Conj_oneC Conj_reel: geo.
  
 Lemma Conj_i : Conj i = Copp i.
 unfold i in |- *.
@@ -100,7 +100,7 @@ red in |- *; intros; apply H.
 rewrite <- (Conj_Conj z).
 rewrite H0; auto with geo.
 Qed.
-Hint Resolve non_zero_Conj Conj_produit Conj_somme: geo.
+#[export] Hint Resolve non_zero_Conj Conj_produit Conj_somme: geo.
  
 Lemma Conj_Cinv : forall z : C, z <> zeroC -> Conj (Cinv z) = Cinv (Conj z).
 intros.
@@ -111,7 +111,7 @@ cut (Cinv (Conj z) = Conj (Cinv z)); intros.
 rewrite <- H2; auto with geo.
 rewrite <- Conj_produit; rewrite H0; auto with geo.
 Qed.
-Hint Resolve Conj_Cinv: geo.
+#[export] Hint Resolve Conj_Cinv: geo.
  
 Lemma Conj_Cdiv :
  forall z z' : C, z' <> zeroC -> Conj (Cdiv z z') = Cdiv (Conj z) (Conj z').

@@ -264,7 +264,7 @@ elim (existence_rayon_circonscrit (A:=A) (B:=B) (C:=C)); [intros O | auto];
 Axiom
    triangle_Sin_not_0 :
    forall A B C, triangle A B C ->  (Sin (cons_AV (vec A B) (vec A C)) <> 0).
-Hint Resolve triangle_Sin_not_0 :geo.
+#[export] Hint Resolve triangle_Sin_not_0 :geo.
  
 Lemma triangle_abs_Sin_not_0:
  forall A B C,
@@ -273,7 +273,7 @@ intros.
 apply Rabs_no_R0.
 auto with geo.
 Qed.
-Hint Resolve triangle_abs_Sin_not_0 :geo.
+#[export] Hint Resolve triangle_abs_Sin_not_0 :geo.
 (* Theoreme connu sous le nom de loi des Sinus.*)
  
 Theorem loi_Sinus:
@@ -358,7 +358,7 @@ split.
 lra.
 lra.
 Qed.
-Hint Resolve pisurtrois_utile sin_pos pisurtrois_utile1 pisurtrois_utile2 :geo.
+#[export] Hint Resolve pisurtrois_utile sin_pos pisurtrois_utile1 pisurtrois_utile2 :geo.
  
 Lemma pisurtrois_triangle_utile:
  forall a b c A B C,

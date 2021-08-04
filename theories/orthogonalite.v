@@ -84,7 +84,7 @@ apply def_orthogonal2.
 rewrite scalaire_sym.
 rewrite (def_orthogonal (A:=A) (B:=B) (C:=C) (D:=D)); auto.
 Qed.
-Hint Immediate ortho_sym: geo.
+#[export] Hint Immediate ortho_sym: geo.
  
 Lemma zero_ortho_tout : forall A B : PO, orthogonal (vec A B) zero.
 intros A B; try assumption.
@@ -101,7 +101,7 @@ apply def_orthogonal2.
 VReplace (vec A A) (mult_PP 0 (vec A B)).
 Simplscal.
 Qed.
-Hint Resolve ortho_sym ortho_mult zero_ortho_tout zero_ortho_tout2
+#[export] Hint Resolve ortho_sym ortho_mult zero_ortho_tout zero_ortho_tout2
   def_orthogonal2 def_orthogonal: geo.
  
 Ltac Simplortho :=
@@ -115,14 +115,14 @@ Lemma opp_orthogonal :
 intros.
 replace (vec B A) with (mult_PP (-1) (vec A B)); [ Simplortho | Ringvec ].
 Qed.
-Hint Immediate opp_orthogonal: geo.
+#[export] Hint Immediate opp_orthogonal: geo.
  
 Lemma opp_orthogonal2 :
  forall A B C D : PO,
  orthogonal (vec A B) (vec C D) -> orthogonal (vec C D) (vec B A).
 auto with geo.
 Qed.
-Hint Immediate opp_orthogonal2: geo.
+#[export] Hint Immediate opp_orthogonal2: geo.
  
 Lemma opp_orthogonal3 :
  forall A B C D : PO,
@@ -131,14 +131,14 @@ intros.
 apply ortho_sym.
 replace (vec D C) with (mult_PP (-1) (vec C D)); [ Simplortho | Ringvec ].
 Qed.
-Hint Immediate opp_orthogonal3: geo.
+#[export] Hint Immediate opp_orthogonal3: geo.
  
 Lemma opp_orthogonal4 :
  forall A B C D : PO,
  orthogonal (vec A B) (vec C D) -> orthogonal (vec D C) (vec A B).
 auto with geo.
 Qed.
-Hint Immediate opp_orthogonal4: geo.
+#[export] Hint Immediate opp_orthogonal4: geo.
  
 Lemma opp_orthogonal5 :
  forall A B C D : PO,
@@ -147,14 +147,14 @@ intros.
 apply opp_orthogonal.
 auto with geo.
 Qed.
-Hint Immediate opp_orthogonal5: geo.
+#[export] Hint Immediate opp_orthogonal5: geo.
  
 Lemma opp_orthogonal6 :
  forall A B C D : PO,
  orthogonal (vec A B) (vec C D) -> orthogonal (vec D C) (vec B A).
 auto with geo.
 Qed.
-Hint Immediate opp_orthogonal6: geo.
+#[export] Hint Immediate opp_orthogonal6: geo.
  
 Lemma orthogonal_milieu :
  forall A B C D I : PO,
@@ -226,7 +226,7 @@ contrapose H2.
 apply alignes_non_orthogonal; auto.
 tauto.
 Qed.
-Hint Resolve orthogonal_non_alignes alignes_non_orthogonal: geo.
+#[export] Hint Resolve orthogonal_non_alignes alignes_non_orthogonal: geo.
  
 Lemma orthogonal_alignement :
  forall A B C D : PO,

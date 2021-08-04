@@ -20,7 +20,7 @@ Set Implicit Arguments.
 Unset Strict Implicit.
 Parameters (O : PO) (I : PO) (J : PO).
 Axiom OIJ : repere_orthonormal_direct O I J.
-Hint Resolve OIJ: geo.
+#[export] Hint Resolve OIJ: geo.
  
 Lemma OIJ_repere_ortho : repere_orthonormal O I J.
 auto with geo.
@@ -40,7 +40,7 @@ Lemma OJ_distincts : O <> J.
 elim OIJ; intros.
 elim H0; intros; auto with geo.
 Qed.
-Hint Resolve OIJ_repere_ortho OIJ_repere OI_distincts OJ_distincts: geo.
+#[export] Hint Resolve OIJ_repere_ortho OIJ_repere OI_distincts OJ_distincts: geo.
  
 Lemma IJ_distincts : I <> J.
 cut (repere_orthonormal O I J); intros; auto with geo.
@@ -48,7 +48,7 @@ elim H; intros.
 apply non_alignes_distincts2 with O; auto.
 apply orthogonal_non_alignes; auto with geo.
 Qed.
-Hint Resolve IJ_distincts: geo.
+#[export] Hint Resolve IJ_distincts: geo.
  
 Ltac deroule_OIJ :=
   elim OIJ; intro; intros toto; elim toto; intros; clear toto;

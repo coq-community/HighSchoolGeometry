@@ -42,7 +42,7 @@ red in |- *; intros; apply H.
 replace a with (Cplus a zeroC); [ idtac | ring ].
 rewrite <- H0; ring.
 Qed.
-Hint Resolve nonzero_amoins_un: geo.
+#[export] Hint Resolve nonzero_amoins_un: geo.
  
 Lemma existence_solution_equation :
  forall a b : C, a <> oneC -> exists z : C, z = Cplus (Cmult a z) b.
@@ -108,7 +108,7 @@ elim existence_image_complexe with (z := z); intros M H;
  try clear existence_image_complexe; try exact H.
 rewrite <- H; symmetry  in |- *; auto with geo.
 Qed.
-Hint Resolve image_affixe affixe_image: geo.
+#[export] Hint Resolve image_affixe affixe_image: geo.
  
 Lemma transforme_image :
  forall (f : C -> C) (z : C), transforme f (image z) = image (f z).

@@ -205,7 +205,7 @@ elim orthocentre_def2 with (A := A) (B := B) (C := C) (H := H);
 elim H2; intros H4 H5; try clear H2; try exact H5.
 apply orthocentre_def; auto with geo.
 Qed.
-Hint Immediate orthocentre_ordre orthocentre_permute: geo.
+#[export] Hint Immediate orthocentre_ordre orthocentre_permute: geo.
  
 Lemma orthocentre_triangle_rectangle :
  forall A B C : PO,

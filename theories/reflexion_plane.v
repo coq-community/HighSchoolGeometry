@@ -46,7 +46,7 @@ apply def_projete_orthogonal; auto.
 replace (vec M M) with zero; auto with geo.
 Ringvec.
 Qed.
-Hint Resolve reflexion_axe: geo.
+#[export] Hint Resolve reflexion_axe: geo.
  
 Lemma reflexion_projete_orthogonal_milieu :
  forall A B M M' H : PO,

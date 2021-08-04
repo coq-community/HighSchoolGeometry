@@ -17,7 +17,7 @@
 Require Export orthogonalite.
 Set Implicit Arguments.
 Unset Strict Implicit.
-Hint Resolve distance_non_nulle scalaire_positif: geo.
+#[export] Hint Resolve distance_non_nulle scalaire_positif: geo.
  
 Lemma existence_unitaire :
  forall A B : PO,
@@ -84,7 +84,7 @@ rewrite <- H1.
 Simplscal.
 Simplscal.
 Qed.
-Hint Resolve scalaire_non_nul: geo.
+#[export] Hint Resolve scalaire_non_nul: geo.
  
 Lemma unicite_representant_unitaire :
  forall A B C D : PO,
@@ -307,7 +307,7 @@ red in |- *; intros; apply H11.
 apply Rsqr_inj; auto with real.
 rewrite H12; unfold Rsqr in |- *; ring.
 Qed.
-Hint Resolve representant_unitaire_bis: geo.
+#[export] Hint Resolve representant_unitaire_bis: geo.
  
 Lemma oppose_representant_unitaire :
  forall A B C : PO,

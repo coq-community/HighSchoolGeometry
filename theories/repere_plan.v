@@ -20,7 +20,7 @@ Set Implicit Arguments.
 Unset Strict Implicit.
  
 Axiom geometrie_plane : forall A B C D : PO, coplanaires A B C D.
-Hint Resolve geometrie_plane: geo.
+#[export] Hint Resolve geometrie_plane: geo.
  
 Definition repere (O I J : PO) := triangle O I J.
  
@@ -172,7 +172,7 @@ apply
 apply composantes_vecAB; auto.
 apply cartvec_def; auto.
 Qed.
-Hint Resolve abscisse_def ordonnee_def cartvec_AB unicite_composantes_vecteur
+#[export] Hint Resolve abscisse_def ordonnee_def cartvec_AB unicite_composantes_vecteur
   absvec_def ordvec_def: geo.
  
 Lemma absvec_abscisse :

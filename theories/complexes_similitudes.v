@@ -96,7 +96,7 @@ red in |- *; intros; apply H1.
 rewrite (affixe_vec_AB (a:=a) (b:=b) (A:=A) (B:=B)); auto.
 rewrite affixe_vec_AB_affixes; rewrite H2; ring.
 Qed.
-Hint Resolve nonzero_diff: geo.
+#[export] Hint Resolve nonzero_diff: geo.
  
 Theorem complexe_rotation :
  forall (a : R) (j z z' : C) (J M M' : PO),

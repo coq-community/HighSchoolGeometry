@@ -272,7 +272,7 @@ apply colineaire_alignes with k1.
 replace (vec A HA) with (mult_PP (-1) (vec HA A)); [ idtac | Ringvec ].
 rewrite H26; Ringvec.
 Qed.
-Hint Resolve orthocentre_ordre: geo.
+#[export] Hint Resolve orthocentre_ordre: geo.
  
 Theorem cercle_neuf_points :
  forall A B C A' B' C' O G H I J K L H1 H2 H3 : PO,

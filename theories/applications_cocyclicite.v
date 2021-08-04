@@ -59,7 +59,7 @@ elim H2; intros; clear H H0 H1 H2.
 split; [ idtac | split; try assumption ].
 split; try assumption.
 Qed.
-Hint Resolve cocycliques_ordre_cycle cocycliques_ordre_cycle2
+#[export] Hint Resolve cocycliques_ordre_cycle cocycliques_ordre_cycle2
   cocycliques_ordre_permute: geo.
  
 Lemma circonscrit_trans :

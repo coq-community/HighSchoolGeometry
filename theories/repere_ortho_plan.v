@@ -58,7 +58,7 @@ unfold repere_orthonormal in |- *; intros.
 elim H; intros H0 H1; elim H1; intros H2 H3; try clear H1 H; try exact H3.
 apply triangle_rectangle_repere; auto with geo.
 Qed.
-Hint Resolve orthonormal_orthogonal: geo.
+#[export] Hint Resolve orthonormal_orthogonal: geo.
  
 Lemma orthonormal_repere :
  forall O I J : PO, repere_orthonormal O I J -> repere O I J.
@@ -66,14 +66,14 @@ intros.
 cut (repere_orthogonal O I J); intros; auto with geo.
 elim H0; auto.
 Qed.
-Hint Resolve orthonormal_repere: geo.
+#[export] Hint Resolve orthonormal_repere: geo.
  
 Lemma orthonormal_non_alignes :
  forall O I J : PO, repere_orthonormal O I J -> ~ alignes O I J.
 intros.
 cut (repere O I J); intros; auto with geo.
 Qed.
-Hint Resolve orthonormal_non_alignes: geo.
+#[export] Hint Resolve orthonormal_non_alignes: geo.
  
 Lemma orthogonal_paralleles :
  forall A B C E F : PO,
@@ -197,4 +197,4 @@ rewrite
  (scalaire_coordonnees (O:=O) (I:=I) (J:=J) (M:=M) (N:=M) (x:=x) (y:=y)
     (x':=x) (y':=y)); eauto.
 Qed.
-Hint Resolve distance_coordonnees: geo.
+#[export] Hint Resolve distance_coordonnees: geo.

@@ -130,7 +130,7 @@ apply def_concours with x; auto.
 elim H0; intros H1 H2; try clear H0; try exact H2.
 elim H0; intros H1 H2; try clear H0; try exact H1.
 Qed.
-Hint Resolve concours_sym paralleles_sym paralleles_trans: geo.
+#[export] Hint Resolve concours_sym paralleles_sym paralleles_trans: geo.
  
 Theorem position_relative_droites_espace :
  forall A B C D : PO,

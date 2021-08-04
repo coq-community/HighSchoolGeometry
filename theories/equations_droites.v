@@ -17,7 +17,7 @@
 Require Export determinant.
 Set Implicit Arguments.
 Unset Strict Implicit.
-Hint Resolve cart_def not_and_or or_not_and: geo.
+#[export] Hint Resolve cart_def not_and_or or_not_and: geo.
 Parameter vec_directeur : PP -> DR -> Prop.
  
 Axiom
@@ -77,8 +77,8 @@ elim paralleles_vecteur with (A := C) (B := D) (C := A) (D := B);
  | auto with geo ].
 apply determinant_colinearite with k; auto.
 Qed.
-Hint Resolve vec_directeur_def vec_directeur_def2 cartvec_def: geo.
-Hint Immediate vec_directeur_permute: geo.
+#[export] Hint Resolve vec_directeur_def vec_directeur_def2 cartvec_def: geo.
+#[export] Hint Immediate vec_directeur_permute: geo.
  
 Lemma vec_directeur_paralleles :
  forall A B C D : PO,
@@ -92,7 +92,7 @@ elim determinant_nul_colinearite with (A := C) (B := D) (C := A) (D := B);
  | auto with geo ].
 apply colineaires_paralleles with k; auto.
 Qed.
-Hint Resolve vec_directeur_paralleles paralleles_vec_directeur: geo.
+#[export] Hint Resolve vec_directeur_paralleles paralleles_vec_directeur: geo.
  
 Lemma vec_directeur_calcul :
  forall (A B C D : PO) (x y x0 y0 a b : R),
@@ -315,7 +315,7 @@ Axiom
     C <> D ->
     orthogonal (vec A B) (vec C D) -> vec_normal (vec A B) (droite C D).
 Require Export angles_droites.
-Hint Resolve vec_normal_def vec_normal_def2: geo.
+#[export] Hint Resolve vec_normal_def vec_normal_def2: geo.
  
 Lemma existence_vec_normal :
  forall A B : PO,
@@ -333,7 +333,7 @@ Lemma vec_normal_permute :
 intros.
 eauto with geo.
 Qed.
-Hint Immediate vec_normal_permute: geo.
+#[export] Hint Immediate vec_normal_permute: geo.
  
 Lemma vec_normal_directeur_orthogonaux :
  forall A B C D E F : PO,

@@ -172,7 +172,7 @@ apply conversion_PP with (a := 1) (b := 1); auto with *.
 RingPP2 H0; RingPP.
 apply scalaire_non_degenere; auto.
 Qed.
-Hint Resolve distance_nulle unitaire_distincts distance_non_nulle: geo.
+#[export] Hint Resolve distance_nulle unitaire_distincts distance_non_nulle: geo.
  
 Lemma egalite_scalaire_alignes :
  forall A B C D : PO,

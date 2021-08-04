@@ -19,7 +19,7 @@ Set Implicit Arguments.
 Unset Strict Implicit.
 Parameters (O : PO) (I : PO) (J : PO).
 Axiom OIJ : repere_orthonormal_direct O I J.
-Hint Resolve OIJ: geo.
+#[export] Hint Resolve OIJ: geo.
  
 Lemma OIJ_repere_ortho : repere_orthonormal O I J.
 auto with geo.
@@ -39,7 +39,7 @@ Lemma OJ_distincts : O <> J.
 elim OIJ; intros.
 elim H0; intros; auto with geo.
 Qed.
-Hint Resolve OIJ_repere_ortho OIJ_repere OI_distincts OJ_distincts: geo.
+#[export] Hint Resolve OIJ_repere_ortho OIJ_repere OI_distincts OJ_distincts: geo.
  
 Lemma IJ_distincts : I <> J.
 cut (repere_orthonormal O I J); intros; auto with geo.
@@ -47,7 +47,7 @@ elim H; intros.
 apply non_alignes_distincts2 with O; auto.
 apply orthogonal_non_alignes; auto with geo.
 Qed.
-Hint Resolve IJ_distincts: geo.
+#[export] Hint Resolve IJ_distincts: geo.
 Parameter C : Type.
 Parameter affixe : PO -> C.
 Parameter image : C -> PO.
@@ -77,7 +77,7 @@ Axiom
 Axiom
   image_vecteur_point :
     forall (z : C) (M : PO), vec O M = image_vec z -> M = image z.
-Hint Resolve image_affixe affixe_image affixe_point_vecteur
+#[export] Hint Resolve image_affixe affixe_image affixe_point_vecteur
   affixe_vecteur_point image_point_vecteur image_vecteur_point: geo.
  
 Lemma affixe_image_vecteur :
@@ -119,7 +119,7 @@ Axiom
     z = cons_cart a b ->
     z = affixe M ->
     vec O M = add_PP (mult_PP a (vec O I)) (mult_PP b (vec O J)) :>PP.
-Hint Resolve abscisse_def ordonnee_def cart_def cart_point_complexe
+#[export] Hint Resolve abscisse_def ordonnee_def cart_def cart_point_complexe
   complexe_cart_point: geo.
  
 Lemma cart_point_complexe2 :
@@ -138,7 +138,7 @@ Lemma complexe_cart_point2 :
 intros.
 eauto with geo.
 Qed.
-Hint Resolve cart_point_complexe2 complexe_cart_point2: geo.
+#[export] Hint Resolve cart_point_complexe2 complexe_cart_point2: geo.
  
 Lemma existence_parties_relles_imaginaires :
  forall z : C, exists a : R, (exists b : R, z = cons_cart a b).

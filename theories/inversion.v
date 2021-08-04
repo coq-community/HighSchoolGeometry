@@ -69,7 +69,7 @@ auto with geo.
 rewrite <- H3; auto with geo.
 apply scalaire_sym.
 Qed.
-Hint Immediate inversion_involution: geo.
+#[export] Hint Immediate inversion_involution: geo.
  
 Lemma inversion_droite_pole :
  forall (A A' M M' I : PO) (k : R),
@@ -252,7 +252,7 @@ Qed.
 Ltac image_inversion I A B k :=
   elim (existence_inversion (I:=I) (A:=A) (k:=k)); intros B; intros; auto;
    deroule_inversion I A B k.
-Hint Resolve inversion_involution: geo.
+#[export] Hint Resolve inversion_involution: geo.
 Require Export applications_cocyclicite.
  
 Theorem inversion_droite_non_pole :

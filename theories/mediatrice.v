@@ -26,7 +26,7 @@ Lemma mediatrice_permute :
 unfold mediatrice in |- *; intros.
 rewrite H; auto.
 Qed.
-Hint Immediate mediatrice_permute: geo.
+#[export] Hint Immediate mediatrice_permute: geo.
  
 Lemma milieu_mediatrice :
  forall A B M : PO, M = milieu A B :>PO -> mediatrice A B M.

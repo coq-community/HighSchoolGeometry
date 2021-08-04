@@ -19,7 +19,7 @@ Set Implicit Arguments.
 Unset Strict Implicit.
  
 Definition milieu (A B : PO) := barycentre (cons 1 A) (cons 1 B).
-Hint Unfold milieu: geo.
+#[export] Hint Unfold milieu: geo.
  
 Lemma milieu_permute :
  forall A B I : PO, I = milieu A B :>PO -> I = milieu B A :>PO.
@@ -119,7 +119,7 @@ unfold milieu in |- *; intros.
 apply def_vecteur_bary_rec; auto with real.
 rewrite <- H; Ringvec.
 Qed.
-Hint Resolve milieu_vecteur milieu_vecteur_double milieu_vecteur2
+#[export] Hint Resolve milieu_vecteur milieu_vecteur_double milieu_vecteur2
   vecteur_milieu alignes_milieu milieu_trivial milieu_permute
   egalite_vecteur_milieu: geo.
  
@@ -147,7 +147,7 @@ Fieldvec 2.
 rewrite <- (milieu_vecteur (A:=A) (B:=B) (M:=milieu A B)); auto.
 rewrite <- (milieu_vecteur2 (A:=A) (B:=B) (M:=milieu A B)); auto.
 Qed.
-Hint Resolve triangle_milieu_distinct milieu_distinct milieu_distinct2: geo.
+#[export] Hint Resolve triangle_milieu_distinct milieu_distinct milieu_distinct2: geo.
  
 Lemma existence_milieu :
  forall A B : PO, ex (fun I : PO => I = milieu A B :>PO).
@@ -251,7 +251,7 @@ Lemma centre_gravite_ordre_permute :
 unfold centre_gravite in |- *; intros.
 rewrite (milieu_permute (A:=C) (B:=B) (I:=milieu C B)); auto.
 Qed.
-Hint Resolve centre_gravite_ordre_permute centre_gravite_ordre_cycle2
+#[export] Hint Resolve centre_gravite_ordre_permute centre_gravite_ordre_cycle2
   centre_gravite_ordre_cycle: geo.
  
 Lemma triangle_medianes_triangle :

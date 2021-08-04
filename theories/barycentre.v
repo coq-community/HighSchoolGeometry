@@ -138,7 +138,7 @@ RingPP.
 rewrite H0.
 RingPP.
 Qed.
-Hint Resolve add_PP_barycentre: geo.
+#[export] Hint Resolve add_PP_barycentre: geo.
  
 Lemma barycentre_alignes :
  forall (a b : R) (A B : PO),
@@ -180,7 +180,7 @@ rewrite H2; auto.
 repeat rewrite <- add_PP_barycentre; auto.
 replace (k + (1 + - k)) with 1; try ring; auto with *.
 Qed.
-Hint Resolve barycentre_alignes prop_vecteur_bary def_vecteur_bary_rec
+#[export] Hint Resolve barycentre_alignes prop_vecteur_bary def_vecteur_bary_rec
   def_vecteur_bary homogene_barycentre barycentre_zero: geo.
  
 Lemma existence_representant_vecteur :

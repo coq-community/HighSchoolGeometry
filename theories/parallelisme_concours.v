@@ -22,7 +22,7 @@ Parameter droite : PO -> PO -> DR.
  
 Axiom
   droite_permute : forall A B : PO, A <> B :>PO -> droite A B = droite B A.
-Hint Resolve droite_permute: geo.
+#[export] Hint Resolve droite_permute: geo.
  
 Axiom
   alignes_droite :
@@ -36,7 +36,7 @@ intros.
 rewrite droite_permute; auto.
 apply alignes_droite; auto with geo.
 Qed.
-Hint Resolve alignes_droite alignes_droite2: geo.
+#[export] Hint Resolve alignes_droite alignes_droite2: geo.
 Parameter paralleles : DR -> DR -> Prop.
  
 Axiom
@@ -61,7 +61,7 @@ Lemma paralleles_refl :
 intros A B H; try assumption.
 apply def_paralleles with (k := 1); auto.
 Qed.
-Hint Resolve paralleles_refl: geo.
+#[export] Hint Resolve paralleles_refl: geo.
  
 Lemma paralleles_sym :
  forall A B C D : PO,
@@ -147,7 +147,7 @@ intros.
 apply def_paralleles with (-1); auto.
 RingPP.
 Qed.
-Hint Immediate paralleles_ABBA paralleles_sym: geo.
+#[export] Hint Immediate paralleles_ABBA paralleles_sym: geo.
  
 Lemma non_paralleles_trans :
  forall A B C D E F : PO,
@@ -161,7 +161,7 @@ intros; red in |- *; intros.
 apply H3.
 apply paralleles_trans with (4 := H2); auto.
 Qed.
-Hint Resolve alignes_paralleles: geo.
+#[export] Hint Resolve alignes_paralleles: geo.
  
 Lemma paralleles_alignes :
  forall A B C D : PO,

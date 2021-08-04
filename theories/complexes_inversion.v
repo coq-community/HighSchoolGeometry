@@ -51,7 +51,7 @@ intros.
 rewrite Copp_Cmult.
 apply nonzero_produit; auto with geo.
 Qed.
-Hint Resolve Copp_non_zeroC nonzero_produit: geo.
+#[export] Hint Resolve Copp_non_zeroC nonzero_produit: geo.
  
 Lemma Cinv_Copp : forall z : C, z <> zeroC -> Cinv (Copp z) = Copp (Cinv z).
 intros.

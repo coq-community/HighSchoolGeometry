@@ -72,7 +72,7 @@ right; try assumption.
 exists 0; exists 0.
 RingPP.
 Qed.
-Hint Resolve coplanaires_trivial coplanaires_trivial2 coplanaires_trivial3:
+#[export] Hint Resolve coplanaires_trivial coplanaires_trivial2 coplanaires_trivial3:
   geo.
  
 Ltac hcoplanaires H x y :=
@@ -103,7 +103,7 @@ Axiom
             cons 1 E =
             add_PP (add_PP (cons a A) (cons b B))
               (add_PP (cons c C) (cons (1 + - (a + b + c)) D)))).
-Hint Unfold coplanaires: geo.
+#[export] Hint Unfold coplanaires: geo.
  
 Lemma vecteur_def_coplanaires :
  forall (k k' : R) (A B C D : PO),
@@ -122,7 +122,7 @@ apply vecteur_def_coplanaires with (k := a) (k' := 0).
 rewrite H0.
 Ringvec.
 Qed.
-Hint Resolve alignes_coplanaires: geo.
+#[export] Hint Resolve alignes_coplanaires: geo.
  
 Lemma coplanaire_ordre_permute :
  forall A B C D : PO, coplanaires A B C D -> coplanaires A B D C.
@@ -165,7 +165,7 @@ VReplace (vec B D) (add_PP (vec B A) (vec A D)).
 rewrite H1.
 Fieldvec (1 + - x + - y).
 Qed.
-Hint Resolve coplanaire_ordre_cycle coplanaire_ordre_permute: geo.
+#[export] Hint Resolve coplanaire_ordre_cycle coplanaire_ordre_permute: geo.
  
 Lemma coplanaire_trans :
  forall A B C D E : PO,

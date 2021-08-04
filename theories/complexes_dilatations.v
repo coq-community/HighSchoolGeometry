@@ -31,7 +31,7 @@ rewrite (argument_def2 (M:=M) (z:=z)); auto.
 rewrite (argument_def2 (M:=M') (z:=z')); auto.
 rewrite Chasles_diff; auto with geo.
 Qed.
-Hint Resolve angle_argument: geo.
+#[export] Hint Resolve angle_argument: geo.
  
 Lemma egalite_vecteur_OM_image :
  forall (z z' : C) (M M' : PO),
@@ -83,7 +83,7 @@ apply egalite_affixe_vecteur_OM with (z := z) (z' := z'); auto.
 rewrite H2; auto.
 rewrite H3; auto.
 Qed.
-Hint Resolve affixe_vec_AB: geo.
+#[export] Hint Resolve affixe_vec_AB: geo.
  
 Lemma complexe_translation :
  forall (a z z' : C) (A M M' : PO),

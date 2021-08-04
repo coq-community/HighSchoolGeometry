@@ -92,14 +92,14 @@ apply angle_plat; auto.
 rewrite H; Ringvec.
 apply distinct_produit_vecteur with (3 := H); auto with real.
 Qed.
-Hint Resolve aire_ABAB aire_AB_oppAB aire_anti_symetrique: geo.
+#[export] Hint Resolve aire_ABAB aire_AB_oppAB aire_anti_symetrique: geo.
  
 Ltac deroule_representant_unitaire A B C :=
   elim (existence_representant_unitaire (A:=A) (B:=B)); auto; intros C;
    intros; elim (def_representant_unitaire2 (A:=A) (B:=B) (C:=C)); 
    auto; intros; applatit_and; cut (A <> C); intros;
    [ idtac | auto with geo ].
-Hint Resolve sin_zero sin_pisurdeux sin_pi angle_nul angle_plat: geo.
+#[export] Hint Resolve sin_zero sin_pisurdeux sin_pi angle_nul angle_plat: geo.
  
 Lemma Sin_angles_alignes :
  forall A B C : PO,
@@ -129,14 +129,14 @@ intros.
 VReplace zero (vec A A).
 rewrite def_aire_0; auto.
 Qed.
-Hint Resolve aire_vecteur_nul_r: geo.
+#[export] Hint Resolve aire_vecteur_nul_r: geo.
  
 Lemma aire_vecteur_nul_l : forall A B : PO, aire zero (vec A B) = 0.
 intros.
 VReplace zero (vec A A).
 rewrite def_aire_0; auto.
 Qed.
-Hint Resolve aire_vecteur_nul_l: geo.
+#[export] Hint Resolve aire_vecteur_nul_l: geo.
  
 Lemma aire_alignement :
  forall A B C : PO, alignes A B C -> aire (vec A B) (vec A C) = 0.
@@ -166,7 +166,7 @@ apply aire_alignement; auto.
 apply colineaire_alignes with k; auto.
 rewrite H; auto.
 Qed.
-Hint Resolve distance_refl2 egalite_vecteur_distance: geo.
+#[export] Hint Resolve distance_refl2 egalite_vecteur_distance: geo.
  
 Lemma aire_colineaire_l :
  forall (k : R) (A B C D : PO),
@@ -262,7 +262,7 @@ rewrite aire_anti_symetrique.
 rewrite H2; rewrite aire_colineaire_l; auto.
 rewrite aire_anti_symetrique; ring.
 Qed.
-Hint Resolve aire_colineaire_r aire_colineaire_l: geo.
+#[export] Hint Resolve aire_colineaire_r aire_colineaire_l: geo.
  
 Lemma aire_nulle_colineaires :
  forall A B C D : PO,
@@ -454,7 +454,7 @@ repeat rewrite Rabs_mult.
 rewrite Rabs_right; auto with geo.
 rewrite Rabs_right; auto with geo.
 Qed.
-Hint Resolve distance_sym: geo.
+#[export] Hint Resolve distance_sym: geo.
  
 Theorem sinA_sur_a :
  forall (a b c sin_A sin_B sin_C : R) (A B C : PO),
