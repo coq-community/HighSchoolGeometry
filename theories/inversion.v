@@ -13,7 +13,6 @@
 (* Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA *)
 (* 02110-1301 USA                                                     *)
 
-
 Require Export puissance_cercle.
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -458,7 +457,7 @@ VReplace
 RReplace (/ x * x) 1.
 RReplace (/ (distance I A * distance I A) * k)
  (k * (/ (distance I A * distance I A) * 1)); auto.
-rewrite <- Rinv_mult_distr; auto.
+rewrite <- Rinv_mult; auto.
 RReplace (distance I A * distance I A * x)
  (x * (distance I A * distance I A)); auto.
 apply vecteur_homothetie.

@@ -13,7 +13,6 @@
 (* Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA *)
 (* 02110-1301 USA                                                     *)
 
-
 Require Export dilatations.
 Require Export affine_classiques.
 Require Export cercle.
@@ -175,7 +174,7 @@ apply image_homothetie_distincts with (3 := H11) (4 := H5); auto.
 replace (-2) with (/ - / 2).
 apply homothetie_inverse; auto with real.
 apply centre_gravite_homothetie with (2 := H4); auto.
-rewrite Ropp_inv_permute; auto with real.
+rewrite <- Rinv_opp; auto with real.
 discrR.
 Qed.
  

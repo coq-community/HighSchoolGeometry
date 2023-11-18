@@ -13,7 +13,6 @@
 (* Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA *)
 (* 02110-1301 USA                                                     *)
 
-
 Require Export orthogonalite.
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -54,7 +53,7 @@ replace
 rewrite def_sqrt; auto.
 auto with *.
 auto with *.
-apply Rinv_mult_distr; auto with *.
+apply Rinv_mult; auto with *.
 apply existence_representant_mult_vecteur; auto.
 Qed.
  

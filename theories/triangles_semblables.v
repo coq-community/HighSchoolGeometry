@@ -1,11 +1,10 @@
-
 Require Export alignement.
 Require Export angles_vecteurs.
 Require Export rotation_plane.
 Require Export reflexion_plane.
 Require Export dilatations.
 Require Export transformations_contact.
-Require Export  distance_euclidienne.
+Require Export distance_euclidienne.
 
 (* Definition of similar triangles by  equality of 2 angles *)
 Definition trianglesSD (A B C A' B' C' : PO):Prop:=
@@ -492,7 +491,7 @@ assert (/k<>0) by apply (@Rinv_neq_0_compat k H14).
 assert (vec A N = mult_PP (/k) (vec A C)) by
       (apply (@Thales_concours (/k) A B C M N H0 H15 H13);auto with geo).
 assert (vec A C = mult_PP (k) (vec A N)) .
-elim (@Rinv_involutive k);auto.
+elim (@Rinv_inv k);auto.
 apply (@inversion_colineaire (/k) A C N );auto.
 assert (vec B C =mult_PP (k) (vec M N)).
 rewrite <-(@Chasles_vec M A N).
