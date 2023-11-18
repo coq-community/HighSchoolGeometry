@@ -13,7 +13,6 @@
 (* Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA *)
 (* 02110-1301 USA                                                     *)
 
-
 Require Export inversion.
 Require Export complexes_conjugaison.
 Require Export complexes_similitudes.
@@ -211,10 +210,10 @@ apply
 rewrite Rabs_mult.
 rewrite <- (module_def2 (z:=z) (M:=M)); auto with geo.
 unfold Rsqr in |- *.
-rewrite Rabs_Rinv; auto with real.
+rewrite Rabs_inv; auto with real.
 rewrite Rabs_right; auto with geo real.
 unfold Rsqr in |- *.
-rewrite Rinv_mult_distr; auto with real.
+rewrite Rinv_mult; auto with real.
 Qed.
  
 Lemma aux_positif :

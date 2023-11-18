@@ -176,9 +176,10 @@ Qed.
 #[export] Hint Resolve non_produit_un: real.
  
 Lemma opp_inv_demi_nonzero : - / 2 <> 0.
+Proof.
 cut (-2 <> 0); intros.
 replace (- / 2) with (/ -2); auto with real.
-rewrite Ropp_inv_permute; auto with real.
+rewrite <- Rinv_opp; auto with real.
 lra.
 Qed.
 #[export] Hint Resolve opp_inv_demi_nonzero: real.
@@ -224,7 +225,8 @@ field.
 Qed.
  
 Lemma zero_double : forall a : R, a = 0 -> 2 * a = 0.
-intuition.
+Proof.
+intuition (auto with real).
 Qed.
 #[export] Hint Resolve double_zero zero_double: real.
  

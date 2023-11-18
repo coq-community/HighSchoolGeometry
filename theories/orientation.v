@@ -14,7 +14,6 @@ unfold orient in *.
 rewrite aire_ordre_cycle ;auto.
 Qed.
 
-
 Lemma orient_compensation :
     forall (A B C :PO), ~orient A B C \/ ~orient B A C .
 intros A B C.
@@ -94,28 +93,28 @@ Lemma orient_deroule :
     forall ( A B C :PO), orient A B C ->
              ~orient B A C /\ ~alignes A B C /\
              A<>B /\ A <> C /\ B<>C.
+Proof.
 intros A B C H.
 cut (~orient B A C);intro H0.
 cut (~alignes A B C);intro H1.
 repeat split;auto.
 red;intro H2.
 rewrite H2 in H.
-assert (alignes B B C ) by intuition.
+assert (alignes B B C ) by intuition (auto with geo).
 rewrite H2 in H1.
 elim H1;assumption.
 red;intro H2.
 rewrite H2 in H.
-assert (alignes C B C ) by intuition.
+assert (alignes C B C ) by intuition (auto with geo).
 rewrite H2 in H1.
 elim H1;assumption.
 red;intro H2.
 rewrite H2 in H1.
-assert (alignes A C C ) by intuition.
+assert (alignes A C C ) by intuition (auto with geo).
 elim H1;assumption.
-destruct (position_3points_1 A B C) as [[H2 H3]|h4] ;intuition.
+destruct (position_3points_1 A B C) as [[H2 H3]|h4]; intuition.
 elim (orient_compensation A B C );intros H1;elim H1;auto.
 Qed.
-
 
 Ltac deroule_orient H:=
 (*find out others trivial hypotheses from the one*)
