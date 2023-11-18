@@ -479,7 +479,7 @@ Qed.
 
 Lemma duplication_cos : forall a : R, cos (2 * a) = 2 * Rsqr (cos a) + -1.
 intros.
-repeat rewrite <- Rplus_diag.
+repeat rewrite double.
 rewrite cos_som.
 replace (-1) with (-(1)) by ring.
 rewrite <- (trigo_Pythagore a).
@@ -488,7 +488,7 @@ Qed.
 
 Lemma duplication_cos2 : forall a : R, cos (2 * a) = 1 + - (2 * Rsqr (sin a)).
 intros.
-repeat rewrite <- Rplus_diag.
+repeat rewrite double.
 rewrite cos_som.
 rewrite <- (trigo_Pythagore a).
 unfold Rsqr; ring.
@@ -496,7 +496,7 @@ Qed.
 
 Lemma duplication_sin : forall a : R, sin (2 * a) = 2 * (sin a * cos a).
 intros.
-repeat rewrite <- Rplus_diag.
+repeat rewrite double.
 rewrite sin_som; auto.
 Qed.
 
