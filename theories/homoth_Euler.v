@@ -14,8 +14,8 @@
 (* 02110-1301 USA                                                     *)
 
 
-Require Export droite_Euler.
-Require Export applications_cocyclicite.
+From HighSchoolGeometry Require Export droite_Euler.
+From HighSchoolGeometry Require Export applications_cocyclicite.
 Set Implicit Arguments.
 Unset Strict Implicit.
  

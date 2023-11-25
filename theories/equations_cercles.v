@@ -14,8 +14,8 @@
 (* 02110-1301 USA                                                     *)
 
 
-Require Export equations_droites.
-Require Export contact.
+From HighSchoolGeometry Require Export equations_droites.
+From HighSchoolGeometry Require Export contact.
 Set Implicit Arguments.
 Unset Strict Implicit.
  

@@ -14,7 +14,7 @@
 (* 02110-1301 USA                                                     *)
 
 
-Require Export complexes.
+From HighSchoolGeometry Require Export complexes.
 Set Implicit Arguments.
 Unset Strict Implicit.
 Parameter partie_reelle : C -> R.

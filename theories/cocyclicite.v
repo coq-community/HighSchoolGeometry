@@ -14,7 +14,7 @@
 (* 02110-1301 USA                                                     *)
 
 
-Require Export cercle.
+From HighSchoolGeometry Require Export cercle.
 Set Implicit Arguments.
 Unset Strict Implicit.
  
@@ -481,7 +481,7 @@ elim H; intros; auto.
 split; [ assumption | split; [ idtac | try assumption ] ].
 rewrite <- H0; auto.
 Qed.
-Require Export rotation_plane.
+From HighSchoolGeometry Require Export rotation_plane.
  
 Theorem reciproque_cocyclicite :
  forall A B C D : PO,

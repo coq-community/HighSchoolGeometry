@@ -14,7 +14,7 @@
 (* 02110-1301 USA                                                     *)
 
 
-Require Export angles_vecteurs.
+From HighSchoolGeometry Require Export angles_vecteurs.
 Set Implicit Arguments.
 Unset Strict Implicit.
  

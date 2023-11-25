@@ -14,7 +14,7 @@
 (* 02110-1301 USA                                                     *)
 
 
-Require Export alignement.
+From HighSchoolGeometry Require Export alignement.
 Set Implicit Arguments.
 Unset Strict Implicit.
 Parameter barycentre : PP -> PP -> PO.

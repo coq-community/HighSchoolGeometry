@@ -14,7 +14,7 @@
 (* 02110-1301 USA                                                     *)
 
 
-Require Export complexes_transformations.
-Require Export complexes_analytique.
-Require Export complexes_exercice.
-Require Export geometrie_plane.
+From HighSchoolGeometry Require Export complexes_transformations.
+From HighSchoolGeometry Require Export complexes_analytique.
+From HighSchoolGeometry Require Export complexes_exercice.
+From HighSchoolGeometry Require Export geometrie_plane.

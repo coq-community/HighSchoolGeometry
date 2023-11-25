@@ -14,7 +14,7 @@
 (* 02110-1301 USA                                                     *)
 
 
-Require Export distance_euclidienne.
+From HighSchoolGeometry Require Export distance_euclidienne.
 Set Implicit Arguments.
 Unset Strict Implicit.
  
@@ -134,7 +134,7 @@ apply H0; auto with geo.
 intros H; try assumption.
 apply def_orthogonal2; auto.
 Qed.
-Require Export projection_orthogonale.
+From HighSchoolGeometry Require Export projection_orthogonale.
  
 Lemma Pythagore_projete_orthogonal :
  forall A B C H : PO,

@@ -14,7 +14,7 @@
 (* 02110-1301 USA                                                     *)
 
 
-Require Export formes_complexes.
+From HighSchoolGeometry Require Export formes_complexes.
 Set Implicit Arguments.
 Unset Strict Implicit.
  

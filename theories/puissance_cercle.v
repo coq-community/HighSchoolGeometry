@@ -14,7 +14,7 @@
 (* 02110-1301 USA                                                     *)
 
 
-Require Export contact.
+From HighSchoolGeometry Require Export contact.
 Set Implicit Arguments.
 Unset Strict Implicit.
  

@@ -14,10 +14,10 @@
 (* 02110-1301 USA                                                     *)
 
 
-Require Export Rbase.
-Require Export Rfunctions.
-Require Export R_sqrt.
-Require Export Lra.
+From Coq Require Export Rbase.
+From Coq Require Export Rfunctions.
+From Coq Require Export R_sqrt.
+From Coq Require Export Lra.
 
 Open Scope R_scope.
  

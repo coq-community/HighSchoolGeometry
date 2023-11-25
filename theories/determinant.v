@@ -14,8 +14,8 @@
 (* 02110-1301 USA                                                     *)
 
 
-Require Export aire_signee.
-Require Export metrique_triangle.
+From HighSchoolGeometry Require Export aire_signee.
+From HighSchoolGeometry Require Export metrique_triangle.
 Set Implicit Arguments.
 Unset Strict Implicit.
 Parameters (O : PO) (I : PO) (J : PO).

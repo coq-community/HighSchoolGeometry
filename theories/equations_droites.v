@@ -14,7 +14,7 @@
 (* 02110-1301 USA                                                     *)
 
 
-Require Export determinant.
+From HighSchoolGeometry Require Export determinant.
 Set Implicit Arguments.
 Unset Strict Implicit.
 #[export] Hint Resolve cart_def not_and_or or_not_and: geo.
@@ -314,7 +314,7 @@ Axiom
     A <> B ->
     C <> D ->
     orthogonal (vec A B) (vec C D) -> vec_normal (vec A B) (droite C D).
-Require Export angles_droites.
+From HighSchoolGeometry Require Export angles_droites.
 #[export] Hint Resolve vec_normal_def vec_normal_def2: geo.
  
 Lemma existence_vec_normal :

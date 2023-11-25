@@ -14,7 +14,7 @@
 (* 02110-1301 USA                                                     *)
 
 
-Require Export parallelisme_concours.
+From HighSchoolGeometry Require Export parallelisme_concours.
 Set Implicit Arguments.
 Unset Strict Implicit.
  

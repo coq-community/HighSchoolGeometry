@@ -14,7 +14,7 @@
 (* 02110-1301 USA                                                     *)
 
 
-Require Export cocyclicite.
+From HighSchoolGeometry Require Export cocyclicite.
 Set Implicit Arguments.
 Unset Strict Implicit.
  

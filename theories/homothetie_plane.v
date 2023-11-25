@@ -13,10 +13,10 @@
 (* Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA *)
 (* 02110-1301 USA                                                     *)
 
-Require Export dilatations.
-Require Export affine_classiques.
-Require Export cercle.
-Require Export rotation_plane.
+From HighSchoolGeometry Require Export dilatations.
+From HighSchoolGeometry Require Export affine_classiques.
+From HighSchoolGeometry Require Export cercle.
+From HighSchoolGeometry Require Export rotation_plane.
 Set Implicit Arguments.
 Unset Strict Implicit.
  

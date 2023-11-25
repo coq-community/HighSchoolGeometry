@@ -14,7 +14,7 @@
 (* 02110-1301 USA                                                     *)
 
 
-Require Export cocyclicite.
+From HighSchoolGeometry Require Export cocyclicite.
 Set Implicit Arguments.
 Unset Strict Implicit.
  
@@ -552,8 +552,8 @@ deroule_triangle A B M.
 apply (triangle_ortho_cote2 (A:=A) (B:=B) (C:=C) (M:=M) (P:=P) (Q:=R)); auto.
 apply projete_non_axe with (2 := H3); auto.
 Qed.
-Require Export orthocentre.
-Require Export reflexion_plane.
+From HighSchoolGeometry Require Export orthocentre.
+From HighSchoolGeometry Require Export reflexion_plane.
  
 Lemma orthocentre_double :
  forall A B C H : PO,

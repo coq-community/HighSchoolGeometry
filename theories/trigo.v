@@ -13,7 +13,7 @@
 (* Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA *)
 (* 02110-1301 USA                                                     *)
 
-Require Export angles_vecteurs.
+From HighSchoolGeometry Require Export angles_vecteurs.
 Set Implicit Arguments.
 Unset Strict Implicit.
 (* Le plan est orienté et on utilise le cercle trigonométrique*)

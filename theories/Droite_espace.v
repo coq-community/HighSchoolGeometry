@@ -14,8 +14,8 @@
 (* 02110-1301 USA                                                     *)
 
 
-Require Export parallelisme_concours.
-Require Export coplanarite.
+From HighSchoolGeometry Require Export parallelisme_concours.
+From HighSchoolGeometry Require Export coplanarite.
 Set Implicit Arguments.
 Unset Strict Implicit.
  

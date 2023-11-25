@@ -14,7 +14,7 @@
 (* 02110-1301 USA                                                     *)
 
 
-Require Export isocele.
+From HighSchoolGeometry Require Export isocele.
 Set Implicit Arguments.
 Unset Strict Implicit.
 Parameter reflexion : PO -> PO -> PO -> PO.

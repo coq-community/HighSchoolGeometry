@@ -14,8 +14,8 @@
 (* 02110-1301 USA                                                     *)
 
 
-Require Export dilatations.
-Require Export operations_complexes.
+From HighSchoolGeometry Require Export dilatations.
+From HighSchoolGeometry Require Export operations_complexes.
 Set Implicit Arguments.
 Unset Strict Implicit.
  

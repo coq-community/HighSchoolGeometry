@@ -14,7 +14,7 @@
 (* 02110-1301 USA                                                     *)
 
 
-Require Export milieu.
+From HighSchoolGeometry Require Export milieu.
 Set Implicit Arguments.
 Unset Strict Implicit.
 Parameter DR : Type.

@@ -14,7 +14,7 @@
 (* 02110-1301 USA                                                     *)
 
 
-Require Export composee_reflexions.
+From HighSchoolGeometry Require Export composee_reflexions.
 Set Implicit Arguments.
 Unset Strict Implicit.
  

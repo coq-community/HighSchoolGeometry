@@ -1,8 +1,8 @@
-Require Export aire_signee.
-Require Export angles_droites.
-Require Export angles_vecteurs.
-Require Export Droite_espace.
-Require Export triangles_semblables.
+From HighSchoolGeometry Require Export aire_signee.
+From HighSchoolGeometry Require Export angles_droites.
+From HighSchoolGeometry Require Export angles_vecteurs.
+From HighSchoolGeometry Require Export Droite_espace.
+From HighSchoolGeometry Require Export triangles_semblables.
 
 Definition orient ( A B C :PO) : Prop :=
      aire (vec A B) (vec A C) >0.
@@ -820,7 +820,7 @@ Qed.
 (*Consequence concernant angles inscrits oriente*)
 Axiom differencePiNull : image_angle 0 <>image_angle pi.
 
-Require Export cocyclicite.
+From HighSchoolGeometry Require Export cocyclicite.
 
 Ltac deroule_sont_cocycliques :=
   match goal with H : sont_cocycliques ?A ?B ?C ?D|- _ =>

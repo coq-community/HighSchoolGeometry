@@ -14,7 +14,7 @@
 (* 02110-1301 USA                                                     *)
 
 
-Require Export composee_translation_rotation.
+From HighSchoolGeometry Require Export composee_translation_rotation.
 Set Implicit Arguments.
 Unset Strict Implicit.
  

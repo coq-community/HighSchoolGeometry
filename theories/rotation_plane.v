@@ -14,7 +14,7 @@
 (* 02110-1301 USA                                                     *)
 
 
-Require Export metrique_triangle.
+From HighSchoolGeometry Require Export metrique_triangle.
 Set Implicit Arguments.
 Unset Strict Implicit.
 Parameter rotation : PO -> R -> PO -> PO.

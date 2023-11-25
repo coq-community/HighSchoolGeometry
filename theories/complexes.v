@@ -14,7 +14,7 @@
 (* 02110-1301 USA                                                     *)
 
 
-Require Export trigo.
+From HighSchoolGeometry Require Export trigo.
 Set Implicit Arguments.
 Unset Strict Implicit.
 Parameters (O : PO) (I : PO) (J : PO).

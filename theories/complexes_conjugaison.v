@@ -14,8 +14,8 @@
 (* 02110-1301 USA                                                     *)
 
 
-Require Export complexes_dilatations.
-Require Export reflexion_plane.
+From HighSchoolGeometry Require Export complexes_dilatations.
+From HighSchoolGeometry Require Export reflexion_plane.
 Set Implicit Arguments.
 Unset Strict Implicit.
 Parameter Conj : C -> C.

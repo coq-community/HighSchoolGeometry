@@ -1,10 +1,10 @@
-Require Export alignement.
-Require Export angles_vecteurs.
-Require Export rotation_plane.
-Require Export reflexion_plane.
-Require Export dilatations.
-Require Export transformations_contact.
-Require Export distance_euclidienne.
+From HighSchoolGeometry Require Export alignement.
+From HighSchoolGeometry Require Export angles_vecteurs.
+From HighSchoolGeometry Require Export rotation_plane.
+From HighSchoolGeometry Require Export reflexion_plane.
+From HighSchoolGeometry Require Export dilatations.
+From HighSchoolGeometry Require Export transformations_contact.
+From HighSchoolGeometry Require Export distance_euclidienne.
 
 (* Definition of similar triangles by  equality of 2 angles *)
 Definition trianglesSD (A B C A' B' C' : PO):Prop:=

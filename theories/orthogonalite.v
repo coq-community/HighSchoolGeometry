@@ -14,7 +14,7 @@
 (* 02110-1301 USA                                                     *)
 
 
-Require Export produit_scalaire.
+From HighSchoolGeometry Require Export produit_scalaire.
 Set Implicit Arguments.
 Unset Strict Implicit.
 Parameter orthogonal : PP -> PP -> Prop.

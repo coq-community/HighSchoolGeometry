@@ -14,7 +14,7 @@
 (* 02110-1301 USA                                                     *)
 
 
-Require Export complexes_inversion.
+From HighSchoolGeometry Require Export complexes_inversion.
 Set Implicit Arguments.
 Unset Strict Implicit.
  

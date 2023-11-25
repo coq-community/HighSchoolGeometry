@@ -13,7 +13,7 @@
 (* Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA *)
 (* 02110-1301 USA                                                     *)
 
-Require Export puissance_cercle.
+From HighSchoolGeometry Require Export puissance_cercle.
 Set Implicit Arguments.
 Unset Strict Implicit.
 Parameter inversion : PO -> R -> PO -> PO.
@@ -252,7 +252,7 @@ Ltac image_inversion I A B k :=
   elim (existence_inversion (I:=I) (A:=A) (k:=k)); intros B; intros; auto;
    deroule_inversion I A B k.
 #[export] Hint Resolve inversion_involution: geo.
-Require Export applications_cocyclicite.
+From HighSchoolGeometry Require Export applications_cocyclicite.
  
 Theorem inversion_droite_non_pole :
  forall (A B M M' I : PO) (k : R),

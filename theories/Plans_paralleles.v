@@ -14,7 +14,7 @@
 (* 02110-1301 USA                                                     *)
 
 
-Require Export Droite_plan_espace.
+From HighSchoolGeometry Require Export Droite_plan_espace.
 Set Implicit Arguments.
 Unset Strict Implicit.
 Parameter para_plan_plan : PL -> PL -> Prop.

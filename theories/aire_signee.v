@@ -14,7 +14,7 @@
 (* 02110-1301 USA                                                     *)
 
 
-Require Export trigo.
+From HighSchoolGeometry Require Export trigo.
 Set Implicit Arguments.
 Unset Strict Implicit.
 Parameter aire : PP -> PP -> R.
@@ -530,7 +530,7 @@ field.
 rewrite H0; rewrite H1; rewrite H2.
 repeat split; auto with geo.
 Qed.
-Require Export projection_orthogonale.
+From HighSchoolGeometry Require Export projection_orthogonale.
  
 Lemma aire_avec_projete :
  forall A B C H : PO,

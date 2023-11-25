@@ -14,8 +14,8 @@
 (* 02110-1301 USA                                                     *)
 
 
-Require Export coplanarite.
-Require Export barycentre.
+From HighSchoolGeometry Require Export coplanarite.
+From HighSchoolGeometry Require Export barycentre.
 Set Implicit Arguments.
 Unset Strict Implicit.
  

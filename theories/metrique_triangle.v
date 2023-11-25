@@ -14,8 +14,8 @@
 (* 02110-1301 USA                                                     *)
 
 
-Require Export euclidien_classiques.
-Require Export trigo.
+From HighSchoolGeometry Require Export euclidien_classiques.
+From HighSchoolGeometry Require Export trigo.
 Set Implicit Arguments.
 Unset Strict Implicit.
  

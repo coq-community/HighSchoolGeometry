@@ -14,13 +14,13 @@
 (* 02110-1301 USA                                                     *)
 
 
-Require Export composee_dilatations.
-Require Export composee_transformations.
-Require Export similitudes_directes.
-Require Export equations_cercles.
-Require Export homoth_Euler.
-Require Export transformations_contact.
-Require Export inversion.
+From HighSchoolGeometry Require Export composee_dilatations.
+From HighSchoolGeometry Require Export composee_transformations.
+From HighSchoolGeometry Require Export similitudes_directes.
+From HighSchoolGeometry Require Export equations_cercles.
+From HighSchoolGeometry Require Export homoth_Euler.
+From HighSchoolGeometry Require Export transformations_contact.
+From HighSchoolGeometry Require Export inversion.
 
 
 

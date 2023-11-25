@@ -14,9 +14,9 @@
 (* 02110-1301 USA                                                     *)
 
 
-Require Export homothetie_plane.
-Require Export cocyclicite.
-Require Export orthocentre.
+From HighSchoolGeometry Require Export homothetie_plane.
+From HighSchoolGeometry Require Export cocyclicite.
+From HighSchoolGeometry Require Export orthocentre.
 Set Implicit Arguments.
 Unset Strict Implicit.
  

@@ -1,4 +1,4 @@
-Require Export trigo.
+From HighSchoolGeometry Require Export trigo.
 Set  Implicit Arguments.
 Unset Strict Implicit.
 (* Formules de trigonometrie necessaires.*)
@@ -113,7 +113,7 @@ RReplace (((pisurtrois + a) + (pisurtrois + c)) + b)
          (((a + b) + c) + (pisurtrois + pisurtrois)).
 rewrite H; ring.
 Qed.
-Require Export cocyclicite.
+From HighSchoolGeometry Require Export cocyclicite.
 (* lemme a mettre dans distance_euclidienne apres colinearite_distance*)
  
 Lemma distance_double_milieu:
@@ -166,7 +166,7 @@ Axiom
     Rabs (Sin (cons_AV (vec A B) (vec A C))) =
     Rabs (Sin (cons_AV (vec E F) (vec E G))).
 
-Require Export complements_cercle.
+From HighSchoolGeometry Require Export complements_cercle.
 (* theoreme : dans un triangle avec les notations habituelles  a = 2 R sin A
    cas particulier : le cote est un diametre du cercle circonscrit*)
  
