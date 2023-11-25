@@ -1,4 +1,4 @@
--R theories HighSchoolGeometry
+-Q theories HighSchoolGeometry
 theories/affine_classiques.v 
 theories/aire_signee.v 
 theories/alignement.v 

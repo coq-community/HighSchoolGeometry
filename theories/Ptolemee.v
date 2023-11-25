@@ -1,5 +1,5 @@
-Require Export triangles_semblables.
-Require Export orientation.
+From HighSchoolGeometry Require Export triangles_semblables.
+From HighSchoolGeometry Require Export orientation.
 
 (* Main proof of Ptolemy's theorem *)
 
@@ -82,7 +82,7 @@ rewrite H0; ring.
 elim H2;auto.
 Qed.
 
-Require Export Droite_espace.
+From HighSchoolGeometry Require Export Droite_espace.
 
 
 Lemma Exists_Intersection1 : (* on peut prouver grace au lemme

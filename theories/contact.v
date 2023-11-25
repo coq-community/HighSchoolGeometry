@@ -14,7 +14,7 @@
 (* 02110-1301 USA                                                     *)
 
 
-Require Export complements_cercle.
+From HighSchoolGeometry Require Export complements_cercle.
 Set Implicit Arguments.
 Unset Strict Implicit.
  

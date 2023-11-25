@@ -14,8 +14,8 @@
 (* 02110-1301 USA                                                     *)
 
 
-Require Export angles_droites.
-Require Export metrique_triangle.
+From HighSchoolGeometry Require Export angles_droites.
+From HighSchoolGeometry Require Export metrique_triangle.
 Set Implicit Arguments.
 Unset Strict Implicit.
  
@@ -260,7 +260,7 @@ rewrite H1; auto.
 lapply (milieu_distinct (A:=A) (B:=B)); auto; intros.
 rewrite H1; auto.
 Qed.
-Require Export Droite_espace.
+From HighSchoolGeometry Require Export Droite_espace.
  
 Lemma mediatrices_triangle_concours :
  forall A B C I J K L : PO,

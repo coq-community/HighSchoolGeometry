@@ -14,8 +14,8 @@
 (* 02110-1301 USA                                                     *)
 
 
-Require Export similitudes_directes.
-Require Export complexes_dilatations.
+From HighSchoolGeometry Require Export similitudes_directes.
+From HighSchoolGeometry Require Export complexes_dilatations.
 Set Implicit Arguments.
 Unset Strict Implicit.
  

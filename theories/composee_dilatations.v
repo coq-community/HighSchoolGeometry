@@ -14,7 +14,7 @@
 (* 02110-1301 USA                                                     *)
 
 
-Require Export dilatations.
+From HighSchoolGeometry Require Export dilatations.
 Set Implicit Arguments.
 Unset Strict Implicit.
  

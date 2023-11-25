@@ -14,7 +14,7 @@
 (* 02110-1301 USA                                                     *)
 
 
-Require Export representant_unitaire.
+From HighSchoolGeometry Require Export representant_unitaire.
 Set Implicit Arguments.
 Unset Strict Implicit.
 #[export] Hint Resolve distance_non_nulle scalaire_positif: geo.

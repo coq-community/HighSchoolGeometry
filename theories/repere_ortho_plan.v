@@ -14,8 +14,8 @@
 (* 02110-1301 USA                                                     *)
 
 
-Require Export repere_plan.
-Require Export distance_euclidienne.
+From HighSchoolGeometry Require Export repere_plan.
+From HighSchoolGeometry Require Export distance_euclidienne.
 Set Implicit Arguments.
 Unset Strict Implicit.
  

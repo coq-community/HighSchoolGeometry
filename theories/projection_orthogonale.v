@@ -14,7 +14,7 @@
 (* 02110-1301 USA                                                     *)
 
 
-Require Export orthogonalite.
+From HighSchoolGeometry Require Export orthogonalite.
 Set Implicit Arguments.
 Unset Strict Implicit.
 Parameter projete_orthogonal : PO -> PO -> PO -> PO.

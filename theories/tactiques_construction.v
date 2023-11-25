@@ -14,10 +14,10 @@
 (* 02110-1301 USA                                                     *)
 
 
-Require Export droite_Euler.
-Require Export parallelisme_concours.
-Require Export orthogonalite_espace.
-Require Export transformations_contact.
+From HighSchoolGeometry Require Export droite_Euler.
+From HighSchoolGeometry Require Export parallelisme_concours.
+From HighSchoolGeometry Require Export orthogonalite_espace.
+From HighSchoolGeometry Require Export transformations_contact.
 
 Ltac DecompEx H P := elim H;intro P;intro;clear H.
 Ltac DecompExAnd H P := 

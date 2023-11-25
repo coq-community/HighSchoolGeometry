@@ -14,7 +14,7 @@
 (* 02110-1301 USA                                                     *)
 
 
-Require Export homothetie_plane.
+From HighSchoolGeometry Require Export homothetie_plane.
 Set Implicit Arguments.
 Unset Strict Implicit.
 Parameter similitude : PO -> R -> R -> PO -> PO.

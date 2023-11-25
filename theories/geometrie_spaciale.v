@@ -14,7 +14,7 @@
 (* 02110-1301 USA                                                     *)
 
 
-Require Export exercice_espace.
+From HighSchoolGeometry Require Export exercice_espace.
 
 
 

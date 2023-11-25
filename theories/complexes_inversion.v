@@ -13,9 +13,9 @@
 (* Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA *)
 (* 02110-1301 USA                                                     *)
 
-Require Export inversion.
-Require Export complexes_conjugaison.
-Require Export complexes_similitudes.
+From HighSchoolGeometry Require Export inversion.
+From HighSchoolGeometry Require Export complexes_conjugaison.
+From HighSchoolGeometry Require Export complexes_similitudes.
 Set Implicit Arguments.
 Unset Strict Implicit.
 (* a mettre plus haut dans les complexes*)

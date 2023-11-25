@@ -14,7 +14,7 @@
 (* 02110-1301 USA                                                     *)
 
 
-Require Export vecteur.
+From HighSchoolGeometry Require Export vecteur.
 Set Implicit Arguments.
 Unset Strict Implicit.
  

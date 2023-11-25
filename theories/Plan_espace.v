@@ -14,7 +14,7 @@
 (* 02110-1301 USA                                                     *)
 
 
-Require Export Plans_paralleles.
+From HighSchoolGeometry Require Export Plans_paralleles.
 Set Implicit Arguments.
 Unset Strict Implicit.
 Parameter secants : PL -> PL -> Prop.

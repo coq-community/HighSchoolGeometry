@@ -14,8 +14,8 @@
 (* 02110-1301 USA                                                     *)
 
 
-Require Export projection_orthogonale.
-Require Export angles_droites.
+From HighSchoolGeometry Require Export projection_orthogonale.
+From HighSchoolGeometry Require Export angles_droites.
 Set Implicit Arguments.
 Unset Strict Implicit.
  
@@ -88,7 +88,7 @@ elim (def_projete_orthogonal2 (A:=A) (B:=B) (C:=C) (H:=H)); auto; intros.
 red in |- *; intros; apply H2.
 rewrite H8; auto.
 Qed.
-Require Export Droite_espace.
+From HighSchoolGeometry Require Export Droite_espace.
  
 Lemma triangle_hauteurs_secantes :
  forall A B C H K : PO,

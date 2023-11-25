@@ -14,7 +14,7 @@
 (* 02110-1301 USA                                                     *)
 
 
-Require Export Droite_espace.
+From HighSchoolGeometry Require Export Droite_espace.
 Set Implicit Arguments.
 Unset Strict Implicit.
 Parameter PL : Type.

@@ -14,8 +14,8 @@
 (* 02110-1301 USA                                                     *)
 
 
-Require Export orthogonalite.
-Require Export Plan_espace.
+From HighSchoolGeometry Require Export orthogonalite.
+From HighSchoolGeometry Require Export Plan_espace.
 Set Implicit Arguments.
 Unset Strict Implicit.
 Parameter orthogonales : DR -> DR -> Prop.

@@ -14,8 +14,8 @@
 (* 02110-1301 USA                                                     *)
 
 
-Require Export Classical.
-Require Export Field_affine.
+From Coq Require Export Classical.
+From HighSchoolGeometry Require Export Field_affine.
 Set Implicit Arguments.
 Unset Strict Implicit.
  

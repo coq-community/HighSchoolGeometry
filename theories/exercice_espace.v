@@ -14,8 +14,8 @@
 (* 02110-1301 USA                                                     *)
 
 
-Require Export orthogonalite_espace.
-Require Export affine_classiques.
+From HighSchoolGeometry Require Export orthogonalite_espace.
+From HighSchoolGeometry Require Export affine_classiques.
 Set Implicit Arguments.
 Unset Strict Implicit.
  

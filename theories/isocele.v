@@ -14,7 +14,7 @@
 (* 02110-1301 USA                                                     *)
 
 
-Require Export mediatrice.
+From HighSchoolGeometry Require Export mediatrice.
 Set Implicit Arguments.
 Unset Strict Implicit.
  

@@ -14,7 +14,7 @@
 (* 02110-1301 USA                                                     *)
 
 
-Require Export barycentre.
+From HighSchoolGeometry Require Export barycentre.
 Set Implicit Arguments.
 Unset Strict Implicit.
 Parameter mes_alg : PO -> PO -> R.

@@ -14,7 +14,7 @@
 (* 02110-1301 USA                                                     *)
 
 
-Require Export isocele.
+From HighSchoolGeometry Require Export isocele.
 Set Implicit Arguments.
 Unset Strict Implicit.
  
@@ -162,7 +162,7 @@ rewrite <- H0.
 apply distance_refl1.
 rewrite <- H5; rewrite <- H0; auto with geo.
 Qed.
-Require Export dilatations.
+From HighSchoolGeometry Require Export dilatations.
  
 Lemma existence_rayon_diametre :
  forall A B O : PO,

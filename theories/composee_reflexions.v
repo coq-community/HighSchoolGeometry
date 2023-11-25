@@ -14,9 +14,9 @@
 (* 02110-1301 USA                                                     *)
 
 
-Require Export reflexion_plane.
-Require Export dilatations.
-Require Export rotation_plane.
+From HighSchoolGeometry Require Export reflexion_plane.
+From HighSchoolGeometry Require Export dilatations.
+From HighSchoolGeometry Require Export rotation_plane.
 Set Implicit Arguments.
 Unset Strict Implicit.
  

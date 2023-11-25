@@ -14,7 +14,7 @@
 (* 02110-1301 USA                                                     *)
 
 
-Require Export complexes_similitudes.
+From HighSchoolGeometry Require Export complexes_similitudes.
 Set Implicit Arguments.
 Unset Strict Implicit.
  

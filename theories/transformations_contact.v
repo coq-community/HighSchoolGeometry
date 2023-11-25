@@ -14,9 +14,9 @@
 (* 02110-1301 USA                                                     *)
 
 
-Require Export contact.
-Require Export reflexion_plane.
-Require Export similitudes_directes.
+From HighSchoolGeometry Require Export contact.
+From HighSchoolGeometry Require Export reflexion_plane.
+From HighSchoolGeometry Require Export similitudes_directes.
 Set Implicit Arguments.
 Unset Strict Implicit.
 #[export] Hint Resolve translation_trivial rec_translation_vecteur: geo.

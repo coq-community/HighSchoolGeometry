@@ -14,8 +14,8 @@
 (* 02110-1301 USA                                                     *)
 
 
-Require Export Rutile.
-Require Export Ring Field.
+From HighSchoolGeometry Require Export Rutile.
+From Coq Require Export Ring Field.
 Set Implicit Arguments.
 Unset Strict Implicit.
 Parameter PO : Type.

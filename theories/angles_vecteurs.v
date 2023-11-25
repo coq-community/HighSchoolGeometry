@@ -14,7 +14,7 @@
 (* 02110-1301 USA                                                     *)
 
 
-Require Export repere_ortho_plan.
+From HighSchoolGeometry Require Export repere_ortho_plan.
 Set Implicit Arguments.
 Unset Strict Implicit.
 Parameter AV : Type.
