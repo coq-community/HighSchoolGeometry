@@ -62,6 +62,7 @@ Axiom
 Lemma ROND_RON :
  forall O I J : PO,
  repere_orthonormal_direct O I J -> repere_orthonormal O I J.
+Proof.
 unfold repere_orthonormal_direct, repere_orthonormal in |- *; intros.
 elim H; intros H0 H1; try clear H; try exact H1.
 split; [ auto with geo | try assumption ].
@@ -75,6 +76,7 @@ Definition repere_orthonormal_indirect (O I J : PO) :=
 Lemma ROND_RONI :
  forall O I J : PO,
  repere_orthonormal_direct O I J -> repere_orthonormal_indirect O J I.
+Proof.
 unfold repere_orthonormal_indirect, repere_orthonormal_direct in |- *.
 intros O I J H; try assumption.
 elim H; intros H0 H1; try clear H; try exact H1.
@@ -86,6 +88,7 @@ Lemma ROND_new :
  forall O I J K : PO,
  repere_orthonormal_direct O I J ->
  vec O K = mult_PP (-1) (vec O I) -> repere_orthonormal_direct O J K.
+Proof.
 unfold repere_orthonormal_indirect, repere_orthonormal_direct in |- *.
 intros O I J K H H0; try assumption.
 elim H; intros H1 H2; elim H2; intros H3 H4; try clear H2 H; try exact H4.
@@ -109,6 +112,7 @@ Qed.
 Lemma existence_ROND_AB :
  forall A B : PO,
  distance A B = 1 -> exists C : PO, repere_orthonormal_direct A B C.
+Proof.
 intros.
 elim
  existence_representant_angle
@@ -121,6 +125,7 @@ Qed.
 
 Lemma cos_deux_mes :
  forall x y : R, image_angle x = image_angle y -> cos x = cos y.
+Proof.
 intros.
 elim existence_AB_unitaire; intros A H1; elim H1; intros B H0; try clear H1.
 elim existence_representant_angle with (A := A) (B := B) (C := A) (x := x);
@@ -131,6 +136,7 @@ rewrite <- H3; auto.
 Qed.
 
 Lemma cos_paire : forall x : R, cos (- x) = cos x.
+Proof.
 intros.
 elim existence_AB_unitaire; intros A H; elim H; intros B H0; try clear H;
  try exact H0.
@@ -144,6 +150,7 @@ apply mes_oppx; auto with geo.
 Qed.
 
 Lemma cos_periodique : forall x : R, cos (x + deuxpi) = cos x.
+Proof.
 intros.
 elim existence_AB_unitaire; intros A H; elim H; intros B H0; try clear H;
  try exact H0.
@@ -157,6 +164,7 @@ Qed.
 
 Lemma sin_deux_mes :
  forall x y : R, image_angle x = image_angle y -> sin x = sin y.
+Proof.
 intros.
 elim existence_AB_unitaire; intros A H1; elim H1; clear H1; intros B H0.
 elim existence_ROND_AB with (A := A) (B := B); [ intros D H10 | auto ].
@@ -168,6 +176,7 @@ rewrite <- H3; auto.
 Qed.
 
 Lemma sin_periodique : forall x : R, sin (x + deuxpi) = sin x.
+Proof.
 intros.
 elim existence_AB_unitaire; intros A H; elim H; intros B H0; try clear H;
  try exact H0.
@@ -181,6 +190,7 @@ apply mesure_mod_deuxpi; auto with geo.
 Qed.
 
 Lemma sin_cos_pisurdeux_moins_x : forall x : R, sin x = cos (pisurdeux + - x).
+Proof.
 intros.
 elim existence_AB_unitaire; intros A H; elim H; intros B H0; try clear H;
  try exact H0.
@@ -200,12 +210,14 @@ apply mes_oppx; auto with geo.
 Qed.
 
 Lemma cos_sin_pisurdeux_moins_x : forall x : R, cos x = sin (pisurdeux + - x).
+Proof.
 intros.
 rewrite sin_cos_pisurdeux_moins_x.
 replace (pisurdeux + - (pisurdeux + - x)) with x; try ring.
 Qed.
 
 Lemma cos_zero : cos 0 = 1.
+Proof.
 elim existence_AB_unitaire; intros A H; elim H; intros B H0; try clear H;
  try exact H0.
 rewrite (def_cos (A:=A) (B:=B) (C:=B) (x:=0)); auto with geo.
@@ -213,6 +225,7 @@ rewrite <- angle_nul; auto with geo.
 Qed.
 
 Lemma sin_zero : sin 0 = 0.
+Proof.
 elim existence_AB_unitaire; intros A H; elim H; intros B H0; try clear H;
  try exact H0.
 elim existence_ROND_AB with (A := A) (B := B); [ intros D H | auto ].
@@ -222,6 +235,7 @@ rewrite <- angle_nul; auto with geo.
 Qed.
 
 Lemma cos_pisurdeux : cos pisurdeux = 0.
+Proof.
 elim existence_AB_unitaire; intros A H; elim H; intros B H0; try clear H;
  try exact H0.
 elim existence_ROND_AB with (A := A) (B := B); [ intros D H | auto ].
@@ -231,6 +245,7 @@ rewrite (def_cos (A:=A) (B:=B) (C:=D) (x:=pisurdeux)); auto with geo.
 Qed.
 
 Lemma sin_pisurdeux : sin pisurdeux = 1.
+Proof.
 elim existence_AB_unitaire; intros A H; elim H; intros B H0; try clear H;
  try exact H0.
 elim existence_ROND_AB with (A := A) (B := B); [ intros D H | auto ].
@@ -240,6 +255,7 @@ rewrite (def_sin (A:=A) (B:=B) (C:=D) (D:=D) (x:=pisurdeux)); auto with geo.
 Qed.
 
 Lemma cos_pi : cos pi = -1.
+Proof.
 elim existence_AB_unitaire; intros A H; elim H; intros B H0; try clear H;
  try exact H0.
 elim
@@ -258,6 +274,7 @@ Simplscal; rewrite carre_scalaire_distance; rewrite H0; ring.
 Qed.
 
 Lemma sin_pi : sin pi = 0.
+Proof.
 elim existence_AB_unitaire; intros A H; elim H; intros B H0; try clear H;
  try exact H0.
 elim existence_ROND_AB with (A := A) (B := B); [ intros D H | auto ].
@@ -286,6 +303,7 @@ Lemma coordonnees_cos_sin :
  distance O M = 1 ->
  vec O M = add_PP (mult_PP (cos x) (vec O I)) (mult_PP (sin x) (vec O J))
  :>PP.
+Proof.
 intros.
 elim H; intros.
 elim H3; intros H4 H5; try clear H3; try exact H5.
@@ -303,12 +321,14 @@ Lemma calcul_cos_sin :
  distance O M = 1 ->
  vec O M = add_PP (mult_PP a (vec O I)) (mult_PP b (vec O J)) :>PP ->
  a = cos x /\ b = sin x.
+Proof.
 intros.
 apply unicite_coordonnees with (2 := H2); auto with geo.
 apply coordonnees_cos_sin; auto.
 Qed.
 
 Lemma trigo_Pythagore : forall x : R, Rsqr (cos x) + Rsqr (sin x) = 1.
+Proof.
 unfold Rsqr in |- *; intros.
 elim existence_AB_unitaire; intros A H; elim H; intros B H0; try clear H;
  try exact H0.
@@ -333,6 +353,7 @@ Qed.
 
 Lemma pisurdeux_plus_x :
  forall x : R, cos (pisurdeux + x) = - sin x /\ sin (pisurdeux + x) = cos x.
+Proof.
 intros.
 elim existence_AB_unitaire; intros A H; elim H; intros B H0; try clear H;
  try exact H0.
@@ -370,6 +391,7 @@ apply Chasles; auto with geo.
 Qed.
 
 Lemma sin_impaire : forall x : R, sin (- x) = - sin x.
+Proof.
 intros.
 elim pisurdeux_plus_x with (x := - x); intros H H0;
  try clear pisurdeux_plus_x; try exact H.
@@ -384,6 +406,7 @@ Qed.
 
 Lemma pi_moins_x :
  forall x : R, cos (pi + - x) = - cos x /\ sin (pi + - x) = sin x.
+Proof.
 intros.
 unfold pi in |- *.
 replace (pisurdeux + pisurdeux + - x) with (pisurdeux + (pisurdeux + - x)).
@@ -398,6 +421,7 @@ Qed.
 
 Lemma pi_plus_x :
  forall x : R, cos (pi + x) = - cos x /\ sin (pi + x) = - sin x.
+Proof.
 intros.
 elim pi_moins_x with (x := - x); intros H H0; try clear pi_moins_x;
  try exact H0.
@@ -411,6 +435,7 @@ Qed.
 
 Theorem cos_diff :
  forall a b : R, cos (a + - b) = cos a * cos b + sin a * sin b.
+Proof.
 intros.
 elim existence_AB_unitaire; intros A H; elim H; intros B H0; try clear H;
  try exact H0.
@@ -447,6 +472,7 @@ Qed.
 
 Lemma cos_som :
  forall a b : R, cos (a + b) = cos a * cos b + - (sin a * sin b).
+Proof.
 intros.
 replace (a + b) with (a + - - b).
 rewrite (cos_diff a (- b)).
@@ -457,6 +483,7 @@ ring.
 Qed.
 
 Lemma sin_som : forall a b : R, sin (a + b) = sin a * cos b + sin b * cos a.
+Proof.
 intros.
 replace (sin (a + b)) with (cos (pisurdeux + - (a + b))).
 replace (pisurdeux + - (a + b)) with (pisurdeux + - a + - b).
@@ -470,6 +497,7 @@ Qed.
 
 Lemma sin_diff :
  forall a b : R, sin (a + - b) = sin a * cos b + - (sin b * cos a).
+Proof.
 intros.
 rewrite sin_som.
 rewrite cos_paire.
@@ -478,6 +506,7 @@ ring.
 Qed.
 
 Lemma duplication_cos : forall a : R, cos (2 * a) = 2 * Rsqr (cos a) + -1.
+Proof.
 intros.
 repeat rewrite double.
 rewrite cos_som.
@@ -487,6 +516,7 @@ unfold Rsqr; ring.
 Qed.
 
 Lemma duplication_cos2 : forall a : R, cos (2 * a) = 1 + - (2 * Rsqr (sin a)).
+Proof.
 intros.
 repeat rewrite double.
 rewrite cos_som.
@@ -495,6 +525,7 @@ unfold Rsqr; ring.
 Qed.
 
 Lemma duplication_sin : forall a : R, sin (2 * a) = 2 * (sin a * cos a).
+Proof.
 intros.
 repeat rewrite double.
 rewrite sin_som; auto.
@@ -508,6 +539,7 @@ Lemma coordonnees_polaires_cartesiennes :
  image_angle a = cons_AV (vec O I) (vec O M) ->
  vec O M = add_PP (mult_PP x (vec O I)) (mult_PP y (vec O J)) :>PP ->
  x = r * cos a /\ y = r * sin a.
+Proof.
 intros.
 apply unicite_coordonnees with (2 := H3); auto with geo.
 elim existence_representant_unitaire with (A := O) (B := M);
@@ -536,6 +568,7 @@ Lemma trivial_cos_Cos :
  distance A C = 1 ->
  image_angle x = cons_AV (vec A B) (vec A C) ->
  cos x = Cos (cons_AV (vec A B) (vec A C)).
+Proof.
 intros.
 rewrite (def_cos (A:=A) (B:=B) (C:=C) (x:=x)); auto.
 rewrite (def_Cos (A:=A) (B:=B) (C:=C)); auto.
@@ -547,6 +580,7 @@ Lemma egalite_cos_Cos :
  A <> C ->
  image_angle x = cons_AV (vec A B) (vec A C) ->
  cos x = Cos (cons_AV (vec A B) (vec A C)).
+Proof.
 intros.
 elim existence_representant_unitaire with (A := A) (B := B);
  [ intros B' H2; try clear existence_representant_unitaire; try exact H2
@@ -573,6 +607,7 @@ Lemma trivial_sin_Sin :
  distance A C = 1 ->
  image_angle x = cons_AV (vec A B) (vec A C) ->
  repere_orthonormal_direct A B D -> sin x = Sin (cons_AV (vec A B) (vec A C)).
+Proof.
 intros.
 rewrite (def_sin (A:=A) (B:=B) (C:=C) (D:=D) (x:=x)); auto.
 rewrite (def_Sin (A:=A) (B:=B) (C:=C) (D:=D)); auto.
@@ -584,6 +619,7 @@ Lemma egalite_sin_Sin :
  A <> C ->
  image_angle x = cons_AV (vec A B) (vec A C) ->
  sin x = Sin (cons_AV (vec A B) (vec A C)).
+Proof.
 intros.
 elim existence_representant_unitaire with (A := A) (B := B);
  [ intros B' H2; try clear existence_representant_unitaire; try exact H2
@@ -615,6 +651,7 @@ Lemma coordonnees_Cos_Sin :
  vec O M =
  add_PP (mult_PP (Cos (cons_AV (vec O I) (vec O M))) (vec O I))
    (mult_PP (Sin (cons_AV (vec O I) (vec O M))) (vec O J)) :>PP.
+Proof.
 intros.
 elim H; intros.
 elim H2; intros H4 H5; try clear H2.
@@ -633,6 +670,7 @@ Lemma calcul_Cos_Sin :
  vec O M = add_PP (mult_PP a (vec O I)) (mult_PP b (vec O J)) :>PP ->
  a = Cos (cons_AV (vec O I) (vec O M)) /\
  b = Sin (cons_AV (vec O I) (vec O M)).
+Proof.
 intros.
 elim H; intros.
 elim H3; intros H4 H5; try clear H3.
@@ -654,6 +692,7 @@ Axiom
 Lemma egalite_angle_PiPres_trigo:
     forall x y :R,
     sin x = -sin y ->cos x = -cos y -> image_angle x = image_angle (y+pi).
+Proof.
 intros x y H H0.
 destruct (@pi_plus_x y) as [H1 H2].
 rewrite <-H2 in H.

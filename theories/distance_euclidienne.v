@@ -22,10 +22,12 @@ Unset Strict Implicit.
 Definition distance (A B : PO) := sqrt (scalaire (vec A B) (vec A B)).
  
 Lemma distance_pos : forall A B : PO, distance A B >= 0.
+Proof.
 unfold distance in |- *; intros; auto with geo real.
 Qed.
  
 Lemma distance_sym : forall A B : PO, distance A B = distance B A.
+Proof.
 unfold distance in |- *; intros; auto.
 VReplace (vec B A) (mult_PP (-1) (vec A B)).
 Simplscal.
@@ -34,6 +36,7 @@ replace (-1 * -1 * scalaire (vec A B) (vec A B)) with
 Qed.
  
 Lemma distance_refl : forall A B : PO, distance A B = 0 <-> A = B.
+Proof.
 unfold distance in |- *; intros; red in |- *.
 split; [ idtac | try assumption ].
 intros H; try assumption.
@@ -51,11 +54,13 @@ try exact sqrt_0.
 Qed.
  
 Lemma distance_refl1 : forall A B : PO, distance A B = 0 :>R -> A = B :>PO.
+Proof.
 intros.
 elim (distance_refl A B); auto.
 Qed.
  
 Lemma distance_refl2 : forall A B : PO, A = B :>PO -> distance A B = 0 :>R.
+Proof.
 intros.
 elim (distance_refl A B); auto.
 Qed.
@@ -66,6 +71,7 @@ Lemma caract_representant_unitaire :
  A <> B ->
  vec A C = representant_unitaire (vec A B) ->
  vec A C = mult_PP (/ distance A B) (vec A B).
+Proof.
 unfold distance in |- *; intros.
 cut
  (alignes A B C /\
@@ -99,6 +105,7 @@ Qed.
 Lemma distance_vecteur :
  forall A B : PO,
  A <> B -> vec A B = mult_PP (distance A B) (representant_unitaire (vec A B)).
+Proof.
 unfold distance in |- *; intros.
 elim existence_representant_unitaire with (A := A) (B := B);
  [ intros C H0; try clear existence_unitaire; try exact H0 | auto ].
@@ -111,6 +118,7 @@ auto with *.
 Qed.
  
 Lemma dist_non_nulle : forall A B : PO, distance A B <> 0 -> A <> B.
+Proof.
 unfold distance in |- *; red in |- *; intros.
 apply H.
 rewrite H0.
@@ -123,6 +131,7 @@ Qed.
 #[export] Hint Resolve distance_pos dist_non_nulle: geo.
  
 Lemma distincts_dist_non_nulle : forall A B : PO, A <> B -> distance A B <> 0.
+Proof.
 unfold distance in |- *; intros; red in |- *; intros.
 apply H.
 apply distance_nulle.
@@ -133,12 +142,14 @@ Qed.
  
 Lemma isometrie_distinct :
  forall A B A' B' : PO, A <> B -> distance A B = distance A' B' -> A' <> B'.
+Proof.
 intros.
 apply dist_non_nulle; rewrite <- H0; auto with geo.
 Qed.
  
 Lemma carre_scalaire_distance :
  forall A B : PO, scalaire (vec A B) (vec A B) = distance A B * distance A B.
+Proof.
 unfold distance in |- *; intros.
 rewrite def_sqrt; auto with geo.
 Qed.
@@ -147,6 +158,7 @@ Lemma carre_egalite_distance :
  forall A B C D : PO,
  distance A B * distance A B = distance C D * distance C D ->
  distance A B = distance C D.
+Proof.
 intros.
 apply resolution; auto with geo.
 Qed.
@@ -154,6 +166,7 @@ Qed.
 Lemma distance_carre :
  forall A B C D : PO,
  Rsqr (distance A B) = Rsqr (distance C D) -> distance A B = distance C D.
+Proof.
 unfold Rsqr in |- *; intros.
 apply carre_egalite_distance; auto with geo.
 Qed.
@@ -163,12 +176,14 @@ Lemma carre_scalaire_egalite_distance :
  forall A B C D : PO,
  scalaire (vec A B) (vec A B) = scalaire (vec C D) (vec C D) ->
  distance A B = distance C D.
+Proof.
 intros.
 apply carre_egalite_distance.
 repeat rewrite <- carre_scalaire_distance; auto with geo.
 Qed.
  
 Lemma unitaire_distincts2 : forall A B : PO, distance A B = 1 -> A <> B.
+Proof.
 intros.
 apply dist_non_nulle.
 rewrite H.
@@ -179,6 +194,7 @@ Qed.
 Lemma distance_1_representant :
  forall A B : PO,
  distance A B = 1 -> vec A B = representant_unitaire (vec A B).
+Proof.
 intros.
 apply def_representant_unitaire; auto with geo.
 rewrite carre_scalaire_distance; rewrite H; ring.
@@ -186,6 +202,7 @@ Qed.
  
 Lemma distance_1_carre_scalaire :
  forall A B : PO, distance A B = 1 -> scalaire (vec A B) (vec A B) = 1.
+Proof.
 intros.
 rewrite carre_scalaire_distance.
 rewrite H; ring.
@@ -193,6 +210,7 @@ Qed.
  
 Lemma carre_scalaire_1_distance :
  forall A B : PO, scalaire (vec A B) (vec A B) = 1 -> distance A B = 1.
+Proof.
 intros.
 unfold distance in |- *.
 rewrite H.
@@ -203,6 +221,7 @@ Qed.
  
 Lemma milieu_distance :
  forall A B I : PO, I = milieu A B -> distance I A = distance I B.
+Proof.
 intros.
 apply carre_scalaire_egalite_distance.
 rewrite <- (milieu_vecteur (A:=A) (B:=B) (M:=I)); auto with geo.
@@ -213,6 +232,7 @@ Qed.
  
 Lemma egalite_vecteur_distance :
  forall A B C D : PO, vec A B = vec C D -> distance A B = distance C D :>R.
+Proof.
 intros.
 apply carre_scalaire_egalite_distance.
 rewrite H; auto.
@@ -221,6 +241,7 @@ Qed.
 Lemma colinearite_distance :
  forall (k : R) (A B C D : PO),
  vec C D = mult_PP k (vec A B) :>PP -> distance C D = Rabs k * distance A B.
+Proof.
 unfold distance in |- *; intros.
 rewrite H; Simplscal.
 replace (k * k) with (Rsqr k); auto with real.

@@ -24,6 +24,7 @@ Definition isocele_rectangle_direct (A B C : PO) :=
  
 Lemma iso_rec_dir_distinct :
  forall A B C : PO, isocele_rectangle_direct A B C -> A <> C.
+Proof.
 unfold isocele_rectangle_direct, isocele in |- *; intros.
 elim H;
  [ intros H0 H1; elim H1; [ intros H2 H3; try clear H1 H; try exact H2 ] ].
@@ -38,6 +39,7 @@ Lemma iso_rec_dir_complexe :
  c = affixe C ->
  isocele_rectangle_direct A B C ->
  Cplus c (Copp a) = Cmult i (Cplus b (Copp a)).
+Proof.
 unfold isocele_rectangle_direct, isocele in |- *; intros.
 elim H2;
  [ intros H3 H4; elim H4; [ intros H5 H6; try clear H4 H2; try exact H6 ] ].
@@ -54,6 +56,7 @@ Lemma complexe_iso_rec_dir :
  A <> B ->
  Cplus c (Copp a) = Cmult i (Cplus b (Copp a)) ->
  isocele_rectangle_direct A B C.
+Proof.
 unfold isocele_rectangle_direct, isocele in |- *; intros.
 cut (distance A B = distance A C); intros.
 cut (A <> C); intros.
@@ -92,6 +95,7 @@ Lemma deux_iso_rec_dir_complexe :
  isocele_rectangle_direct A B C ->
  isocele_rectangle_direct A D E ->
  Cplus e (Copp c) = Cmult i (Cplus d (Copp b)).
+Proof.
 intros a b c d e A B C D E aA bB cC dD eE ABC ADE.
 generalize (iso_rec_dir_complexe aA bB cC ABC);
  intros H11.
@@ -114,6 +118,7 @@ Theorem deux_isocele_rectangle_direct :
  isocele_rectangle_direct A D E ->
  distance B D = distance C E /\
  cons_AV (vec B D) (vec C E) = image_angle pisurdeux.
+Proof.
 intros.
 elim existence_affixe_point with (M := A); intros a; intros.
 elim existence_affixe_point with (M := B); intros b; intros.

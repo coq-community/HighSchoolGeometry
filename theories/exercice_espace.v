@@ -23,6 +23,7 @@ Definition tetraedre (A B C D : PO) := ~ coplanaires A B C D.
  
 Lemma tetraedre_non_alignes :
  forall A B C D : PO, tetraedre A B C D -> ~ alignes A B C.
+Proof.
 unfold tetraedre in |- *; intros.
 elim non_coplanaires_expl with (A := A) (B := B) (C := C) (D := D);
  [ intros H0 H1; try clear non_coplanaires_expl; try exact H0 | auto ].
@@ -34,6 +35,7 @@ Lemma deux_milieux_tetraedre :
  tetraedre A B C D ->
  I = milieu D A ->
  J = milieu D B -> K = milieu C A -> L = milieu C B -> vec I J = vec K L.
+Proof.
 intros.
 cut (mult_PP 2 (vec I J) = vec A B); intros.
 cut (mult_PP 2 (vec K L) = vec A B); intros.
@@ -64,6 +66,7 @@ Definition cube (A B C D E F G H : PO) :=
 Lemma parallelepipede_parallelogramme :
  forall A B C D E F G H : PO,
  parallelepipede A B C D E F G H -> vec F G = vec A D.
+Proof.
 unfold parallelepipede in |- *; intros A B C D E F G H' H.
 elim H; intros H0 H1; elim H1; intros H2 H3; try clear H1 H; try exact H3.
 elim H0; intros H H1; try clear H0; try exact H1.
@@ -76,6 +79,7 @@ Qed.
  
 Lemma diagonales_carre :
  forall A B C D : PO, carre A B C D -> orthogonal (vec A C) (vec D B).
+Proof.
 intros.
 elim H; clear H; intros.
 apply def_orthogonal2.
@@ -96,6 +100,7 @@ Qed.
 Lemma centre_gravite_coplanaire :
  forall A B C : PO,
  ~ alignes A B C -> coplanaires A B C (centre_gravite A B C).
+Proof.
 unfold centre_gravite, milieu, coplanaires in |- *; intros.
 right; try assumption.
 exists (/ 3); exists (/ 3).
@@ -125,6 +130,7 @@ Lemma exercice :
  ~ alignes E B G ->
  parallelepipede A B C D E F G H ->
  I = centre_gravite E B G -> coplanaires E B G I /\ alignes F D I.
+Proof.
 intros A B C D E F G H I H20 H0 H1 H51; try assumption.
 rewrite H51.
 split; [ auto with geo | idtac ].
@@ -183,6 +189,7 @@ Lemma exercice_cube :
  cube A B C D E F G H ->
  I = centre_gravite E B G ->
  alignes F D I /\ orthogonaux (droite F D) (plan E B G).
+Proof.
 intros A B C D E F G H I H0 H1 H2 H51; try assumption.
 elim H2; intros; clear H2.
 elim H3; intros; clear H3.
@@ -305,6 +312,7 @@ Lemma equilateral_non_alignes :
  scalaire (vec A B) (vec A B) = scalaire (vec A C) (vec A C) ->
  scalaire (vec A B) (vec A B) = scalaire (vec B C) (vec B C) ->
  ~ alignes A B C.
+Proof.
 intros A B C H H0 H1; red in |- *; intros H2; try exact H2.
 halignes H2 k.
 rewrite H3 in H0.
@@ -364,6 +372,7 @@ Theorem the_cube :
  cube A B C D E F G H ->
  I = centre_gravite E B G ->
  alignes F D I /\ orthogonaux (droite F D) (plan E B G).
+Proof.
 intros A B C D E F G H I H0 H51; try assumption.
 elim H0; intros.
 elim H1; intros.

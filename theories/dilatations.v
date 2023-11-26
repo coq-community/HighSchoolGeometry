@@ -23,6 +23,7 @@ Definition translation (I J A : PO) :=
  
 Lemma translation_vecteur :
  forall I J A A' : PO, A' = translation I J A -> vec I J = vec A A'.
+Proof.
 unfold vec, translation in |- *; intros.
 rewrite H.
 pattern 1 at 2 in |- *.
@@ -35,6 +36,7 @@ Qed.
  
 Lemma translation_identite :
  forall I A A' : PO, A' = translation I I A :>PO -> A = A'.
+Proof.
 intros.
 apply vecteur_nul_conf; auto.
 rewrite <- (translation_vecteur (I:=I) (J:=I) (A:=A) (A':=A')); auto.
@@ -61,6 +63,7 @@ RingPP.
 Qed.
  
 Lemma translation_trivial : forall I J : PO, J = translation I J I.
+Proof.
 intros.
 apply rec_translation_vecteur; auto.
 Qed.
@@ -70,6 +73,7 @@ Lemma translation_bipoint :
  forall I J A A' B B' : PO,
  A' = translation I J A :>PO ->
  B' = translation I J B :>PO -> vec A B = vec A' B'.
+Proof.
 intros I J A A' B B' H H0; try assumption.
 apply egalite_vecteur.
 rewrite <- (translation_vecteur (I:=I) (J:=J) (A:=A) (A':=A')); auto.
@@ -80,6 +84,7 @@ Lemma translation_trans :
  forall I J A A' B B' : PO,
  A' = translation I J A :>PO ->
  B' = translation I J B :>PO -> B' = translation A A' B :>PO.
+Proof.
 intros I J A A' B B' H H0; try assumption.
 apply rec_translation_vecteur.
 rewrite <- (translation_vecteur (I:=I) (J:=J) (A:=A) (A':=A')); auto.
@@ -89,6 +94,7 @@ Qed.
 Lemma image_translation_distincts :
  forall I J A A' B B' : PO,
  A <> B -> A' = translation I J A :>PO -> B' = translation I J B -> A' <> B'.
+Proof.
 intros.
 apply distinct_egalite_vecteur with (A := A) (B := B); auto.
 symmetry  in |- *; apply translation_bipoint with (I := I) (J := J); auto.
@@ -99,6 +105,7 @@ Lemma translation_droite :
  A <> B ->
  A' = translation I J A :>PO ->
  B' = translation I J B :>PO -> paralleles (droite A' B') (droite A B).
+Proof.
 intros.
 apply colineaires_paralleles with 1; auto.
 apply image_translation_distincts with (2 := H0) (3 := H1); auto.
@@ -112,6 +119,7 @@ Lemma translation_milieu :
  A' = translation I J A :>PO ->
  B' = translation I J B ->
  M = milieu A B -> N = milieu A' B' -> N = translation I J M.
+Proof.
 intros I J A A' B B' M N H H0 H1 H2; try assumption.
 apply rec_translation_vecteur; auto.
 replace (vec M N) with (add_PP (cons (-1) M) (cons 1 N)); auto.
@@ -139,6 +147,7 @@ Lemma translation_alignement :
  A' = translation I J A :>PO ->
  B' = translation I J B :>PO ->
  C' = translation I J C -> alignes A B C -> alignes A' B' C'.
+Proof.
 intros I J A A' B B' C C' H H0 H1 H2; try assumption.
 discrimine A B.
 assert (A' = B'); auto with geo.
@@ -157,6 +166,7 @@ Qed.
 Lemma translation_inverse :
  forall I J A A' : PO,
  A' = translation I J A :>PO -> A = translation J I A' :>PO.
+Proof.
 intros.
 apply rec_translation_vecteur; auto.
 VReplace (vec J I) (mult_PP (-1) (vec I J)).
@@ -177,6 +187,7 @@ Lemma translation_intersection :
  D' = translation I J D :>PO ->
  K' = translation I J K :>PO ->
  K' = pt_intersection (droite A' B') (droite C' D').
+Proof.
 intros.
 elim def_pt_intersection2 with (A := A) (B := B) (C := C) (D := D) (I := K);
  [ try clear def_pt_intersection2; intros | auto | auto | auto | auto ].
@@ -211,6 +222,7 @@ Lemma translation_paralleles :
  B' = translation I J B ->
  C' = translation I J C :>PO ->
  D' = translation I J D :>PO -> paralleles (droite A' B') (droite C' D').
+Proof.
 intros.
 elim paralleles_vecteur with (A := A) (B := B) (C := C) (D := D);
  [ intros k H6; try clear paralleles_vecteur; try exact H6
@@ -233,6 +245,7 @@ Definition homothetie (k : R) (I A : PO) :=
   barycentre (cons k A) (cons (1 + - k) I).
  
 Lemma homothetie_identite : forall I A : PO, A = homothetie 1 I A.
+Proof.
 unfold homothetie, vec in |- *; intros.
 replace (1 + -(1)) with 0; try ring; auto.
 rewrite barycentre_zero; auto with *.
@@ -241,6 +254,7 @@ Qed.
 Lemma vecteur_homothetie :
  forall (k : R) (I A A' : PO),
  vec I A' = mult_PP k (vec I A) :>PP -> A' = homothetie k I A :>PO.
+Proof.
 unfold vec, homothetie in |- *; intros.
 elim
  cons_inj
@@ -257,6 +271,7 @@ replace (k + (1 + - k)) with 1; try ring; try discrR.
 Qed.
  
 Lemma homothetie_centre : forall (I : PO) (k : R), I = homothetie k I I.
+Proof.
 intros.
 apply vecteur_homothetie.
 Ringvec.
@@ -266,6 +281,7 @@ Qed.
 Lemma homothetie_vecteur :
  forall (k : R) (I A A' : PO),
  A' = homothetie k I A -> vec I A' = mult_PP k (vec I A).
+Proof.
 unfold homothetie, vec in |- *; intros.
 rewrite H.
 pattern 1 at 1 in |- *.
@@ -280,6 +296,7 @@ Definition symetrie (I A : PO) := homothetie (-1) I A.
  
 Lemma milieu_symetrie :
  forall A B I : PO, I = milieu A B :>PO -> B = symetrie I A :>PO.
+Proof.
 unfold symetrie in |- *; intros.
 apply vecteur_homothetie.
 rewrite <- (milieu_vecteur (A:=A) (B:=B) (M:=I)); auto.
@@ -288,6 +305,7 @@ Qed.
  
 Lemma symetrie_milieu :
  forall A B I : PO, B = symetrie I A :>PO -> I = milieu A B :>PO.
+Proof.
 unfold symetrie in |- *; intros.
 cut (vec I B = mult_PP (-1) (vec I A)); intros.
 2: apply homothetie_vecteur; auto.
@@ -301,6 +319,7 @@ Qed.
  
 Lemma symetrie_involution :
  forall A B I : PO, B = symetrie I A :>PO -> A = symetrie I B :>PO.
+Proof.
 intros.
 apply milieu_symetrie.
 apply milieu_permute.
@@ -309,6 +328,7 @@ Qed.
  
 Lemma existence_homothetique :
  forall (k : R) (I A : PO), exists A' : PO, A' = homothetie k I A.
+Proof.
 intros.
 elim
  existence_representant_mult_vecteur with (A := I) (B := I) (C := A) (k := k);
@@ -318,6 +338,7 @@ apply vecteur_homothetie; auto.
 Qed.
  
 Lemma existence_symetrique : forall A B : PO, exists C : PO, C = symetrie A B.
+Proof.
 unfold symetrie in |- *; intros.
 apply (existence_homothetique (-1) A B).
 Qed.
@@ -328,6 +349,7 @@ Ltac symetrique O A B :=
  
 Lemma existence_symetrique_milieu:
  forall (A I : PO),  (exists B : PO , I = milieu A B ).
+Proof.
 intros.
 elim (existence_symetrique I A);
  [intros B H; (try clear existence_symetrique); (try exact H)].
@@ -337,6 +359,7 @@ Qed.
  
 Lemma unicite_symetrique:
  forall (A B P : PO), milieu A P = milieu B P ->  A = B.
+Proof.
 intros.
 elim (existence_milieu B P); [intros I H1; (try clear existence_milieu)].
 assert (B = symetrie I P).
@@ -351,6 +374,7 @@ Lemma homothetie_bipoint :
  forall (k : R) (I A B A' B' : PO),
  A' = homothetie k I A ->
  B' = homothetie k I B -> vec A' B' = mult_PP k (vec A B).
+Proof.
 unfold homothetie, vec in |- *; intros.
 rewrite H.
 rewrite H0.
@@ -400,6 +424,7 @@ Lemma image_homothetie_distincts :
  forall (k : R) (I A A' B B' : PO),
  k <> 0 :>R ->
  A <> B -> A' = homothetie k I A :>PO -> B' = homothetie k I B -> A' <> B'.
+Proof.
 intros.
 cut (vec A' B' <> zero); intros.
 red in |- *; intros; apply H3; auto.
@@ -419,6 +444,7 @@ Lemma homothetie_droite :
  A <> B ->
  A' = homothetie k I A :>PO ->
  B' = homothetie k I B :>PO -> paralleles (droite A' B') (droite A B).
+Proof.
 intros.
 apply colineaires_paralleles with k; auto.
 apply image_homothetie_distincts with (3 := H1) (4 := H2); auto.
@@ -428,6 +454,7 @@ Qed.
 Lemma homothetie_inverse :
  forall (k : R) (I A A' : PO),
  k <> 0 :>R -> A' = homothetie k I A :>PO -> A = homothetie (/ k) I A' :>PO.
+Proof.
 intros.
 apply vecteur_homothetie.
 rewrite (homothetie_vecteur (k:=k) (I:=I) (A:=A) (A':=A')); auto.
@@ -440,6 +467,7 @@ Lemma homothetie_alignement :
  A' = homothetie k I A :>PO ->
  B' = homothetie k I B :>PO ->
  C' = homothetie k I C -> alignes A B C -> alignes A' B' C'.
+Proof.
 intros k I A B A' B' C C' H H0 H1 H2; try assumption.
 discrimine A B.
 assert (A' = B'); auto with geo.
@@ -464,6 +492,7 @@ Lemma homothetie_paralleles :
  B' = homothetie k I B ->
  C' = homothetie k I C :>PO ->
  D' = homothetie k I D :>PO -> paralleles (droite A' B') (droite C' D').
+Proof.
 intros.
 elim paralleles_vecteur with (A := A) (B := B) (C := C) (D := D);
  [ intros x H7; try clear paralleles_vecteur | auto | auto | auto ].
@@ -494,6 +523,7 @@ Lemma homothetie_intersection :
  D' = homothetie k I D :>PO ->
  K' = homothetie k I K :>PO ->
  K' = pt_intersection (droite A' B') (droite C' D') :>PO.
+Proof.
 intros.
 elim def_pt_intersection2 with (A := A) (B := B) (C := C) (D := D) (I := K);
  [ try clear def_pt_intersection2; intros | auto | auto | auto | auto ].
@@ -528,6 +558,7 @@ Lemma paralleles_dilatations :
     (exists J : PO, A' = translation I J A /\ B' = translation I J B)) \/
  (exists k : R,
     (exists I : PO, A' = homothetie k I A /\ B' = homothetie k I B)).
+Proof.
 intros.
 elim paralleles_vecteur with (A := A') (B := B') (C := A) (D := B);
  [ intros k H2; try clear paralleles_vecteur; try exact H2

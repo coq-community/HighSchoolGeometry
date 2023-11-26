@@ -26,6 +26,7 @@ Definition alignes1 (A B C : PO) :=
  
 Lemma colineaire_alignes1 :
  forall (k : R) (A B C : PO), vec A C = mult_PP k (vec A B) -> alignes1 A B C.
+Proof.
 unfold alignes1, vec in |- *; intros.
 exists (1 + - k); auto.
 RingPP2 H.
@@ -34,6 +35,7 @@ Qed.
  
 Lemma alignes1_colineaire :
  forall A B C : PO, alignes1 A B C -> col_vec A B A C.
+Proof.
 unfold alignes1, vec, col_vec in |- *; intros.
 elim H; intros k H0; try clear H; try exact H0.
 exists (1 + - k); auto.
@@ -42,6 +44,7 @@ RingPP.
 Qed.
  
 Lemma cas_degenere_alignes1 : forall A B C : PO, A <> C -> ~ alignes1 A A C.
+Proof.
 unfold alignes1 in |- *; intros.
 unfold not in |- *; intros.
 elim H0; intros k H1; try clear H0; try exact H1.
@@ -56,6 +59,7 @@ Qed.
 Definition alignes (A B C : PO) := A = B \/ alignes1 A B C.
  
 Lemma alignes_trivial : forall A B : PO, alignes A B A.
+Proof.
 unfold alignes, alignes1 in |- *; intros.
 right; try assumption.
 exists 1.
@@ -63,6 +67,7 @@ RingPP.
 Qed.
  
 Lemma alignes_trivial2 : forall A B : PO, alignes A B B.
+Proof.
 unfold alignes, alignes1 in |- *; intros.
 right; try assumption.
 exists 0.
@@ -70,13 +75,13 @@ RingPP.
 Qed.
  
 Lemma alignes_trivial3 : forall A B : PO, alignes A A B.
+Proof.
 unfold alignes, alignes1 in |- *; intros.
 tauto.
 Qed.
 #[export] Hint Resolve alignes_trivial alignes_trivial2 alignes_trivial3: geo.
  
-Lemma existence_point_droite : forall A B : PO, 
-exists C, alignes A B C.
+Lemma existence_point_droite : forall A B : PO, exists C, alignes A B C.
 Proof.
 intros.
 exists A.
@@ -85,11 +90,13 @@ Qed.
 
 Lemma non_alignes_expl :
  forall A B C : PO, ~ alignes A B C -> A <> B /\ ~ alignes1 A B C.
+Proof.
 unfold alignes in |- *; intros.
 intuition.
 Qed.
  
 Lemma non_alignes_distincts : forall A B C : PO, ~ alignes A B C -> A <> C.
+Proof.
 unfold not, alignes, alignes1 in |- *; intros.
 apply H.
 rewrite H0.
@@ -98,6 +105,7 @@ RingPP.
 Qed.
  
 Lemma non_alignes_distincts2 : forall A B C : PO, ~ alignes A B C -> B <> C.
+Proof.
 unfold not, alignes, alignes1 in |- *; intros.
 apply H.
 rewrite H0.
@@ -105,6 +113,7 @@ right; exists 0; RingPP.
 Qed.
  
 Lemma non_alignes_distincts3 : forall A B C : PO, ~ alignes A B C -> A <> B.
+Proof.
 unfold alignes in |- *; intros.
 intuition.
 Qed.
@@ -113,6 +122,7 @@ Qed.
  
 Lemma colineaire_alignes :
  forall (k : R) (A B C : PO), vec A C = mult_PP k (vec A B) -> alignes A B C.
+Proof.
 unfold alignes in |- *; intros.
 right; try assumption.
 apply colineaire_alignes1 with k; auto.
@@ -128,7 +138,9 @@ Ltac halignes H k :=
    [ tauto || (try rewrite H; auto with geo)
    | elim (alignes1_colineaire H); intros k; intros ].
  
-Lemma permute_alignes : forall A B C : PO, alignes A B C -> alignes B A C.
+Lemma permute_alignes :
+ forall A B C : PO, alignes A B C -> alignes B A C.
+Proof.
 intros.
 halignes H x.
 apply colineaire_alignes with (1 + - x).
@@ -137,7 +149,9 @@ rewrite H0; Ringvec.
 Qed.
 #[export] Hint Immediate permute_alignes: geo.
  
-Lemma alignes_ordre_cycle : forall A B C : PO, alignes A B C -> alignes B C A.
+Lemma alignes_ordre_cycle :
+ forall A B C : PO, alignes A B C -> alignes B C A.
+Proof.
 intros.
 halignes H x.
 discrimine B C; auto with geo.
@@ -151,6 +165,7 @@ Qed.
  
 Lemma alignes_ordre_permute :
  forall A B C : PO, alignes A B C -> alignes A C B.
+Proof.
 intros.
 halignes H x.
 discrimine A C; auto with geo.
@@ -160,6 +175,7 @@ Qed.
  
 Lemma alignes_ordre_cycle2 :
  forall A B C : PO, alignes A B C -> alignes C A B.
+Proof.
 intros.
 apply permute_alignes; auto with geo.
 Qed.
@@ -167,6 +183,7 @@ Qed.
  
 Lemma alignes_ordre_cycle3 :
  forall A B C : PO, alignes A B C -> alignes C B A.
+Proof.
 intros.
 apply permute_alignes; auto with geo.
 Qed.
@@ -174,6 +191,7 @@ Qed.
  
 Lemma non_alignes_permute :
  forall A B C : PO, ~ alignes A B C -> ~ alignes B A C.
+Proof.
 intros.
 contrapose H0.
 apply permute_alignes; auto.
@@ -182,6 +200,7 @@ Qed.
  
 Lemma non_alignes_ordre_permute :
  forall A B C : PO, A <> B -> ~ alignes A B C -> ~ alignes A C B.
+Proof.
 intros.
 contrapose H0.
 apply alignes_ordre_permute; auto.
@@ -190,6 +209,7 @@ Qed.
  
 Lemma non_alignes_ordre_cycle :
  forall A B C : PO, ~ alignes B C A -> ~ alignes A B C.
+Proof.
 intros.
 contrapose H.
 apply alignes_ordre_cycle; auto.
@@ -198,6 +218,7 @@ Qed.
  
 Lemma non_alignes_ordre_cycle2 :
  forall A B C : PO, ~ alignes C A B -> ~ alignes A B C.
+Proof.
 intros.
 contrapose H.
 apply alignes_ordre_cycle2; auto.
@@ -206,6 +227,7 @@ Qed.
  
 Lemma non_alignes_ordre_cycle3 :
  forall A B C : PO, ~ alignes C B A -> ~ alignes A B C.
+Proof.
 intros.
 contrapose H.
 apply alignes_ordre_cycle3; auto.
@@ -215,6 +237,7 @@ Qed.
 Lemma alignes_trans :
  forall A B C D : PO,
  A <> B :>PO -> alignes A B C -> alignes A B D -> alignes A C D.
+Proof.
 intros.
 assert (alignes A C B); auto with geo.
 halignes H2 k.
@@ -227,6 +250,7 @@ Qed.
 Lemma alignes_trans2 :
  forall A B C D : PO,
  A <> B -> alignes A B C -> alignes A B D -> alignes B C D.
+Proof.
 intros.
 assert (alignes B A D); auto with geo.
 halignes H2 k.
@@ -260,6 +284,7 @@ Ltac deroule_triangle A B C :=
 Lemma alignes_non_alignes_trans :
  forall A B C D : PO,
  A <> D -> ~ alignes A B C -> alignes A B D -> ~ alignes A D C.
+Proof.
 intros.
 contrapose H0.
 eauto with geo.
@@ -269,6 +294,7 @@ Qed.
 Lemma alignes_non_alignes_trans2 :
  forall A B C D : PO,
  A <> D -> ~ alignes A B C -> alignes A B D -> ~ alignes A C D.
+Proof.
 intros.
 eauto with geo.
 Qed.
@@ -276,6 +302,7 @@ Qed.
 Lemma alignes_non_alignes_trans3 :
  forall A B C D : PO,
  A <> D -> ~ alignes A B C -> alignes A C D -> ~ alignes A B D.
+Proof.
 intros.
 contrapose H0.
 eauto with geo.
@@ -285,6 +312,7 @@ Qed.
 Lemma alignes_non_alignes_trans4 :
  forall A B C D : PO,
  A <> D -> ~ alignes A B C -> alignes A C D -> ~ alignes A D B.
+Proof.
 intros.
 eauto with geo.
 Qed.
@@ -292,6 +320,7 @@ Qed.
 Lemma add_PP_alignes :
  forall (a b : R) (A B C : PO),
  a + b <> 0 -> add_PP (cons a A) (cons b B) = cons (a + b) C -> alignes A B C.
+Proof.
 unfold alignes, alignes1, vec in |- *; intros.
 right; try assumption.
 exists (1 + - (/ (a + b) * b)).
@@ -304,26 +333,31 @@ Qed.
  
 Lemma triangle_ordre_cycle :
  forall A B C : PO, triangle A B C -> triangle B C A.
+Proof.
 unfold triangle in |- *; intros; auto with geo.
 Qed.
  
 Lemma triangle_ordre_permute :
  forall A B C : PO, triangle A B C -> triangle A C B.
+Proof.
 unfold triangle in |- *; intros; auto with geo.
 Qed.
 #[export] Hint Resolve triangle_ordre_cycle triangle_ordre_permute: geo.
  
 Lemma triangle_ordre_cycle2 :
  forall A B C : PO, triangle A B C -> triangle C A B.
+Proof.
 auto with geo.
 Qed.
  
 Lemma triangle_ordre_cycle3 :
  forall A B C : PO, triangle A B C -> triangle C B A.
+Proof.
 auto with geo.
 Qed.
  
 Lemma permute_ordre_triangle :
  forall A B C : PO, triangle A B C -> triangle B A C.
+Proof.
 auto with geo.
 Qed.

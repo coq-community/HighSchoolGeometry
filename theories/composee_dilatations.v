@@ -22,6 +22,7 @@ Lemma compo_transl :
  forall A A' A1 I J K L : PO,
  A1 = translation I J A ->
  A' = translation K L A1 -> vec A A' = add_PP (vec I J) (vec K L).
+Proof.
 intros A A' A1 I J K L H H0; try assumption.
 cut (vec K L = vec A1 A'); intros.
 cut (vec I J = vec A A1); intros.
@@ -37,6 +38,7 @@ Lemma composition_translation :
  ex
    (fun M : PO =>
     vec I M = add_PP (vec I J) (vec K L) :>PP /\ A' = translation I M A).
+Proof.
 intros A A' A1 I J K L H H0; try assumption.
 elim
  existence_representant_som_vecteur with (A := I) (B := J) (C := K) (D := L);
@@ -53,6 +55,7 @@ Lemma compo_homothetie_I :
  forall (k k' : R) (I A A' A1 : PO),
  A1 = homothetie k I A :>PO ->
  A' = homothetie k' I A1 :>PO -> A' = homothetie (k' * k) I A.
+Proof.
 intros k k' I A A' A1 H H0; try assumption.
 cut (vec I A' = mult_PP (k' * k) (vec I A)); intros.
 apply vecteur_homothetie; auto.
@@ -68,6 +71,7 @@ Lemma compo_homothetie_IJ :
  cons 1 A' =
  add_PP (add_PP (cons (k' * k) A) (cons (k' * (1 + - k)) I))
    (cons (1 + - k') J) :>PP.
+Proof.
 unfold vec, homothetie in |- *; intros.
 rewrite H0; rewrite H.
 rewrite (distrib_mult_cons k (1 + - k) k' A I).
@@ -87,6 +91,7 @@ Lemma compo_homothetie_IJ_1 :
  A1 = homothetie k I A :>PO ->
  A' = homothetie k' J A1 :>PO ->
  vec I K = mult_PP (1 + - k') (vec I J) :>PP -> A' = translation I K A.
+Proof.
 intros.
 cut (vec A A' = mult_PP (1 + - k') (vec I J)); intros.
 apply rec_translation_vecteur; auto.
@@ -111,6 +116,7 @@ Lemma compo_homothetie_IJ_1_exists :
    (forall A A' A1 : PO,
     A1 = homothetie k I A ->
     A' = homothetie (/ k) J A1 :>PO -> A' = translation I K A).
+Proof.
 intros.
 elim
  existence_representant_mult_vecteur
@@ -127,6 +133,7 @@ Lemma compo_homothetie_IJ_non1 :
  A' = homothetie k' J A1 :>PO ->
  K = barycentre (cons (k' * (1 + - k)) I) (cons (1 + - k') J) :>PO ->
  A' = homothetie (k' * k) K A.
+Proof.
 intros; unfold homothetie in |- *.
 cut (A' = barycentre (cons (k' * k) A) (cons (1 + - (k' * k)) K)); intros.
 rewrite H3; auto.
@@ -157,6 +164,7 @@ Lemma compo_homothetie_IJ_non1_exists :
    (forall A A' A1 : PO,
     A1 = homothetie k I A ->
     A' = homothetie k' J A1 :>PO -> A' = homothetie (k' * k) K A :>PO).
+Proof.
 intros.
 exists (barycentre (cons (k' * (1 + - k)) I) (cons (1 + - k') J)); intros.
 apply compo_homothetie_IJ_non1 with (2 := H0) (3 := H1); auto.
@@ -172,6 +180,7 @@ Lemma composee_homothetie_translation :
  barycentre (cons 1 A')
    (cons (-1 + (1 + - k)) (barycentre (cons (-1) A) (cons (1 + - k) I))) :>PO ->
  B' = homothetie k J B.
+Proof.
 unfold translation, homothetie in |- *;
  intros k A A' B B' B1 I J H H0 H1 H2 H30.
 elim
@@ -211,6 +220,7 @@ Lemma composee_homothetie_translation_exists :
    (forall B B' B1 : PO,
     B1 = homothetie k I B :>PO ->
     B' = translation A A' B1 :>PO -> B' = homothetie k J B :>PO).
+Proof.
 intros.
 exists
  (barycentre (cons 1 A')
@@ -270,6 +280,7 @@ Lemma composee_translation_homothetie_exists :
    (forall B B' B1 : PO,
     B1 = translation A A' B :>PO ->
     B' = homothetie k I B1 :>PO -> B' = homothetie k J B :>PO).
+Proof.
 intros.
 exists
  (barycentre (cons (- k) A)

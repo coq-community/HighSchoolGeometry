@@ -36,15 +36,18 @@ end.
 Lemma trianglesSD_angles_egaux :
 forall A B C A' B' C' :PO,
 trianglesSD A B C A' B' C' -> cons_AV(vec A B) (vec A C) = cons_AV (vec A' B') (vec A' C').
+Proof.
 intros A B C A' B' C' H.
 deroule_triangles_semblables.
 rewrite <- angle_triangle;try auto.
 rewrite -> H2;rewrite -> H5.
 apply angle_triangle;auto .
 Qed.
+
 Lemma trianglesSI_angles_egaux:
 forall A B C A' B' C' :PO,
 trianglesSI A B C A' B' C'  -> cons_AV (vec A B)(vec A C) = cons_AV (vec A' C') (vec A' B').
+Proof.
 intros A B C A' B' C' H.
 deroule_triangles_semblables.
 rewrite <- angle_triangle;try auto.
@@ -73,13 +76,16 @@ end.
 Lemma trianglesSD_ordre_cycle :
 forall A B C A' B' C' :PO,
 trianglesSD A B C A' B' C' -> trianglesSD  B C A B' C' A'.
+Proof.
 intros.
 expand_triangles_semblables.
 repeat split; auto with geo.
 Qed.
+
 Lemma trianglesSI_ordre_cycle :
 forall A B C A' B' C' :PO,
 trianglesSI A B C A' B' C' -> trianglesSI  B C A B' C' A'.
+Proof.
 intros.
 expand_triangles_semblables.
 repeat split; auto with geo.
@@ -87,7 +93,8 @@ Qed.
 
 Lemma trianglesSD_ordre_permute :
 forall A B C A' B' C' :PO,
-trianglesSD A B C A' B' C' -> trianglesSD  A C B A' C' B' .
+trianglesSD A B C A' B' C' -> trianglesSD  A C B A' C' B'.
+Proof.
 intros.
 expand_triangles_semblables.
 repeat split; auto with geo.
@@ -95,7 +102,8 @@ Qed.
 
 Lemma trianglesSI_ordre_permute :
 forall A B C A' B' C' :PO,
-trianglesSI A B C A' B' C' -> trianglesSI  A C B A' C' B' .
+trianglesSI A B C A' B' C' -> trianglesSI  A C B A' C' B'.
+Proof.
 intros.
 expand_triangles_semblables.
 repeat split; auto with geo.
@@ -111,37 +119,43 @@ Qed.
 
 Lemma trianglesSD_ordre_cycle2 :
 forall A B C A' B' C' :PO,
-trianglesSD A B C A' B' C' -> trianglesSD  C A B C' A' B' .
+trianglesSD A B C A' B' C' -> trianglesSD  C A B C' A' B'.
+Proof.
 auto with geo.
 Qed.
 
 Lemma trianglesSD_ordre_permute2 :
 forall A B C A' B' C' :PO,
-trianglesSD A B C A' B' C' -> trianglesSD  B A C B' A' C' .
+trianglesSD A B C A' B' C' -> trianglesSD  B A C B' A' C'.
+Proof.
 auto with geo.
 Qed.
 
 Lemma trianglesSD_ordre_permute3 :
 forall A B C A' B' C' :PO,
 trianglesSD A B C A' B' C' -> trianglesSD  C B A C' B' A'.
+Proof.
 auto with geo.
 Qed.
 
 Lemma trianglesSI_ordre_cycle2 :
 forall A B C A' B' C' :PO,
-trianglesSI A B C A' B' C' -> trianglesSI  C A B C' A' B' .
+trianglesSI A B C A' B' C' -> trianglesSI  C A B C' A' B'.
+Proof.
 auto with geo.
 Qed.
 
 Lemma trianglesSI_ordre_permute2 :
 forall A B C A' B' C' :PO,
-trianglesSI A B C A' B' C' -> trianglesSI  B A C B' A' C' .
+trianglesSI A B C A' B' C' -> trianglesSI  B A C B' A' C'.
+Proof.
 auto with geo.
 Qed.
 
 Lemma trianglesSI_ordre_permute3 :
 forall A B C A' B' C' :PO,
 trianglesSI A B C A' B' C' -> trianglesSI  C B A C' B' A'.
+Proof.
 auto with geo.
 Qed.
 
@@ -149,6 +163,7 @@ Lemma trianglesS_trans_DD:
 forall A B C A' B' C' M N P :PO,
 trianglesSD A B C A' B' C' -> trianglesSD  A' B' C' M N P ->
 trianglesSD A B C M N P.
+Proof.
 intros A B C A' B' C' M N P H H1.
 expand_triangles_semblables ;clear H1 .
 expand_triangles_semblables ;clear H .
@@ -161,6 +176,7 @@ Lemma trianglesS_trans_DI:
 forall A B C A' B' C' M N P :PO,
 trianglesSD A B C A' B' C' -> trianglesSI  A' B' C' M N P->
 trianglesSI A B C M N P.
+Proof.
 intros A B C A' B' C' M N P H H1.
 expand_triangles_semblables ;clear H .
 expand_triangles_semblables ;clear H1 .
@@ -173,6 +189,7 @@ Lemma trianglesS_trans_II:
 forall A B C A' B' C' M N P :PO,
 trianglesSI A B C A' B' C' -> trianglesSI  A' B' C' M N P->
 trianglesSD A B C M N P.
+Proof.
 intros A B C A' B' C' M N P H H1.
 expand_triangles_semblables ;clear H1 .
 expand_triangles_semblables ;clear H .
@@ -194,6 +211,7 @@ A<>B->A<>C->
 alignes A B C ->
 (cons_AV(vec A B)(vec A C) = image_angle 0)
   \/(cons_AV(vec A B)(vec A C) = image_angle pi).
+Proof.
 intros A B C H H0 H1.
 halignes H1 k.
 elim (Rtotal_order k 0);intros.
@@ -217,6 +235,7 @@ forall (I A B A' B' :PO) ( a : R),
 A' = rotation I a A ->
 B' = rotation I a B ->
 A =B -> A' = B'.
+Proof.
 intros I A B A' B' a H H0 H1.
 rewrite ->H1 in H.
 rewrite <-H0 in H.
@@ -230,6 +249,7 @@ A' = rotation I a A ->
 B' = rotation I a B ->
 C' = rotation I a C ->
 alignes A B C -> alignes A' B' C'.
+Proof.
 intros I A B C A' B' C' a H H0 H1 H2 .
 discrimine A B .
 elim (@rotation_image_bipoint_coincide I A B A' B' a);auto with geo.
@@ -265,6 +285,7 @@ A' = rotation I a A ->
 B' = rotation I a B ->
 C' = rotation I a C ->
 trianglesSD A B C A' B' C'.
+Proof.
 intros I A B C A' B' C' a H H1 H2.
 deroule_triangle A B C.
 unfold trianglesSD.
@@ -287,17 +308,20 @@ M<>N->
 A' = reflexion M N A ->
 B' = reflexion M N B ->
 A =B -> A' = B'.
+Proof.
 intros M N A B A' B' H H0 H1 H2.
 rewrite ->H2 in H0.
 rewrite <-H1 in H0.
 assumption.
 Qed.
+
 Lemma reflexion_image_bipoint_distinct :
 forall (M N A B A' B' :PO),
 M<>N->
 A' = reflexion M N A ->
 B' = reflexion M N B ->
 A <>B -> A'<> B'.
+Proof.
 intros.
 generalize (@reflexion_isometrie M N A A' B B');
  intros H7.
@@ -311,6 +335,7 @@ A' = reflexion M N A ->
 B' = reflexion M N B ->
 C' = reflexion M N C ->
 alignes A B C -> alignes A' B' C'.
+Proof.
 intros M N A B C A' B' C' H0 H1 H2 H3 H.
 discrimine A B .
 elim (@reflexion_image_bipoint_coincide M N A B A' B' );auto with geo.
@@ -364,7 +389,7 @@ A' = reflexion M N A ->
 B' = reflexion M N B ->
 C' = reflexion M N C ->
 trianglesSI A B C A' B' C'.
-
+Proof.
 intros M N A B C A' B' C' H H0 H1 H2 H3.
 deroule_triangle A B C.
 unfold trianglesSI.
@@ -388,6 +413,7 @@ A' = translation I J A->
 B' = translation I J B->
 C' = translation I J C ->
 trianglesSD A B C A' B' C'.
+Proof.
 intros I J A A' B B' C C' H0 H1 H2 H3.
 unfold trianglesSD.
 repeat split;[assumption|idtac|
@@ -413,6 +439,7 @@ Qed.
 Lemma inversion_colineaire :
  forall (k : R) (A B C : PO),
  A <> C -> vec A C = mult_PP k (vec A B) -> vec A B = mult_PP (/ k) (vec A C).
+Proof.
 intros.
 cut (k <> 0); intros.
 rewrite H0.
@@ -430,6 +457,7 @@ exists x:R,
 	cons_AV (vec M N)(vec A B) =image_angle x /\
 	cons_AV (vec N P)(vec B C) =image_angle x /\
 	cons_AV (vec P M)(vec C A) =image_angle x.
+Proof.
 intros A B C M N P H.
 expand_triangles_semblables.
 elim (tout_angle_a_une_mesure (A:=N) (B:=P) (C:=B) (D:=C)); auto with geo.
@@ -473,6 +501,7 @@ paralleles (droite M N) (droite B C)->
                      distance B C = k* distance M N  /\
                      distance A B = k* distance A M /\
                      distance A C = k * distance A N /\ k<>0.
+Proof.
 intros A B C M N H0 H1 H2 H3 H.
 deroule_triangle A B C.
 deroule_triangle A M N.
@@ -511,7 +540,6 @@ exists (Rabs(k)).
 repeat split;
 [apply colinearite_distance;auto |apply colinearite_distance;auto|
 apply colinearite_distance;auto|apply Rabs_no_R0;auto].
-
 Qed.
 
 
@@ -521,6 +549,7 @@ A<>B->C<>D->
 (cons_AV(vec A B)(vec C D) = image_angle 0)
   \/(cons_AV(vec A B)(vec C D) = image_angle pi) ->
 paralleles (droite A B) (droite C D).
+Proof.
 intros A B C D H H1 H2.
 set (B' := translation A C B).
 assert (H3:= refl_equal B'); unfold B' at 2 in H3.
@@ -556,7 +585,7 @@ trianglesSD A B C A' B' C' ->
                       distance B C =k*distance B' C' /\
                       distance A B = k*distance A' B' /\
                       distance A C = k * distance A' C'/\ k<>0.
-
+Proof.
 intros A B C A' B' C' H.
 generalize H;intro H1.
 destruct H1 as [H2 [H3 [H4 H5]]].
@@ -636,6 +665,7 @@ trianglesSI A B C A' B' C' ->
                       distance B C =k*distance B' C' /\
                       distance A B = k*distance A' B' /\
                       distance A C = k * distance A' C' /\ k<>0.
+Proof.
 intros A B C A' B' C' H.
 expand_triangles_semblables.
 set (A'':=(reflexion B' C' A')).
@@ -663,6 +693,7 @@ triangles_semblables A B C A' B' C' ->
                       distance B C =k*distance B' C' /\
                       distance A B = k*distance A' B' /\
                       distance A C = k * distance A' C' /\ k<>0.
+Proof.
 intros A B C A' B' C' H.
 unfold triangles_semblables in H.
 elim H;intros H1.

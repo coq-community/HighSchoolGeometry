@@ -49,6 +49,7 @@ Theorem position_relative_plans :
  ~ alignes D E F ->
  para_plan_plan (plan A B C) (plan D E F) \/
  secants (plan A B C) (plan D E F).
+Proof.
 intros.
 lapply
  (plans_paralleles_ou_droite_incluse2 (A:=A) (B:=B) (C:=C) (D:=D) (E:=E)
@@ -78,6 +79,7 @@ Theorem toit :
    (exists J : PO,
       (I <> J :>PO /\ paralleles (droite A B) (droite I J)) /\
       incluse (droite I J) (plan A B C) /\ incluse (droite I J) (plan D E F)).
+Proof.
 intros.
 deroule_triangle A B C.
 deroule_triangle D E F.
@@ -146,6 +148,7 @@ Lemma plans_paralleles_droite :
  para_plan_plan (plan A B C) (plan D E F) ->
  para_plan_dr (plan A B C) (droite I J) ->
  para_plan_dr (plan D E F) (droite I J).
+Proof.
 intros.
 deroule_triangle A B C.
 deroule_triangle D E F.
@@ -190,6 +193,7 @@ Lemma plans_paralleles_secants_droites_paralleles :
        (G <> L /\ incluse (droite G L) (plan I J K)) /\
        incluse (droite G L) (plan D E F) /\
        paralleles (droite G L) (droite I J))).
+Proof.
 intros.
 deroule_triangle A B C.
 deroule_triangle D E F.
@@ -280,6 +284,7 @@ Lemma non_disjoints_exists :
  ~ alignes D E F ->
  ~ disjoints (plan A B C) (plan D E F) ->
  exists I : PO, coplanaires A B C I /\ coplanaires D E F I.
+Proof.
 intros A B C D E F H H0 H1; try assumption.
 cut (~ (forall I : PO, ~ (coplanaires A B C I /\ coplanaires D E F I)));
  intros.
@@ -300,6 +305,7 @@ Theorem position_relative_plans_paralleles :
  ~ alignes D E F ->
  para_plan_plan (plan A B C) (plan D E F) ->
  disjoints (plan A B C) (plan D E F) \/ confondus (plan A B C) (plan D E F).
+Proof.
 intros A B C D E F H H0 H3; try assumption.
 intros.
 assert (A <> B); auto with geo.
@@ -345,6 +351,7 @@ Theorem position_relative_plans_general :
  ~ alignes D E F ->
  (disjoints (plan A B C) (plan D E F) \/ confondus (plan A B C) (plan D E F)) \/
  secants (plan A B C) (plan D E F).
+Proof.
 intros.
 assert (A <> B); auto with geo.
 assert (D <> E); auto with geo.
@@ -368,6 +375,7 @@ Theorem position_relative_plans_non_disjoints :
  ~ alignes D E F ->
  ~ disjoints (plan A B C) (plan D E F) ->
  secants (plan A B C) (plan D E F) \/ confondus (plan A B C) (plan D E F).
+Proof.
 intros.
 elim
  position_relative_plans_general

@@ -31,15 +31,18 @@ Ltac contrapose H :=
   end.
  
 Lemma Chasles_vec : forall A B C : PO, add_PP (vec A B) (vec B C) = vec A C.
+Proof.
 intros; Ringvec.
 Qed.
  
 Lemma opp_vecteur : forall A B : PO, vec B A = mult_PP (-1) (vec A B).
+Proof.
 intros; Ringvec.
 Qed.
  
 Lemma egalite_vecteur :
  forall A B C D : PO, vec A B = vec C D -> vec A C = vec B D.
+Proof.
 unfold vec in |- *; intros.
 RingPP1 H.
 RingPP.
@@ -51,12 +54,14 @@ Definition parallelogramme (A B C D : PO) := vec A B = vec D C.
  
 Lemma parallelogramme_ordre_cycle :
  forall A B C D : PO, parallelogramme A B C D -> parallelogramme B C D A.
+Proof.
 unfold parallelogramme in |- *; intros.
 symmetry  in |- *; auto with geo.
 Qed.
  
 Lemma parallelogramme_ordre_permute :
  forall A B C D : PO, parallelogramme A B C D -> parallelogramme A D C B.
+Proof.
 unfold parallelogramme in |- *; intros.
 auto with geo.
 Qed.
@@ -69,6 +74,7 @@ Lemma add_PP_vecteur :
  add_PP (cons a A) (cons b B) = cons (a + b) C ->
  add_PP (mult_PP a (vec M A)) (mult_PP b (vec M B)) =
  mult_PP (a + b) (vec M C).
+Proof.
 unfold vec in |- *; intros.
 repeat rewrite <- distrib_mult_cons; auto.
 replace (a * 1) with a; try ring; auto.
@@ -79,6 +85,7 @@ Qed.
 Lemma calcul :
  forall P Q T U : PP,
  add_PP (add_PP P Q) (add_PP T U) = add_PP (add_PP P T) (add_PP Q U).
+Proof.
 intros P Q T U; RingPP.
 Qed.
  
@@ -87,6 +94,7 @@ Lemma add_PP_vecteur_rec :
  a + b <> 0 ->
  add_PP (mult_PP a (vec M A)) (mult_PP b (vec M B)) =
  mult_PP (a + b) (vec M C) -> add_PP (cons a A) (cons b B) = cons (a + b) C.
+Proof.
 unfold vec in |- *; intros.
 repeat rewrite <- distrib_mult_cons in H0; auto.
 replace a with (a * 1); try ring; auto.
@@ -100,25 +108,30 @@ Qed.
 Lemma add_PP_vecteur_opp :
  forall (a : R) (A B C M : PO),
  add_PP (mult_PP a (vec M A)) (mult_PP (- a) (vec M B)) = mult_PP a (vec B A).
+Proof.
 intros; Ringvec.
 Qed.
  
 Lemma add_PP_assoc_permute :
  forall P Q T : PP, add_PP P (add_PP Q T) = add_PP (add_PP P T) Q :>PP.
+Proof.
 intros P Q T; RingPP.
 Qed.
  
 Lemma vecteur_nul : forall (a : R) (A : PO), zero = mult_PP a (vec A A).
+Proof.
 intros; Ringvec.
 Qed.
  
 Lemma mult_1_vec : forall A B : PO, mult_PP 1 (vec A B) = vec A B.
+Proof.
 intros; Ringvec.
 Qed.
  
 Lemma add_PP_vec_reg :
  forall (P Q : PP) (a : R) (A B : PO),
  add_PP (mult_PP a (vec A B)) P = add_PP (mult_PP a (vec A B)) Q -> P = Q.
+Proof.
 unfold vec in |- *; intros.
 RingPP2 H.
 RingPP.
@@ -127,12 +140,14 @@ Qed.
 Lemma add_opp_vec :
  forall (k : R) (A B : PO),
  add_PP (mult_PP k (vec A B)) (mult_PP (- k) (vec A B)) = zero.
+Proof.
 intros; Ringvec.
 Qed.
  
 Lemma mult_mult_vec :
  forall (A B : PO) (k k' : R),
  mult_PP k (mult_PP k' (vec A B)) = mult_PP (k * k') (vec A B) :>PP.
+Proof.
 intros; Ringvec.
 Qed.
  
@@ -140,12 +155,14 @@ Lemma distrib_mult_vec :
  forall (A B C D : PO) (k : R),
  mult_PP k (add_PP (vec A B) (vec C D)) =
  add_PP (mult_PP k (vec A B)) (mult_PP k (vec C D)) :>PP.
+Proof.
 intros; Ringvec.
 Qed.
  
 Lemma conversion_PP :
  forall (a b : R) (A B : PO),
  cons a A = cons b B :>PP -> a <> 0 :>R -> a = b :>R -> A = B :>PO.
+Proof.
 intros a b A B H H0 H1; try assumption.
 elim cons_inj with (a := a) (b := b) (A := A) (B := B); intros;
  try assumption.
@@ -153,6 +170,7 @@ Qed.
  
 Lemma produit_vecteur_nul :
  forall (a : R) (A B : PO), mult_PP a (vec A B) = zero -> a = 0 \/ A = B.
+Proof.
 unfold vec in |- *; intros.
 elim (classic (a = 0)); intros.
 left; try assumption.
@@ -167,6 +185,7 @@ Qed.
  
 Lemma vecteur_egalite_point :
  forall (a : R) (A B : PO), mult_PP a (vec A B) = zero -> a <> 0 -> A = B.
+Proof.
 intros a A B H H0; try assumption.
 generalize produit_vecteur_nul; intros.
 elim H1 with (a := a) (A := A) (B := B);
@@ -180,6 +199,7 @@ Qed.
 Lemma distinct_produit_vecteur :
  forall (A B C : PO) (a : R),
  A <> B -> a <> 0 -> vec A C = mult_PP a (vec A B) :>PP -> A <> C.
+Proof.
 intros; red in |- *; intros.
 cut (~ (a = 0 \/ A = B)); intros.
 apply H3.
@@ -190,6 +210,7 @@ intuition.
 Qed.
  
 Lemma vecteur_nul_conf : forall A B : PO, vec A B = zero -> A = B.
+Proof.
 unfold vec in |- *; intros.
 apply conversion_PP with (a := 1) (b := 1); auto.
 RingPP2 H; RingPP.
@@ -197,6 +218,7 @@ Qed.
  
 Lemma distinct_egalite_vecteur :
  forall A B C D : PO, A <> B :>PO -> vec C D = vec A B :>PP -> C <> D :>PO.
+Proof.
 red in |- *; intros.
 apply H; apply vecteur_nul_conf.
 rewrite <- H0; rewrite <- H1; Ringvec.
@@ -205,6 +227,7 @@ Qed.
 Lemma inversion_colineaire :
  forall (k : R) (A B C : PO),
  A <> C -> vec A C = mult_PP k (vec A B) -> vec A B = mult_PP (/ k) (vec A C).
+Proof.
 intros.
 cut (k <> 0); intros.
 rewrite H0.
@@ -225,6 +248,7 @@ Ltac discrimine A B := elim (classic (A = B)); intro; [ subst_ A B | idtac ].
 Lemma produit_zero_conf :
  forall (k : R) (A B C D : PO),
  vec A B = mult_PP k (vec C D) -> k = 0 -> A = B.
+Proof.
 intros.
 apply vecteur_nul_conf.
 rewrite H; rewrite H0; Ringvec.
@@ -232,6 +256,7 @@ Qed.
  
 Lemma egalite_vecteur_point :
  forall A B C : PO, vec C A = vec C B :>PP -> A = B :>PO.
+Proof.
 intros.
 apply vecteur_nul_conf.
 replace (vec A B) with (add_PP (vec C B) (mult_PP (-1) (vec C A)));
@@ -248,6 +273,7 @@ Ltac FVReplace a b k := replace a with b; [ idtac | Fieldvec k ].
 Lemma distinct_col_nonzero :
  forall (A B C D : PO) (x : R),
  A <> B -> vec A B = mult_PP x (vec C D) -> x <> 0.
+Proof.
 intros.
 contrapose H.
 apply vecteur_nul_conf.
@@ -258,6 +284,7 @@ Qed.
 Lemma distinct_col_nonun :
  forall (A B C : PO) (x : R),
  B <> C -> vec A C = mult_PP x (vec A B) -> 1 + - x <> 0.
+Proof.
 intros.
 contrapose H.
 cut (x = 1); intros.

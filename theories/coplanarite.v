@@ -28,6 +28,7 @@ Lemma vecteur_def_coplanaires1 :
  forall (k k' : R) (A B C D : PO),
  vec A D = add_PP (mult_PP k (vec A B)) (mult_PP k' (vec A C)) ->
  coplanaires1 A B C D.
+Proof.
 unfold coplanaires1, vec in |- *; intros.
 exists (1 + - (k + k')); auto.
 exists k; auto.
@@ -41,6 +42,7 @@ Lemma coplanaires1_vecteur_def :
  exists k : R,
    (exists k' : R,
       vec A D = add_PP (mult_PP k (vec A B)) (mult_PP k' (vec A C))).
+Proof.
 unfold coplanaires1, vec in |- *; intros.
 elim H; intros a H0; elim H0; intros b H1; try clear H0 H; try exact H1.
 exists b; auto.
@@ -53,6 +55,7 @@ Definition coplanaires (A B C D : PO) :=
   alignes A B C \/ coplanaires1 A B C D.
  
 Lemma coplanaires_trivial : forall A B C : PO, coplanaires A B C A.
+Proof.
 unfold coplanaires, coplanaires1 in |- *; intros.
 right; try assumption.
 exists 1; exists 0.
@@ -60,6 +63,7 @@ RingPP.
 Qed.
  
 Lemma coplanaires_trivial2 : forall A B C : PO, coplanaires A B C B.
+Proof.
 unfold coplanaires, coplanaires1 in |- *; intros.
 right; try assumption.
 exists 0; exists 1.
@@ -67,6 +71,7 @@ RingPP.
 Qed.
  
 Lemma coplanaires_trivial3 : forall A B C : PO, coplanaires A B C C.
+Proof.
 unfold coplanaires, coplanaires1 in |- *; intros.
 right; try assumption.
 exists 0; exists 0.
@@ -89,6 +94,7 @@ Ltac hPPcoplanaires H x y :=
 Lemma non_coplanaires_expl :
  forall A B C D : PO,
  ~ coplanaires A B C D -> ~ alignes A B C /\ ~ coplanaires1 A B C D.
+Proof.
 unfold coplanaires in |- *; intros.
 intuition.
 Qed.
@@ -109,6 +115,7 @@ Lemma vecteur_def_coplanaires :
  forall (k k' : R) (A B C D : PO),
  vec A D = add_PP (mult_PP k (vec A B)) (mult_PP k' (vec A C)) ->
  coplanaires A B C D.
+Proof.
 intros; unfold coplanaires in |- *.
 right; try assumption.
 apply vecteur_def_coplanaires1 with (k := k) (k' := k'); try assumption.
@@ -116,6 +123,7 @@ Qed.
  
 Lemma alignes_coplanaires :
  forall A B C D : PO, alignes A B C -> coplanaires A B D C.
+Proof.
 intros.
 halignes H a.
 apply vecteur_def_coplanaires with (k := a) (k' := 0).
@@ -126,6 +134,7 @@ Qed.
  
 Lemma coplanaire_ordre_permute :
  forall A B C D : PO, coplanaires A B C D -> coplanaires A B D C.
+Proof.
 intros.
 elim H; clear H; intros; auto with geo.
 elim (coplanaires1_vecteur_def H); intros.
@@ -141,6 +150,7 @@ Qed.
  
 Lemma coplanaire_ordre_cycle :
  forall A B C D : PO, coplanaires A B C D -> coplanaires B C D A.
+Proof.
 intros.
 elim H; clear H; intros; auto with geo.
 elim coplanaires1_vecteur_def with (A := A) (B := B) (C := C) (D := D);
@@ -171,6 +181,7 @@ Lemma coplanaire_trans :
  forall A B C D E : PO,
  ~ alignes A B C ->
  coplanaires A B C D -> coplanaires A B C E -> coplanaires B C D E.
+Proof.
 intros.
 elim H1; clear H1; intros.
 tauto.

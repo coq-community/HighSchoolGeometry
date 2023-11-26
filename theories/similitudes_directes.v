@@ -44,6 +44,7 @@ Lemma composee_rotation_homothetie_pos :
  forall (I M M' M1 : PO) (k a : R),
  k > 0 ->
  M1 = rotation I a M -> M' = homothetie k I M1 -> M' = similitude I k a M.
+Proof.
 intros I M M' M1 k a H; try assumption.
 discrimine I M.
 rewrite <- similitude_def_centre; auto; rewrite <- rotation_def_centre;
@@ -71,6 +72,7 @@ Lemma composee_homothetie_pos_rotation :
  forall (I M M' M1 : PO) (k a : R),
  k > 0 ->
  M1 = homothetie k I M -> M' = rotation I a M1 -> M' = similitude I k a M.
+Proof.
 intros I M M' M1 k a H; try assumption.
 discrimine I M.
 rewrite <- similitude_def_centre; auto; rewrite <- homothetie_centre; intros.
@@ -99,6 +101,7 @@ Qed.
 Lemma existence_similitude_Ika :
  forall (I M : PO) (k a : R),
  k > 0 -> exists M' : PO, M' = similitude I k a M.
+Proof.
 intros.
 elim existence_rotation_Ia with (I := I) (M := M) (a := a); intros M1; intros.
 elim existence_homothetique with (k := k) (I := I) (A := M1); intros M' H1;
@@ -109,6 +112,7 @@ Qed.
  
 Lemma similitude_rapport_un :
  forall (I A : PO) (a : R), rotation I a A = similitude I 1 a A.
+Proof.
 intros.
 discrimine I A.
 rewrite <- rotation_def_centre; rewrite <- similitude_def_centre; auto.
@@ -123,6 +127,7 @@ Qed.
  
 Lemma similitude_angle_nul :
  forall (I A : PO) (k : R), k > 0 -> homothetie k I A = similitude I k 0 A.
+Proof.
 intros.
 discrimine I A.
 rewrite <- homothetie_centre; rewrite <- similitude_def_centre; auto.
@@ -135,6 +140,7 @@ apply composee_rotation_homothetie_pos with A; auto.
 Qed.
  
 Lemma similitude_identite : forall I A : PO, A = similitude I 1 0 A.
+Proof.
 intros.
 rewrite <- similitude_rapport_un.
 rewrite <- rotation_angle_nul; auto.
@@ -143,6 +149,7 @@ Qed.
 Lemma image_sim_distinct_centre :
  forall (I A B : PO) (k a : R),
  I <> A -> k > 0 -> B = similitude I k a A -> I <> B.
+Proof.
 intros.
 elim similitude_def with (I := I) (A := A) (B := B) (k := k) (a := a);
  [ intros | auto | auto | auto ].
@@ -157,6 +164,7 @@ Lemma similitude_decomposition :
  k > 0 ->
  M' = similitude I k a M ->
  exists M1 : PO, M1 = rotation I a M /\ M' = homothetie k I M1.
+Proof.
 intros.
 elim existence_rotation_Ia with (I := I) (M := M) (a := a); intros M1; intros.
 exists M1.
@@ -193,6 +201,7 @@ Lemma rotation_homothetie_pos_I_commutent :
  k > 0 ->
  M1 = homothetie k I M ->
  M2 = rotation I a M -> homothetie k I M2 = rotation I a M1.
+Proof.
 intros.
 elim existence_rotation_Ia with (I := I) (M := M1) (a := a); intros N; intros.
 elim existence_homothetique with (k := k) (I := I) (A := M2); intros N';
@@ -212,6 +221,7 @@ Lemma similitudes_meme_centre_commutent :
  m > 0 ->
  M1 = similitude I k a M ->
  M2 = similitude I m b M -> similitude I k a M2 = similitude I m b M1.
+Proof.
 intros I M M1 M2 k m a b H H0; try assumption.
 discrimine I M.
 repeat (rewrite <- similitude_def_centre; auto).
@@ -259,6 +269,7 @@ Qed.
 Lemma homothetie_neg :
  forall (I M M' : PO) (k : R),
  k < 0 -> M' = homothetie k I M -> M' = similitude I (- k) pi M.
+Proof.
 intros I M M' k H; try assumption.
 discrimine I M.
 rewrite <- homothetie_centre.
@@ -286,6 +297,7 @@ Qed.
 Lemma homothetie_neg2 :
  forall (I M : PO) (k : R),
  k < 0 -> homothetie k I M = similitude I (- k) pi M.
+Proof.
 intros.
 elim existence_homothetique with (k := k) (I := I) (A := M); intros M';
  intros.
@@ -298,6 +310,7 @@ Lemma rotation_homothetie_I_commutent :
  k <> 0 ->
  M1 = homothetie k I M ->
  M2 = rotation I a M -> homothetie k I M2 = rotation I a M1.
+Proof.
 intros I M M1 M2 k a H; try assumption.
 repeat rewrite similitude_rapport_un.
 elim Rtotal_order with (r1 := k) (r2 := 0);
@@ -327,6 +340,7 @@ Lemma similitude_conserve_angle :
  B' = similitude I k a B ->
  C' = similitude I k a C ->
  cons_AV (vec A B) (vec A C) = cons_AV (vec A' B') (vec A' C').
+Proof.
 intros.
 elim
  similitude_decomposition with (I := I) (M := A) (M' := A') (k := k) (a := a);
@@ -360,6 +374,7 @@ Lemma distance_similitude :
  k > 0 ->
  A' = similitude I k a A ->
  B' = similitude I k a B -> distance A' B' = k * distance A B.
+Proof.
 intros.
 elim
  similitude_decomposition with (I := I) (M := A) (M' := A') (k := k) (a := a);

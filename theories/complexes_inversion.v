@@ -21,12 +21,14 @@ Unset Strict Implicit.
 (* a mettre plus haut dans les complexes*)
  
 Lemma Rinj_opp : forall k : R, Rinj (- k) = Copp (Rinj k).
+Proof.
 unfold Rinj in |- *; intros.
 rewrite Copp_algebrique.
 RReplace (-0) 0; auto.
 Qed.
  
 Lemma Conj_Copp : forall z : C, Conj (Copp z) = Copp (Conj z).
+Proof.
 intros.
 elim existence_parties_relles_imaginaires with (z := z); intros x1 H; elim H;
  intros y1 H0; try clear H; try exact H0.
@@ -37,6 +39,7 @@ rewrite Copp_algebrique; auto.
 Qed.
  
 Lemma Copp_Cmult : forall z : C, Copp z = Cmult (Rinj (-1)) z.
+Proof.
 intros.
 replace (Rinj (-1)) with (Copp oneC).
 ring.
@@ -46,6 +49,7 @@ RReplace (-0) 0; auto.
 Qed.
  
 Lemma Copp_non_zeroC : forall z : C, z <> zeroC -> Copp z <> zeroC.
+Proof.
 intros.
 rewrite Copp_Cmult.
 apply nonzero_produit; auto with geo.
@@ -53,6 +57,7 @@ Qed.
 #[export] Hint Resolve Copp_non_zeroC nonzero_produit: geo.
  
 Lemma Cinv_Copp : forall z : C, z <> zeroC -> Cinv (Copp z) = Copp (Cinv z).
+Proof.
 intros.
 assert (Copp z <> zeroC); auto with geo.
 assert (Cmult (Copp z) (Copp (Cinv z)) = oneC).
@@ -64,6 +69,7 @@ Qed.
 Lemma carre_module :
  forall (z : C) (x y : R),
  z = cons_cart x y -> Rsqr (module z) = Rsqr x + Rsqr y.
+Proof.
 intros.
 rewrite (passage_algebrique_module H).
 rewrite Rsqr_sqrt; auto.
@@ -74,6 +80,7 @@ Qed.
  
 Lemma produit_Conj_module :
  forall z : C, Cmult z (Conj z) = Rinj (Rsqr (module z)).
+Proof.
 intros.
 elim existence_parties_relles_imaginaires with (z := z); intros x H; elim H;
  intros y H0; try clear H; try exact H0.
@@ -92,6 +99,7 @@ lra.
 Qed.
  
 Lemma Rinj_Cmult : forall x y : R, Rinj (x * y) = Cmult (Rinj x) (Rinj y).
+Proof.
 intros.
 unfold Rinj, oneC in |- *.
 rewrite Cmult_algebrique.
@@ -100,6 +108,7 @@ RReplace (0 * y + x * 0) 0; auto.
 Qed.
  
 Lemma Rinj_Cinv : forall k : R, k <> 0 -> Rinj (/ k) = Cinv (Rinj k).
+Proof.
 intros.
 assert (Rinj k <> zeroC); auto with geo.
 assert (Cmult (Rinj k) (Rinj (/ k)) = oneC).
@@ -114,6 +123,7 @@ Qed.
 Lemma Cinv_Cmult :
  forall z z' : C,
  z <> zeroC -> z' <> zeroC -> Cinv (Cmult z z') = Cmult (Cinv z) (Cinv z').
+Proof.
 intros.
 assert (Cmult z z' <> zeroC); [ auto with geo | idtac ].
 assert (Cmult (Cmult z z') (Cmult (Cinv z) (Cinv z')) = oneC).
@@ -128,6 +138,7 @@ Qed.
 Lemma Cinv_Conj :
  forall z : C,
  z <> zeroC -> Cinv z = Cmult (Cinv (Rinj (Rsqr (module z)))) (Conj z).
+Proof.
 intros.
 assert (module z <> 0); auto with geo.
 assert (Rsqr (module z) <> 0).
@@ -145,6 +156,7 @@ Qed.
 Lemma Conj_Cinv :
  forall z : C,
  z <> zeroC -> Cinv (Conj z) = Cmult (Cinv (Rinj (Rsqr (module z)))) z.
+Proof.
 intros.
 assert (Conj z <> zeroC); auto with geo.
 rewrite Cinv_Conj; auto.
@@ -153,6 +165,7 @@ Qed.
  
 Lemma Cmult_Rinj_algebrique :
  forall x y k : R, Cmult (Rinj k) (cons_cart x y) = cons_cart (k * x) (k * y).
+Proof.
 unfold Rinj in |- *; intros.
 rewrite Cmult_algebrique.
 replace (k * x + - (0 * y)) with (k * x) by ring.
@@ -165,6 +178,7 @@ Lemma Cinv_algebrique :
  z <> zeroC ->
  z = cons_cart x y ->
  Cinv z = cons_cart (x / (Rsqr x + Rsqr y)) (- y / (Rsqr x + Rsqr y)).
+Proof.
 intros.
 assert (module z <> 0); auto with geo.
 assert (Rsqr (module z) <> 0).
@@ -187,6 +201,7 @@ Lemma inversion_origine_module :
  z = affixe_vec (vec O M) ->
  z' = affixe_vec (vec O M') ->
  M' = inversion O k M :>PO -> module z' = Rabs k * / module z.
+Proof.
 intros.
 assert (vec O M' = mult_PP (/ Rsqr (distance O M) * k) (vec O M)).
 apply inversion_pole_vecteur; auto.
@@ -219,6 +234,7 @@ Qed.
 Lemma aux_positif :
  forall (k : R) (M : PO),
  O <> M :>PO -> k > 0 -> / Rsqr (distance O M) * k > 0.
+Proof.
 intros.
 apply Rmult_gt_0_compat; auto.
 apply Rgt_inv; auto.
@@ -233,6 +249,7 @@ Qed.
 Lemma aux_negatif :
  forall (k : R) (M : PO),
  O <> M :>PO -> k < 0 -> / Rsqr (distance O M) * k < 0.
+Proof.
 intros.
 RReplace (/ Rsqr (distance O M) * k) (- (/ Rsqr (distance O M) * - k)).
 apply Ropp_lt_gt_0_contravar.
@@ -246,6 +263,7 @@ Lemma argument_affixe_inversion_pole_positif :
  z = affixe_vec (vec O M) :>C ->
  z' = affixe_vec (vec O M') :>C ->
  M' = inversion O k M :>PO -> argument z' = argument z :>AV.
+Proof.
 intros.
 assert (vec O M' = mult_PP (/ Rsqr (distance O M) * k) (vec O M)).
 apply inversion_pole_vecteur; auto.
@@ -262,6 +280,7 @@ Lemma argument_affixe_inversion_pole_negatif :
  z' = affixe_vec (vec O M') :>C ->
  M' = inversion O k M :>PO ->
  argument z' = plus (argument z) (image_angle pi) :>AV.
+Proof.
 intros.
 assert (vec O M' = mult_PP (/ Rsqr (distance O M) * k) (vec O M)).
 apply inversion_pole_vecteur; auto.
@@ -277,6 +296,7 @@ Lemma argument_affixe_inversion_positif_conjugue :
  z = affixe_vec (vec O M) :>C ->
  z' = affixe_vec (vec O M') :>C ->
  M' = inversion O k M :>PO -> argument z' = argument (Cinv (Conj z)) :>AV.
+Proof.
 intros.
 assert (z <> zeroC).
 apply points_distincts_non_zeroC with (1 := H); auto with geo.
@@ -297,6 +317,7 @@ Theorem inversion_positif_complexe :
  z = affixe_vec (vec O M) :>C ->
  z' = affixe_vec (vec O M') :>C ->
  M' = inversion O k M :>PO -> z' = Cmult (Rinj k) (Cinv (Conj z)).
+Proof.
 intros.
 assert (k <> 0); auto with real.
 assert (z <> zeroC).
@@ -372,6 +393,7 @@ Theorem inversion_pole_origine_complexe :
  z = affixe_vec (vec O M) :>C ->
  z' = affixe_vec (vec O M') :>C ->
  M' = inversion O k M :>PO -> z' = Cmult (Rinj k) (Cinv (Conj z)).
+Proof.
 intros.
 elim Rtotal_order with (r1 := k) (r2 := 0);
  [ intros H4; try clear total_order
@@ -392,6 +414,7 @@ Theorem complexe_inversion_pole_origine :
  z = affixe_vec (vec O M) :>C ->
  z' = affixe_vec (vec O M') :>C ->
  z' = Cmult (Rinj k) (Cinv (Conj z)) -> M' = inversion O k M :>PO.
+Proof.
 intros.
 apply homothetie_inversion; auto.
 apply vecteur_homothetie; auto.
@@ -423,6 +446,7 @@ Theorem ecriture_complexe_inversion_pole_origine :
  z = affixe M ->
  z' = affixe M' ->
  (M' = inversion O k M <-> z' = Cmult (Rinj k) (Cinv (Conj z))).
+Proof.
 intros; red in |- *; try split; intros.
 apply
  (inversion_pole_origine_complexe (k:=k) (z:=z) (z':=z') (M:=M) (M':=M'));
@@ -441,6 +465,7 @@ Theorem inversion_complexe :
  j = affixe J ->
  M' = inversion J k M ->
  Cplus z' (Copp j) = Cmult (Rinj k) (Cinv (Conj (Cplus z (Copp j)))).
+Proof.
 intros.
 elim existence_representant_vecteur with (A := O) (B := J) (C := M); intros N;
  intros.
@@ -478,6 +503,7 @@ Theorem complexe_inversion :
  j = affixe J ->
  Cplus z' (Copp j) = Cmult (Rinj k) (Cinv (Conj (Cplus z (Copp j)))) ->
  M' = inversion J k M.
+Proof.
 intros.
 elim existence_representant_vecteur with (A := O) (B := J) (C := M); intros N;
  intros.
@@ -509,6 +535,7 @@ Theorem ecriture_complexe_inversion :
  j = affixe J ->
  (M' = inversion J k M <->
   Cplus z' (Copp j) = Cmult (Rinj k) (Cinv (Conj (Cplus z (Copp j))))).
+Proof.
 intros; red in |- *; try split; intros.
 apply
  (inversion_complexe (k:=k) (j:=j) (z:=z) (z':=z') (J:=J) (M:=M) (M':=M'));

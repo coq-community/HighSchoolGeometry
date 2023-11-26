@@ -54,6 +54,7 @@ Lemma droites_coplanaires :
  incluse (droite D E) (plan A B C) ->
  incluse (droite F G) (plan A B C) ->
  concours (droite D E) (droite F G) \/ paralleles (droite D E) (droite F G).
+Proof.
 intros A B C D E F G H10 H11 H H0 H1; try assumption.
 intros.
 elim (classic (paralleles (droite D E) (droite F G))); intros; auto.
@@ -94,6 +95,7 @@ Lemma paralleles_droites_plan :
  D <> E ->
  paralleles (droite A B) (droite D E) ->
  para_plan_dr (plan A B C) (droite D E).
+Proof.
 intros.
 apply def_para_plan_dr with (D := A) (E := B); auto with geo.
 Qed.
@@ -103,6 +105,7 @@ Lemma paralleles_droite_incluse :
  ~ alignes A B C ->
  D <> E ->
  incluse (droite D E) (plan A B C) -> para_plan_dr (plan A B C) (droite D E).
+Proof.
 intros.
 elim droite_incluse_plan with (A := A) (B := B) (C := C) (D := D) (E := E);
  intros; auto.
@@ -115,6 +118,7 @@ Lemma paralleles_droite_plan_coplanaires_incluse :
  ~ alignes A B C ->
  para_plan_dr (plan A B C) (droite D E) ->
  coplanaires A B C D -> coplanaires A B C E.
+Proof.
 intros A B C D E H20 H H0 H1.
 unfold coplanaires in |- *.
 hPPcoplanaires H1 a1 b1.
@@ -144,6 +148,7 @@ Lemma paralleles_plan_droite_non_secants :
  para_plan_dr (plan A B C) (droite D E) ->
  ~ coplanaires A B C D ->
  ~ (exists I : PO, alignes D E I /\ coplanaires A B C I).
+Proof.
 intros.
 unfold not in |- *; intros.
 elim H3; intros I H4; elim H4; intros H5 H6; try clear H4 H3; try exact H6.
@@ -188,6 +193,7 @@ Lemma position_relative_plan_droite_paralleles :
  ~ alignes A B C ->
  para_plan_dr (plan A B C) (droite D E) ->
  incluse (droite D E) (plan A B C) \/ ~ contact (droite D E) (plan A B C).
+Proof.
 intros.
 elim (classic (coplanaires A B C D)); intros.
 left; try assumption.
@@ -210,6 +216,7 @@ Lemma para_plan_dr_vecteur :
  exists k : R,
    (exists k' : R,
       vec D E = add_PP (mult_PP k (vec A B)) (mult_PP k' (vec A C))).
+Proof.
 intros A B C D E H30 H H0; unfold vec in |- *.
 elim def_para_plan_dr2 with (A := A) (B := B) (C := C) (F := D) (G := E);
  [ intros F H2; elim H2; intros G H3; try clear H2; try exact H3
@@ -246,6 +253,7 @@ Lemma vecteurs_para_plan_dr :
  ~ alignes A B C ->
  vec D E = add_PP (mult_PP k (vec A B)) (mult_PP k' (vec A C)) ->
  para_plan_dr (plan A B C) (droite D E).
+Proof.
 intros.
 cut
  (ex
@@ -301,6 +309,7 @@ Lemma points_plan_espace :
        (exists d : R,
           add_PP (cons d D) (cons (1 + - d) E) =
           add_PP (cons a A) (add_PP (cons b B) (cons (1 + - (a + b)) C))))).
+Proof.
 intros A B C D E H0; try assumption.
 assert (~ alignes A B C).
 elim non_coplanaires_expl with (A := A) (B := B) (C := C) (D := D);
@@ -339,6 +348,7 @@ Theorem position_relative_droite_plan :
  D <> E ->
  ~ alignes A B C ->
  para_plan_dr (plan A B C) (droite D E) \/ perce (droite D E) (plan A B C).
+Proof.
 unfold perce in |- *; intros.
 elim (classic (coplanaires A B C D)); intros.
 elim (classic (coplanaires A B C E)); intros.

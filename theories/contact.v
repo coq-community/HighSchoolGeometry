@@ -21,6 +21,7 @@ Unset Strict Implicit.
 Lemma existence_intersection_droite_cercle_centre :
  forall (r : R) (A B : PO),
  A <> B -> r >= 0 -> exists C : PO, alignes A B C /\ distance A C = r.
+Proof.
 intros.
 assert (distance A B <> 0); auto with geo.
 elim
@@ -47,6 +48,7 @@ Theorem intersection_cercle_droite :
  H = projete_orthogonal A B O ->
  distance O H <= distance O D ->
  exists C : PO, alignes A B C /\ cercle_rayon O D C.
+Proof.
 icercle.
 assert (Rsqr (distance O D) + - Rsqr (distance O H) >= 0).
 unfold Rsqr in |- *.
@@ -133,6 +135,7 @@ Lemma unicite_contact_cercle_droite_tangente :
  A <> B ->
  H = projete_orthogonal A B O ->
  cercle_rayon O D H -> alignes A B C -> cercle_rayon O D C -> H = C.
+Proof.
 icercle.
 elim def_projete_orthogonal2 with (A := A) (B := B) (C := O) (H := H);
  [ intros; auto | auto | auto ].
@@ -157,6 +160,7 @@ Theorem tangente_cercle_contact_unique :
  forall A B O M C : PO,
  B <> M ->
  tangente_cercle O A B M -> alignes B M C -> cercle_rayon O A C -> B = C.
+Proof.
 intros.
 hcercle H0.
 assert (B = projete_orthogonal B M O).
@@ -173,6 +177,7 @@ Theorem intersection2_cercle_droite :
  H = projete_orthogonal A B O ->
  distance O H < distance O A ->
  exists C : PO, A <> C /\ alignes A B C /\ cercle_rayon O A C.
+Proof.
 icercle.
 assert (Rsqr (distance O A) + - Rsqr (distance O H) > 0).
 unfold Rsqr in |- *.
@@ -232,6 +237,7 @@ Definition cercles_tangents (O A O' A' : PO) :=
  
 Lemma auto_cercles_tangents :
  forall O A : PO, O <> A -> cercles_tangents O A O A.
+Proof.
 unfold cercles_tangents in |- *; intros.
 exists A.
 icercle.
@@ -240,6 +246,7 @@ Qed.
 Lemma cercles_concentriques_tangents_egaux :
  forall O A A' : PO,
  O <> A -> O <> A' -> cercles_tangents O A O A' -> cercle_rayon O A A'.
+Proof.
 unfold cercles_tangents in |- *; icercle.
 elim H1;
  [ intros B H2; elim H2;
@@ -258,6 +265,7 @@ Lemma cercles_tangents_tangente_commune :
  exists B : PO,
    (exists M : PO,
       B <> M /\ tangente_cercle O A B M /\ tangente_cercle O' A' B M).
+Proof.
 unfold cercles_tangents, tangente_cercle in |- *; intros.
 elim H1;
  [ intros B H2; elim H2;
@@ -290,6 +298,7 @@ Lemma tangente_commune_cercles_tangents :
  B <> M ->
  tangente_cercle O A B M ->
  tangente_cercle O' A' B M -> cercles_tangents O A O' A'.
+Proof.
 unfold cercles_tangents, tangente_cercle in |- *; intros.
 repeat applatit_and.
 exists B.
@@ -317,6 +326,7 @@ Lemma point_contact_k_positif :
  cercle_rayon O A B ->
  cercle_rayon O' A' B ->
  mult_PP (distance O A) (vec O' B) = mult_PP (distance O' A') (vec O B).
+Proof.
 icercle.
 assert (distance O A <> 0); auto with geo.
 assert (Rsqr k = Rsqr (distance O' A' * / distance O A)).
@@ -359,6 +369,7 @@ Lemma point_contact_k_negatif :
  cercle_rayon O A B ->
  cercle_rayon O' A' B ->
  mult_PP (distance O A) (vec O' B) = mult_PP (- distance O' A') (vec O B).
+Proof.
 icercle.
 assert (distance O A <> 0); auto with geo.
 assert (Rsqr k = Rsqr (distance O' A' * / distance O A)).
@@ -403,6 +414,7 @@ Lemma point_contact_cercles_tangents :
  cercle_rayon O' A' B ->
  mult_PP (distance O A) (vec O' B) = mult_PP (distance O' A') (vec O B) \/
  mult_PP (distance O A) (vec O' B) = mult_PP (- distance O' A') (vec O B).
+Proof.
 icercle.
 assert (O <> B).
 apply (isometrie_distinct (A:=O) (B:=A) (A':=O) (B':=B)); auto with geo.
@@ -428,6 +440,7 @@ Lemma k_negatif_barycentre :
  cercle_rayon O A B ->
  cercle_rayon O' A' B ->
  B = barycentre (cons (distance O A) O') (cons (distance O' A') O).
+Proof.
 intros.
 assert
  (mult_PP (distance O A) (vec O' B) = mult_PP (- distance O' A') (vec O B)).
@@ -455,6 +468,7 @@ Lemma k_negatif_distance_centres :
  vec O' B = mult_PP k (vec O B) ->
  cercle_rayon O A B ->
  cercle_rayon O' A' B -> distance O O' = distance O A + distance O' A'.
+Proof.
 intros.
 assert (distance O A <> 0); auto with geo.
 assert (distance O' A' <> 0); auto with geo.
@@ -507,6 +521,7 @@ Lemma k_positif_vecteur_centres :
  cercle_rayon O' A' B ->
  vec O O' =
  mult_PP (/ distance O A * (distance O A + - distance O' A')) (vec O B).
+Proof.
 intros.
 assert
  (mult_PP (distance O A) (vec O' B) = mult_PP (distance O' A') (vec O B)).
@@ -543,6 +558,7 @@ Lemma k_positif_distance_centres :
  cercle_rayon O A B ->
  cercle_rayon O' A' B ->
  distance O O' = Rabs (distance O A + - distance O' A').
+Proof.
 intros.
 assert (distance O A <> 0); auto with geo.
 assert
@@ -563,6 +579,7 @@ Qed.
  
 Lemma aux_Rpos :
  forall a b : R, a >= 0 -> b >= 0 -> a + b = Rabs (a + - b) -> a = 0 \/ b = 0.
+Proof.
 intros.
 assert (Rsqr (a + b) = Rsqr (a + - b)).
 rewrite H1.
@@ -591,6 +608,7 @@ Theorem cercles_tangents_contact_unique :
  cercle_rayon O A B ->
  cercle_rayon O' A' B ->
  alignes O C O' -> cercle_rayon O A C -> cercle_rayon O' A' C -> B = C.
+Proof.
 intros O A O' A' B C H H0 H100 H1 H2 H3 H4 H5 H6; try assumption.
 assert (O <> B).
 apply (isometrie_distinct (A:=O) (B:=A) (A':=O) (B':=B)); auto with geo.

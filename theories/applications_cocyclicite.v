@@ -20,6 +20,7 @@ Unset Strict Implicit.
  
 Lemma cocycliques_ordre_cycle :
  forall A B C D : PO, sont_cocycliques A B C D -> sont_cocycliques B C D A.
+Proof.
 unfold sont_cocycliques, circonscrit, isocele in |- *; intros.
 elim H; intros O; intros.
 elim H0; intros.
@@ -36,6 +37,7 @@ Qed.
  
 Lemma cocycliques_ordre_cycle2 :
  forall A B C D : PO, sont_cocycliques A B C D -> sont_cocycliques B C A D.
+Proof.
 unfold sont_cocycliques, circonscrit, isocele in |- *; intros.
 elim H; intros O H0; elim H0; intros H1 H2; elim H2; intros H3 H4;
  try clear H2 H0 H; try exact H3.
@@ -50,6 +52,7 @@ Qed.
  
 Lemma cocycliques_ordre_permute :
  forall A B C D : PO, sont_cocycliques A B C D -> sont_cocycliques A C B D.
+Proof.
 unfold sont_cocycliques, circonscrit, isocele in |- *; intros.
 elim H; intros O; intros.
 elim H0; intros.
@@ -65,6 +68,7 @@ Qed.
 Lemma circonscrit_trans :
  forall O A B C D : PO,
  circonscrit O A B C -> circonscrit O A B D -> circonscrit O A C D.
+Proof.
 unfold circonscrit, isocele in |- *; intros.
 elim H0; clear H0; intros.
 elim H; clear H; intros.
@@ -79,6 +83,7 @@ Lemma cocyclicite2 :
  sont_cocycliques A B C D ->
  double_AV (cons_AV (vec B C) (vec B A)) =
  double_AV (cons_AV (vec D C) (vec D A)) :>AV.
+Proof.
 intros.
 deroule_triangle A B C.
 deroule_triangle A B D.
@@ -102,6 +107,7 @@ Lemma cocyclicite3 :
  sont_cocycliques A B C D ->
  double_AV (cons_AV (vec B D) (vec B A)) =
  double_AV (cons_AV (vec C D) (vec C A)) :>AV.
+Proof.
 intros.
 deroule_triangle A B C.
 deroule_triangle A B D.
@@ -119,6 +125,7 @@ Qed.
  
 Lemma circonscrit_ordre_permute :
  forall O A B C : PO, circonscrit O A B C -> circonscrit O B A C.
+Proof.
 unfold circonscrit, isocele in |- *; intros.
 elim H; clear H; intros.
 split; auto.
@@ -133,6 +140,7 @@ Lemma cocyclicite4 :
  sont_cocycliques A B C D ->
  double_AV (cons_AV (vec A B) (vec A C)) =
  double_AV (cons_AV (vec D B) (vec D C)) :>AV.
+Proof.
 intros.
 deroule_triangle A B C.
 deroule_triangle A B D.
@@ -157,6 +165,7 @@ Lemma cocyclicite5 :
  sont_cocycliques A B C D ->
  double_AV (cons_AV (vec A B) (vec A D)) =
  double_AV (cons_AV (vec C B) (vec C D)) :>AV.
+Proof.
 intros.
 deroule_triangle A B C.
 deroule_triangle A B D.
@@ -180,6 +189,7 @@ Lemma cocyclicite6 :
  sont_cocycliques A B C D ->
  double_AV (cons_AV (vec A C) (vec A D)) =
  double_AV (cons_AV (vec B C) (vec B D)) :>AV.
+Proof.
 intros.
 deroule_triangle A B C.
 deroule_triangle A B D.
@@ -201,6 +211,7 @@ Lemma centre_circonscrit_rectangle_milieu :
  triangle A B C ->
  C' = milieu A B ->
  circonscrit O A B C -> orthogonal (vec C A) (vec C B) -> O = C'.
+Proof.
 intros.
 deroule_triangle A B C.
 deroule_circonscrit A B C O.
@@ -227,6 +238,7 @@ Lemma orthogonal_diametre_cercle :
  circonscrit O A B C ->
  O = milieu A A' ->
  orthogonal (vec D A) (vec D A') -> sont_cocycliques A B C D.
+Proof.
 intros.
 discrimine D A.
 discrimine D A'.
@@ -272,6 +284,7 @@ Theorem Miquel :
  sont_cocycliques A C F M ->
  sont_cocycliques A E D M ->
  sont_cocycliques E C B M /\ sont_cocycliques D F B M.
+Proof.
 intros.
 deroule_triangle A E D.
 deroule_triangle A E M.
@@ -332,6 +345,7 @@ Lemma triangles_meme_hypotenuse :
  orthogonal (vec D A) (vec D B) ->
  double_AV (cons_AV (vec B C) (vec B A)) =
  double_AV (cons_AV (vec D C) (vec D A)) :>AV.
+Proof.
 intros.
 discrimine A C.
 rewrite <- angle_nul; auto.
@@ -356,6 +370,7 @@ Lemma triangle_ortho_cote :
  P = projete_orthogonal B C M ->
  Q = projete_orthogonal A C M ->
  ~ alignes A C M -> ~ alignes B C M -> ~ alignes M P Q.
+Proof.
 intros.
 deroule_triangle A B C.
 elim (def_projete_orthogonal2 (A:=B) (B:=C) (C:=M) (H:=P)); auto; intros.
@@ -377,6 +392,7 @@ Lemma triangle_ortho_cote2 :
  P = projete_orthogonal B C M ->
  Q = projete_orthogonal A B M ->
  ~ alignes A B M -> ~ alignes B C M -> ~ alignes M P Q.
+Proof.
 intros.
 deroule_triangle A B C.
 elim (def_projete_orthogonal2 (A:=B) (B:=C) (C:=M) (H:=P)); auto; intros.
@@ -563,6 +579,7 @@ Lemma orthocentre_double :
  H = orthocentre A B C :>PO ->
  double_AV (cons_AV (vec H C) (vec H B)) =
  double_AV (cons_AV (vec A B) (vec A C)) :>AV.
+Proof.
 intros.
 elim orthocentre_def2 with (A := A) (B := B) (C := C) (H := H);
  [ intros | auto ].
@@ -577,6 +594,7 @@ Theorem symetrique_orthocentre :
  triangle B C H ->
  H = orthocentre A B C :>PO ->
  H' = reflexion B C H :>PO -> sont_cocycliques A B C H'.
+Proof.
 intros.
 deroule_triangle A B C.
 deroule_triangle B C H.

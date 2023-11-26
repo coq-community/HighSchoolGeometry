@@ -113,11 +113,13 @@ Lemma existence_representant_angle :
  distance A B = 1 ->
  exists D : PO,
    distance C D = 1 /\ image_angle x = cons_AV (vec A B) (vec C D).
+Proof.
 intros.
 apply existence_representant_cons; auto.
 Qed.
  
 Lemma tout_angle_mesure : forall a : AV, exists x : R, a = image_angle x :>AV.
+Proof.
 intros.
 elim existence_AB_unitaire;
  [ intros A H; elim H;
@@ -152,6 +154,7 @@ Ltac mesure A B C D :=
    end.
  
 Lemma plus_commutative : forall a b : AV, plus a b = plus b a :>AV.
+Proof.
 intros.
 mes a.
 mes b.
@@ -160,6 +163,7 @@ replace (x + x0) with (x0 + x); [ auto | ring ].
 Qed.
  
 Lemma plus_angle_zero : forall a : AV, plus a (image_angle 0) = a.
+Proof.
 intros.
 mes a.
 replace (x + 0) with x; [ auto | ring ].
@@ -167,6 +171,7 @@ Qed.
  
 Lemma plus_associative :
  forall a b c : AV, plus a (plus b c) = plus (plus a b) c :>AV.
+Proof.
 intros.
 mes a.
 mes b.
@@ -177,6 +182,7 @@ Qed.
  
 Lemma opp_angle :
  forall a b : AV, plus a b = image_angle 0 :>AV -> b = opp a :>AV.
+Proof.
 intros.
 mes a.
 mes b.
@@ -191,6 +197,7 @@ ring.
 Qed.
  
 Lemma plus_angle_oppose : forall a : AV, plus a (opp a) = image_angle 0.
+Proof.
 intros.
 mes a.
 replace (x + - x) with 0; [ auto | ring ].
@@ -202,6 +209,7 @@ Lemma mes_oppx :
  C <> D ->
  image_angle x = cons_AV (vec A B) (vec C D) ->
  image_angle (- x) = cons_AV (vec C D) (vec A B).
+Proof.
 intros.
 rewrite <- def_opp; auto.
 rewrite <- H1; rewrite <- mes_opp; auto with geo.
@@ -217,6 +225,7 @@ Lemma mes_opp_opp :
  image_angle b = cons_AV (vec E F) (vec G I) ->
  image_angle b = image_angle (- a) ->
  cons_AV (vec E F) (vec G I) = opp (cons_AV (vec A B) (vec C D)).
+Proof.
 intros A B C D E F G I a b H H0 H1 H2 H3 H4 H5; try assumption.
 rewrite <- H4; rewrite def_opp; auto.
 rewrite <- (mes_oppx (A:=A) (B:=B) (C:=C) (D:=D) (x:=a)); auto.
@@ -230,6 +239,7 @@ Lemma permute_angles :
  G <> I :>PO ->
  cons_AV (vec A B) (vec C D) = cons_AV (vec E F) (vec G I) :>AV ->
  cons_AV (vec C D) (vec A B) = cons_AV (vec G I) (vec E F) :>AV.
+Proof.
 intros A B C D E F G I H H0 H1 H2 H3; try assumption.
 rewrite <- def_opp; auto.
 rewrite <- (def_opp (A:=E) (B:=F) (C:=G) (D:=I)); auto.
@@ -246,6 +256,7 @@ Lemma opp_plus_plus_opp :
  opp (plus (cons_AV (vec A B) (vec C D)) (cons_AV (vec E F) (vec G I))) =
  plus (opp (cons_AV (vec A B) (vec C D))) (opp (cons_AV (vec E F) (vec G I)))
  :>AV.
+Proof.
 intros A B C D E F G I H H0 H1 H2; try assumption.
 mesure A B C D.
 mesure E F G I.
@@ -261,6 +272,7 @@ Lemma Chasles_diff :
  E <> F :>PO ->
  plus (cons_AV (vec A B) (vec C D)) (opp (cons_AV (vec A B) (vec E F))) =
  cons_AV (vec E F) (vec C D) :>AV.
+Proof.
 intros.
 rewrite def_opp; auto.
 rewrite plus_commutative; auto with geo.
@@ -271,6 +283,7 @@ Lemma pisurdeux_scalaire_nul :
  forall A B C : PO,
  image_angle pisurdeux = cons_AV (vec A B) (vec A C) ->
  scalaire (vec A B) (vec A C) = 0.
+Proof.
 intros.
 apply def_orthogonal.
 apply pisurdeux_droit; auto.
@@ -284,6 +297,7 @@ Lemma orthogonal_pisurdeux_or :
  orthogonal (vec A B) (vec C D) ->
  image_angle pisurdeux = cons_AV (vec A B) (vec C D) \/
  image_angle (- pisurdeux) = cons_AV (vec A B) (vec C D).
+Proof.
 intros A B C D H H0; try assumption.
 elim existence_representant_vecteur with (A := A) (B := C) (C := D);
  [ intros E H2; rewrite <- H2; intros ].
@@ -293,6 +307,7 @@ Qed.
  
 Lemma angle_nul :
  forall A B : PO, A <> B -> image_angle 0 = cons_AV (vec A B) (vec A B).
+Proof.
 intros.
 elim existence_representant_unitaire with (A := A) (B := B);
  [ intros C H0; try clear existence_representant_unitaire; try exact H0
@@ -313,6 +328,7 @@ elim H2; auto with geo.
 Qed.
  
 Lemma pi_plus_pi : image_angle deuxpi = image_angle 0.
+Proof.
 unfold deuxpi in |- *; intros.
 elim existence_AB_unitaire; intros A H; elim H; intros B H0; try clear H;
  try exact H0.
@@ -332,6 +348,7 @@ Lemma mesure_mod_deuxpi :
  C <> D ->
  image_angle x = cons_AV (vec A B) (vec C D) ->
  image_angle (x + deuxpi) = cons_AV (vec A B) (vec C D).
+Proof.
 intros.
 rewrite add_mes_compatible.
 rewrite pi_plus_pi.
@@ -345,6 +362,7 @@ Lemma angle_oppu_oppv :
  A <> B :>PO ->
  C <> D :>PO ->
  cons_AV (vec B A) (vec D C) = cons_AV (vec A B) (vec C D) :>AV.
+Proof.
 intros.
 replace (cons_AV (vec B A) (vec D C)) with
  (plus (cons_AV (vec B A) (vec A B))
@@ -367,6 +385,7 @@ Theorem somme_triangle :
  plus (cons_AV (vec A B) (vec A C))
    (plus (cons_AV (vec B C) (vec B A)) (cons_AV (vec C A) (vec C B))) =
  image_angle pi :>AV.
+Proof.
 intros A B C H H0 H1; try assumption.
 rewrite <- (angle_oppu_oppv (A:=C) (B:=A) (C:=C) (D:=B)); auto.
 mesure A B A C.
@@ -387,6 +406,7 @@ Lemma angle_triangle :
  plus (image_angle pi)
    (opp (plus (cons_AV (vec A B) (vec A C)) (cons_AV (vec B C) (vec B A)))) =
  cons_AV (vec C A) (vec C B).
+Proof.
 intros.
 rewrite <- (somme_triangle (A:=A) (B:=B) (C:=C)); auto.
 rewrite opp_plus_plus_opp; auto.
@@ -407,6 +427,7 @@ Lemma angles_complementaires_triangle_rectangle :
  image_angle a = cons_AV (vec A B) (vec A C) ->
  image_angle (pisurdeux + - a) = cons_AV (vec C A) (vec C B) \/
  image_angle (- pisurdeux + - a) = cons_AV (vec C A) (vec C B).
+Proof.
 intros.
 generalize (somme_triangle (A:=A) (B:=B) (C:=C)); intros.
 replace (cons_AV (vec C A) (vec C B)) with
@@ -445,6 +466,7 @@ Lemma angle_produit_positif_r :
  k > 0 ->
  vec A C = mult_PP k (vec A B) :>PP ->
  cons_AV (vec D E) (vec A C) = cons_AV (vec D E) (vec A B).
+Proof.
 intros.
 cut (A <> C); intros.
 2: apply distinct_produit_vecteur with (3 := H2); auto.
@@ -464,6 +486,7 @@ Lemma angle_produit_negatif_r :
  vec A C = mult_PP k (vec A B) ->
  cons_AV (vec D E) (vec A C) =
  plus (cons_AV (vec D E) (vec A B)) (image_angle pi).
+Proof.
 intros.
 cut (A <> C); intros.
 2: apply distinct_produit_vecteur with (3 := H2); auto.
@@ -497,6 +520,7 @@ Lemma angle_produit_negatif_r2 :
  k < 0 ->
  cons_AV (vec C D) (mult_PP k (vec A B)) =
  plus (cons_AV (vec C D) (vec A B)) (image_angle pi).
+Proof.
 intros.
 elim
  existence_representant_mult_vecteur with (A := A) (B := A) (C := B) (k := k);
@@ -513,6 +537,7 @@ Lemma angle_produit_negatif_l :
  k < 0 ->
  cons_AV (mult_PP k (vec A B)) (vec C D) =
  plus (cons_AV (vec A B) (vec C D)) (image_angle pi).
+Proof.
 intros.
 elim
  existence_representant_mult_vecteur with (A := A) (B := A) (C := B) (k := k);
@@ -541,6 +566,7 @@ Lemma angle_produit_positif_r2 :
  C <> D ->
  k > 0 ->
  cons_AV (vec C D) (mult_PP k (vec A B)) = cons_AV (vec C D) (vec A B).
+Proof.
 intros.
 elim
  existence_representant_mult_vecteur with (A := A) (B := A) (C := B) (k := k);
@@ -556,6 +582,7 @@ Lemma angle_produit_positif_l :
  C <> D ->
  k > 0 ->
  cons_AV (mult_PP k (vec A B)) (vec C D) = cons_AV (vec A B) (vec C D).
+Proof.
 intros.
 elim
  existence_representant_mult_vecteur with (A := A) (B := A) (C := B) (k := k);
@@ -576,6 +603,7 @@ Lemma angle_nul_positif_colineaire :
  A <> C ->
  cons_AV (vec A B) (vec A C) = image_angle 0 ->
  exists k : R, k > 0 /\ vec A C = mult_PP k (vec A B).
+Proof.
 intros A B C H H0; try assumption.
 cut
  (cons_AV (vec A B) (vec A C) =
@@ -605,6 +633,7 @@ Lemma angles_milieu :
  B <> A :>PO ->
  I = milieu B C :>PO ->
  cons_AV (vec B C) (vec B A) = cons_AV (vec B I) (vec B A) :>AV.
+Proof.
 intros.
 replace (vec B C) with (mult_PP 2 (vec B I)); auto with geo.
 apply angle_produit_positif_l; auto.
@@ -619,6 +648,7 @@ Lemma angles_milieu2 :
  C <> A :>PO ->
  I = milieu B C :>PO ->
  cons_AV (vec C A) (vec C B) = cons_AV (vec C A) (vec C I) :>AV.
+Proof.
 intros.
 replace (vec C B) with (mult_PP 2 (vec C I)); auto with geo.
 apply angle_produit_positif_r2; auto.
@@ -634,6 +664,7 @@ Lemma milieu_angles :
  M = milieu A B ->
  cons_AV (vec M A) (vec M N) =
  plus (cons_AV (vec M B) (vec M N)) (image_angle pi) :>AV.
+Proof.
 intros.
 VReplace (vec M A) (mult_PP (-1) (vec A M)).
 rewrite <- (milieu_vecteur H1); auto.
@@ -659,6 +690,7 @@ Lemma alignes_distance_positif_colineaire :
  A <> C ->
  cons_AV (vec A B) (vec A C) = image_angle 0 ->
  distance A C = k * distance A B -> vec A C = mult_PP k (vec A B).
+Proof.
 intros.
 elim angle_nul_positif_colineaire with (A := A) (B := B) (C := C);
  [ intros k0 H3; elim H3; intros H4 H5; try clear H3; try exact H5
@@ -681,6 +713,7 @@ Lemma angle_pi_negatif_colineaire :
  A <> C ->
  cons_AV (vec A B) (vec A C) = image_angle pi ->
  exists k : R, k < 0 /\ vec A C = mult_PP k (vec A B).
+Proof.
 intros A B C H H0; try assumption.
 cut
  (cons_AV (vec A B) (vec A C) =
@@ -728,6 +761,7 @@ Lemma alignes_distance_negatif_colineaire :
  A <> C ->
  cons_AV (vec A B) (vec A C) = image_angle pi ->
  distance A C = k * distance A B -> vec A C = mult_PP (- k) (vec A B).
+Proof.
 intros.
 elim angle_pi_negatif_colineaire with (A := A) (B := B) (C := C);
  [ intros k0 H3; elim H3; intros H4 H5; try clear H3; try exact H5

@@ -25,6 +25,7 @@ Lemma triangle_rectangle_demi_cercle :
  ex
    (fun O : PO =>
     circonscrit O A B C /\ cons_AV (vec O B) (vec O C) = image_angle pi).
+Proof.
 intros; deroule_triangle A B C.
 soit_circonscrit A B C D.
 exists D.
@@ -39,6 +40,7 @@ Lemma triangle_demi_cercle_rectangle :
  circonscrit O A B C ->
  cons_AV (vec O B) (vec O C) = image_angle pi ->
  orthogonal (vec A B) (vec A C).
+Proof.
 intros; deroule_triangle A B C.
 deroule_circonscrit A B C O.
 apply angles_orthogonal; auto.
@@ -49,6 +51,7 @@ Lemma triangle_diametre :
  forall A B C O : PO,
  triangle A B C ->
  O = milieu B C -> circonscrit O A B C -> orthogonal (vec A B) (vec A C).
+Proof.
 intros.
 apply triangle_demi_cercle_rectangle with O; auto.
 deroule_circonscrit A B C O.
@@ -65,6 +68,7 @@ Qed.
 Lemma triangle_rectangle_cercle_diametre :
  forall A B C : PO,
  A <> B -> A <> C -> orthogonal (vec A B) (vec A C) -> cercle_diametre B C A.
+Proof.
 icercle.
 assert (triangle A B C).
 unfold triangle in |- *.
@@ -88,6 +92,7 @@ Qed.
  
 Lemma ligne_niveau_MAMB_O :
  forall A B M : PO, scalaire (vec M A) (vec M B) = 0 -> cercle_diametre A B M.
+Proof.
 intros.
 discrimine M A.
 discrimine M B.
@@ -97,6 +102,7 @@ Qed.
 Theorem caracterisation_cercle_diametre :
  forall A B M : PO,
  cercle_diametre A B M <-> scalaire (vec M A) (vec M B) = 0.
+Proof.
 red in |- *; try split; intros.
 hcercle H.
 elim H0;
@@ -130,6 +136,7 @@ Lemma ligne_niveau_MAMB_k :
  I = milieu A B ->
  scalaire (vec M A) (vec M B) = k ->
  cercle I (sqrt (k + Rsqr (distance I A))) M.
+Proof.
 intros A B I M k H H0; try assumption.
 rewrite (scalaire_difference_carre (A:=A) (B:=B) (I:=I) M); auto.
 icercle.
@@ -146,6 +153,7 @@ Lemma homothetie_cercle_diametre :
  B' = homothetie k I B :>PO ->
  M' = homothetie k I M :>PO ->
  cercle_diametre A B M -> cercle_diametre A' B' M'.
+Proof.
 icercle.
 elim H3;
  [ intros O H4; elim H4;
@@ -185,6 +193,7 @@ Lemma cocyclicite_cercle_diametre :
  triangle A B C ->
  sont_cocycliques A B C D ->
  diametre_circonscrit A A' B C -> diametre_circonscrit A A' C D.
+Proof.
 unfold sont_cocycliques, diametre_circonscrit in |- *; intros.
 elim H0;
  [ intros O1 H3; elim H3; [ intros H4 H5; try clear H3 H0; try exact H5 ] ].
@@ -204,6 +213,7 @@ Lemma diametre_circonscrit_centre :
  triangle A B C ->
  circonscrit O A B C ->
  diametre_circonscrit A A' B C -> cercle_diametre A A' B.
+Proof.
 unfold sont_cocycliques, diametre_circonscrit in |- *; intros.
 elim H1;
  [ intros O1 H2; elim H2; [ intros H3 H4; try clear H2 H1; try exact H4 ] ].
@@ -218,6 +228,7 @@ Lemma changement_diametre :
  triangle A B C ->
  circonscrit O A B C ->
  O = milieu C C' -> sont_cocycliques A B C D -> cercle_diametre C C' D.
+Proof.
 unfold cercle_diametre, sont_cocycliques in |- *; intros.
 elim H2;
  [ intros O1 H3; elim H3; [ intros H4 H5; try clear H3 H2; try exact H5 ] ].
@@ -234,6 +245,7 @@ Qed.
 Lemma cocycliques_existence_diametre :
  forall A B C D : PO,
  sont_cocycliques A B C D -> exists A' : PO, diametre_circonscrit A A' B C.
+Proof.
 intros.
 generalize H; unfold sont_cocycliques, diametre_circonscrit in |- *; intros.
 elim H0;

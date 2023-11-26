@@ -29,6 +29,7 @@ Lemma homothetie_conserve_angle :
  B' = homothetie k I B ->
  C' = homothetie k I C ->
  cons_AV (vec A B) (vec A C) = cons_AV (vec A' B') (vec A' C').
+Proof.
 intros.
 cut (vec A' B' = mult_PP k (vec A B)); intros.
 cut (vec A' C' = mult_PP k (vec A C)); intros.
@@ -60,6 +61,7 @@ Lemma distance_homothetie :
  forall (k : R) (I A A' B B' : PO),
  A' = homothetie k I A :>PO ->
  B' = homothetie k I B :>PO -> distance A' B' = Rabs k * distance A B.
+Proof.
 unfold distance in |- *; intros.
 rewrite <- sqrt_Rsqr_abs.
 rewrite <- sqrt_mult; intros.
@@ -87,6 +89,7 @@ Lemma intersection_homothetie :
  D' = homothetie k I D :>PO ->
  K' = pt_intersection (droite A' B') (droite C' D') :>PO ->
  K' = homothetie k I K :>PO.
+Proof.
 intros.
 elim existence_homothetique with (k := k) (I := I) (A := K); intros L H13.
 rewrite <- H13; rewrite H8; symmetry  in |- *.
@@ -104,6 +107,7 @@ Theorem paralleles_homothetie :
  paralleles (droite B C) (droite I J) ->
  alignes A C J ->
  exists k : R, I = homothetie k A B :>PO /\ J = homothetie k A C :>PO.
+Proof.
 intros.
 deroule_triangle A B C.
 halignes H1 x.
@@ -128,6 +132,7 @@ Lemma centre_gravite_homothetie :
  forall A B C I G : PO,
  I = milieu B C :>PO ->
  G = centre_gravite A B C :>PO -> I = homothetie (- / 2) G A :>PO.
+Proof.
 intros.
 apply vecteur_homothetie.
 replace (vec G A) with (mult_PP (-1) (vec A G)).
@@ -159,6 +164,7 @@ Lemma homothetie_mediatrice_hauteur :
  mediatrice B C J ->
  G = centre_gravite A B C :>PO ->
  H = homothetie (-2) G J :>PO -> orthogonal (vec A H) (vec B C).
+Proof.
 intros.
 deroule_triangle A B C.
 cut (-2 <> 0); intros.
@@ -185,6 +191,7 @@ Lemma homothetie_cercle :
  A' = homothetie k I A :>PO ->
  M' = homothetie k I M :>PO ->
  cercle O (distance O A) M -> cercle O' (distance O' A') M'.
+Proof.
 unfold cercle in |- *; intros.
 generalize (homothetie_bipoint (k:=k) (I:=I) (A:=O) (B:=M) (A':=O') (B':=M'));
  intros H5.
@@ -200,6 +207,7 @@ Qed.
  
 Lemma symetrie_rotation :
  forall A B I : PO, B = symetrie I A :>PO -> B = rotation I pi A :>PO.
+Proof.
 intros.
 generalize symetrie_milieu; intros.
 discrimine I A.
@@ -215,6 +223,7 @@ Qed.
  
 Lemma rotation_symetrie :
  forall A B I : PO, B = rotation I pi A :>PO -> B = symetrie I A :>PO.
+Proof.
 intros.
 apply milieu_symetrie; auto.
 discrimine I A.

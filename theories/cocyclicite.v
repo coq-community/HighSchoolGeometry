@@ -25,6 +25,7 @@ Theorem angle_inscrit :
  O <> B ->
  circonscrit O A B C ->
  double_AV (cons_AV (vec A B) (vec A C)) = cons_AV (vec O B) (vec O C).
+Proof.
 unfold double_AV in |- *; intros O A B C H H0 H2 H4.
 cut (O <> A); intros.
 2: apply circonscrit_distinct3 with (2 := H4); auto.
@@ -101,6 +102,7 @@ Theorem angle_inscrit2 :
  O <> B ->
  circonscrit O A B C ->
  double_AV (cons_AV (vec C A) (vec C B)) = cons_AV (vec O A) (vec O B).
+Proof.
 intros O A B C H H0 H1 H2; try assumption.
 cut (O <> A); intros.
 2: apply circonscrit_distinct3 with (2 := H2); auto.
@@ -112,6 +114,7 @@ Qed.
 Lemma circonscrit_triangle_non_point :
  forall O A B C : PO,
  triangle A B C -> circonscrit O A B C -> O <> A /\ O <> B /\ O <> C.
+Proof.
 intros.
 cut (O <> A); intros.
 split; [ try assumption | idtac ].
@@ -135,6 +138,7 @@ Theorem cocyclicite :
  sont_cocycliques A B C D ->
  double_AV (cons_AV (vec C A) (vec C B)) =
  double_AV (cons_AV (vec D A) (vec D B)).
+Proof.
 unfold sont_cocycliques in |- *; intros.
 deroule_triangle A B C.
 deroule_triangle A B D.
@@ -157,6 +161,7 @@ Qed.
  
 Theorem existence_cercle_circonscrit :
  forall A B C : PO, triangle A B C -> ex (fun O : PO => circonscrit O A B C).
+Proof.
 intros.
 deroule_triangle A B C.
 soit_mediatrice A B M K.
@@ -197,6 +202,7 @@ Lemma existence_cercle_circonscrit_diametre :
    (exists D : PO,
       circonscrit O A B C /\
       cercle_diametre A D C /\ sont_cocycliques A B C D).
+Proof.
 intros.
 elim existence_cercle_circonscrit with (A := A) (B := B) (C := C);
  [ unfold circonscrit, isocele in |- *; intros O H0; try exact H0 | auto ].
@@ -214,6 +220,7 @@ Qed.
  
 Lemma cocycliques_trivial :
  forall A B C : PO, triangle A B C -> sont_cocycliques A B C A.
+Proof.
 icercle.
 elim existence_cercle_circonscrit with (A := A) (B := B) (C := C);
  [ unfold sont_cocycliques, circonscrit, isocele in |- *; intros O H0;
@@ -249,6 +256,7 @@ Lemma triangle_intersection_mediatrices :
  B' <> O ->
  C' = milieu A B ->
  B' = milieu A C -> circonscrit O A B C -> ~ alignes C' O B'.
+Proof.
 unfold circonscrit, isocele in |- *; intros.
 deroule_triangle A B C.
 cut (~ paralleles (droite C' O) (droite B' O)); intros.
@@ -272,6 +280,7 @@ Qed.
 Lemma milieu_centrecirconscrit_orthogonal_segment :
  forall A B C A' O : PO,
  A' = milieu B C -> circonscrit O A B C -> orthogonal (vec O A') (vec B C).
+Proof.
 unfold circonscrit, isocele in |- *; intros.
 elim H0; intros H1 H2; try clear H0; try exact H2.
 discrimine O A'.
@@ -303,6 +312,7 @@ Theorem tangente :
  isocele O A B ->
  orthogonal (vec A T) (vec O A) ->
  double_AV (cons_AV (vec A T) (vec A B)) = cons_AV (vec O A) (vec O B).
+Proof.
 intros A B O T H H0 H1 H2 H3 H4; try assumption.
 lapply (isocele_angles_base (A:=O) (B:=A) (C:=B)); auto; intros.
 lapply (orthogonal_angles (A:=A) (B:=T) (C:=O) (D:=A)); auto; intros.
@@ -362,6 +372,7 @@ Theorem tangente_reciproque :
  orthogonal (vec A T) (vec O A) ->
  double_AV (cons_AV (vec A T') (vec A B)) = cons_AV (vec O A) (vec O B) ->
  alignes A T T'.
+Proof.
 intros A B O T T' H H0 H1 H3 H4 H5 H6; try assumption.
 discrimine A T.
 apply alignes_angle; auto.
@@ -399,6 +410,7 @@ Qed.
 Theorem unicite_circonscrit_triangle :
  forall A B C O O1 : PO,
  triangle A B C -> circonscrit O A B C -> circonscrit O1 A B C -> O = O1.
+Proof.
 intros.
 deroule_triangle A B C.
 soit_mediatrice A B M K.
@@ -476,6 +488,7 @@ Lemma circonscrit_mediatrice :
  forall O A B C : PO,
  circonscrit O A B C ->
  mediatrice A B O /\ mediatrice B C O /\ mediatrice A C O.
+Proof.
 unfold circonscrit, isocele, mediatrice in |- *; intros; auto.
 elim H; intros; auto.
 split; [ assumption | split; [ idtac | try assumption ] ].
@@ -489,6 +502,7 @@ Theorem reciproque_cocyclicite :
  triangle A B D ->
  double_AV (cons_AV (vec C A) (vec C B)) =
  double_AV (cons_AV (vec D A) (vec D B)) -> sont_cocycliques A B C D.
+Proof.
 unfold sont_cocycliques in |- *; intros.
 deroule_triangle A B C.
 deroule_triangle A B D.

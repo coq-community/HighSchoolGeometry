@@ -25,6 +25,7 @@ Lemma scalaire_diametre :
  cercle_diametre A A' B ->
  alignes A B M ->
  scalaire (vec M A) (vec M B) = Rsqr (distance M O) + - Rsqr (distance O A).
+Proof.
 intros A A' B O M H0 H1 H2 H3; try assumption.
 generalize H2; unfold cercle_diametre in |- *; intros.
 elim H4;
@@ -73,6 +74,7 @@ Theorem puissance_cercle :
  sont_cocycliques A B C D ->
  alignes A B M ->
  alignes C D M -> scalaire (vec M A) (vec M B) = scalaire (vec M C) (vec M D).
+Proof.
 intros A B C D M H H20 H0 H2 H3; try assumption.
 elim cocycliques_existence_diametre with (A := A) (B := B) (C := C) (D := D);
  [ intros A' H1; try clear cocycliques_existence_diametre; try exact H1
@@ -106,6 +108,7 @@ Theorem puissance_cercle_tangente :
  alignes A B M ->
  tangente_cercle O A C M ->
  Rsqr (distance M C) = scalaire (vec M A) (vec M B).
+Proof.
 unfold tangente_cercle in |- *; intros; applatit_and.
 symetrique O A A'.
 deroule_triangle A B C.
@@ -130,6 +133,7 @@ Theorem egalite_puissance_cocycliques :
  alignes C D M ->
  scalaire (vec M A) (vec M B) = scalaire (vec M C) (vec M D) ->
  sont_cocycliques A B C D.
+Proof.
 unfold sont_cocycliques in |- *; intros A B C D M H10 H0 H1 H2 H3.
 elim existence_cercle_circonscrit with (A := A) (B := B) (C := C);
  [ intros O H4; try clear existence_cercle_circonscrit; try exact H4 | auto ].
@@ -212,6 +216,7 @@ Lemma puissance_cercle_tangente_rec :
  alignes A B M ->
  Rsqr (distance M C) = scalaire (vec M A) (vec M B) ->
  tangente_cercle O A C M.
+Proof.
 intros.
 deroule_circonscrit A B C O.
 deroule_triangle A B C.

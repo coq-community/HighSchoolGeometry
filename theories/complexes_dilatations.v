@@ -26,6 +26,7 @@ Lemma angle_argument :
  z = affixe M :>C ->
  z' = affixe M' :>C ->
  cons_AV (vec O M) (vec O M') = plus (argument z') (opp (argument z)) :>AV.
+Proof.
 intros.
 rewrite (argument_def2 (M:=M) (z:=z)); auto.
 rewrite (argument_def2 (M:=M') (z:=z')); auto.
@@ -37,6 +38,7 @@ Lemma egalite_vecteur_OM_image :
  forall (z z' : C) (M M' : PO),
  z = affixe_vec (vec O M) :>C ->
  z' = affixe_vec (vec O M') :>C -> vec O M = vec O M' :>PP -> z = z' :>C.
+Proof.
 intros.
 apply egalite_point_image with (M := M) (M' := M'); eauto with geo.
 apply vecteur_nul_conf.
@@ -49,6 +51,7 @@ Lemma egalite_vecteur_image :
  forall (z z' : C) (A B A' B' : PO),
  z = affixe_vec (vec A B) :>C ->
  z' = affixe_vec (vec A' B') :>C -> vec A B = vec A' B' :>PP -> z = z' :>C.
+Proof.
 intros.
 elim existence_representant_vecteur with (A := O) (B := A) (C := B);
  intros D H2; intros; try exact H2.
@@ -64,6 +67,7 @@ Lemma egalite_affixe_vecteur_OM :
  forall (z z' : C) (M M' : PO),
  z = affixe_vec (vec O M) :>C ->
  z' = affixe_vec (vec O M') :>C -> z = z' :>C -> vec O M = vec O M' :>PP.
+Proof.
 intros.
 replace M' with M; auto.
 apply egalite_affixe_point with (3 := H1); auto with geo.
@@ -73,6 +77,7 @@ Lemma egalite_affixe_vecteur :
  forall (z z' : C) (A B A' B' : PO),
  z = affixe_vec (vec A B) :>C ->
  z' = affixe_vec (vec A' B') :>C -> z = z' :>C -> vec A B = vec A' B' :>PP.
+Proof.
 intros.
 elim existence_representant_vecteur with (A := O) (B := A) (C := B);
  intros D H2; intros; try exact H2.
@@ -90,6 +95,7 @@ Lemma complexe_translation :
  z = affixe M ->
  z' = affixe M' ->
  a = affixe A -> z' = Cplus z a -> M' = translation O A M :>PO.
+Proof.
 intros.
 apply rec_translation_vecteur.
 apply
@@ -104,6 +110,7 @@ Lemma rec_complexe_translation :
  z = affixe M ->
  z' = affixe M' ->
  a = affixe A -> M' = translation O A M :>PO -> z' = Cplus z a.
+Proof.
 intros.
 cut (Cplus z' (Copp z) = a); intros.
 rewrite <- H3; ring.
@@ -122,6 +129,7 @@ Lemma argument_affixe_produit_positif_vecteur_OM :
  vec O M' = mult_PP k (vec O M) :>PP ->
  z = affixe_vec (vec O M) :>C ->
  z' = affixe_vec (vec O M') :>C -> argument z' = argument z :>AV.
+Proof.
 intros.
 cut (O <> M'); intros.
 rewrite (argument_def2 (M:=M) (z:=z)); auto with geo.
@@ -139,6 +147,7 @@ Lemma argument_affixe_produit_negatif_vecteur_OM :
  z = affixe_vec (vec O M) :>C ->
  z' = affixe_vec (vec O M') :>C ->
  argument z' = plus (argument z) (image_angle pi) :>AV.
+Proof.
 intros.
 cut (O <> M'); intros.
 rewrite (argument_def2 (M:=M) (z:=z)); auto with geo.
@@ -155,6 +164,7 @@ Lemma argument_affixe_produit_positif_vecteur :
  vec A' B' = mult_PP k (vec A B) :>PP ->
  z = affixe_vec (vec A B) :>C ->
  z' = affixe_vec (vec A' B') :>C -> argument z' = argument z :>AV.
+Proof.
 intros k A B A' B' z z' H H0; try assumption.
 elim existence_representant_vecteur with (A := O) (B := A) (C := B); intros M;
  intros H1.
@@ -175,6 +185,7 @@ Lemma argument_affixe_produit_negatif_vecteur :
  z = affixe_vec (vec A B) :>C ->
  z' = affixe_vec (vec A' B') :>C ->
  argument z' = plus (argument z) (image_angle pi) :>AV.
+Proof.
 intros k A B A' B' z z' H H0; try assumption.
 elim existence_representant_vecteur with (A := O) (B := A) (C := B); intros M;
  intros H1.
@@ -192,6 +203,7 @@ Lemma module_affixe_produit_vecteur_OM :
  vec O M' = mult_PP k (vec O M) :>PP ->
  z = affixe_vec (vec O M) :>C ->
  z' = affixe_vec (vec O M') :>C -> module z' = Rabs k * module z.
+Proof.
 intros.
 rewrite (module_def2 (z:=z) (M:=M)); auto with geo.
 rewrite (module_def2 (z:=z') (M:=M')); auto with geo.
@@ -202,6 +214,7 @@ Lemma module_affixe_produit_vecteur :
  vec A' B' = mult_PP k (vec A B) :>PP ->
  z = affixe_vec (vec A B) :>C ->
  z' = affixe_vec (vec A' B') :>C -> module z' = Rabs k * module z.
+Proof.
 intros k A B A' B' z z'; try assumption.
 elim existence_representant_vecteur with (A := O) (B := A) (C := B); intros M;
  intros H1.
@@ -216,6 +229,7 @@ Qed.
 Lemma egalite_point_zeroC :
  forall (z : C) (A B : PO),
  A = B -> z = affixe_vec (vec A B) :>C -> z = zeroC :>C.
+Proof.
 intros z A B H; try assumption.
 elim existence_representant_vecteur with (A := O) (B := A) (C := B);
  intros M H1.
@@ -230,6 +244,7 @@ Qed.
 Lemma points_distincts_non_zeroC :
  forall (z : C) (A B : PO),
  A <> B :>PO -> z = affixe_vec (vec A B) :>C -> z <> zeroC :>C.
+Proof.
 intros z A B H; try assumption.
 elim existence_representant_vecteur with (A := O) (B := A) (C := B);
  intros M H1.
@@ -246,6 +261,7 @@ Theorem produit_vecteur_image :
  z = affixe_vec (vec A B) :>C ->
  z' = affixe_vec (vec A' B') :>C ->
  vec A' B' = mult_PP k (vec A B) :>PP -> z' = Cmult (Rinj k) z :>C.
+Proof.
 intros.
 cut (module z' = Rabs k * module z); intros.
 2: apply
@@ -307,6 +323,7 @@ Theorem produit_reel_affixe_vecteur_OM :
  z = affixe_vec (vec O M) :>C ->
  z' = affixe_vec (vec O M') :>C ->
  z' = Cmult (Rinj k) z :>C -> vec O M' = mult_PP k (vec O M) :>PP.
+Proof.
 intros.
 cut (module z' = module (Rinj k) * module z); intros.
 discrimine O M.
@@ -383,6 +400,7 @@ Theorem produit_reel_affixe_vecteur :
  z = affixe_vec (vec A B) :>C ->
  z' = affixe_vec (vec A' B') :>C ->
  z' = Cmult (Rinj k) z :>C -> vec A' B' = mult_PP k (vec A B) :>PP.
+Proof.
 intros k z z' A B A' B'; try assumption.
 elim existence_representant_vecteur with (A := O) (B := A) (C := B); intros M;
  intros H1.
@@ -400,6 +418,7 @@ Theorem complexe_homothetie :
  j = affixe J ->
  Cplus z' (Copp j) = Cmult (Rinj k) (Cplus z (Copp j)) ->
  M' = homothetie k J M :>PO.
+Proof.
 intros.
 apply vecteur_homothetie.
 apply produit_reel_affixe_vecteur with (3 := H2); auto with geo.
@@ -412,6 +431,7 @@ Theorem rec_complexe_homothetie :
  j = affixe J ->
  M' = homothetie k J M :>PO ->
  Cplus z' (Copp j) = Cmult (Rinj k) (Cplus z (Copp j)).
+Proof.
 intros.
 cut (vec J M' = mult_PP k (vec J M)); intros.
 2: apply homothetie_vecteur; auto.

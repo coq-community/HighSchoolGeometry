@@ -66,7 +66,8 @@ Axiom invAM_l : forall x : AM, x <> zeroAM -> multAM (invAM x) x = unAM.
 
 Lemma AMField : field_theory
   zeroAM unAM plusAM multAM minusAM oppAM divAM invAM(eq(A:=AM)).
-constructor.
+Proof.
+ constructor.
  apply AM_theory.
  rewrite <- fR1 in |- *; apply nonzeroAM; discrR.
  reflexivity.
@@ -95,11 +96,13 @@ Ltac RewriteAM :=
 Ltac RingPP := apply fPP_inj; RewriteAM; (ring || ring_simplify).
 
 Lemma l1 : forall A B C : PP, add_PP A B = C -> A = add_PP C (mult_PP (-1) B).
+Proof.
 intros.
 rewrite <- H; RingPP.
 Qed.
  
 Lemma l2 : forall A B C : PP, add_PP A B = C -> B = add_PP C (mult_PP (-1) A).
+Proof.
 intros.
 rewrite <- H.
 RingPP.
@@ -116,39 +119,47 @@ Ltac FieldPP k :=
    [try lra | RewriteAM; rewrite <- H; try (ring || ring_simplify); auto].
  
 Lemma add_PP_zero : forall (P : PP) (A : PO), add_PP P (cons 0 A) = P.
+Proof.
 intros; RingPP.
 Qed.
  
 Lemma add_PP_A :
  forall (a b : R) (A : PO), add_PP (cons a A) (cons b A) = cons (a + b) A.
+Proof.
 intros; RingPP.
 Qed.
  
 Lemma add_PP_sym : forall P Q : PP, add_PP P Q = add_PP Q P.
+Proof.
 intros; RingPP.
 Qed.
  
 Lemma add_PP_assoc :
  forall P Q T : PP, add_PP P (add_PP Q T) = add_PP (add_PP P Q) T.
+Proof.
 intros; RingPP.
 Qed.
  
 Lemma def_mult_PP :
  forall (a k : R) (A : PO), mult_PP k (cons a A) = cons (k * a) A.
+Proof.
 intros; RingPP.
 Qed.
  
 Lemma mult_PP_1 : forall (a : R) (A : PO), mult_PP 1 (cons a A) = cons a A.
+Proof.
 intros; RingPP.
 Qed.
  
 Lemma mult_PP_0 : forall (a : R) (A : PO), mult_PP 0 (cons a A) = cons 0 A.
+Proof.
 intros; RingPP.
 Qed.
  
 Lemma distrib_mult_PP :
  forall (k : R) (P Q : PP),
  add_PP (mult_PP k P) (mult_PP k Q) = mult_PP k (add_PP P Q).
+Proof.
 intros; RingPP.
 Qed.
  
@@ -156,11 +167,13 @@ Lemma distrib_mult_cons :
  forall (a b k : R) (A B : PO),
  add_PP (cons (k * a) A) (cons (k * b) B) =
  mult_PP k (add_PP (cons a A) (cons b B)).
+Proof.
 intros; RingPP.
 Qed.
  
 Lemma mult_PP_regulier :
  forall (k : R) (P Q : PP), k <> 0 -> mult_PP k P = mult_PP k Q -> P = Q :>PP.
+Proof.
 intros k P Q Hk H0.
 replace P with (mult_PP (/ k) (mult_PP k P)).
 rewrite H0.
@@ -171,6 +184,7 @@ Qed.
 Lemma add_PP_regulier :
  forall (P Q : PP) (a : R) (A : PO),
  add_PP P (cons a A) = add_PP Q (cons a A) :>PP -> P = Q :>PP.
+Proof.
 intros P Q c C H; try assumption.
 RingPP1 H.
 RingPP.
@@ -179,27 +193,32 @@ Qed.
 Lemma add_PP_reg_gauche :
  forall (P Q : PP) (a : R) (A : PO),
  add_PP (cons a A) P = add_PP (cons a A) Q :>PP -> P = Q :>PP.
+Proof.
 intros P Q a A H; try assumption.
 RingPP2 H.
 RingPP.
 Qed.
  
 Lemma PP_0 : forall A B : PO, cons 0 A = cons 0 B.
+Proof.
 intros; RingPP.
 Qed.
  
 Lemma zero_add_PP : forall (P : PP) (A : PO), add_PP (cons 0 A) P = P :>PP.
+Proof.
 intros.
 RingPP.
 Qed.
  
 Lemma def_zero : forall A : PO, zero = cons 0 A.
+Proof.
 intros; RingPP.
 Qed.
  
 Lemma inversion_kPP :
  forall (k : R) (P Q : PP),
  k <> 0 -> P = mult_PP k Q -> Q = mult_PP (/ k) P :>PP.
+Proof.
 intros.
 rewrite H0.
 FieldPP k.
@@ -207,6 +226,7 @@ Qed.
  
 Lemma cons_comp :
  forall (a b : R) (A B : PO), a = b -> A = B -> cons a A = cons b B.
+Proof.
 intros.
 rewrite H; rewrite H0; auto.
 Qed.

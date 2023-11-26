@@ -25,6 +25,7 @@ Lemma cercle_equation :
  b = ordonnee A ->
  x = abscisse M ->
  y = ordonnee M -> cercle A r M -> Rsqr (x + - a) + Rsqr (y + - b) = Rsqr r.
+Proof.
 icercle.
 assert (scalaire (vec A M) (vec A M) = Rsqr r).
 rewrite carre_scalaire_distance; rewrite H3; auto.
@@ -45,6 +46,7 @@ Lemma equation_cartesienne_cercle :
  x = abscisse M ->
  y = ordonnee M ->
  Rsqr (x + - a) + Rsqr (y + - b) = Rsqr r -> exists A : _, cercle A r M.
+Proof.
 icercle.
 assert (vec O M = add_PP (mult_PP x (vec O I)) (mult_PP y (vec O J)));
  auto with geo.
@@ -74,6 +76,7 @@ Lemma equation_generale_cercle :
  y = ordonnee M ->
  Rsqr x + (Rsqr y + (2 * (a * x) + 2 * (b * y))) = c ->
  exists A : _, cercle A (sqrt (c + (Rsqr a + Rsqr b))) M.
+Proof.
 intros M x y a b c H H0 H1; try assumption.
 RReplace (Rsqr x + (Rsqr y + (2 * (a * x) + 2 * (b * y))))
  (Rsqr x + 2 * (a * x) + (Rsqr y + 2 * (b * y))).
@@ -101,6 +104,7 @@ Lemma tangente_cercle_equation :
  x = abscisse M ->
  y = ordonnee M ->
  tangente_cercle A C C M -> (c + - a) * (x + - c) + (d + - b) * (y + - d) = 0.
+Proof.
 icercle.
 rewrite <-
  (scalaire_composantes_ABCD (O:=O) (I:=I) (J:=J) (A:=A) (B:=C) (C:=C) (D:=M)
@@ -119,6 +123,7 @@ Lemma equation_tangente_cercle :
  x = abscisse M ->
  y = ordonnee M ->
  (c + - a) * (x + - c) + (d + - b) * (y + - d) = 0 -> tangente_cercle A C C M.
+Proof.
 icercle.
 assert (orthogonal (vec A C) (vec C M)).
 apply def_orthogonal2.
@@ -141,6 +146,7 @@ Lemma cercle_diametre_equation :
  y = ordonnee M ->
  cercle_diametre A A' M ->
  (x + - a) * (x + - a') + (y + - b) * (y + - b') = 0.
+Proof.
 intros.
 elim (caracterisation_cercle_diametre A A' M); intros.
 rewrite <- H6; auto.
@@ -165,6 +171,7 @@ Lemma equation_cercle_diametre :
  y = ordonnee M ->
  (x + - a) * (x + - a') + (y + - b) * (y + - b') = 0 ->
  cercle_diametre A A' M.
+Proof.
 intros.
 elim (caracterisation_cercle_diametre A A' M); intros.
 apply H7.
@@ -192,6 +199,7 @@ Lemma equation_k_cercle :
  K = milieu A A' ->
  (x + - a) * (x + - a') + (y + - b) * (y + - b') = k ->
  cercle K (sqrt (k + Rsqr (distance K A))) M.
+Proof.
 intros A A' K M k a b a' b' x y H H0 H1 H2 H3 H4 H5 H6; try assumption.
 rewrite <-
  (scalaire_composantes_ABCD (O:=O) (I:=I) (J:=J) (A:=A) (B:=M) (C:=A') (D:=M)

@@ -24,6 +24,7 @@ Lemma existence_unitaire :
  exists C : PO,
    alignes A B C /\
    scalaire (vec A C) (vec A C) = 1 /\ scalaire (vec A B) (vec A C) >= 0.
+Proof.
 intros.
 cut
  (ex
@@ -63,6 +64,7 @@ Lemma scalaire_non_nul :
  alignes A B C ->
  scalaire (vec A C) (vec A C) = 1 ->
  scalaire (vec A B) (vec A C) >= 0 -> scalaire (vec A B) (vec A C) <> 0.
+Proof.
 intros.
 halignes H0 k.
 rewrite H3.
@@ -94,6 +96,7 @@ Lemma unicite_representant_unitaire :
  alignes A B D ->
  scalaire (vec A D) (vec A D) = 1 ->
  scalaire (vec A B) (vec A D) >= 0 -> C = D.
+Proof.
 intros.
 halignes H0 k.
 halignes H3 k0.
@@ -164,6 +167,7 @@ Axiom
 Lemma existence_representant_unitaire :
  forall A B : PO,
  A <> B -> exists C : PO, vec A C = representant_unitaire (vec A B).
+Proof.
 intros A B H; try assumption.
 elim existence_unitaire with (A := A) (B := B);
  [ intros C H0; try clear existence_unitaire; try exact H0 | auto ].
@@ -189,6 +193,7 @@ Lemma produit_positif_representant_unitaire :
  k > 0 ->
  vec A C = mult_PP k (vec A B) :>PP ->
  representant_unitaire (vec A B) = representant_unitaire (vec A C).
+Proof.
 intros.
 cut (A <> C); intros.
 2: apply distinct_produit_vecteur with (3 := H1); auto with real.
@@ -211,6 +216,7 @@ Lemma egalite_representant_unitaire :
  A <> C :>PO ->
  representant_unitaire (vec A B) = representant_unitaire (vec A C) :>PP ->
  exists k : R, k > 0 /\ vec A C = mult_PP k (vec A B) :>PP.
+Proof.
 intros A B C H H0; try assumption.
 elim existence_representant_unitaire with (A := A) (B := B);
  [ intros B' H3; try clear existence_representant_unitaire; rewrite <- H3
@@ -267,6 +273,7 @@ Lemma representant_unitaire_bis :
  A <> B :>PO ->
  representant_unitaire (representant_unitaire (vec A B)) =
  representant_unitaire (vec A B) :>PP.
+Proof.
 intros A B H; try assumption.
 elim existence_representant_unitaire with (A := A) (B := B);
  [ intros B' H3; try clear existence_representant_unitaire; rewrite <- H3
@@ -315,6 +322,7 @@ Lemma oppose_representant_unitaire :
  representant_unitaire (vec A C) =
  mult_PP (-1) (representant_unitaire (vec A B)) :>PP ->
  exists k : R, k < 0 /\ vec A C = mult_PP k (vec A B) :>PP.
+Proof.
 intros A B C H H0; try assumption.
 elim existence_representant_unitaire with (A := A) (B := B);
  [ intros B' H3; try clear existence_representant_unitaire; rewrite <- H3
@@ -363,6 +371,7 @@ Lemma produit_negatif_representant_unitaire :
  vec A C = mult_PP k (vec A B) ->
  representant_unitaire (vec A C) =
  mult_PP (-1) (representant_unitaire (vec A B)).
+Proof.
 intros.
 cut (A <> C); intros.
 2: apply distinct_produit_vecteur with (3 := H1); auto.
@@ -400,6 +409,7 @@ Lemma alignes_representant_unitaire :
  representant_unitaire (vec A B) = representant_unitaire (vec A C) \/
  representant_unitaire (vec A C) =
  mult_PP (-1) (representant_unitaire (vec A B)).
+Proof.
 intros.
 halignes H1 k.
 elim Rtotal_order with (r1 := k) (r2 := 0);

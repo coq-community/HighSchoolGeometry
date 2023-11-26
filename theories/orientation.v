@@ -9,13 +9,15 @@ Definition orient ( A B C :PO) : Prop :=
 
 Lemma orient_cycle :
     forall (A B C :PO), orient A B C -> orient B C A.
+Proof.
 intros A B C H.
 unfold orient in *.
 rewrite aire_ordre_cycle ;auto.
 Qed.
 
 Lemma orient_compensation :
-    forall (A B C :PO), ~orient A B C \/ ~orient B A C .
+   forall (A B C :PO), ~orient A B C \/ ~orient B A C.
+Proof.
 intros A B C.
 elim (classic (orient A B C));(intros H;auto).
 assert (H0 : orient B C A ) by (apply orient_cycle ;auto).
@@ -27,6 +29,7 @@ Qed.
 
 Lemma position_3points_1:
    forall (A B C :PO), (~ orient A B C /\ ~ orient B A C) \/ ~ alignes A B C.
+Proof.
 intros A B C.
 elim (classic (~ orient A B C /\ ~ orient B A C));(intros H;auto).
 right.
@@ -47,6 +50,7 @@ Qed.
 
 Lemma position_3points_2:
    forall (A B C :PO), orient A B C \/ orient B A C \/ alignes A B C.
+Proof.
 intros A B C .
 destruct (@total_order_T (aire (vec A B)(vec A C)) 0) as [[H | H ] |H].
 right;left.
@@ -62,11 +66,13 @@ apply  colineaire_alignes with (k:=k);auto.
 left.
 unfold orient;auto.
 Qed.
+
 Lemma orient_4point:
 (*correspondant un axiom de Knuth
   prouve grace a l'axiom position_4points *)
 forall (A B C D : PO), orient A B D -> orient B C D ->
           orient C A D -> orient A B C.
+Proof.
 intros A B C D H0 H1 H2.
 unfold orient in *.
 rewrite aire_ordre_cycle2 in H2.
@@ -149,6 +155,7 @@ Axiom negatifColineaire_positifColineaire :
 Lemma inversion_colineaire :
  forall (k : R) (A B C : PO),
  A <> C -> vec A C = mult_PP k (vec A B) -> vec A B = mult_PP (/ k) (vec A C).
+Proof.
 intros.
 cut (k <> 0); intros.
 rewrite H0.
@@ -161,6 +168,7 @@ Qed.
 Lemma alignes_positifColineaire :
            forall ( A B M :PO), A<>B ->alignes A B M ->
                     positifColineaire A B M \/ positifColineaire B A M.
+Proof.
 intros A B M H H0.
 elim H0;intros H1.
 elim H;auto.
@@ -191,6 +199,7 @@ Qed.
 Lemma positifColineaire_orient_l:
 forall (A B C M :PO), orient A B C -> positifColineaire A B M ->
           orient A M C.
+Proof.
 intros A B C M H [k [H0 [H1 H2]]].
 unfold orient in *.
 rewrite H1.
@@ -201,6 +210,7 @@ Qed.
 Lemma negatifColineaire_orient_l:
 forall (A B C M :PO), orient A B C -> negatifColineaire A B M ->
           orient A C M.
+Proof.
 intros A B C M H [k [H0 [H1 H2]]].
 unfold orient in *.
 rewrite H1.
@@ -214,6 +224,7 @@ Qed.
 Lemma positifColineaire_orient_r:
 forall (A B C M :PO), orient A B C -> positifColineaire A C M ->
           orient A B M.
+Proof.
 intros A B C M H [k [H0 [H1 H2]]].
 unfold orient in *.
 rewrite H1.
@@ -224,6 +235,7 @@ Qed.
 Lemma negatifColineaire_orient_r:
 forall (A B C M :PO), orient A B C -> negatifColineaire A C M ->
           orient A M B.
+Proof.
 intros A B C M H [k [H0 [H1 H2]]].
 unfold orient in *.
 rewrite H1.
@@ -238,6 +250,7 @@ Qed.
 Lemma positifColineaire_orient_inv_l:
 forall (A B C M :PO), orient A B C -> orient A M C ->
           alignes A B M -> positifColineaire A B M.
+Proof.
 intros A B C M H H0 H1 .
 destruct H1 as [H2|H3].
 deroule_orient H.
@@ -260,6 +273,7 @@ Qed.
 Lemma positifColineaire_orient_inv_r:
 forall (A B C M :PO), orient A B C -> orient A B M  ->
            alignes A C M ->  positifColineaire A C M.
+Proof.
 intros A B C M H H0 H1 .
 destruct H1 as [H2|H3].
 deroule_orient H.
@@ -283,6 +297,7 @@ Qed.
 Lemma negatifColineaire_orient_inv_l:
 forall (A B C M :PO), orient A B C -> orient A C M->alignes A B M->
           negatifColineaire A B M.
+Proof.
 intros A B C M H H0 H1.
 destruct H1 as [H2|H2].
 deroule_orient H.
@@ -304,6 +319,7 @@ Qed.
 Lemma negatifColineaire_orient_inv_r:
 forall (A B C M :PO), orient A B C -> orient A M B->alignes A C M->
           negatifColineaire A C M.
+Proof.
 intros A B C M H H0 H1.
 destruct H1 as [H2|H2].
 deroule_orient H.
@@ -329,6 +345,7 @@ Qed.
 Lemma orient_SinusPositif :
 forall A B C  :PO,
            orient A B C-> Sin (cons_AV (vec A B )(vec A C ))>0.
+Proof.
 intros A B C H.
 generalize H;intros H0.
 unfold orient in H0.
@@ -349,6 +366,7 @@ Lemma anglesEgaux_orient :
 forall (A B C M N P : PO), orient A B C -> M<>N -> M <>P->
          cons_AV (vec M N) (vec M P) = cons_AV (vec A B ) ( vec A C)->
          orient M N P.
+Proof.
 intros A B C M N P H H0 H1 H2.
 generalize H;intros H3.
 unfold orient in H3.
@@ -374,6 +392,7 @@ forall A B C M N P :PO,
 double_AV (cons_AV (vec A B)(vec A C))= double_AV (cons_AV (vec M N) (vec M P))->
 orient A B C -> orient M N P ->
 cons_AV (vec A B) (vec A C) = cons_AV (vec M N) (vec M P).
+Proof.
 intros A B C M N P H H0 H1.
 unfold double_AV in H.
 deroule_orient H0.
@@ -421,6 +440,7 @@ forall A B C M N P :PO,
 double_AV (cons_AV (vec A B)(vec A C))= double_AV (cons_AV (vec M N) (vec M P))->
 orient A B C -> orient M P N ->
 cons_AV (vec A B) (vec A C) = plus (cons_AV (vec M N) (vec M P)) (image_angle pi).
+Proof.
 intros A B C M N P H H0 H1.
 unfold double_AV in H.
 deroule_orient H0.
@@ -498,6 +518,7 @@ Definition vecEntreDeuxVec ( A B C M :PO) : Prop :=
 Lemma (*lemme*) vecEntreDeuxVec_permute :
 forall ( A B C M :PO), vecEntreDeuxVec A B C M ->
           vecEntreDeuxVec A C B M.
+Proof.
 intros A B C M [[H0 [H1 H2]]|[H0 [H1 H2]]].
 right;auto.
 left;auto.
@@ -507,6 +528,7 @@ Lemma vecEntreDeuxVec_intersection_middle1:
            forall ( A B C D :PO),orient A B C -> vecEntreDeuxVec A B C D ->
            forall M:PO, alignes A D M /\ alignes B C M ->
            positifColineaire A D M.
+Proof.
 intros A B C D H H0 M [H2 H1] .
 elim H0;intros [H3 [H4 H5]].
 destruct H2 as [H2|H2].
@@ -542,6 +564,7 @@ Lemma vecEntreDeuxVec_intersection_middle2:
            forall ( A B C D  :PO),orient A B C -> vecEntreDeuxVec A B C D ->
            forall M:PO, alignes A D M /\ alignes B C M ->
            positifColineaire B C M /\ positifColineaire C B M.
+Proof.
 intros A B C D  H H0 M [H2 H1].
 elim H0;intros [H3 [H4 H5]].
 assert (positifColineaire A D M) by  (apply(@vecEntreDeuxVec_intersection_middle1 A B C D );auto).
@@ -564,6 +587,7 @@ Lemma vecEntreDeuxVec_intersection_middle:
            forall ( A B C D :PO), vecEntreDeuxVec A B C D ->
            forall M:PO, alignes A D M /\ alignes B C M ->
            positifColineaire B C M /\ positifColineaire C B M /\ positifColineaire A D M.
+Proof.
 intros A B C D H M [H1 H0].
 elim H;intros [H2 [H3 H4]].
 assert (positifColineaire B C M /\ positifColineaire C B M).
@@ -586,7 +610,8 @@ Lemma vecEntreDeuxVec_intersection_left1:
            forall ( A B C D :PO), vecEntreDeuxVec A B C D ->
            forall M :PO, alignes A B M /\ alignes C D M ->
            (positifColineaire C D M -> positifColineaire A B M) /\
-           (positifColineaire A B M -> positifColineaire C D M /\ positifColineaire M D C ) .
+           (positifColineaire A B M -> positifColineaire C D M /\ positifColineaire M D C).
+Proof.
 intros A B C D H M [H3 H2].
 repeat split.
 intro H1.
@@ -637,7 +662,8 @@ Lemma vecEntreDeuxVec_intersection_left2:
            forall ( A B C D :PO), vecEntreDeuxVec A B C D ->
            forall M :PO, alignes A B M /\ alignes C D M ->
            (negatifColineaire C D M -> negatifColineaire A B M) /\
-           (negatifColineaire A B M -> negatifColineaire C D M  ) .
+           (negatifColineaire A B M -> negatifColineaire C D M).
+Proof.
 intros A B C D H M [H3 H2].
 repeat split;intro H1.
 destruct H as [[H19 [H20 H21]] |[H19 [H20 H21]]].
@@ -670,7 +696,8 @@ Lemma vecEntreDeuxVec_intersection_right1:
            forall ( A B C D :PO), vecEntreDeuxVec A B C D ->
            forall M :PO, alignes A C M /\ alignes B D M ->
            (positifColineaire B D M -> positifColineaire A C M) /\
-           (positifColineaire A C M -> positifColineaire B D M /\ positifColineaire M D B ) .
+           (positifColineaire A C M -> positifColineaire B D M /\ positifColineaire M D B).
+Proof.
 intros A B C  D H M [H3 H2].
 repeat split.
 intro H1.
@@ -721,7 +748,8 @@ Lemma vecEntreDeuxVec_intersection_right2:
            forall ( A B C D :PO), vecEntreDeuxVec A B C D ->
            forall M :PO, alignes A C M /\ alignes B D M ->
            (negatifColineaire B D M -> negatifColineaire A C M) /\
-           (negatifColineaire A C M -> negatifColineaire B D M  ) .
+           (negatifColineaire A C M -> negatifColineaire B D M).
+Proof.
 intros A B C D H M [H3 H2].
 repeat split;intro H1.
 destruct H as [[H19 [H20 H21]] |[H19 [H20 H21]]].
@@ -756,6 +784,7 @@ droites_non_paralleles *)
 forall (A B C D :PO),
           vecEntreDeuxVec A B C D ->
           exists E :PO, alignes A D E /\ alignes B C E.
+Proof.
 intros A B C D H.
 assert (H0 : ~alignes A D B /\ A <>D)
  by(destruct H as [[_ [H2 _]]|[_ [_ H2]]];deroule_orient H2;auto with geo).
@@ -811,6 +840,7 @@ droites_non_paralleles *)
 forall (A B C D :PO),
           vecEntreDeuxVec A B C D ->
           exists M :PO,positifColineaire B C M /\ positifColineaire C B M /\ positifColineaire A D M.
+Proof.
 intros A B C D H.
 destruct (@Exists_Intersection1 A B C D) as [M [H0 H1]];auto.
 exists M.
@@ -838,6 +868,7 @@ end.
 Lemma sont_cocycliques_avec_ordre_cycle:
 forall (A B C D :PO),
          sont_cocycliques A B C D ->sont_cocycliques B C D A.
+Proof.
 intros A B C D H.
 deroule_sont_cocycliques .
 unfold sont_cocycliques .
@@ -853,6 +884,7 @@ Qed.
 Lemma sont_cocycliques_avec_ordre_permute:
 forall (A B C D :PO),
          sont_cocycliques A B C D ->sont_cocycliques A B D C.
+Proof.
 intros A B C D H.
 deroule_sont_cocycliques .
 unfold sont_cocycliques .
@@ -871,6 +903,7 @@ Theorem SommeAnglesInscritsOriente:
 forall (A B C D : PO),
          sont_cocycliques A B C D ->orient A B C ->
                     orient A C D -> orient A B D.
+Proof.
 intros A B C D H H0 H1.
 destruct (@position_3points_2 A B D) as [H2|[H2|H2]];auto.
 assert (H3:orient B C D).

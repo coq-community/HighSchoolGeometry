@@ -26,12 +26,14 @@ Axiom
  
 Lemma Conj_algebrique :
  forall x y : R, Conj (cons_cart x y) = cons_cart x (- y).
+Proof.
 intros.
 rewrite (Conj_def (z:=cons_cart x y) (x:=x) (y:=y)); auto.
 Qed.
 #[export] Hint Resolve Conj_algebrique: geo.
  
 Lemma Conj_Conj : forall z : C, Conj (Conj z) = z.
+Proof.
 intros.
 elim existence_parties_relles_imaginaires with (z := z); intros x H; elim H;
  intros y H0; try clear H; try exact H0.
@@ -42,6 +44,7 @@ Qed.
  
 Lemma Conj_somme :
  forall z1 z2 : C, Conj (Cplus z1 z2) = Cplus (Conj z1) (Conj z2).
+Proof.
 intros.
 elim existence_parties_relles_imaginaires with (z := z1); intros x1 H; elim H;
  intros y1 H0; try clear H; try exact H0.
@@ -56,6 +59,7 @@ Qed.
  
 Lemma Conj_produit :
  forall z1 z2 : C, Conj (Cmult z1 z2) = Cmult (Conj z1) (Conj z2).
+Proof.
 intros.
 elim existence_parties_relles_imaginaires with (z := z1); intros x1 H; elim H;
  intros y1 H0; try clear H; try exact H0.
@@ -70,18 +74,21 @@ replace (- y1 * x2 + x1 * - y2) with (- (y1 * x2 + x1 * y2)); [ auto | ring ].
 Qed.
  
 Lemma Conj_zeroC : Conj zeroC = zeroC.
+Proof.
 unfold zeroC in |- *.
 repeat rewrite Conj_algebrique.
 replace (-0) with 0; [ auto | ring ].
 Qed.
  
 Lemma Conj_oneC : Conj oneC = oneC.
+Proof.
 unfold oneC in |- *.
 repeat rewrite Conj_algebrique.
 replace (-0) with 0; [ auto | ring ].
 Qed.
  
 Lemma Conj_reel : forall x : R, Conj (Rinj x) = Rinj x.
+Proof.
 unfold Rinj in |- *; intros.
 repeat rewrite Conj_algebrique.
 replace (-0) with 0; [ auto | ring ].
@@ -89,12 +96,14 @@ Qed.
 #[export] Hint Resolve Conj_zeroC Conj_oneC Conj_reel: geo.
  
 Lemma Conj_i : Conj i = Copp i.
+Proof.
 unfold i in |- *.
 repeat rewrite Conj_algebrique; repeat rewrite Copp_algebrique.
 replace (-0) with 0; [ auto | ring ].
 Qed.
  
 Lemma non_zero_Conj : forall z : C, z <> zeroC -> Conj z <> zeroC.
+Proof.
 intros.
 red in |- *; intros; apply H.
 rewrite <- (Conj_Conj z).
@@ -103,6 +112,7 @@ Qed.
 #[export] Hint Resolve non_zero_Conj Conj_produit Conj_somme: geo.
  
 Lemma Conj_Cinv : forall z : C, z <> zeroC -> Conj (Cinv z) = Cinv (Conj z).
+Proof.
 intros.
 cut (Cmult z (Cinv z) = oneC); (intros; auto with geo).
 cut (Cmult (Conj z) (Conj (Cinv z)) = oneC); intros.
@@ -115,12 +125,14 @@ Qed.
  
 Lemma Conj_Cdiv :
  forall z z' : C, z' <> zeroC -> Conj (Cdiv z z') = Cdiv (Conj z) (Conj z').
+Proof.
 intros.
 rewrite Cdiv_def; auto; rewrite Conj_produit; rewrite Conj_Cinv; auto.
 rewrite <- Cdiv_def; auto with geo.
 Qed.
  
 Lemma module_Conj : forall z : C, module (Conj z) = module z.
+Proof.
 intros.
 elim existence_parties_relles_imaginaires with (z := z); intros x H; elim H;
  intros y H0; try clear H; try exact H0.
@@ -134,6 +146,7 @@ Lemma argument_Conj :
  forall (z : C) (a : R),
  z <> zeroC ->
  argument z = image_angle a -> argument (Conj z) = image_angle (- a).
+Proof.
 intros.
 elim existence_parties_relles_imaginaires with (z := z); intros x H1; elim H1;
  intros y H2; try clear H1; try exact H2.
@@ -162,6 +175,7 @@ Qed.
 Lemma forme_polaire_Conj :
  forall (z : C) (r a : R),
  z <> zeroC -> z = cons_pol r a -> Conj z = cons_pol r (- a).
+Proof.
 intros.
 apply forme_polaire_def; auto with geo.
 rewrite module_Conj; auto.
@@ -172,6 +186,7 @@ Qed.
  
 Lemma argument_Conj2 :
  forall z : C, z <> zeroC -> argument (Conj z) = opp (argument z).
+Proof.
 intros.
 elim existence_argument with (z := z);
  [ intros a H7; try clear existence_argument; try exact H7 | auto with geo ].
@@ -182,6 +197,7 @@ Qed.
 Theorem reflexion_conjugaison :
  forall (z z' : C) (M M' : PO),
  z = affixe M -> z' = affixe M' -> M' = reflexion O I M -> z' = Conj z.
+Proof.
 intros z z' M M' H H0; try assumption.
 discrimine O M.
 cut (M <> I).
@@ -225,6 +241,7 @@ Lemma composantes_projete_orthogonal :
  H = projete_orthogonal O I M ->
  vec O M = add_PP (mult_PP a (vec O I)) (mult_PP b (vec O J)) ->
  vec O H = mult_PP a (vec O I).
+Proof.
 intros.
 elim def_projete_orthogonal2 with (A := O) (B := I) (C := M) (H := H);
  [ intros | auto with geo | auto ].
@@ -255,6 +272,7 @@ Lemma affixe_projete_orthogonal :
  forall (z : C) (a b : R) (M H : PO),
  H = projete_orthogonal O I M ->
  z = affixe M -> z = cons_cart a b -> Rinj a = affixe H.
+Proof.
 unfold Rinj in |- *; intros.
 cut (vec O H = mult_PP a (vec O I)); intros.
 symmetry  in |- *.
@@ -267,6 +285,7 @@ Qed.
 Theorem conjugaison_reflexion :
  forall (z : C) (M M' : PO),
  z = affixe M -> Conj z = affixe M' -> M' = reflexion O I M.
+Proof.
 intros z M M'; try assumption.
 discrimine O M.
 cut (M <> I); intros.

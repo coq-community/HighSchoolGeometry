@@ -36,6 +36,7 @@ Lemma Sin_opp :
  A <> B ->
  C <> D ->
  Sin (cons_AV (vec C D) (vec A B)) = - Sin (cons_AV (vec A B) (vec C D)).
+Proof.
 intros.
 elim (existence_representant_vecteur A C D); intros E; intros.
 rewrite <- H1.
@@ -51,6 +52,7 @@ Qed.
  
 Lemma aire_anti_symetrique :
  forall A B C D : PO, aire (vec A B) (vec C D) = - aire (vec C D) (vec A B).
+Proof.
 intros.
 elim (classic (A = B \/ C = D)); intros.
 rewrite def_aire_0; auto.
@@ -67,6 +69,7 @@ apply not_or_and; auto.
 Qed.
  
 Lemma aire_ABAB : forall A B : PO, aire (vec A B) (vec A B) = 0.
+Proof.
 intros.
 elim (classic (A = B)); intros.
 rewrite def_aire_0; auto.
@@ -78,6 +81,7 @@ Qed.
  
 Lemma aire_AB_oppAB :
  forall A B C : PO, aire (vec A B) (mult_PP (-1) (vec A B)) = 0.
+Proof.
 intros.
 elim (existence_representant_mult_vecteur A A B (-1)); auto; intros D H.
 rewrite <- H.
@@ -104,6 +108,7 @@ Ltac deroule_representant_unitaire A B C :=
 Lemma Sin_angles_alignes :
  forall A B C : PO,
  A <> B -> A <> C -> alignes A B C -> Sin (cons_AV (vec A B) (vec A C)) = 0.
+Proof.
 intros.
 deroule_representant_unitaire A B D.
 deroule_representant_unitaire A C E.
@@ -125,6 +130,7 @@ VReplace (mult_PP (-1) (vec A D)) (vec D A); auto with geo.
 Qed.
  
 Lemma aire_vecteur_nul_r : forall A B : PO, aire (vec A B) zero = 0.
+Proof.
 intros.
 VReplace zero (vec A A).
 rewrite def_aire_0; auto.
@@ -132,6 +138,7 @@ Qed.
 #[export] Hint Resolve aire_vecteur_nul_r: geo.
  
 Lemma aire_vecteur_nul_l : forall A B : PO, aire zero (vec A B) = 0.
+Proof.
 intros.
 VReplace zero (vec A A).
 rewrite def_aire_0; auto.
@@ -140,6 +147,7 @@ Qed.
  
 Lemma aire_alignement :
  forall A B C : PO, alignes A B C -> aire (vec A B) (vec A C) = 0.
+Proof.
 intros.
 discrimine A B.
 VReplace (vec B B) zero; auto with geo.
@@ -153,6 +161,7 @@ Qed.
 Lemma aire_colinearite :
  forall (k : R) (A B C D : PO),
  vec C D = mult_PP k (vec A B) -> aire (vec A B) (vec C D) = 0.
+Proof.
 intros.
 discrimine A B.
 VReplace (vec B B) zero; auto with geo.
@@ -171,6 +180,7 @@ Qed.
 Lemma aire_colineaire_l :
  forall (k : R) (A B C D : PO),
  aire (mult_PP k (vec A B)) (vec C D) = k * aire (vec A B) (vec C D).
+Proof.
 intros.
 discrimine A B.
 VReplace (mult_PP k (vec B B)) zero; auto with geo.
@@ -254,6 +264,7 @@ Qed.
 Lemma aire_colineaire_r :
  forall (k : R) (A B C D : PO),
  aire (vec A B) (mult_PP k (vec C D)) = k * aire (vec A B) (vec C D).
+Proof.
 intros.
 elim
  existence_representant_mult_vecteur with (A := A) (B := C) (C := D) (k := k);
@@ -268,6 +279,7 @@ Lemma aire_nulle_colineaires :
  forall A B C D : PO,
  A <> B ->
  aire (vec A B) (vec C D) = 0 -> exists k : R, vec C D = mult_PP k (vec A B).
+Proof.
 intros.
 discrimine C D.
 exists 0.
@@ -315,6 +327,7 @@ Lemma aire_orthogonal_direct :
  C <> D ->
  image_angle pisurdeux = cons_AV (vec A B) (vec C D) ->
  aire (vec A B) (vec C D) = distance A B * distance C D.
+Proof.
 intros A B C D H H0; try assumption.
 elim existence_representant_vecteur with (A := A) (B := C) (C := D);
  [ intros E H2; rewrite <- H2; intros ].
@@ -333,6 +346,7 @@ Lemma aire_orthogonal_indirect :
  C <> D ->
  image_angle (- pisurdeux) = cons_AV (vec A B) (vec C D) ->
  aire (vec A B) (vec C D) = - (distance A B * distance C D).
+Proof.
 intros A B C D H H0; try assumption.
 elim existence_representant_vecteur with (A := A) (B := C) (C := D);
  [ intros E H2; rewrite <- H2; intros ].
@@ -349,6 +363,7 @@ Lemma aire_orthogonal :
  forall A B C D : PO,
  orthogonal (vec A B) (vec C D) ->
  Rabs (aire (vec A B) (vec C D)) = distance A B * distance C D.
+Proof.
 intros.
 discrimine A B.
 VReplace (vec B B) zero; auto with geo.
@@ -384,6 +399,7 @@ Lemma aire_distrib_r :
  forall A B C D E F : PO,
  aire (add_PP (vec A B) (vec C D)) (vec E F) =
  aire (vec A B) (vec E F) + aire (vec C D) (vec E F).
+Proof.
 intros.
 replace (aire (vec A B) (vec E F) + aire (vec C D) (vec E F)) with
  (- (aire (vec E F) (vec A B) + aire (vec E F) (vec C D))).
@@ -398,6 +414,7 @@ Qed.
  
 Lemma aire_ordre_cycle :
  forall A B C : PO, aire (vec B C) (vec B A) = aire (vec A B) (vec A C).
+Proof.
 intros.
 VReplace (vec B C) (add_PP (vec B A) (vec A C)).
 rewrite aire_distrib_r; rewrite aire_ABAB; ring_simplify.
@@ -407,6 +424,7 @@ Qed.
  
 Lemma aire_ordre_cycle2 :
  forall A B C : PO, aire (vec C A) (vec C B) = aire (vec A B) (vec A C).
+Proof.
 intros.
 rewrite aire_ordre_cycle; rewrite aire_ordre_cycle; auto.
 Qed.
@@ -418,6 +436,7 @@ Lemma produit_longueur_absolu_Sin :
  B <> C ->
  distance A B * (distance A C * Rabs (Sin (cons_AV (vec A B) (vec A C)))) =
  distance B C * (distance B A * Rabs (Sin (cons_AV (vec B C) (vec B A)))).
+Proof.
 intros.
 replace
  (distance A B * (distance A C * Rabs (Sin (cons_AV (vec A B) (vec A C)))))
@@ -440,6 +459,7 @@ Lemma produit_longueur_absolu_Sin2 :
  B <> C ->
  distance A B * (distance A C * Rabs (Sin (cons_AV (vec A B) (vec A C)))) =
  distance C A * (distance C B * Rabs (Sin (cons_AV (vec C A) (vec C B)))).
+Proof.
 intros.
 replace
  (distance A B * (distance A C * Rabs (Sin (cons_AV (vec A B) (vec A C)))))
@@ -466,6 +486,7 @@ Theorem sinA_sur_a :
  sin_B = Rabs (Sin (cons_AV (vec B C) (vec B A))) ->
  sin_C = Rabs (Sin (cons_AV (vec C A) (vec C B))) ->
  sin_A / a = sin_B / b /\ sin_A / a = sin_C / c.
+Proof.
 intros.
 rewrite H0; rewrite H1; rewrite H2; rewrite H5; rewrite H4; rewrite H3.
 deroule_triangle A B C.
@@ -492,12 +513,14 @@ Definition aire_triangle (A B C : PO) :=
  
 Lemma aire_triangle_ordre_permute :
  forall A B C : PO, aire_triangle A B C = aire_triangle A C B.
+Proof.
 unfold aire_triangle in |- *; intros.
 rewrite aire_anti_symetrique; rewrite Rabs_Ropp; auto.
 Qed.
  
 Lemma aire_triangle_ordre_cycle :
  forall A B C : PO, aire_triangle A B C = aire_triangle B C A.
+Proof.
 unfold aire_triangle in |- *; intros.
 rewrite <- aire_ordre_cycle; auto.
 Qed.
@@ -514,6 +537,7 @@ Theorem sinA_sur_a_aire :
  sin_C = Rabs (Sin (cons_AV (vec C A) (vec C B))) ->
  (sin_A / a = sin_B / b /\ sin_A / a = sin_C / c) /\
  sin_A / a = 2 * S / (a * (b * c)).
+Proof.
 unfold aire_triangle in |- *;
  intros a b c d e f g A B C H H0 H1 H2 H3 H4 H5 H6.
 split; [ try assumption | idtac ].
@@ -537,6 +561,7 @@ Lemma aire_avec_projete :
  A <> B ->
  H = projete_orthogonal A B C ->
  aire (vec A B) (vec A C) = aire (vec A B) (vec H C).
+Proof.
 intros.
 elim (def_projete_orthogonal2 (A:=A) (B:=B) (C:=C) (H:=H)); auto; intros.
 VReplace (vec A C) (add_PP (vec A H) (vec H C)).
@@ -551,6 +576,7 @@ Lemma projete_Sinus :
  A <> C ->
  H = projete_orthogonal A B C ->
  distance H C = distance A C * Rabs (Sin (cons_AV (vec A B) (vec A C))).
+Proof.
 intros.
 apply Rmult_eq_reg_l with (distance A B); auto with geo.
 elim (def_projete_orthogonal2 (A:=A) (B:=B) (C:=C) (H:=H)); auto; intros.
@@ -568,6 +594,7 @@ Lemma projete_sinus :
  H = projete_orthogonal A B C ->
  image_angle x = cons_AV (vec A B) (vec A C) ->
  distance H C = distance A C * Rabs (sin x).
+Proof.
 intros.
 rewrite (egalite_sin_Sin (A:=A) (B:=B) (C:=C) (x:=x)); auto.
 rewrite (projete_Sinus (A:=A) (B:=B) (C:=C) (H:=H)); auto.
@@ -578,6 +605,7 @@ Lemma aire_triangle_projete :
  A <> B ->
  H = projete_orthogonal A B C ->
  aire_triangle A B C = / 2 * (distance A B * distance H C).
+Proof.
 unfold aire_triangle in |- *; intros.
 discrimine A C.
 assert (H = A).

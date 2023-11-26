@@ -5,6 +5,7 @@ Unset Strict Implicit.
  
 Lemma prod_sin:
  forall (a b : R),  2 * (sin (a + b) * sin (a - b)) = cos (2 * b) - cos (2 * a).
+Proof.
 intros.
 assert
  (cos ((a + b) + (a - b)) =
@@ -25,6 +26,7 @@ RReplace ((a + b) + (a - b)) (2 * a); auto.
 Qed.
  
 Lemma sin_3_a: forall (a : R),  sin (3 * a) = sin a * (2 * cos (2 * a) + 1).
+Proof.
 intros.
 RReplace (3 * a) (a + 2 * a).
 rewrite sin_som.
@@ -43,6 +45,7 @@ Lemma Al_Kashi_sin_cos:
  forall (a b c : R),
  (a + b) + c = pi ->
   Rsqr (sin c) = (Rsqr (sin a) + Rsqr (sin b)) - ((2 * sin a) * sin b) * cos c.
+Proof.
 intros.
 RReplace ((Rsqr (sin a) + Rsqr (sin b)) - ((2 * sin a) * sin b) * cos c)
          (((Rsqr (sin a) * Rsqr (cos c) + Rsqr (sin b)) -
@@ -74,6 +77,7 @@ Axiom pisurtrois_def : 3 * pisurtrois = pi.
 Axiom sin_pisurtrois_non_zero : sin pisurtrois <> 0.
  
 Lemma cos_2_pisurtrois: 2 * cos (2 * pisurtrois) + 1 = 0.
+Proof.
 RReplace (2 * cos (2 * pisurtrois) + 1) (sin pi * / sin pisurtrois).
 rewrite sin_pi; ring.
 rewrite <- pisurtrois_def.
@@ -85,6 +89,7 @@ Qed.
 Lemma sin_3_a_pisurtrois:
  forall (a : R),
   sin (3 * a) = 4 * (sin a * (sin (pisurtrois + a) * sin (pisurtrois - a))).
+Proof.
 intros.
 rewrite sin_3_a.
 RReplace (4 * (sin a * (sin (pisurtrois + a) * sin (pisurtrois - a))))
@@ -106,6 +111,7 @@ Lemma Al_Kashi_pisurtrois:
   Rsqr (sin b) =
   (Rsqr (sin (pisurtrois + a)) + Rsqr (sin (pisurtrois + c))) -
   ((2 * sin (pisurtrois + a)) * sin (pisurtrois + c)) * cos b.
+Proof.
 intros.
 apply Al_Kashi_sin_cos.
 rewrite <- pisurtrois_def.
@@ -118,6 +124,7 @@ From HighSchoolGeometry Require Export cocyclicite.
  
 Lemma distance_double_milieu:
  forall (B C A' : PO), A' = milieu B C ->  distance B C = 2 * distance A' C.
+Proof.
 intros.
 rewrite <- (milieu_distance H); auto.
 assert (vec B C = mult_PP 2 (vec B A')).
@@ -139,6 +146,7 @@ Lemma demi_angle_centre:
  circonscrit O A B C ->
   double_AV (cons_AV (vec A B) (vec A C)) =
   double_AV (cons_AV (vec O A') (vec O C)).
+Proof.
 intros.
 deroule_triangle A B C.
 deroule_circonscrit A B C O.
@@ -176,6 +184,7 @@ Lemma diametre_Sinus:
  O = milieu B C ->
  circonscrit O A B C ->
   distance B C = 2 * (distance O C * Rabs (Sin (cons_AV (vec A B) (vec A C)))).
+Proof.
 intros.
 assert (orthogonal (vec A B) (vec A C)).
 apply triangle_diametre with O; auto.
@@ -203,6 +212,7 @@ Lemma rayon_Sinus_general:
  A' = milieu B C ->
  circonscrit O A B C ->
   distance B C = 2 * (distance O C * Rabs (Sin (cons_AV (vec A B) (vec A C)))).
+Proof.
 intros.
 deroule_triangle A B C.
 deroule_circonscrit A B C O.
@@ -233,6 +243,7 @@ Theorem rayon_Sinus:
  triangle A B C ->
  circonscrit O A B C ->
   distance B C = 2 * (distance O C * Rabs (Sin (cons_AV (vec A B) (vec A C)))).
+Proof.
 intros.
 deroule_triangle A B C.
 soit_milieu B C A'.
@@ -246,6 +257,7 @@ Lemma existence_rayon_circonscrit:
  forall A B C,
  triangle A B C ->
   (exists O : PO , circonscrit O A B C /\ (exists r : R , r = distance O C ) ).
+Proof.
 intros.
 elim existence_cercle_circonscrit with ( A := A ) ( B := B ) ( C := C );
  [intros O H0; (try clear existence_cercle_circonscrit); (try exact H0) | auto].
@@ -269,6 +281,7 @@ Axiom
 Lemma triangle_abs_Sin_not_0:
  forall A B C,
  triangle A B C ->  (Rabs (Sin (cons_AV (vec A B) (vec A C))) <> 0).
+Proof.
 intros.
 apply Rabs_no_R0.
 auto with geo.
@@ -284,6 +297,7 @@ Theorem loi_Sinus:
     distance A B / Rabs (Sin (cons_AV (vec C A) (vec C B))))
    (distance B C / Rabs (Sin (cons_AV (vec A B) (vec A C))) =
     distance C A / Rabs (Sin (cons_AV (vec B C) (vec B A)))).
+Proof.
 intros.
 deroule_triangle A B C.
 soit_rayon_circonscrit A B C D a.
@@ -312,6 +326,7 @@ Definition rayon_circonscrit (A B C : PO) (r : R) : Prop :=
 Lemma triangle_sin_not_0:
  forall A B C x,
  triangle A B C -> image_angle x = cons_AV (vec A B) (vec A C) ->  (sin x <> 0).
+Proof.
 intros.
 deroule_triangle A B C.
 rewrite (egalite_sin_Sin (A:=A) (B:=B) (C:=C) (x:=x)); auto.
@@ -332,6 +347,7 @@ Axiom
 Lemma pisurtrois_utile:
  forall a b c,
  0 < a -> 0 < b -> 0 < c -> (a + b) + c = pisurtrois ->  ( 0 <= 3 * a <= pi ).
+Proof.
 intros.
 rewrite <- pisurtrois_def.
 split.
@@ -342,6 +358,7 @@ Qed.
 Lemma pisurtrois_utile1:
  forall a b c,
  0 < a -> 0 < b -> 0 < c -> (a + b) + c = pisurtrois ->  ( 0 <= b + c <= pi ).
+Proof.
 intros.
 rewrite <- pisurtrois_def.
 split.
@@ -352,6 +369,7 @@ Qed.
 Lemma pisurtrois_utile2:
  forall a b c,
  0 < a -> 0 < b -> 0 < c -> (a + b) + c = pisurtrois ->  ( 0 <= c <= pi ).
+Proof.
 intros.
 rewrite <- pisurtrois_def.
 split.
@@ -368,6 +386,7 @@ Lemma pisurtrois_triangle_utile:
  (a + b) + c = pisurtrois ->
  A <> B ->
  A <> C -> image_angle (3 * a) = cons_AV (vec A B) (vec A C) ->  triangle A B C.
+Proof.
 intros.
 apply non_multiple_pi_triangle with (3 * a); auto.
 rewrite <- pisurtrois_def.
@@ -384,6 +403,7 @@ Lemma pisurtrois_triangle_utile2:
  (a + b) + c = pisurtrois ->
  B <> C ->
  B <> P -> image_angle b = cons_AV (vec B C) (vec B P) ->  triangle B C P.
+Proof.
 intros.
 apply non_multiple_pi_triangle with b; auto.
 split.
@@ -393,6 +413,7 @@ lra.
 Qed.
  
 Lemma Rabs_neg: forall (r : R), r <= 0 ->  Rabs r = - r.
+Proof.
 intros.
 elim H; intros.
 rewrite Rabs_left; auto.
@@ -417,6 +438,7 @@ Lemma Morley_1:
  image_angle c = cons_AV (vec C P) (vec C B) ->
  image_angle (3 * a) = cons_AV (vec A B) (vec A C) ->
   distance B P = (2 * (r * sin (3 * a))) * (sin c / sin (pisurtrois - a)).
+Proof.
 unfold rayon_circonscrit; intros.
 elim H7; [intros O [H13 H12]].
 assert (triangle A B C).
@@ -494,6 +516,7 @@ Lemma Morley_2:
  image_angle c = cons_AV (vec C P) (vec C B) ->
  image_angle (3 * a) = cons_AV (vec A B) (vec A C) ->
   distance B P = (8 * (r * sin a)) * (sin c * sin (pisurtrois + a)).
+Proof.
 intros.
 assert (triangle B C P).
 apply (pisurtrois_triangle_utile2 (a:=a) (b:=b) (c:=c) (B:=B) (C:=C) (P:=P));
@@ -541,6 +564,7 @@ Lemma Morley_3:
  image_angle c = cons_AV (vec C P) (vec C B) ->
  image_angle (3 * a) = cons_AV (vec A B) (vec A C) ->
   distance C P = (8 * (r * sin a)) * (sin b * sin (pisurtrois + a)).
+Proof.
 unfold rayon_circonscrit; intros.
 elim H7; clear H7; [intros O [H13 H12]].
 assert (triangle A B C).
@@ -650,6 +674,7 @@ Lemma Morley_4:
  image_angle a = cons_AV (vec A B) (vec A Q) ->
  image_angle (3 * c) = cons_AV (vec C A) (vec C B) ->
   distance B Q = (8 * (r * sin c)) * (sin a * sin (pisurtrois + c)).
+Proof.
 intros.
 rewrite <- (Morley_3 (a:=c) (b:=a) (c:=b) (r:=r) (A:=C) (B:=A) (C:=B) (P:=Q));
  auto with geo.
@@ -689,6 +714,7 @@ Lemma Morley_5:
   (Rsqr 8 * (Rsqr r * (Rsqr (sin a) * Rsqr (sin c)))) *
   ((Rsqr (sin (pisurtrois + a)) + Rsqr (sin (pisurtrois + c))) -
    2 * (sin (pisurtrois + a) * (sin (pisurtrois + c) * cos b))).
+Proof.
 intros.
 rewrite (Al_Kashi (A:=B) (B:=P) (C:=Q) (a:=b)); auto.
 rewrite (Morley_2 (a:=a) (b:=b) (c:=c) (r:=r) (A:=A) (B:=B) (C:=C) (P:=P)); auto.
@@ -736,6 +762,7 @@ Lemma Morley_6:
  image_angle (3 * c) = cons_AV (vec C A) (vec C B) ->
   Rsqr (distance P Q) =
   (Rsqr 8 * (Rsqr r * (Rsqr (sin a) * Rsqr (sin b)))) * Rsqr (sin c).
+Proof.
 intros.
 rewrite (Morley_5 (a:=a) (b:=b) (c:=c) (r:=r) (A:=A) (B:=B) (C:=C) (P:=P) (Q:=Q));
  auto.
@@ -767,6 +794,7 @@ Theorem Morley:
  image_angle a = cons_AV (vec A B) (vec A Q) ->
  image_angle a = cons_AV (vec A Q) (vec A T) ->
  image_angle a = cons_AV (vec A T) (vec A C) ->  equilateral P Q T.
+Proof.
 intros.
 assert (triangle B C P).
   apply (pisurtrois_triangle_utile2 (a:=a) (b:=b) (c:=c) (B:=B) (C:=C) (P:=P));
@@ -862,5 +890,3 @@ split.
   rewrite (distance_sym P T); auto with geo.
 rewrite (distance_sym Q P); auto with geo.
 Qed.
-
-

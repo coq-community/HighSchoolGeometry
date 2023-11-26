@@ -24,6 +24,7 @@ Lemma isometrie_egalite_module :
  distance A' B' = distance A B ->
  z = affixe_vec (vec A B) ->
  z' = affixe_vec (vec A' B') -> module z' = module z.
+Proof.
 intros A B A' B' z z'; try assumption.
 elim existence_representant_vecteur with (A := O) (B := A) (C := B); intros M;
  intros H1.
@@ -44,6 +45,7 @@ Lemma angle_vecteurs_arguments :
  z = affixe_vec (vec A B) ->
  z' = affixe_vec (vec A' B') ->
  cons_AV (vec A B) (vec A' B') = plus (argument z') (opp (argument z)).
+Proof.
 intros A B A' B' z z'; try assumption.
 elim existence_representant_vecteur with (A := O) (B := A) (C := B); intros M;
  intros H1.
@@ -59,6 +61,7 @@ Theorem complexe_rotation_centre_origine :
  forall (a : R) (z z' : C) (M M' : PO),
  z = affixe M ->
  z' = affixe M' -> z' = Cmult (cons_pol 1 a) z -> M' = rotation O a M.
+Proof.
 intros.
 cut (module z' = module z); intros.
 discrimine O M.
@@ -91,6 +94,7 @@ Qed.
 Lemma nonzero_diff :
  forall (a b : C) (A B : PO),
  a = affixe A -> b = affixe B -> Cplus b (Copp a) <> zeroC -> A <> B.
+Proof.
 intros.
 red in |- *; intros; apply H1.
 rewrite (affixe_vec_AB (a:=a) (b:=b) (A:=A) (B:=B)); auto.
@@ -105,6 +109,7 @@ Theorem complexe_rotation :
  j = affixe J ->
  Cplus z' (Copp j) = Cmult (cons_pol 1 a) (Cplus z (Copp j)) ->
  M' = rotation J a M.
+Proof.
 intros.
 cut (module (Cplus z' (Copp j)) = module (Cplus z (Copp j))); intros.
 discrimine J M.
@@ -146,6 +151,7 @@ Theorem rotation_centre_origine_complexe :
  forall (a : R) (z z' : C) (M M' : PO),
  z = affixe M ->
  z' = affixe M' -> M' = rotation O a M -> z' = Cmult (cons_pol 1 a) z.
+Proof.
 intros a z z' M M'; try assumption.
 discrimine M O.
 intros.
@@ -186,6 +192,7 @@ Theorem rotation_complexe :
  j = affixe J ->
  M' = rotation J a M ->
  Cplus z' (Copp j) = Cmult (cons_pol 1 a) (Cplus z (Copp j)).
+Proof.
 intros a j z z' J M M'; try assumption.
 discrimine M J.
 intros.
@@ -230,6 +237,7 @@ Theorem similitude_complexe :
  j = affixe J ->
  M' = similitude J k a M ->
  Cplus z' (Copp j) = Cmult (cons_pol k a) (Cplus z (Copp j)).
+Proof.
 intros k a j z z' J M M' H; try assumption.
 discrimine M J.
 intros.
@@ -276,6 +284,7 @@ Theorem complexe_similitude :
  j = affixe J ->
  Cplus z' (Copp j) = Cmult (cons_pol k a) (Cplus z (Copp j)) ->
  M' = similitude J k a M.
+Proof.
 intros.
 cut (module (Cplus z' (Copp j)) = k * module (Cplus z (Copp j))); intros.
 discrimine J M.

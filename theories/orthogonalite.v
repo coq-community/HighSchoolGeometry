@@ -34,6 +34,7 @@ Lemma ortho_somme :
  orthogonal (vec A B) (vec E F) ->
  orthogonal (vec C D) (vec E F) ->
  orthogonal (add_PP (vec A B) (vec C D)) (vec E F).
+Proof.
 intros A B C D E F H H0; try assumption.
 elim
  existence_representant_som_vecteur with (A := A) (B := B) (C := C) (D := D);
@@ -52,6 +53,7 @@ Lemma ortho_combinaison_lineaire :
  orthogonal (vec A B) (vec E F) ->
  orthogonal (vec C D) (vec E F) ->
  orthogonal (add_PP (mult_PP a (vec A B)) (mult_PP b (vec C D))) (vec E F).
+Proof.
 intros a b A B C D E F H H0; try assumption.
 elim
  existence_representant_comb_lin_vecteur
@@ -69,6 +71,7 @@ Qed.
 Lemma ortho_mult :
  forall (a : R) (A B C D : PO),
  orthogonal (vec A B) (vec C D) -> orthogonal (mult_PP a (vec A B)) (vec C D).
+Proof.
 intros.
 replace (mult_PP a (vec A B)) with
  (add_PP (mult_PP a (vec A B)) (mult_PP 0 (vec A B))).
@@ -79,6 +82,7 @@ Qed.
 Lemma ortho_sym :
  forall A B C D : PO,
  orthogonal (vec A B) (vec C D) -> orthogonal (vec C D) (vec A B).
+Proof.
 intros A B C D H; try assumption.
 apply def_orthogonal2.
 rewrite scalaire_sym.
@@ -87,6 +91,7 @@ Qed.
 #[export] Hint Immediate ortho_sym: geo.
  
 Lemma zero_ortho_tout : forall A B : PO, orthogonal (vec A B) zero.
+Proof.
 intros A B; try assumption.
 VReplace zero (vec A A).
 apply def_orthogonal2.
@@ -95,6 +100,7 @@ Simplscal.
 Qed.
  
 Lemma zero_ortho_tout2 : forall A B : PO, orthogonal zero (vec A B).
+Proof.
 intros.
 VReplace zero (vec A A).
 apply def_orthogonal2.
@@ -112,6 +118,7 @@ Ltac Simplortho :=
 Lemma opp_orthogonal :
  forall A B C D : PO,
  orthogonal (vec A B) (vec C D) -> orthogonal (vec B A) (vec C D).
+Proof.
 intros.
 replace (vec B A) with (mult_PP (-1) (vec A B)); [ Simplortho | Ringvec ].
 Qed.
@@ -120,6 +127,7 @@ Qed.
 Lemma opp_orthogonal2 :
  forall A B C D : PO,
  orthogonal (vec A B) (vec C D) -> orthogonal (vec C D) (vec B A).
+Proof.
 auto with geo.
 Qed.
 #[export] Hint Immediate opp_orthogonal2: geo.
@@ -127,6 +135,7 @@ Qed.
 Lemma opp_orthogonal3 :
  forall A B C D : PO,
  orthogonal (vec A B) (vec C D) -> orthogonal (vec A B) (vec D C).
+Proof.
 intros.
 apply ortho_sym.
 replace (vec D C) with (mult_PP (-1) (vec C D)); [ Simplortho | Ringvec ].
@@ -136,6 +145,7 @@ Qed.
 Lemma opp_orthogonal4 :
  forall A B C D : PO,
  orthogonal (vec A B) (vec C D) -> orthogonal (vec D C) (vec A B).
+Proof.
 auto with geo.
 Qed.
 #[export] Hint Immediate opp_orthogonal4: geo.
@@ -143,6 +153,7 @@ Qed.
 Lemma opp_orthogonal5 :
  forall A B C D : PO,
  orthogonal (vec A B) (vec C D) -> orthogonal (vec B A) (vec D C).
+Proof.
 intros.
 apply opp_orthogonal.
 auto with geo.
@@ -152,6 +163,7 @@ Qed.
 Lemma opp_orthogonal6 :
  forall A B C D : PO,
  orthogonal (vec A B) (vec C D) -> orthogonal (vec D C) (vec B A).
+Proof.
 auto with geo.
 Qed.
 #[export] Hint Immediate opp_orthogonal6: geo.
@@ -162,6 +174,7 @@ Lemma orthogonal_milieu :
  I = milieu A B ->
  orthogonal (vec I A) (vec C D) \/ orthogonal (vec I B) (vec C D) ->
  orthogonal (vec A B) (vec C D).
+Proof.
 intros.
 elim H1; intros.
 replace (vec A B) with (mult_PP (-2) (vec I A)).
@@ -184,6 +197,7 @@ Lemma orthogonal_segment_milieu :
  I = milieu A B ->
  orthogonal (vec A B) (vec C D) ->
  orthogonal (vec I A) (vec C D) /\ orthogonal (vec I B) (vec C D).
+Proof.
 intros.
 cut (orthogonal (vec A I) (vec C D)); intros.
 split; [ try assumption | idtac ].
@@ -197,6 +211,7 @@ Qed.
 Lemma non_orthogonal_def :
  forall A B C D : PO,
  scalaire (vec A B) (vec C D) <> 0 -> ~ orthogonal (vec A B) (vec C D).
+Proof.
 intros.
 contrapose H.
 apply def_orthogonal; auto.
@@ -206,6 +221,7 @@ Lemma alignes_non_orthogonal :
  forall A B C : PO,
  A <> B :>PO ->
  A <> C :>PO -> alignes A B C -> ~ orthogonal (vec A B) (vec A C).
+Proof.
 intros.
 halignes H1 x.
 cut (x <> 0); intros.
@@ -220,6 +236,7 @@ Lemma orthogonal_non_alignes :
  forall A B C : PO,
  A <> B :>PO ->
  A <> C :>PO -> orthogonal (vec A B) (vec A C) -> ~ alignes A B C.
+Proof.
 intros.
 cut (~ ~ orthogonal (vec A B) (vec A C)); intros.
 contrapose H2.
@@ -233,6 +250,7 @@ Lemma orthogonal_alignement :
  A <> B ->
  alignes A B C ->
  orthogonal (vec A B) (vec C D) -> orthogonal (vec C D) (vec C B).
+Proof.
 intros.
 halignes H0 x.
 apply ortho_sym.
@@ -250,6 +268,7 @@ Lemma orthogonal_alignement2 :
  A <> B ->
  alignes A B C ->
  orthogonal (vec A B) (vec C D) -> orthogonal (vec C D) (vec C A).
+Proof.
 intros.
 halignes H0 x.
 apply ortho_sym.
@@ -267,6 +286,7 @@ Lemma paralleles_orthogonal :
  C <> D ->
  paralleles (droite A B) (droite C D) ->
  orthogonal (vec A B) (vec E F) -> orthogonal (vec C D) (vec E F).
+Proof.
 intros.
 elim (paralleles_vecteur (A:=C) (B:=D) (C:=A) (D:=B)); auto with geo; intros.
 rewrite H3.
@@ -278,6 +298,7 @@ Lemma alignes_unitaire :
  alignes A B C ->
  scalaire (vec A B) (vec A B) = 1 ->
  vec A C = mult_PP (scalaire (vec A B) (vec A C)) (vec A B).
+Proof.
 intros.
 assert (A <> B); auto with geo.
 halignes H x.
@@ -293,6 +314,7 @@ Lemma scalaire_avec_projete :
  alignes A B H ->
  orthogonal (vec A B) (vec H C) ->
  scalaire (vec A B) (vec A C) = scalaire (vec A B) (vec A H).
+Proof.
 intros.
 discrimine A B.
 VReplace (vec B B) (mult_PP 0 (vec B C)).
@@ -313,6 +335,7 @@ Lemma scalaire_alignes :
  alignes A B C ->
  alignes A B D ->
  scalaire (vec A B) (vec A C) = scalaire (vec A B) (vec A D) -> C = D.
+Proof.
 intros A B C D H H0 H10 H1; try assumption.
 halignes H0 k.
 halignes H10 k'.
@@ -340,6 +363,7 @@ Lemma unicite_projete_orthogonal :
  alignes A B H ->
  orthogonal (vec A B) (vec H C) ->
  alignes A B H' -> orthogonal (vec A B) (vec H' C) -> H = H'.
+Proof.
 intros.
 apply scalaire_alignes with (2 := H1) (3 := H3); auto.
 rewrite <- (scalaire_avec_projete (A:=A) (B:=B) (C:=C) (H:=H)); auto.

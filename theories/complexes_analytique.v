@@ -23,6 +23,7 @@ Lemma translation_analytique :
  M' = translation O A M :>PO ->
  abscisse M' = abscisse M + abscisse A /\
  ordonnee M' = ordonnee M + ordonnee A.
+Proof.
 intros.
 paffixe M z.
 paffixe A a.
@@ -40,6 +41,7 @@ Lemma homothetie_analytique :
  M' = homothetie k J M :>PO ->
  abscisse M' + - abscisse J = k * (abscisse M + - abscisse J) /\
  ordonnee M' + - ordonnee J = k * (ordonnee M + - ordonnee J).
+Proof.
 intros.
 paffixe M z.
 paffixe J j.
@@ -70,6 +72,7 @@ Lemma rotation_analytique :
  - (sin a * (ordonnee M + - ordonnee J)) /\
  ordonnee M' + - ordonnee J =
  sin a * (abscisse M + - abscisse J) + cos a * (ordonnee M + - ordonnee J).
+Proof.
 intros.
 assert (cons_pol 1 a = cons_cart (cos a) (sin a)).
 elim existence_parties_relles_imaginaires with (z := cons_pol 1 a);
@@ -110,6 +113,7 @@ Lemma similitude_analytique :
  ordonnee M' + - ordonnee J =
  k *
  (sin a * (abscisse M + - abscisse J) + cos a * (ordonnee M + - ordonnee J)).
+Proof.
 intros.
 assert (k <> 0); auto with real.
 assert (cons_pol k a = cons_cart (k * cos a) (k * sin a)).
@@ -154,6 +158,7 @@ Lemma inversion_pole_origine_analytique :
  M' = inversion O k M :>PO ->
  abscisse M' = k * abscisse M / (Rsqr (abscisse M) + Rsqr (ordonnee M)) /\
  ordonnee M' = k * ordonnee M / (Rsqr (abscisse M) + Rsqr (ordonnee M)).
+Proof.
 intros.
 paffixe M z.
 paffixe M' z'.

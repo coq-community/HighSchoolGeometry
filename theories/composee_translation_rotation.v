@@ -24,6 +24,7 @@ Theorem composee_translation_rotation :
  exists J : PO,
    (forall M M1 M2 : PO,
     M1 = translation A B M -> M2 = rotation I a M1 -> M2 = rotation J a M).
+Proof.
 intros I A B a H50; try assumption.
 elim (classic (A = B)); intros H2.
 exists I; intros.
@@ -248,6 +249,7 @@ Theorem composee_rotation_translation :
    (fun J : PO =>
     forall M M1 M2 : PO,
     M1 = rotation I a M -> M2 = translation A B M1 -> M2 = rotation J a M).
+Proof.
 intros I A B a H50; try assumption.
 elim (classic (A = B)); intros H2.
 exists I; intros.

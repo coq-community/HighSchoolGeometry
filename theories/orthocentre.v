@@ -23,6 +23,7 @@ Lemma deux_hauteurs_trois :
  forall A B C H : PO,
  orthogonal (vec H A) (vec B C) ->
  orthogonal (vec H B) (vec A C) -> orthogonal (vec H C) (vec A B).
+Proof.
 intros.
 apply def_orthogonal2.
 replace (vec H C) with (add_PP (vec H A) (vec A C)) by Ringvec.
@@ -50,6 +51,7 @@ Lemma triangle_rectangle_une_fois :
  triangle A B C ->
  orthogonal (vec A B) (vec A C) ->
  ~ orthogonal (vec A B) (vec B C) /\ ~ orthogonal (vec A C) (vec C B).
+Proof.
 intros.
 cut (triangle A C B); intros; auto with geo.
 deroule_triangle A C B.
@@ -82,6 +84,7 @@ Qed.
 Lemma triangle_distincts_pied_hauteur :
  forall A B C H : PO,
  triangle A B C -> H = projete_orthogonal A B C -> C <> H :>PO.
+Proof.
 intros.
 deroule_triangle A B C.
 elim (def_projete_orthogonal2 (A:=A) (B:=B) (C:=C) (H:=H)); auto; intros.
@@ -95,6 +98,7 @@ Lemma triangle_hauteurs_secantes :
  triangle A B C ->
  H = projete_orthogonal A B C ->
  K = projete_orthogonal A C B -> concours (droite C H) (droite B K).
+Proof.
 intros.
 deroule_triangle A B C.
 elim (def_projete_orthogonal2 (A:=A) (B:=B) (C:=C) (H:=H)); auto; intros.
@@ -119,6 +123,7 @@ Lemma aux :
  triangle A B C ->
  H = projete_orthogonal A B C :>PO ->
  K = projete_orthogonal A C B :>PO -> ~ alignes C H B \/ ~ alignes C H K.
+Proof.
 intros.
 deroule_triangle A B C.
 elim (def_projete_orthogonal2 (A:=A) (B:=B) (C:=C) (H:=H)); auto; intros.
@@ -161,6 +166,7 @@ Lemma existence_intersection_deux_hauteurs_triangle :
  H = projete_orthogonal A B C :>PO ->
  K = projete_orthogonal A C B :>PO ->
  ex (fun I : PO => I = pt_intersection (droite C H) (droite B K) :>PO).
+Proof.
 intros.
 cut (~ alignes C H B \/ ~ alignes C H K); intros.
 apply existence_pt_intersection; auto.
@@ -189,6 +195,7 @@ Axiom
 Lemma orthocentre_ordre :
  forall A B C H : PO,
  triangle A B C -> H = orthocentre A B C :>PO -> H = orthocentre C A B :>PO.
+Proof.
 intros.
 elim orthocentre_def2 with (A := A) (B := B) (C := C) (H := H);
  [ intros | auto ].
@@ -199,6 +206,7 @@ Qed.
 Lemma orthocentre_permute :
  forall A B C H : PO,
  triangle A B C -> H = orthocentre A B C :>PO -> H = orthocentre B A C :>PO.
+Proof.
 intros.
 elim orthocentre_def2 with (A := A) (B := B) (C := C) (H := H);
  [ intros | auto ].
@@ -211,6 +219,7 @@ Lemma orthocentre_triangle_rectangle :
  forall A B C : PO,
  triangle A B C ->
  orthogonal (vec A B) (vec B C) -> B = orthocentre A B C :>PO.
+Proof.
 intros.
 apply orthocentre_def; auto with geo.
 replace (vec B B) with zero; auto with geo.
@@ -224,6 +233,7 @@ Lemma intersection_deux_hauteurs_orthocentre_triangle :
  K = projete_orthogonal A C B :>PO ->
  I = pt_intersection (droite C H) (droite B K) :>PO ->
  I = orthocentre A B C :>PO.
+Proof.
 intros A B C H K I H0 H2 H3 H4.
 deroule_triangle A B C.
 elim (def_projete_orthogonal2 (A:=A) (B:=B) (C:=C) (H:=H)); auto; intros.
@@ -268,6 +278,7 @@ Lemma orthocentre_intersection_hauteurs :
  K = projete_orthogonal A C B :>PO ->
  I = orthocentre A B C :>PO ->
  I = pt_intersection (droite C H) (droite B K) :>PO.
+Proof.
 intros.
 elim orthocentre_def2 with (A := A) (B := B) (C := C) (H := I);
  [ intros | auto ].

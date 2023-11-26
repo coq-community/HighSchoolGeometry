@@ -47,6 +47,7 @@ let id1 := fresh in ((assert (id1: exists C, A = milieu B C);
 
 Lemma existence_parallele :  forall A B C : PO, A <> B -> 
 exists D, paralleles (droite A B) (droite C D).
+Proof.
 intros.
 soit_milieu M A C.
 soit_image D M B.

@@ -30,6 +30,7 @@ Lemma permute_barycentre :
  forall (a b : R) (A B : PO),
  a + b <> 0 ->
  barycentre (cons a A) (cons b B) = barycentre (cons b B) (cons a A).
+Proof.
 intros a b A B H; try assumption.
 apply conversion_PP with (a := a + b) (b := b + a); try ring; auto.
 repeat rewrite <- add_PP_barycentre; auto.
@@ -39,6 +40,7 @@ Qed.
  
 Lemma barycentre_zero :
  forall (a : R) (A B : PO), a <> 0 -> barycentre (cons a A) (cons 0 B) = A.
+Proof.
 intros a A B H; try assumption.
 apply conversion_PP with (a := a + 0) (b := a); try ring; auto.
 repeat rewrite <- add_PP_barycentre; auto.
@@ -54,6 +56,7 @@ Lemma bary_assoc :
  a + (b + c) <> 0 ->
  barycentre (cons a A) (cons (b + c) (barycentre (cons b B) (cons c C))) =
  barycentre (cons (a + b) (barycentre (cons a A) (cons b B))) (cons c C).
+Proof.
 intros a b c A B C H H0 H1; try assumption.
 apply conversion_PP with (a := a + (b + c)) (b := a + b + c); try ring; auto.
 repeat rewrite <- add_PP_barycentre; auto.
@@ -67,6 +70,7 @@ Lemma homogene_barycentre :
  k <> 0 ->
  barycentre (cons (k * a) A) (cons (k * b) B) =
  barycentre (cons a A) (cons b B).
+Proof.
 intros a b k A B H H0; try assumption.
 apply conversion_PP with (a := k * a + k * b) (b := k * (a + b)); try ring;
  auto.
@@ -85,6 +89,7 @@ Lemma def_vecteur_bary :
  a + b <> 0 ->
  G = barycentre (cons a A) (cons b B) ->
  add_PP (mult_PP a (vec G A)) (mult_PP b (vec G B)) = zero.
+Proof.
 intros.
 cut (zero = mult_PP (a + b) (vec G G)); intros; auto.
 rewrite H1.
@@ -99,6 +104,7 @@ Lemma def_vecteur_bary_rec :
  a + b <> 0 ->
  add_PP (mult_PP a (vec G A)) (mult_PP b (vec G B)) = zero ->
  G = barycentre (cons a A) (cons b B).
+Proof.
 unfold vec in |- *; intros.
 apply conversion_PP with (a := a + b) (b := a + b); auto.
 rewrite <- (add_PP_barycentre (a:=a) (b:=b) A B); auto.
@@ -114,6 +120,7 @@ Lemma prop_vecteur_bary :
  G = barycentre (cons a A) (cons b B) ->
  add_PP (mult_PP a (vec M A)) (mult_PP b (vec M B)) =
  mult_PP (a + b) (vec M G).
+Proof.
 intros.
 apply add_PP_vecteur; auto.
 rewrite (add_PP_barycentre (a:=a) (b:=b) A B); auto.
@@ -125,6 +132,7 @@ Lemma prop_vecteur_bary_rec :
  a + b <> 0 ->
  add_PP (mult_PP a (vec M A)) (mult_PP b (vec M B)) =
  mult_PP (a + b) (vec M G) -> G = barycentre (cons a A) (cons b B).
+Proof.
 unfold vec in |- *; intros.
 apply conversion_PP with (a := a + b) (b := a + b); auto.
 rewrite <- (add_PP_barycentre (a:=a) (b:=b) A B); auto.
@@ -143,6 +151,7 @@ Qed.
 Lemma barycentre_alignes :
  forall (a b : R) (A B : PO),
  a + b <> 0 -> alignes A B (barycentre (cons a A) (cons b B)).
+Proof.
 intros a b A B H; try assumption.
 apply add_PP_alignes with (a := a) (b := b); auto with geo.
 Qed.
@@ -151,6 +160,7 @@ Lemma colineaire_barycentre :
  forall (k : R) (A B C : PO),
  vec A C = mult_PP k (vec A B) ->
  C = barycentre (cons (1 + - k) A) (cons k B).
+Proof.
 unfold vec in |- *; intros.
 elim
  cons_inj
@@ -170,6 +180,7 @@ Lemma alignes_barycentre :
  forall A B C : PO,
  A <> B ->
  alignes A B C -> exists k : R, C = barycentre (cons k A) (cons (1 + - k) B).
+Proof.
 unfold alignes, alignes1 in |- *; intros.
 elim H0;
  [ intros H1; tauto
@@ -185,6 +196,7 @@ Qed.
  
 Lemma existence_representant_vecteur :
  forall A B C : PO, ex (fun D : PO => vec A D = vec B C :>PP).
+Proof.
 unfold vec in |- *; intros.
 exists (barycentre (cons (-1) B) (cons 2 (barycentre (cons 1 A) (cons 1 C)))).
 replace 2 with (1 + 1) by ring.
@@ -197,6 +209,7 @@ Qed.
 Lemma existence_representant_mult_vecteur :
  forall (A B C : PO) (k : R),
  ex (fun D : PO => vec A D = mult_PP k (vec B C) :>PP).
+Proof.
 intros.
 elim (classic (k = -1)); intros.
 rewrite H.
@@ -218,6 +231,7 @@ Qed.
 Lemma existence_representant_som_vecteur :
  forall A B C D : PO,
  ex (fun E : PO => vec A E = add_PP (vec A B) (vec C D) :>PP).
+Proof.
 intros.
 unfold vec in |- *.
 exists (barycentre (cons (-1) C) (cons 2 (barycentre (cons 1 B) (cons 1 D)))).
@@ -234,6 +248,7 @@ Lemma existence_representant_comb_lin_vecteur :
  ex
    (fun E : PO =>
     vec A E = add_PP (mult_PP a (vec A B)) (mult_PP b (vec C D)) :>PP).
+Proof.
 intros.
 elim
  existence_representant_mult_vecteur with (A := A) (B := A) (C := B) (k := a);
@@ -254,6 +269,7 @@ Lemma distinct_mult_vecteur :
  forall (A B C D : PO) (a : R),
  A <> B :>PO ->
  a <> 0 :>R -> vec C D = mult_PP a (vec A B) :>PP -> C <> D :>PO.
+Proof.
 intros.
 elim
  existence_representant_mult_vecteur with (A := A) (B := A) (C := B) (k := a);
@@ -270,6 +286,7 @@ Lemma unicite_coor_bar :
  A <> B ->
  cons 1 I = add_PP (cons k A) (cons (1 + - k) B) ->
  cons 1 I = add_PP (cons k' A) (cons (1 + - k') B) -> k = k'.
+Proof.
 intros.
 elim produit_vecteur_nul with (a := k + - k') (A := A) (B := B);
  [ intros H2; try clear produit_vecteur_nul; try exact H2
@@ -294,6 +311,7 @@ Lemma unicite_coef_bar :
  1 + x0 <> 0 ->
  barycentre (cons 1 A) (cons x B) = barycentre (cons 1 A) (cons x0 B) ->
  x = x0.
+Proof.
 intros.
 cut
  (barycentre (cons (/ (1 + x) * 1) A) (cons (/ (1 + x) * x) B) =
@@ -367,6 +385,7 @@ Lemma unicite_coor_bar_aux :
  cons 1 I =
  add_PP (add_PP (cons x' A) (cons y' B)) (cons (1 + - (x' + y')) C) :>PP ->
  alignes A B C.
+Proof.
 intros.
 assert (vec C I = add_PP (mult_PP x (vec C A)) (mult_PP y (vec C B))).
 unfold vec in |- *.
@@ -411,6 +430,7 @@ Lemma unicite_coor_bar2 :
  cons 1 I =
  add_PP (add_PP (cons x' A) (cons y' B)) (cons (1 + - (x' + y')) C) :>PP ->
  x = x' :>R /\ y = y' :>R.
+Proof.
 intros.
 assert (~ x <> x' /\ ~ y <> y').
 apply not_or_and; auto.
@@ -428,6 +448,7 @@ Lemma parallelogramme_non_concours :
  alignes A A1 S ->
  alignes B B1 S ->
  add_PP (cons 1 A) (cons (-1) A1) <> add_PP (cons 1 B) (cons (-1) B1).
+Proof.
 intros.
 contrapose H.
 assert (vec A1 A = vec B1 B).
@@ -453,6 +474,7 @@ Lemma concours_unique :
  B1 <> B ->
  alignes A A1 I ->
  alignes B1 B I -> alignes A A1 J -> alignes B1 B J -> I = J.
+Proof.
 intros A B A1 B1 I J H.
 unfold alignes in |- *; intros H50 H0 H1 H2 H3.
 elim H3; clear H3; [ intros; tauto | unfold alignes1 in |- *; intros ].
@@ -556,6 +578,7 @@ Lemma couple_colineaires_parallelogramme :
  ~ alignes A B C ->
  vec C D = mult_PP k (vec A B) ->
  vec B D = mult_PP k' (vec A C) -> vec B D = vec A C.
+Proof.
 unfold vec in |- *; intros.
 cut
  (cons 1 D =
