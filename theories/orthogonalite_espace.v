@@ -60,6 +60,7 @@ Lemma perpendiculaires_orthogonales :
  C <> D ->
  perpendiculaires (droite A B) (droite C D) ->
  orthogonales (droite A B) (droite C D).
+Proof.
 intros.
 elim def_perpendiculaires2 with (A := A) (B := B) (C := C) (D := D);
  [ intros; try exact H3 | auto | auto | auto ].
@@ -75,6 +76,7 @@ Lemma orthogonales_2droites_secantes :
  orthogonales (droite A B) (droite D E) ->
  orthogonales (droite A C) (droite D E) ->
  orthogonales (droite F G) (droite D E).
+Proof.
 intros A B C D E F G H; try assumption.
 assert (A <> B); auto with geo.
 intros.
@@ -122,6 +124,7 @@ Lemma vecteurs_orthogonaux :
  D <> E ->
  orthogonal (vec A B) (vec D E) ->
  orthogonal (vec A C) (vec D E) -> orthogonaux (droite D E) (plan A B C).
+Proof.
 intros.
 deroule_triangle A B C.
 apply def_orthogonaux; auto with geo.
@@ -133,6 +136,7 @@ Lemma vecteurs_orthogonaux_rec :
  D <> E ->
  orthogonaux (droite D E) (plan A B C) ->
  orthogonal (vec A B) (vec D E) /\ orthogonal (vec A C) (vec D E).
+Proof.
 intros.
 deroule_triangle A B C.
 elim def_orthogonaux2 with (A := A) (B := B) (C := C) (D := D) (E := E);
@@ -153,6 +157,7 @@ Lemma orthogonaux_orthogonales_toute_droite :
  coplanaires A B C G ->
  orthogonaux (droite D E) (plan A B C) ->
  orthogonales (droite F G) (droite D E).
+Proof.
 intros.
 assert (A <> B); auto with geo.
 apply orthogonales_2droites_secantes with (1 := H); auto.
@@ -171,6 +176,7 @@ Lemma orthogonales_toute_droite_orthogonaux :
   coplanaires A B C F ->
   coplanaires A B C G -> orthogonales (droite F G) (droite D E)) ->
  orthogonaux (droite D E) (plan A B C).
+Proof.
 intros.
 assert (A <> B); auto with geo.
 apply def_orthogonaux; auto with geo.
@@ -183,6 +189,7 @@ Lemma orthogonaux_perce :
  ~ alignes A B C ->
  D <> E ->
  orthogonaux (droite D E) (plan A B C) -> perce (droite D E) (plan A B C).
+Proof.
 intros.
 elim
  position_relative_droite_plan

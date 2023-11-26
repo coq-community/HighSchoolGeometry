@@ -32,6 +32,7 @@ Axiom
 Lemma alignes_droite2 :
  forall A B C : PO,
  A <> B :>PO -> B <> C :>PO -> alignes A B C -> droite A B = droite B C.
+Proof.
 intros.
 rewrite droite_permute; auto.
 apply alignes_droite; auto with geo.
@@ -58,6 +59,7 @@ Axiom
  
 Lemma paralleles_refl :
  forall A B : PO, A <> B :>PO -> paralleles (droite A B) (droite A B).
+Proof.
 intros A B H; try assumption.
 apply def_paralleles with (k := 1); auto.
 Qed.
@@ -68,6 +70,7 @@ Lemma paralleles_sym :
  A <> B ->
  C <> D ->
  paralleles (droite A B) (droite C D) -> paralleles (droite C D) (droite A B).
+Proof.
 intros A B C D H H1 H0; try assumption.
 elim def_paralleles2 with (3 := H0); intros; auto.
 elim (classic (x = 0)); intros.
@@ -91,6 +94,7 @@ Lemma paralleles_trans :
  E <> F :>PO ->
  paralleles (droite A B) (droite C D) ->
  paralleles (droite C D) (droite E F) -> paralleles (droite A B) (droite E F).
+Proof.
 intros A B C D E F H H10 H11 H0 H1; try assumption.
 elim def_paralleles2 with (3 := H0); intros; auto.
 elim def_paralleles2 with (3 := H1); intros; auto.
@@ -115,6 +119,7 @@ Lemma paralleles_vecteur :
  C <> D :>PO ->
  paralleles (droite A B) (droite C D) ->
  exists k : R, vec A B = mult_PP k (vec C D) :>PP.
+Proof.
 unfold vec in |- *; intros.
 elim def_paralleles2 with (3 := H1); auto.
 intros k H2; try assumption.
@@ -127,6 +132,7 @@ Lemma colineaires_paralleles :
  A <> B :>PO ->
  C <> D :>PO ->
  vec A B = mult_PP k (vec C D) -> paralleles (droite A B) (droite C D).
+Proof.
 unfold vec in |- *; intros.
 apply def_paralleles with k; auto.
 RingPP1 H1; RingPP.
@@ -135,6 +141,7 @@ Qed.
 Lemma alignes_paralleles :
  forall A B C : PO,
  A <> B -> A <> C -> alignes A B C -> paralleles (droite A B) (droite A C).
+Proof.
 intros.
 apply paralleles_sym; auto.
 halignes H1 x.
@@ -143,6 +150,7 @@ Qed.
  
 Lemma paralleles_ABBA :
  forall A B : PO, A <> B -> paralleles (droite A B) (droite B A).
+Proof.
 intros.
 apply def_paralleles with (-1); auto.
 RingPP.
@@ -157,6 +165,7 @@ Lemma non_paralleles_trans :
  paralleles (droite A B) (droite C D) ->
  ~ paralleles (droite A B) (droite E F) ->
  ~ paralleles (droite C D) (droite E F).
+Proof.
 intros; red in |- *; intros.
 apply H3.
 apply paralleles_trans with (4 := H2); auto.
@@ -168,6 +177,7 @@ Lemma paralleles_alignes :
  A <> B :>PO ->
  C <> D :>PO ->
  paralleles (droite A B) (droite C D) -> alignes A B C -> alignes A B D.
+Proof.
 intros.
 elim (paralleles_vecteur (A:=C) (B:=D) (C:=A) (D:=B)); intros; auto with geo.
 halignes H2 x0.
@@ -182,6 +192,7 @@ Lemma paralleles_alignes1 :
  C <> D :>PO ->
  vec E F = vec A B :>PP ->
  paralleles (droite A B) (droite C D) -> alignes C D E -> alignes C D F.
+Proof.
 intros A B C D E F H H0 H1 H2 H3; try assumption.
 elim (paralleles_vecteur (A:=A) (B:=B) (C:=C) (D:=D)); intros; auto.
 halignes H3 x0.
@@ -197,6 +208,7 @@ Lemma paralleles_alignes2 :
  C <> D :>PO ->
  vec E F = vec A B :>PP ->
  paralleles (droite A B) (droite C D) -> alignes C D E -> alignes F C E.
+Proof.
 intros A B C D E F H H0 H1 H2 H3; try assumption.
 elim (paralleles_vecteur (A:=C) (B:=D) (C:=A) (D:=B)); intros; auto with geo.
 halignes H3 x0.
@@ -224,6 +236,7 @@ Lemma paralleles_alignes3 :
  A <> B :>PO ->
  C <> D :>PO ->
  paralleles (droite A B) (droite C D) -> alignes C D A -> alignes A C B.
+Proof.
 intros A B C D H H0 H1 H2; try assumption.
 elim (paralleles_vecteur (A:=A) (B:=B) (C:=C) (D:=D)); intros; auto.
 discrimine C A.
@@ -238,6 +251,7 @@ Lemma alignes_paralleles_confondus :
  forall A B C J : PO,
  triangle A B C ->
  alignes A C J -> paralleles (droite B C) (droite B J) -> J = C :>PO.
+Proof.
 intros.
 cut (triangle B C A); auto with geo; intros.
 deroule_triangle B C A.
@@ -275,6 +289,7 @@ Lemma paralleles_non_concours :
  C <> D :>PO ->
  ~ alignes A B D ->
  paralleles (droite C D) (droite A B) -> ~ concours (droite C D) (droite A B).
+Proof.
 intros A B C D H10 H11 H H0.
 elim def_paralleles2 with (3 := H0); intros; auto.
 unfold not in |- *; intros.
@@ -313,6 +328,7 @@ Lemma concours_non_paralleles :
  C <> D :>PO ->
  ~ alignes A B D ->
  concours (droite C D) (droite A B) -> ~ paralleles (droite C D) (droite A B).
+Proof.
 intros A B C D H10 H20 H H0; try assumption.
 cut (~ ~ concours (droite C D) (droite A B)); intros.
 unfold not in |- *; intros.
@@ -347,6 +363,7 @@ Lemma existence_pt_intersection :
  ~ alignes A B C \/ ~ alignes A B D ->
  concours (droite A B) (droite C D) ->
  exists I : PO, I = pt_intersection (droite A B) (droite C D) :>PO.
+Proof.
 intros.
 elim def_concours2 with (A := A) (B := B) (C := C) (D := D);
  [ intros I H3; elim H3; intros H4 H5; try clear H3 def_concours2;
@@ -362,6 +379,7 @@ Lemma ordre_alignement_4points :
  forall A B C D : PO,
  A <> B :>PO ->
  alignes A B C /\ alignes A B D -> alignes C D A /\ alignes C D B.
+Proof.
 intros.
 elim H0; intros H1 H2; try clear H0; try exact H2.
 split; [ try assumption | idtac ].
@@ -376,6 +394,7 @@ Lemma pt_intersection_commute :
  ~ alignes A B C \/ ~ alignes A B D ->
  I = pt_intersection (droite A B) (droite C D) :>PO ->
  I = pt_intersection (droite C D) (droite A B) :>PO.
+Proof.
 intros.
 elim def_pt_intersection2 with (A := A) (B := B) (C := C) (D := D) (I := I);
  [ try clear def_pt_intersection2; intros | auto | auto | auto | auto ].
@@ -399,6 +418,7 @@ Lemma concours_barycentre :
         (fun b : R =>
          I = barycentre (cons (1 + - a) A) (cons a B) :>PO /\
          I = barycentre (cons (1 + - b) C) (cons b D) :>PO)).
+Proof.
 intros A B C D H10 H11 H; try assumption.
 elim def_concours2 with (3 := H); auto.
 intros I H0; elim H0; intros H1 H2; clear H0 H; try exact H2.
@@ -421,6 +441,7 @@ Lemma barycentre_concours :
  c + d <> 0 :>R ->
  barycentre (cons c C) (cons d D) = I :>PO ->
  concours (droite A B) (droite C D).
+Proof.
 intros a b c d A B C D I H H0 H1 H2 H3 H4; try assumption.
 apply def_concours with I; auto.
 rewrite <- H2.
@@ -438,6 +459,7 @@ Lemma add_PP_concours :
  c + d <> 0 :>R ->
  add_PP (cons c C) (cons d D) = cons (c + d) I :>PP ->
  concours (droite A B) (droite C D).
+Proof.
 intros a b c d A B C D I H H0 H1 H2 H3 H4; try assumption.
 apply def_concours with I; auto.
 apply add_PP_alignes with (a := a) (b := b); auto.
@@ -449,6 +471,7 @@ Lemma concours_mediane :
  A <> milieu B C :>PO ->
  milieu A B <> C :>PO ->
  concours (droite A (milieu B C)) (droite (milieu A B) C).
+Proof.
 intros A B C H H0; try assumption.
 generalize (add_PP_milieu_asso A B C); intros.
 generalize
@@ -469,6 +492,7 @@ Definition concours_3 (A B C D E F : PO) :=
  
 Lemma concours_3_mediane :
  forall A B C : PO, concours_3 A (milieu B C) (milieu A B) C (milieu A C) B.
+Proof.
 intros A B C; try assumption.
 generalize (add_PP_milieu_asso A B C); intros.
 generalize (add_PP_milieu_permute A B C); intros.
@@ -495,6 +519,7 @@ Lemma concours_3_barycentre :
  a + c <> 0 :>R ->
  concours_3 A (barycentre (cons b B) (cons c C))
    (barycentre (cons a A) (cons b B)) C (barycentre (cons a A) (cons c C)) B.
+Proof.
 unfold concours_3 in |- *.
 intros a b c A B C H H0 H1 H2; try assumption.
 exists
@@ -529,6 +554,7 @@ Lemma centre_gravite_intersection_medianes :
  J = milieu A B :>PO ->
  G = centre_gravite A B C :>PO ->
  G = pt_intersection (droite A I) (droite C J) :>PO.
+Proof.
 intros.
 deroule_triangle A B C.
 cut (triangle B C A); auto with geo; unfold triangle in |- *; intros.
@@ -564,6 +590,7 @@ Lemma centre_gravite_intersection_trois_medianes :
  G = centre_gravite A B C :>PO ->
  G = pt_intersection (droite A I) (droite B K) :>PO /\
  G = pt_intersection (droite A I) (droite C J) :>PO.
+Proof.
 intros.
 split; [ idtac | try assumption ].
 apply centre_gravite_intersection_medianes with (B := C); auto with geo.

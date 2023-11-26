@@ -23,6 +23,7 @@ Lemma paralleles_coplanaires :
  forall A B C D : PO,
  A <> B ->
  C <> D -> paralleles (droite A B) (droite C D) -> coplanaires A B C D.
+Proof.
 unfold coplanaires in |- *; intros A B C D H H10 H0.
 elim def_paralleles2 with (3 := H0); auto.
 intros k H1.
@@ -50,6 +51,7 @@ Lemma concours_coplanaires :
  forall A B C D : PO,
  A <> B :>PO ->
  C <> D :>PO -> concours (droite A B) (droite C D) -> coplanaires A B D C.
+Proof.
 unfold coplanaires in |- *; intros A B C D H20 H21 H11.
 elim def_concours2 with (A := A) (B := B) (C := C) (D := D);
  [ intros I H0; elim H0; intros H1 H2; try clear H0; try exact H2
@@ -85,6 +87,7 @@ Lemma droites_non_paralleles :
  C <> D :>PO ->
  ~ paralleles (droite C D) (droite A B) ->
  concours (droite C D) (droite A B) \/ ~ coplanaires A B C D.
+Proof.
 intros A B C D H20 H21 H; try assumption.
 elim (classic (coplanaires A B C D)); intros.
 left; try assumption.
@@ -124,6 +127,7 @@ Lemma concours_sym :
  A <> B :>PO ->
  C <> D :>PO ->
  concours (droite A B) (droite C D) -> concours (droite C D) (droite A B).
+Proof.
 intros A B C D H10 H11 H; try assumption.
 elim def_concours2 with (3 := H); auto; intros.
 apply def_concours with x; auto.
@@ -138,6 +142,7 @@ Theorem position_relative_droites_espace :
  C <> D :>PO ->
  ~ coplanaires A B C D \/
  concours (droite A B) (droite C D) \/ paralleles (droite A B) (droite C D).
+Proof.
 intros A B C D H10 H; try assumption.
 elim (classic (paralleles (droite A B) (droite C D))); intros.
 right; right; try assumption.
@@ -151,6 +156,7 @@ Theorem position_relative_droites_coplanaires :
  C <> D :>PO ->
  coplanaires A B C D ->
  concours (droite A B) (droite C D) \/ paralleles (droite A B) (droite C D).
+Proof.
 intros A B C D H10 H H0; try assumption.
 elim
  position_relative_droites_espace with (A := A) (B := B) (C := C) (D := D);

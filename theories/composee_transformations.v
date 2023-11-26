@@ -25,6 +25,7 @@ Theorem composee_rotation_IJ_translation :
    (exists B : PO,
       (forall M M1 M2 : PO,
        M1 = rotation I a M -> M2 = rotation J b M1 -> M2 = translation A B M)).
+Proof.
 intros I J a b H; try assumption.
 discrimine I J.
 exists J; exists J; intros.
@@ -218,6 +219,7 @@ Theorem composee_rotation_IJ_rotation :
    (fun K : PO =>
     forall M M1 M2 : PO,
     M1 = rotation I a M -> M2 = rotation J b M1 -> M2 = rotation K (a + b) M).
+Proof.
 intros I J a b H; try assumption.
 discrimine I J.
 exists I; intros.
@@ -414,6 +416,7 @@ Theorem translation_reflexion_axe_parallele_commutent :
  M1 = translation A B M ->
  M2 = reflexion C D M1 ->
  N1 = reflexion C D M -> N2 = translation A B N1 -> N2 = M2.
+Proof.
 intros A B C D M M1 M2 N1 N2 H H0 H1 H2 H3 H4 H5; try assumption.
 rewrite H3.
 cut (vec M M1 = vec A B).

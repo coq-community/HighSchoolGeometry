@@ -37,6 +37,7 @@ Lemma car_image_forme_algebrique :
  forall (z : C) (M : PO),
  M = image z ->
  partie_reelle z = abscisse M /\ partie_imaginaire z = ordonnee M.
+Proof.
 intros.
 elim existence_coordonnees with (O := O) (I := I) (J := J) (M := M);
  [ intros x H2; elim H2; intros y H3 | auto with geo ].
@@ -49,6 +50,7 @@ Qed.
  
 Lemma coordonnees_affixe :
  forall M : PO, cons_cart (abscisse M) (ordonnee M) = affixe M :>C.
+Proof.
 intros.
 elim existence_affixe_point with (M := M); intros z H;
  try clear existence_affixe_point; try exact H.
@@ -63,6 +65,7 @@ Lemma absvec_ordvec_affixe :
  forall (a b : R) (A B : PO),
  a = absvec (vec A B) ->
  b = ordvec (vec A B) -> cons_cart a b = affixe_vec (vec A B).
+Proof.
 intros a b A B.
 elim existence_representant_vecteur with (A := O) (B := A) (C := B);
  intros D H1; try exact H1.
@@ -87,16 +90,19 @@ Axiom
  
 Lemma module_def2 :
  forall (z : C) (M : PO), z = affixe M -> module z = distance O M.
+Proof.
 intros; eauto with geo.
 Qed.
  
 Lemma argument_def2 :
  forall (M : PO) (z : C),
  O <> M -> z = affixe M -> argument z = cons_AV (vec O I) (vec O M).
+Proof.
 intros; eauto with geo.
 Qed.
  
 Lemma existence_module : forall z : C, exists r : R, module z = r.
+Proof.
 intros.
 elim existence_image_complexe with (z := z); intros M H1;
  try clear existence_image_complexe; try exact H1.
@@ -106,6 +112,7 @@ Qed.
 Definition zeroC := cons_cart 0 0.
  
 Lemma image_zeroC : image zeroC = O.
+Proof.
 elim existence_image_complexe with (z := zeroC); unfold zeroC in |- *;
  intros M H1; try exact H1.
 cut (vec O M = add_PP (mult_PP 0 (vec O I)) (mult_PP 0 (vec O J))); intros;
@@ -119,15 +126,18 @@ Qed.
 #[export] Hint Resolve image_zeroC: geo.
  
 Lemma affixe_origine : zeroC = affixe O.
+Proof.
 eauto with geo.
 Qed.
 #[export] Hint Resolve affixe_origine: geo.
  
 Lemma module_zeroC : module zeroC = 0.
+Proof.
 rewrite (module_def (z:=zeroC) (M:=O)); auto with geo.
 Qed.
  
 Lemma module_nul_zeroC : forall z : C, module z = 0 -> z = zeroC.
+Proof.
 intros.
 elim existence_image_complexe with (z := z); intros M H1;
  try clear existence_image_complexe; try exact H1.
@@ -140,11 +150,13 @@ Qed.
 #[export] Hint Resolve module_zeroC module_nul_zeroC: geo.
  
 Lemma module_non_zero : forall z : C, z <> zeroC -> module z <> 0.
+Proof.
 red in |- *; intros.
 apply H; auto with geo.
 Qed.
  
 Lemma nonzero_module : forall z : C, module z <> 0 -> z <> zeroC.
+Proof.
 red in |- *; intros.
 apply H; rewrite H0; auto with geo.
 Qed.
@@ -152,6 +164,7 @@ Qed.
  
 Lemma image_nonzero_nonorigine :
  forall (M : PO) (z : C), z <> zeroC :>C -> M = image z -> O <> M.
+Proof.
 intros.
 red in |- *; intros; apply H.
 replace z with (affixe M).
@@ -162,6 +175,7 @@ Qed.
  
 Lemma nonorigine_image_nonzero :
  forall (M : PO) (z : C), O <> M -> M = image z -> z <> zeroC :>C.
+Proof.
 intros.
 red in |- *; intros; apply H.
 rewrite H0; rewrite H1.
@@ -171,6 +185,7 @@ Qed.
  
 Lemma existence_argument :
  forall z : C, z <> zeroC -> exists a : R, argument z = image_angle a.
+Proof.
 intros.
 elim existence_image_complexe with (z := z); intros M H1;
  try clear existence_image_complexe; try exact H1.
@@ -184,6 +199,7 @@ Lemma existence_forme_polaire :
  forall z : C,
  z <> zeroC ->
  exists r : R, (exists a : R, module z = r /\ argument z = image_angle a).
+Proof.
 intros.
 elim existence_module with (z := z); intros r H0; try clear existence_module;
  try exact H0.
@@ -206,6 +222,7 @@ Axiom
     forall r a : R, r <> 0 -> argument (cons_pol r a) = image_angle a.
  
 Lemma polaire_non_nul : forall r a : R, r <> 0 -> cons_pol r a <> zeroC.
+Proof.
 intros.
 apply nonzero_module.
 rewrite complexe_polaire_module; auto.
@@ -213,6 +230,7 @@ Qed.
  
 Lemma complexe_pol_module :
  forall (z : C) (r a : R), z <> zeroC -> z = cons_pol r a -> module z = r.
+Proof.
 intros.
 rewrite H0; rewrite complexe_polaire_module; auto.
 Qed.
@@ -220,6 +238,7 @@ Qed.
 Lemma complexe_pol_argument :
  forall (z : C) (r a : R),
  z <> zeroC -> z = cons_pol r a -> argument z = image_angle a.
+Proof.
 intros.
 rewrite H0; rewrite complexe_polaire_argument; auto.
 rewrite <- (complexe_pol_module (z:=z) (r:=r) (a:=a)); auto with geo.
@@ -230,6 +249,7 @@ Qed.
 Lemma pol_complexe_module :
  forall (z : C) (r a : R) (M : PO),
  z <> zeroC -> z = cons_pol r a -> M = image z -> distance O M = r.
+Proof.
 intros.
 rewrite <- (module_def H1); eauto with geo.
 Qed.
@@ -239,6 +259,7 @@ Lemma pol_complexe_argument :
  z <> zeroC ->
  z = cons_pol r a ->
  M = image z -> cons_AV (vec O I) (vec O M) = image_angle a.
+Proof.
 intros.
 rewrite <- (argument_def (M:=M) (z:=z)); eauto with geo.
 Qed.
@@ -249,6 +270,7 @@ Lemma image_forme_polaire :
  O <> M ->
  M = image z ->
  module z = distance O M /\ argument z = cons_AV (vec O I) (vec O M).
+Proof.
 intros.
 split; eauto with geo.
 Qed.
@@ -258,6 +280,7 @@ Lemma unicite_forme_polaire_nonzero :
  z <> zeroC ->
  z = cons_pol r a ->
  z = cons_pol r' a' -> r = r' /\ image_angle a = image_angle a'.
+Proof.
 intros.
 split.
 rewrite <- (complexe_pol_module (z:=z) (r:=r) (a:=a)); eauto with geo.
@@ -269,6 +292,7 @@ Lemma passage_polaire_algebrique :
  forall (z : C) (r a x y : R),
  z <> zeroC ->
  z = cons_cart x y -> z = cons_pol r a -> x = r * cos a /\ y = r * sin a.
+Proof.
 intros.
 elim existence_image_complexe with (z := z); intros M H2;
  try clear existence_image_complexe; try exact H2.
@@ -296,6 +320,7 @@ Qed.
 Lemma passage_algebrique_module :
  forall (z : C) (x y : R),
  z = cons_cart x y -> module z = sqrt (Rsqr x + Rsqr y).
+Proof.
 intros.
 elim existence_image_complexe with (z := z); intros M H2;
  try clear existence_image_complexe; try exact H2.
@@ -309,6 +334,7 @@ Lemma passage_algebrique_argument :
  forall (z : C) (r x y a : R),
  z <> zeroC ->
  z = cons_cart x y -> z = cons_pol r a -> cos a = / r * x /\ sin a = / r * y.
+Proof.
 intros.
 elim
  passage_polaire_algebrique with (z := z) (r := r) (a := a) (x := x) (y := y);
@@ -326,6 +352,7 @@ Lemma egalite_forme_polaire :
  forall z z' : C,
  z <> zeroC ->
  z' <> zeroC -> module z = module z' -> argument z = argument z' -> z = z'.
+Proof.
 intros.
 elim existence_forme_polaire with (z := z);
  [ intros r H3; elim H3; intros a H4; elim H4; intros H5 H6;
@@ -345,6 +372,7 @@ Qed.
  
 Lemma algebrique_zeroC :
  forall a b : R, cons_cart a b = zeroC :>C -> a = 0 /\ b = 0.
+Proof.
 intros.
 apply unicite_parties_relles_imaginaires with zeroC; auto.
 Qed.
@@ -353,6 +381,7 @@ Lemma polaire_calcul_algebrique :
  forall (z : C) (r a : R),
  z <> zeroC :>C ->
  z = cons_pol r a :>C -> z = cons_cart (r * cos a) (r * sin a) :>C.
+Proof.
 intros.
 elim existence_parties_relles_imaginaires with (z := z); intros a0 H1;
  elim H1; intros b H2; try clear H1 existence_parties_relles_imaginaires;
@@ -371,14 +400,17 @@ Definition oneC := cons_cart 1 0.
 #[export] Hint Unfold oneC zeroC Rinj: geo.
  
 Lemma Rinj_zero : Rinj 0 = zeroC.
+Proof.
 unfold Rinj, zeroC in |- *; auto.
 Qed.
  
 Lemma Rinj_un : Rinj 1 = oneC.
+Proof.
 unfold Rinj, oneC in |- *; auto.
 Qed.
  
 Lemma module_oneC : module oneC = 1.
+Proof.
 intros.
 rewrite (passage_algebrique_module (z:=oneC) (x:=1) (y:=0)).
 replace (Rsqr 1 + Rsqr 0) with 1 by (unfold Rsqr; ring).
@@ -387,12 +419,14 @@ unfold oneC in |- *; auto.
 Qed.
  
 Lemma oneC_nonzero : oneC <> zeroC.
+Proof.
 apply nonzero_module.
 rewrite module_oneC; auto with real.
 Qed.
 #[export] Hint Resolve module_oneC oneC_nonzero: geo.
  
 Lemma argument_oneC : argument oneC = image_angle 0.
+Proof.
 elim existence_forme_polaire with (z := oneC);
  [ intros r H; elim H; intros a H0; elim H0; intros H1 H2;
     try clear H0 H existence_forme_polaire; try exact H2
@@ -413,6 +447,7 @@ Definition i := cons_cart 0 1.
 #[export] Hint Unfold i: geo.
  
 Lemma module_i : module i = 1.
+Proof.
 intros.
 rewrite (passage_algebrique_module (z:=i) (x:=0) (y:=1)).
 replace (Rsqr 0 + Rsqr 1) with 1 by (unfold Rsqr; ring).
@@ -421,12 +456,14 @@ unfold i in |- *; auto.
 Qed.
  
 Lemma i_nonzero : i <> zeroC.
+Proof.
 apply nonzero_module.
 rewrite module_i; auto with real.
 Qed.
 #[export] Hint Resolve module_i i_nonzero: geo.
  
 Lemma argument_i : argument i = image_angle pisurdeux.
+Proof.
 elim existence_forme_polaire with (z := i);
  [ intros r H; elim H; intros a H0; elim H0; intros H1 H2;
     try clear H0 H existence_forme_polaire; try exact H2
@@ -448,10 +485,12 @@ Qed.
 #[export] Hint Resolve argument_i: geo.
  
 Lemma forme_polaire_oneC : oneC = cons_pol 1 0.
+Proof.
 apply forme_polaire_def; auto with geo.
 Qed.
  
 Lemma forme_polaire_i : i = cons_pol 1 pisurdeux.
+Proof.
 apply forme_polaire_def; auto with geo.
 Qed.
 #[export] Hint Resolve forme_polaire_oneC forme_polaire_i: geo.
@@ -462,6 +501,7 @@ Lemma egalite_cart_pol :
  module (cons_cart x y) = r ->
  argument (cons_cart x y) = image_angle a :>AV ->
  cons_cart x y = cons_pol r a :>C.
+Proof.
 intros.
 rewrite <- (forme_polaire_def (z:=cons_cart x y) (r:=r) (a:=a));
  auto with geo.
@@ -470,6 +510,7 @@ rewrite H0; auto.
 Qed.
  
 Lemma module_opp_un : module (Rinj (-1)) = 1.
+Proof.
 unfold Rinj in |- *.
 rewrite (passage_algebrique_module (z:=cons_cart (-1) 0) (x:=-1) (y:=0));
  auto with geo.
@@ -478,12 +519,14 @@ exact sqrt_1.
 Qed.
  
 Lemma opp_un_nonzero : Rinj (-1) <> zeroC :>C.
+Proof.
 apply nonzero_module.
 rewrite module_opp_un; auto with real.
 Qed.
 #[export] Hint Resolve opp_un_nonzero module_opp_un: geo.
  
 Lemma argument_opp_un : argument (Rinj (-1)) = image_angle pi.
+Proof.
 elim existence_forme_polaire with (z := Rinj (-1));
  [ intros r H1; elim H1; intros a H2; elim H2; intros H3 H4; try clear H2 H1;
     try exact H4
@@ -501,10 +544,12 @@ Qed.
 #[export] Hint Resolve argument_opp_un: geo.
  
 Lemma forme_polaire_opp_un : Rinj (-1) = cons_pol 1 pi.
+Proof.
 apply forme_polaire_def; auto with geo.
 Qed.
  
 Lemma module_reel : forall x : R, module (Rinj x) = Rabs x.
+Proof.
 unfold Rinj in |- *; intros.
 rewrite (passage_algebrique_module (z:=cons_cart x 0) (x:=x) (y:=0));
  auto with geo.
@@ -513,6 +558,7 @@ rewrite sqrt_Rsqr_abs; auto.
 Qed.
  
 Lemma module_reel_pos : forall x : R, 0 <= x -> module (Rinj x) = x.
+Proof.
 unfold Rinj in |- *; intros.
 rewrite (passage_algebrique_module (z:=cons_cart x 0) (x:=x) (y:=0));
  auto with geo.
@@ -521,6 +567,7 @@ rewrite sqrt_Rsqr; auto.
 Qed.
  
 Lemma reel_non_nul : forall x : R, x <> 0 -> Rinj x <> zeroC.
+Proof.
 intros.
 apply nonzero_module.
 rewrite module_reel.
@@ -530,6 +577,7 @@ Qed.
  
 Lemma argument_reel_pos :
  forall x : R, 0 < x -> argument (Rinj x) = image_angle 0.
+Proof.
 intros.
 cut (x <> 0); intros.
 elim existence_forme_polaire with (z := Rinj x);
@@ -552,6 +600,7 @@ Qed.
 #[export] Hint Resolve argument_reel_pos: geo.
  
 Lemma forme_pol_reel_pos : forall x : R, 0 < x -> Rinj x = cons_pol x 0 :>C.
+Proof.
 intros.
 apply forme_polaire_def; auto with geo.
 apply reel_non_nul; auto with real.
@@ -559,6 +608,7 @@ apply module_reel_pos; auto with real.
 Qed.
  
 Lemma module_reel_neg : forall x : R, 0 > x -> module (Rinj x) = - x.
+Proof.
 intros.
 rewrite module_reel; auto.
 apply Rabs_left1; auto with real.
@@ -567,6 +617,7 @@ Qed.
  
 Lemma argument_reel_neg :
  forall x : R, 0 > x -> argument (Rinj x) = image_angle pi.
+Proof.
 intros.
 cut (x <> 0); intros.
 elim existence_forme_polaire with (z := Rinj x);
@@ -590,12 +641,14 @@ Qed.
  
 Lemma forme_pol_reel_neg :
  forall x : R, 0 > x -> Rinj x = cons_pol (- x) pi :>C.
+Proof.
 intros.
 apply forme_polaire_def; auto with geo.
 apply reel_non_nul; auto with real.
 Qed.
  
 Lemma module_pos : forall z : C, module z >= 0.
+Proof.
 intros.
 elim existence_image_complexe with (z := z); intros M H;
  try clear existence_image_complexe; try exact H.
@@ -604,6 +657,7 @@ Qed.
 #[export] Hint Resolve module_pos: geo.
  
 Lemma module_stric_pos : forall z : C, z <> zeroC :>C -> module z > 0.
+Proof.
 intros.
 cut (module z >= 0); intros; auto with geo.
 elim H0; intros; auto.
@@ -612,6 +666,7 @@ Qed.
 #[export] Hint Resolve module_stric_pos: geo.
  
 Lemma abs_module : forall z : C, module z = Rabs (module z).
+Proof.
 intros.
 cut (module z >= 0); intros; auto with geo.
 rewrite Rabs_right; auto.

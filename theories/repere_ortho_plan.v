@@ -26,6 +26,7 @@ Lemma triangle_rectangle_repere :
  forall O I J : PO,
  O <> I ->
  O <> J -> orthogonal (vec O I) (vec O J) -> repere_orthogonal O I J.
+Proof.
 intros; red in |- *.
 cut (scalaire (vec O I) (vec O J) = 0); intros.
 split; [ idtac | try assumption ].
@@ -54,6 +55,7 @@ Definition repere_orthonormal (O I J : PO) :=
  
 Lemma orthonormal_orthogonal :
  forall O I J : PO, repere_orthonormal O I J -> repere_orthogonal O I J.
+Proof.
 unfold repere_orthonormal in |- *; intros.
 elim H; intros H0 H1; elim H1; intros H2 H3; try clear H1 H; try exact H3.
 apply triangle_rectangle_repere; auto with geo.
@@ -62,6 +64,7 @@ Qed.
  
 Lemma orthonormal_repere :
  forall O I J : PO, repere_orthonormal O I J -> repere O I J.
+Proof.
 intros.
 cut (repere_orthogonal O I J); intros; auto with geo.
 elim H0; auto.
@@ -70,6 +73,7 @@ Qed.
  
 Lemma orthonormal_non_alignes :
  forall O I J : PO, repere_orthonormal O I J -> ~ alignes O I J.
+Proof.
 intros.
 cut (repere O I J); intros; auto with geo.
 Qed.
@@ -82,6 +86,7 @@ Lemma orthogonal_paralleles :
  orthogonal (vec A B) (vec A C) ->
  orthogonal (vec E F) (vec A B) ->
  exists k : R, vec E F = mult_PP k (vec A C).
+Proof.
 intros.
 cut (repere_orthogonal A B C); intros.
 elim H3; intros.
@@ -116,6 +121,7 @@ Lemma orthogonal_colineaires :
  orthogonal (vec A B) (vec C D) ->
  orthogonal (vec A B) (vec E F) ->
  ex (fun k : R => vec E F = mult_PP k (vec C D) :>PP).
+Proof.
 intros.
 elim existence_representant_vecteur with (A := A) (B := C) (C := D);
  intros C1 H5; try clear existence_representant_vecteur; 
@@ -138,6 +144,7 @@ Lemma scalaire_coordonnees :
  vec O M = add_PP (mult_PP x (vec O I)) (mult_PP y (vec O J)) ->
  vec O N = add_PP (mult_PP x' (vec O I)) (mult_PP y' (vec O J)) ->
  scalaire (vec O M) (vec O N) = x * x' + y * y'.
+Proof.
 unfold repere_orthonormal in |- *; intros.
 rewrite H0; rewrite H1.
 Simplscal.
@@ -151,6 +158,7 @@ Lemma scalaire_composantes_ABCD :
  vec A B = add_PP (mult_PP x (vec O I)) (mult_PP y (vec O J)) ->
  vec C D = add_PP (mult_PP x' (vec O I)) (mult_PP y' (vec O J)) ->
  scalaire (vec A B) (vec C D) = x * x' + y * y'.
+Proof.
 intros.
 elim existence_representant_vecteur with (A := O) (B := A) (C := B);
  [ intros M H20 ].
@@ -170,6 +178,7 @@ Lemma coordonnees_scalaire_base :
  vec O M =
  add_PP (mult_PP (scalaire (vec O M) (vec O I)) (vec O I))
    (mult_PP (scalaire (vec O M) (vec O J)) (vec O J)).
+Proof.
 intros.
 elim existence_coordonnees with (O := O) (I := I) (J := J) (M := M);
  [ intros x H1; elim H1; intros y H2; try clear H1; try exact H2
@@ -192,6 +201,7 @@ Lemma distance_coordonnees :
  repere_orthonormal O I J ->
  vec O M = add_PP (mult_PP x (vec O I)) (mult_PP y (vec O J)) :>PP ->
  distance O M = sqrt (Rsqr x + Rsqr y) :>R.
+Proof.
 unfold distance in |- *; intros.
 rewrite
  (scalaire_coordonnees (O:=O) (I:=I) (J:=J) (M:=M) (N:=M) (x:=x) (y:=y)

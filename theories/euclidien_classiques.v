@@ -23,6 +23,7 @@ Lemma carre_scalaire_somme :
  scalaire (add_PP (vec A B) (vec C D)) (add_PP (vec A B) (vec C D)) =
  2 * scalaire (vec A B) (vec C D) +
  (scalaire (vec A B) (vec A B) + scalaire (vec C D) (vec C D)) :>R.
+Proof.
 intros.
 VReplace (add_PP (vec A B) (vec C D))
  (add_PP (mult_PP 1 (vec A B)) (mult_PP 1 (vec C D))).
@@ -35,6 +36,7 @@ Lemma difference_Pythagore :
  scalaire (vec B C) (vec B C) =
  scalaire (vec A B) (vec A B) + scalaire (vec A C) (vec A C) +
  -2 * scalaire (vec A B) (vec A C) :>R.
+Proof.
 intros.
 VReplace (vec B C) (add_PP (mult_PP (-1) (vec A B)) (mult_PP 1 (vec A C))).
 Simplscal.
@@ -46,6 +48,7 @@ Lemma triangle_Pythagore :
  scalaire (vec A B) (vec A C) = 0 <->
  scalaire (vec B C) (vec B C) =
  scalaire (vec A B) (vec A B) + scalaire (vec A C) (vec A C) :>R.
+Proof.
 intros; red in |- *.
 rewrite (difference_Pythagore A B C).
 split; [ intros H; try assumption | idtac ].
@@ -73,6 +76,7 @@ Theorem Pythagore :
  forall A B C : PO,
  orthogonal (vec A B) (vec A C) <->
  Rsqr (distance B C) = Rsqr (distance A B) + Rsqr (distance A C) :>R.
+Proof.
 intros.
 unfold Rsqr in |- *; repeat rewrite <- carre_scalaire_distance.
 elim (triangle_Pythagore A B C); intros.
@@ -86,6 +90,7 @@ Lemma longueur_mediane :
  I = milieu B C ->
  Rsqr (distance A B) + Rsqr (distance A C) =
  R2 * (Rsqr (distance A I) + Rsqr (distance I B)) :>R.
+Proof.
 intros.
 unfold Rsqr, R2 in |- *; repeat rewrite <- carre_scalaire_distance.
 replace (vec A B) with (add_PP (mult_PP 1 (vec A I)) (mult_PP 1 (vec I B))).
@@ -102,6 +107,7 @@ Qed.
 Lemma demi_longueur :
  forall A B I : PO,
  I = milieu A B -> Rsqr (distance A B) = R4 * Rsqr (distance A I) :>R.
+Proof.
 intros.
 unfold Rsqr, R4 in |- *; repeat rewrite <- carre_scalaire_distance.
 replace (vec A B) with (mult_PP 2 (vec A I)).
@@ -114,6 +120,7 @@ Theorem mediane :
  I = milieu B C ->
  R4 * Rsqr (distance A I) =
  R2 * (Rsqr (distance A B) + Rsqr (distance A C)) - Rsqr (distance B C) :>R.
+Proof.
 unfold R2, R4 in |- *; intros.
 rewrite (longueur_mediane A (B:=B) (C:=C) (I:=I)); auto.
 rewrite (demi_longueur (A:=B) (B:=C) (I:=I)); unfold R2, R4 in |- *; auto.
@@ -126,6 +133,7 @@ Lemma rectangle_Pythagore :
  orthogonal (vec A B) (vec A C) <->
  scalaire (vec B C) (vec B C) =
  scalaire (vec A B) (vec A B) + scalaire (vec A C) (vec A C) :>R.
+Proof.
 intros.
 generalize (triangle_Pythagore A B C); unfold iff in |- *; intros.
 elim H; intros H0 H1; try clear H; try exact H0.
@@ -142,6 +150,7 @@ Lemma Pythagore_projete_orthogonal :
  H = projete_orthogonal A B C :>PO ->
  Rsqr (distance A C) = Rsqr (distance H A) + Rsqr (distance H C) :>R /\
  Rsqr (distance B C) = Rsqr (distance H B) + Rsqr (distance H C) :>R.
+Proof.
 intros.
 elim def_projete_orthogonal2 with (A := A) (B := B) (C := C) (H := H);
  [ intros; auto | auto | auto ].
@@ -170,6 +179,7 @@ Lemma scalaire_difference_carre :
  forall A B I M : PO,
  I = milieu A B ->
  scalaire (vec M A) (vec M B) = Rsqr (distance M I) + - Rsqr (distance I A).
+Proof.
 intros.
 unfold Rsqr in |- *; repeat rewrite <- carre_scalaire_distance.
 VReplace (vec M B) (add_PP (mult_PP 1 (vec M I)) (mult_PP 1 (vec I B))).
@@ -187,6 +197,7 @@ Lemma egalite_scalaire_deux_projetes :
  H = projete_orthogonal A B C ->
  K = projete_orthogonal A C B ->
  scalaire (vec A B) (vec A H) = scalaire (vec A K) (vec A C).
+Proof.
 intros.
 elim scalaire_deux_projetes with (A := A) (B := B) (C := C) (H := H) (K := K);
  [ intros H4 H5; try clear scalaire_deux_projetes; try exact H5
@@ -201,6 +212,7 @@ Lemma projete_distance_Rlt :
  forall A B C H : PO,
  A <> B ->
  H <> B -> H = projete_orthogonal A B C -> distance C H < distance C B.
+Proof.
 intros.
 elim def_projete_orthogonal2 with (A := A) (B := B) (C := C) (H := H);
  [ intros | auto | auto ].
@@ -235,6 +247,7 @@ Axiom
 Lemma existence_distance_droite :
  forall A B C : PO,
  A <> B -> exists d : R, d = distance_droite C (droite A B).
+Proof.
 intros A B C H0; try assumption.
 elim existence_projete_orthogonal with (A := A) (B := B) (C := C);
  [ intros H H1; try clear existence_projete_orthogonal; try exact H1 | auto ].

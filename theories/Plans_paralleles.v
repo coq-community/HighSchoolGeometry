@@ -44,6 +44,7 @@ Lemma couple_vecteurs_coplanaires :
  vec D E = add_PP (mult_PP a (vec A B)) (mult_PP b (vec A C)) :>PP ->
  vec D F = add_PP (mult_PP c (vec A B)) (mult_PP d (vec A C)) :>PP ->
  para_plan_plan (plan A B C) (plan D E F).
+Proof.
 intros.
 deroule_triangle D E F.
 apply def_para_plan_plan; auto.
@@ -62,6 +63,7 @@ Lemma plans_paralleles_vecteurs :
  (exists c : R,
     (exists d : R,
        vec D F = add_PP (mult_PP c (vec A B)) (mult_PP d (vec A C)) :>PP)).
+Proof.
 intros.
 elim def_para_plan_plan2 with (3 := H1);
  [ try clear def_para_plan_plan2; auto | auto | auto ].
@@ -92,6 +94,7 @@ Lemma paralleles_droites_plan_trans :
  para_plan_dr (plan A B C) (droite D E) ->
  paralleles (droite D E) (droite F G) ->
  para_plan_dr (plan A B C) (droite F G).
+Proof.
 intros.
 elim def_para_plan_dr2 with (A := A) (B := B) (C := C) (F := D) (G := E);
  [ intros D0 H5; elim H5; intros E0 H6; elim H6; intros H7 H8; elim H8;
@@ -110,6 +113,7 @@ Qed.
 Lemma para_plan_refl :
  forall A B C : PO,
  ~ alignes A B C -> para_plan_plan (plan A B C) (plan A B C).
+Proof.
 intros.
 deroule_triangle A B C.
 generalize
@@ -126,6 +130,7 @@ Lemma para_plan_sym :
  ~ alignes D E F ->
  para_plan_plan (plan A B C) (plan D E F) ->
  para_plan_plan (plan D E F) (plan A B C).
+Proof.
 intros A B C D E F H H0 H1; try assumption.
 elim
  def_para_plan_plan2
@@ -272,6 +277,7 @@ Lemma para_plan_trans :
  para_plan_plan (plan A B C) (plan D E F) ->
  para_plan_plan (plan D E F) (plan G H I) ->
  para_plan_plan (plan A B C) (plan G H I).
+Proof.
 intros A B C D E F G H I H0 H1 H2 H3 H4; try assumption.
 deroule_triangle A B C.
 deroule_triangle D E F.
@@ -359,6 +365,7 @@ Lemma plans_paralleles_ou_droite_incluse2 :
     (exists J : PO,
        I <> J :>PO /\
        incluse (droite I J) (plan A B C) /\ incluse (droite I J) (plan D E F))).
+Proof.
 intros A B C D E F H H0; try assumption.
 deroule_triangle D E F.
 elim

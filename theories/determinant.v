@@ -23,26 +23,31 @@ Axiom OIJ : repere_orthonormal_direct O I J.
 #[export] Hint Resolve OIJ: geo.
  
 Lemma OIJ_repere_ortho : repere_orthonormal O I J.
+Proof.
 auto with geo.
 Qed.
  
 Lemma OIJ_repere : repere O I J.
+Proof.
 auto with geo.
 Qed.
  
 Lemma OI_distincts : O <> I.
+Proof.
 elim OIJ; intros.
 auto with geo.
 elim H0; intros; auto with geo.
 Qed.
  
 Lemma OJ_distincts : O <> J.
+Proof.
 elim OIJ; intros.
 elim H0; intros; auto with geo.
 Qed.
 #[export] Hint Resolve OIJ_repere_ortho OIJ_repere OI_distincts OJ_distincts: geo.
  
 Lemma IJ_distincts : I <> J.
+Proof.
 cut (repere_orthonormal O I J); intros; auto with geo.
 elim H; intros.
 apply non_alignes_distincts2 with O; auto.
@@ -56,6 +61,7 @@ Ltac deroule_OIJ :=
    cut (distance O J = 1); intros; [ idtac | auto with geo ].
  
 Lemma unite_aire : aire (vec O I) (vec O J) = 1.
+Proof.
 intros.
 deroule_OIJ.
 rewrite def_aire; auto with geo.
@@ -64,6 +70,7 @@ rewrite H1; rewrite H2; rewrite H3; ring.
 Qed.
  
 Lemma opp_unite_aire : aire (vec O J) (vec O I) = -1.
+Proof.
 intros.
 deroule_OIJ.
 rewrite def_aire; auto with geo.
@@ -85,6 +92,7 @@ Lemma aire_coordonnees :
  vec O M = add_PP (mult_PP x (vec O I)) (mult_PP y (vec O J)) ->
  vec O N = add_PP (mult_PP x' (vec O I)) (mult_PP y' (vec O J)) ->
  aire (vec O M) (vec O N) = x * y' + - (y * x').
+Proof.
 intros.
 rewrite H.
 elim
@@ -118,6 +126,7 @@ Qed.
  
 Lemma determinant_aire :
  forall A B C D : PO, det (vec A B) (vec C D) = aire (vec A B) (vec C D).
+Proof.
 intros.
 elim composantes_vecteur with (O := O) (I := I) (J := J) (M := A) (N := B);
  [ intros x H; elim H;
@@ -141,6 +150,7 @@ Qed.
  
 Lemma determinant_antisymetrique :
  forall A B C D : PO, det (vec A B) (vec C D) = - det (vec C D) (vec A B).
+Proof.
 intros.
 repeat rewrite determinant_aire.
 rewrite aire_anti_symetrique; auto.
@@ -149,6 +159,7 @@ Qed.
 Lemma determinant_colinearite :
  forall (k : R) (A B C D : PO),
  vec C D = mult_PP k (vec A B) -> det (vec A B) (vec C D) = 0.
+Proof.
 intros.
 repeat rewrite determinant_aire.
 apply (aire_colinearite H).
@@ -158,6 +169,7 @@ Lemma determinant_nul_colinearite :
  forall A B C D : PO,
  A <> B ->
  det (vec A B) (vec C D) = 0 -> exists k : _, vec C D = mult_PP k (vec A B).
+Proof.
 intros A B C D H; try assumption.
 rewrite determinant_aire; intros.
 apply aire_nulle_colineaires; auto.
@@ -165,6 +177,7 @@ Qed.
  
 Lemma alignement_determinant :
  forall A B M : PO, alignes A B M -> det (vec A B) (vec A M) = 0.
+Proof.
 intros.
 rewrite determinant_aire.
 apply aire_alignement; auto.
@@ -172,6 +185,7 @@ Qed.
  
 Lemma determinant_nul_alignement :
  forall A B M : PO, det (vec A B) (vec A M) = 0 -> alignes A B M.
+Proof.
 intros.
 discrimine A B.
 elim determinant_nul_colinearite with (A := A) (B := B) (C := A) (D := M);
@@ -184,6 +198,7 @@ Qed.
 Lemma determinant_colineaire_l :
  forall (k : R) (A B C D : PO),
  det (mult_PP k (vec A B)) (vec C D) = k * det (vec A B) (vec C D).
+Proof.
 intros.
 elim
  existence_representant_mult_vecteur with (A := A) (B := A) (C := B) (k := k);
@@ -197,6 +212,7 @@ Lemma determinant_distrib_l :
  forall A B C D E F : PO,
  det (vec A B) (add_PP (vec C D) (vec E F)) =
  det (vec A B) (vec C D) + det (vec A B) (vec E F).
+Proof.
 intros.
 elim
  existence_representant_som_vecteur with (A := C) (B := D) (C := E) (D := F);
@@ -208,6 +224,7 @@ Qed.
  
 Lemma determinant_ordre_cycle :
  forall A B C D E F : PO, det (vec B C) (vec B A) = det (vec A B) (vec A C).
+Proof.
 intros.
 repeat rewrite determinant_aire.
 apply aire_ordre_cycle.
@@ -216,6 +233,7 @@ Qed.
 Lemma determinant_aire_triangle :
  forall A B C : PO,
  aire_triangle A B C = / 2 * Rabs (det (vec A B) (vec A C)).
+Proof.
 unfold aire_triangle in |- *; intros.
 repeat rewrite determinant_aire; auto.
 Qed.
@@ -225,6 +243,7 @@ Lemma calcul_distance_droite :
  A <> B ->
  distance_droite C (droite A B) =
  Rabs (det (vec A B) (vec A C)) / distance A B.
+Proof.
 intros A B C H0; try assumption.
 elim existence_projete_orthogonal with (A := A) (B := B) (C := C);
  [ intros H H1; try clear existence_projete_orthogonal; try exact H1 | auto ].

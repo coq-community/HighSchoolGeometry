@@ -25,6 +25,7 @@ Lemma produit_scalaire_Cosinus :
  A <> C ->
  scalaire (vec A B) (vec A C) =
  distance A B * (distance A C * Cos (cons_AV (vec A B) (vec A C))).
+Proof.
 intros.
 elim existence_representant_unitaire with (A := A) (B := B);
  [ intros B' H2; try clear existence_representant_unitaire; try exact H2
@@ -72,6 +73,7 @@ Lemma produit_scalaire_cosinus :
  A <> C ->
  image_angle a = cons_AV (vec A B) (vec A C) ->
  scalaire (vec A B) (vec A C) = distance A B * (distance A C * cos a).
+Proof.
 intros.
 rewrite produit_scalaire_Cosinus; auto.
 rewrite (egalite_cos_Cos (A:=A) (B:=B) (C:=C) (x:=a)); auto.
@@ -84,6 +86,7 @@ Lemma triangle_rectangle_Cos :
  A <> C ->
  orthogonal (vec B A) (vec B C) ->
  distance A B = distance A C * Cos (cons_AV (vec A B) (vec A C)).
+Proof.
 intros.
 cut
  (scalaire (vec A B) (vec A C) =
@@ -102,6 +105,7 @@ Lemma triangle_rectangle_cos :
  orthogonal (vec B A) (vec B C) ->
  image_angle a = cons_AV (vec A B) (vec A C) ->
  distance A B = distance A C * cos a.
+Proof.
 intros.
 rewrite (triangle_rectangle_Cos (A:=A) (B:=B) (C:=C)); auto.
 rewrite (egalite_cos_Cos (A:=A) (B:=B) (C:=C) (x:=a)); auto.
@@ -114,6 +118,7 @@ Lemma triangle_rectangle_absolu_cos :
  orthogonal (vec B A) (vec B C) ->
  image_angle a = cons_AV (vec A B) (vec A C) ->
  distance A B = distance A C * Rabs (cos a).
+Proof.
 intros.
 cut (/ distance A C >= 0); intros; auto with geo.
 cut (distance A B >= 0); intros; auto with geo.
@@ -133,6 +138,7 @@ Qed.
 Lemma orthogonal_distincts :
  forall A B C : PO,
  A <> B -> A <> C -> orthogonal (vec A B) (vec A C) -> B <> C.
+Proof.
 intros.
 apply non_alignes_distincts2 with A; auto.
 apply orthogonal_non_alignes; auto with geo.
@@ -146,6 +152,7 @@ Lemma triangle_rectangle_direct_sinus :
  image_angle pisurdeux = cons_AV (vec B C) (vec B A) ->
  image_angle a = cons_AV (vec A B) (vec A C) ->
  distance C B = distance C A * sin a.
+Proof.
 intros.
 cut (image_angle (pisurdeux + - a) = cons_AV (vec C A) (vec C B)); intros.
 rewrite sin_cos_pisurdeux_moins_x.
@@ -174,6 +181,7 @@ Lemma triangle_rectangle_indirect_sinus :
  image_angle (- pisurdeux) = cons_AV (vec B C) (vec B A) ->
  image_angle a = cons_AV (vec A B) (vec A C) ->
  distance C B = distance C A * - sin a.
+Proof.
 intros A B C a H H0 H1 H2 H3; try assumption.
 elim pisurdeux_plus_x with (x := a);
  [ intros H5 H6; try clear pisurdeux_plus_x; try rewrite <- H5 ].
@@ -208,6 +216,7 @@ Lemma triangle_rectangle_absolu_sinus :
  orthogonal (vec B A) (vec B C) ->
  image_angle a = cons_AV (vec A B) (vec A C) ->
  distance C B = distance C A * Rabs (sin a).
+Proof.
 intros.
 cut (/ distance C A >= 0); intros; auto with geo.
 2: apply Rinv_le_pos; auto with geo.
@@ -257,6 +266,7 @@ Lemma triangle_rectangle_direct_Sin :
  B <> C ->
  image_angle pisurdeux = cons_AV (vec B C) (vec B A) ->
  distance C B = distance C A * Sin (cons_AV (vec A B) (vec A C)).
+Proof.
 intros.
 mes (cons_AV (vec A B) (vec A C)).
 rewrite <- H3.
@@ -271,6 +281,7 @@ Lemma triangle_rectangle_indirect_Sin :
  B <> C ->
  image_angle (- pisurdeux) = cons_AV (vec B C) (vec B A) ->
  distance C B = distance C A * - Sin (cons_AV (vec A B) (vec A C)).
+Proof.
 intros.
 mes (cons_AV (vec A B) (vec A C)).
 rewrite <- H3.
@@ -285,6 +296,7 @@ Lemma triangle_rectangle_absolu_Sin :
  B <> C ->
  orthogonal (vec B A) (vec B C) ->
  distance C B = distance C A * Rabs (Sin (cons_AV (vec A B) (vec A C))).
+Proof.
 intros.
 mes (cons_AV (vec A B) (vec A C)).
 rewrite <- H3.
@@ -299,6 +311,7 @@ Lemma projete_negatif_cos :
  H = projete_orthogonal A B C ->
  vec A H = mult_PP k (vec A B) ->
  k < 0 -> image_angle a = cons_AV (vec A B) (vec A C) -> cos a < 0.
+Proof.
 intros.
 cut (scalaire (vec A B) (vec A C) < 0); intros.
 replace (cos a) with
@@ -337,6 +350,7 @@ Lemma projete_absolu_cos :
  H = projete_orthogonal A B C ->
  image_angle a = cons_AV (vec A B) (vec A C) ->
  distance A H = distance A C * Rabs (cos a).
+Proof.
 intros.
 elim def_projete_orthogonal2 with (A := A) (B := B) (C := C) (H := H);
  [ intros; auto | auto | auto ].
@@ -391,6 +405,7 @@ Lemma projete_absolu_sin :
  H = projete_orthogonal A B C ->
  image_angle a = cons_AV (vec A B) (vec A C) ->
  distance C H = distance C A * Rabs (sin a).
+Proof.
 intros.
 deroule_triangle A B C.
 elim def_projete_orthogonal2 with (A := A) (B := B) (C := C) (H := H);
@@ -451,6 +466,7 @@ Lemma projete_absolu_Sin :
  triangle A B C ->
  H = projete_orthogonal A B C ->
  distance C H = distance C A * Rabs (Sin (cons_AV (vec A B) (vec A C))).
+Proof.
 intros.
 deroule_triangle A B C.
 mes (cons_AV (vec A B) (vec A C)).
@@ -465,6 +481,7 @@ Lemma projete_absolu_Cos :
  A <> C ->
  H = projete_orthogonal A B C ->
  distance A H = distance A C * Rabs (Cos (cons_AV (vec A B) (vec A C))).
+Proof.
 intros.
 mes (cons_AV (vec A B) (vec A C)).
 rewrite <- H3.
@@ -479,6 +496,7 @@ Theorem Al_Kashi_Cos :
  Rsqr (distance B C) =
  Rsqr (distance A B) + Rsqr (distance A C) +
  - (2 * (distance A B * (distance A C * Cos (cons_AV (vec A B) (vec A C))))).
+Proof.
 unfold Rsqr in |- *; intros.
 repeat rewrite <- carre_scalaire_distance.
 rewrite (difference_Pythagore A B C).
@@ -494,6 +512,7 @@ Theorem Al_Kashi :
  Rsqr (distance B C) =
  Rsqr (distance A B) + Rsqr (distance A C) +
  - (2 * (distance A B * (distance A C * cos a))).
+Proof.
 unfold Rsqr in |- *; intros.
 repeat rewrite <- carre_scalaire_distance.
 rewrite (difference_Pythagore A B C).
@@ -514,6 +533,7 @@ Lemma triangles_isometriques :
  image_angle y = cons_AV (vec C A) (vec C B) :>AV ->
  image_angle y' = cons_AV (vec C' A') (vec C' B') :>AV ->
  distance B' C' = distance B C /\ cos x = cos x' /\ cos y = cos y'.
+Proof.
 intros.
 mesure A B A C.
 cut (A' <> B' /\ A' <> C'); intros.
@@ -630,6 +650,7 @@ Lemma cas_egalite_triangle :
  distance B' C' = distance B C /\
  cons_AV (vec B C) (vec B A) = cons_AV (vec B' C') (vec B' A') :>AV /\
  cons_AV (vec C A) (vec C B) = cons_AV (vec C' A') (vec C' B') :>AV.
+Proof.
 intros.
 cut (A' <> B' /\ A' <> C'); intros.
 elim H5; intros H6 H7; try clear H5; try exact H7.
@@ -695,6 +716,7 @@ Lemma triangles_isometriques_indirects :
  image_angle y = cons_AV (vec C A) (vec C B) :>AV ->
  image_angle y' = cons_AV (vec C' A') (vec C' B') :>AV ->
  distance B' C' = distance B C /\ cos x = cos x' /\ cos y = cos y'.
+Proof.
 intros.
 mesure A B A C.
 cut (A' <> B' /\ A' <> C'); intros.
@@ -812,6 +834,7 @@ Lemma cas_egalite_triangle_indirect :
  distance B' C' = distance B C :>R /\
  cons_AV (vec B C) (vec B A) = cons_AV (vec B' A') (vec B' C') :>AV /\
  cons_AV (vec C A) (vec C B) = cons_AV (vec C' A') (vec C' B') :>AV.
+Proof.
 intros.
 cut (A' <> B' /\ A' <> C'); intros.
 elim H5; intros H6 H7; try clear H5; try exact H7.

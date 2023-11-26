@@ -37,6 +37,7 @@ Axiom
     image_angle a = cons_AV (vec I A) (vec I B) -> B = rotation I a A.
  
 Lemma rotation_angle_nul : forall I A : PO, A = rotation I 0 A.
+Proof.
 intros.
 elim (classic (I = A)); intros.
 rewrite <- H.
@@ -48,6 +49,7 @@ Qed.
 Lemma image_distinct_centre :
  forall (I A B : PO) (a : R),
  I <> A :>PO -> B = rotation I a A :>PO -> I <> B :>PO.
+Proof.
 intros; red in |- *; intros.
 apply H.
 elim rotation_def with (I := I) (A := A) (B := B) (a := a);
@@ -66,6 +68,7 @@ Qed.
 Lemma rotation_inverse :
  forall (I A B : PO) (a : R),
  B = rotation I a A :>PO -> A = rotation I (- a) B :>PO.
+Proof.
 intros.
 elim (classic (I = A)); intros.
 rewrite <- H0.
@@ -83,6 +86,7 @@ Qed.
 Lemma composee_rotations_meme_centre :
  forall (I A B C : PO) (a b : R),
  B = rotation I a A -> C = rotation I b B -> C = rotation I (a + b) A.
+Proof.
 intros.
 elim (classic (I = A)); intros.
 rewrite H0.
@@ -104,6 +108,7 @@ Qed.
 Theorem rotation_isometrie :
  forall (I A B A' B' : PO) (a : R),
  A' = rotation I a A -> B' = rotation I a B -> distance A' B' = distance A B.
+Proof.
 intros I A B A' B' a H H0; try assumption.
 apply distance_carre; auto.
 elim (classic (I = A)); intros.
@@ -151,6 +156,7 @@ Lemma rotation_IAB :
  A' = rotation I a A ->
  B' = rotation I a B ->
  cons_AV (vec I A) (vec I B) = cons_AV (vec I A') (vec I B') :>AV.
+Proof.
 intros.
 generalize (isometrie_distinct (A:=I) (B:=B) (A':=I) (B':=B')); intros.
 generalize (isometrie_distinct (A:=I) (B:=A) (A':=I) (B':=A')); intros.
@@ -172,6 +178,7 @@ Qed.
 Lemma image_bipoint_distinct :
  forall (I A B A' B' : PO) (a : R),
  A <> B :>PO -> A' = rotation I a A -> B' = rotation I a B -> A' <> B' :>PO.
+Proof.
 intros.
 generalize (rotation_isometrie (I:=I) (A:=A) (B:=B) (A':=A') (B':=B') (a:=a));
  intros H7.
@@ -187,6 +194,7 @@ Theorem rotation_conserve_angle :
  B' = rotation I a B ->
  C' = rotation I a C ->
  cons_AV (vec A B) (vec A C) = cons_AV (vec A' B') (vec A' C') :>AV.
+Proof.
 intros.
 generalize
  (image_bipoint_distinct (I:=I) (A:=A) (B:=C) (A':=A') (B':=C') (a:=a));
@@ -283,6 +291,7 @@ Theorem rotation_image_bipoint :
  B' = rotation I a B ->
  distance A' B' = distance A B /\
  image_angle a = cons_AV (vec A B) (vec A' B') :>AV.
+Proof.
 intros.
 generalize
  (image_bipoint_distinct (I:=I) (A:=A) (B:=B) (A':=A') (B':=B') (a:=a));
@@ -332,6 +341,7 @@ Qed.
  
 Lemma existence_rotation_Ia :
  forall (I M : PO) (a : R), exists M' : PO, M' = rotation I a M.
+Proof.
 intros.
 elim (classic (M = I)); intros.
 exists I.
@@ -389,6 +399,7 @@ Qed.
 Lemma deux_mes_angle_rotation :
  forall (I M : PO) (a b : R),
  image_angle a = image_angle b -> rotation I a M = rotation I b M.
+Proof.
 intros.
 elim (classic (I = M)); intros.
 rewrite <- H0; repeat rewrite <- rotation_def_centre; auto.

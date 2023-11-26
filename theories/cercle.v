@@ -22,16 +22,19 @@ Definition cercle (O : PO) (r : R) (M : PO) : Prop := distance O M = r.
  
 Lemma cercle_isocele :
  forall (O A B : PO) (r : R), cercle O r A -> cercle O r B -> isocele O A B.
+Proof.
 unfold cercle, isocele in |- *; intros.
 rewrite H; rewrite H0; auto.
 Qed.
  
 Lemma existence_rayon : forall O A : PO, cercle O (distance O A) A.
+Proof.
 unfold cercle in |- *; intros; auto.
 Qed.
  
 Lemma isocele_cercle :
  forall O A B : PO, isocele O A B -> cercle O (distance O A) B.
+Proof.
 unfold cercle, isocele in |- *; intros; auto.
 Qed.
  
@@ -40,6 +43,7 @@ Definition circonscrit (O A B C : PO) : Prop :=
  
 Lemma circonscrit_isocele :
  forall O A B C : PO, circonscrit O A B C -> isocele O B C.
+Proof.
 unfold circonscrit, isocele in |- *; intros; auto.
 elim H; intros; auto.
 rewrite <- H0; rewrite <- H1; auto.
@@ -47,6 +51,7 @@ Qed.
  
 Lemma circonscrit_permute :
  forall O A B C : PO, circonscrit O B C A -> circonscrit O A B C.
+Proof.
 unfold circonscrit in |- *; intros.
 elim H; intros; split; auto with geo.
 lapply (circonscrit_isocele (O:=O) (A:=B) (B:=C) (C:=A)); auto with geo.
@@ -54,6 +59,7 @@ Qed.
  
 Lemma circonscrit_distinct1 :
  forall O A B C : PO, O <> A -> circonscrit O A B C -> O <> B.
+Proof.
 unfold circonscrit, isocele in |- *; intros.
 elim H0; [ intros H1 H2; try clear H0; try exact H2 ].
 apply isometrie_distinct with (2 := H1); auto.
@@ -61,6 +67,7 @@ Qed.
  
 Lemma circonscrit_distinct2 :
  forall O A B C : PO, O <> A -> circonscrit O A B C -> O <> C.
+Proof.
 unfold circonscrit, isocele in |- *; intros.
 elim H0; [ intros H1 H2; try clear H0; try exact H2 ].
 apply isometrie_distinct with (2 := H2); auto.
@@ -68,6 +75,7 @@ Qed.
  
 Lemma circonscrit_distinct3 :
  forall O A B C : PO, O <> B -> circonscrit O A B C -> O <> A.
+Proof.
 intros.
 assert (circonscrit O B C A).
 apply circonscrit_permute.
@@ -99,6 +107,7 @@ Ltac icercle :=
  
 Lemma cercle_diametre_permute :
  forall A B C : PO, cercle_diametre A B C -> cercle_diametre B A C.
+Proof.
 icercle.
 elim H;
  [ intros O H0; elim H0;
@@ -111,6 +120,7 @@ Qed.
 #[export] Hint Immediate cercle_diametre_permute: geo.
  
 Lemma cercle_diametre_trivial : forall A B : PO, cercle_diametre A B A.
+Proof.
 icercle.
 discrimine A B.
 exists B; split; auto with geo.
@@ -121,6 +131,7 @@ split; auto with geo.
 Qed.
  
 Lemma cercle_diametre_trivial2 : forall A B : PO, cercle_diametre A B B.
+Proof.
 icercle.
 discrimine A B.
 exists B; split; auto with geo.
@@ -134,6 +145,7 @@ Qed.
 Lemma circonscrit_diametre :
  forall A B C D O : PO,
  circonscrit O A B C -> O = milieu A D -> cercle_diametre A D B.
+Proof.
 icercle.
 exists O.
 split; [ split; [ auto with geo | try assumption ] | try assumption ].
@@ -142,6 +154,7 @@ Qed.
 Lemma cercle_trivial :
  forall A B C D O : PO,
  circonscrit O A B C -> O = milieu A D -> sont_cocycliques A B C D.
+Proof.
 icercle.
 exists O.
 split; [ split; [ try assumption | try assumption ] | try assumption ].
@@ -150,6 +163,7 @@ Qed.
  
 Lemma cercle_diametre_degenere :
  forall A B M : PO, A = B -> cercle_diametre A B M -> A = M.
+Proof.
 intros A B M H; try assumption.
 rewrite H; icercle.
 elim H0;
@@ -167,6 +181,7 @@ From HighSchoolGeometry Require Export dilatations.
 Lemma existence_rayon_diametre :
  forall A B O : PO,
  cercle_rayon O A B -> exists C : PO, cercle_diametre A C B.
+Proof.
 unfold cercle_rayon, isocele in |- *; intros.
 symetrique O A M.
 exists M.
@@ -176,7 +191,7 @@ auto with geo.
 Qed.
  
 Lemma existence_point_cercle : forall O A : PO, 
-exists C, cercle_rayon O A C.
+ exists C, cercle_rayon O A C.
 Proof.
 intros.
 exists A.
@@ -189,6 +204,7 @@ Qed.
 Lemma alignes_diametre :
  forall A B A' : PO,
  alignes A A' B -> cercle_diametre A A' B -> B = A \/ B = A'.
+Proof.
 unfold cercle_diametre in |- *; intros.
 elim H0;
  [ intros O H1; elim H1; [ intros H2 H3; try clear H1 H0; try exact H3 ] ].

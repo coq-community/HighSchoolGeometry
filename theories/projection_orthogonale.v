@@ -35,6 +35,7 @@ Axiom
  
 Lemma existence_projete_orthogonal :
  forall A B C : PO, A <> B -> exists H : PO, H = projete_orthogonal A B C.
+Proof.
 intros A B C H0; try assumption.
 elim
  existence_representant_mult_vecteur
@@ -69,6 +70,7 @@ Theorem scalaire_deux_projetes :
  K = projete_orthogonal A C B ->
  scalaire (vec A B) (vec A C) = scalaire (vec A B) (vec A H) /\
  scalaire (vec A B) (vec A C) = scalaire (vec A K) (vec A C).
+Proof.
 intros.
 elim (def_projete_orthogonal2 (A:=A) (B:=B) (C:=C) (H:=H)); auto; intros.
 elim (def_projete_orthogonal2 (A:=A) (B:=C) (C:=B) (H:=K)); auto; intros.
@@ -87,6 +89,7 @@ Ltac soit_projete A B C H :=
  
 Lemma existence_perpendiculaire :
  forall A B C : PO, A <> B -> exists D : PO, orthogonal (vec A B) (vec C D).
+Proof.
 intros A B C H0; try assumption.
 soit_projete A B C H.
 exists H.
@@ -97,6 +100,7 @@ Lemma projete_axe :
  forall A B M H : PO,
  A <> B :>PO ->
  H = projete_orthogonal A B M :>PO -> alignes A B M -> H = M :>PO.
+Proof.
 intros.
 elim (def_projete_orthogonal2 (A:=A) (B:=B) (C:=M) (H:=H)); auto; intros.
 apply (unicite_projete_orthogonal (A:=A) (B:=B) (C:=M) (H:=H) (H':=M)); auto.
@@ -108,6 +112,7 @@ Lemma projete_non_axe :
  forall A B M H : PO,
  A <> B :>PO ->
  H = projete_orthogonal A B M :>PO -> ~ alignes A B M -> M <> H :>PO.
+Proof.
 intros.
 elim (def_projete_orthogonal2 (A:=A) (B:=B) (C:=M) (H:=H)); auto; intros.
 red in |- *; intros; apply H2.

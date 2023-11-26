@@ -23,6 +23,7 @@ Definition milieu (A B : PO) := barycentre (cons 1 A) (cons 1 B).
  
 Lemma milieu_permute :
  forall A B I : PO, I = milieu A B :>PO -> I = milieu B A :>PO.
+Proof.
 unfold milieu in |- *; intros.
 rewrite permute_barycentre; auto.
 discrR.
@@ -30,6 +31,7 @@ Qed.
  
 Lemma add_PP_milieu :
  forall A B : PO, add_PP (cons 1 A) (cons 1 B) = cons 2 (milieu A B) :>PP.
+Proof.
 unfold milieu in |- *; intros.
 replace 2 with (1 + 1) by ring.
 repeat rewrite <- add_PP_barycentre; auto.
@@ -37,6 +39,7 @@ lra.
 Qed.
  
 Lemma milieu_trivial : forall A : PO, A = milieu A A :>PO.
+Proof.
 intros.
 apply conversion_PP with (a := 2) (b := 2); auto.
 rewrite <- add_PP_milieu; RingPP.
@@ -45,6 +48,7 @@ Qed.
 Lemma prop_vecteur_milieu :
  forall B C A' O : PO,
  A' = milieu B C :>PO -> add_PP (vec O B) (vec O C) = mult_PP 2 (vec O A').
+Proof.
 unfold milieu in |- *; intros.
 replace 2 with (1 + 1) by ring.
 rewrite <- (prop_vecteur_bary (a:=1) (b:=1) (A:=B) (B:=C) (G:=A') O); auto.
@@ -54,6 +58,7 @@ Qed.
  
 Lemma alignes_milieu :
  forall A B I : PO, I = milieu A B :>PO -> alignes A B I.
+Proof.
 unfold milieu in |- *; intros.
 rewrite H.
 apply barycentre_alignes.
@@ -64,6 +69,7 @@ Lemma add_PP_milieu_asso :
  forall A B C : PO,
  add_PP (cons 1 A) (cons 2 (milieu B C)) =
  add_PP (cons 2 (milieu A B)) (cons 1 C) :>PP.
+Proof.
 intros A B C; try assumption.
 repeat rewrite <- add_PP_milieu; try discrR; auto.
 RingPP.
@@ -72,6 +78,7 @@ Qed.
 Lemma vecteur_milieu :
  forall A B M : PO,
  vec A M = mult_PP (/ 2) (vec A B) :>PP -> M = milieu A B :>PO.
+Proof.
 intros; unfold milieu in |- *.
 rewrite (colineaire_barycentre (k:=/ 2) (A:=A) (B:=B) (C:=M)); auto.
 cut (1 + - / 2 = / 2); intros; auto with real.
@@ -83,6 +90,7 @@ Qed.
 Lemma milieu_vecteur2 :
  forall A B M : PO,
  M = milieu A B :>PO -> vec A M = mult_PP (/ 2) (vec A B) :>PP.
+Proof.
 intros; unfold vec in |- *.
 cut (2 <> 0); intros; auto with real.
 apply mult_PP_regulier with 2; auto.
@@ -95,6 +103,7 @@ Qed.
  
 Lemma milieu_vecteur :
  forall A B M : PO, M = milieu A B :>PO -> vec A M = vec M B.
+Proof.
 intros.
 rewrite H.
 apply mult_PP_regulier with 2; auto with real.
@@ -107,6 +116,7 @@ Qed.
  
 Lemma milieu_vecteur_double :
  forall A B M : PO, M = milieu A B :>PO -> vec A B = mult_PP 2 (vec A M) :>PP.
+Proof.
 intros.
 VReplace (vec A B) (add_PP (vec A M) (vec M B)).
 rewrite <- (milieu_vecteur (A:=A) (B:=B) (M:=M)); auto.
@@ -115,6 +125,7 @@ Qed.
  
 Lemma egalite_vecteur_milieu :
  forall A B M : PO, vec A M = vec M B -> M = milieu A B.
+Proof.
 unfold milieu in |- *; intros.
 apply def_vecteur_bary_rec; auto with real.
 rewrite <- H; Ringvec.
@@ -125,18 +136,21 @@ Qed.
  
 Lemma triangle_milieu_distinct :
  forall A B C : PO, ~ alignes B C A -> A <> milieu B C :>PO.
+Proof.
 intros.
 contrapose H.
 auto with geo.
 Qed.
  
 Lemma milieu_distinct : forall A B : PO, A <> B :>PO -> A <> milieu A B :>PO.
+Proof.
 intros A B H; try assumption.
 apply distinct_produit_vecteur with (B := B) (a := / 2); auto with real.
 rewrite <- (milieu_vecteur2 (A:=A) (B:=B) (M:=milieu A B)); auto.
 Qed.
  
 Lemma milieu_distinct2 : forall A B : PO, A <> B :>PO -> B <> milieu A B :>PO.
+Proof.
 intros A B H; try assumption.
 apply distinct_produit_vecteur with (B := A) (a := / 2); auto with real.
 cut (vec (milieu A B) B = mult_PP (/ 2) (vec A B)); intros.
@@ -151,6 +165,7 @@ Qed.
  
 Lemma existence_milieu :
  forall A B : PO, ex (fun I : PO => I = milieu A B :>PO).
+Proof.
 intros.
 exists (milieu A B); auto.
 Qed.
@@ -169,6 +184,7 @@ Ltac soit_milieu A B I :=
 Lemma droite_milieu :
  forall A B C I J : PO,
  I = milieu A B -> J = milieu A C -> mult_PP 2 (vec I J) = vec B C.
+Proof.
 intros.
 rewrite H0; rewrite H.
 VReplace (mult_PP 2 (vec (milieu A B) (milieu A C)))
@@ -180,6 +196,7 @@ Qed.
 Lemma deux_milieux_distincts :
  forall A B C I J : PO,
  A <> C :>PO -> I = milieu A B :>PO -> J = milieu B C :>PO -> I <> J :>PO.
+Proof.
 intros.
 lapply (droite_milieu (A:=B) (B:=A) (C:=C) (I:=I) (J:=J)); auto with geo;
  intros.
@@ -194,6 +211,7 @@ Lemma triangle_triangle_milieux :
  triangle A B C ->
  A' = milieu B C :>PO ->
  B' = milieu A C :>PO -> C' = milieu A B :>PO -> triangle A' B' C'.
+Proof.
 intros.
 deroule_triangle A B C.
 red in |- *; intros; apply H3.
@@ -213,6 +231,7 @@ Lemma add_PP_milieu_permute :
  forall A B C : PO,
  add_PP (cons 1 A) (cons 2 (milieu B C)) =
  add_PP (cons 2 (milieu A C)) (cons 1 B) :>PP.
+Proof.
 intros A B C; try assumption.
 repeat rewrite <- add_PP_milieu; auto.
 Ringvec.
@@ -223,6 +242,7 @@ Definition centre_gravite (A B C : PO) :=
  
 Lemma centre_gravite_ordre_cycle :
  forall A B C : PO, centre_gravite A B C = centre_gravite B C A :>PO.
+Proof.
 unfold centre_gravite in |- *; intros.
 generalize (add_PP_milieu_permute A B C); intros.
 apply conversion_PP with (a := 3) (b := 3); auto with *.
@@ -236,6 +256,7 @@ Qed.
  
 Lemma centre_gravite_ordre_cycle2 :
  forall A B C : PO, centre_gravite A B C = centre_gravite C A B :>PO.
+Proof.
 unfold centre_gravite in |- *; intros.
 generalize (add_PP_milieu_asso A B C); intros.
 apply conversion_PP with (a := 3) (b := 3); auto with *.
@@ -248,6 +269,7 @@ Qed.
  
 Lemma centre_gravite_ordre_permute :
  forall A B C : PO, centre_gravite A B C = centre_gravite A C B :>PO.
+Proof.
 unfold centre_gravite in |- *; intros.
 rewrite (milieu_permute (A:=C) (B:=B) (I:=milieu C B)); auto.
 Qed.
@@ -258,6 +280,7 @@ Lemma triangle_medianes_triangle :
  forall A B C I J : PO,
  triangle A B C ->
  I = milieu B C :>PO -> J = milieu A B :>PO -> ~ alignes A I J.
+Proof.
 intros.
 deroule_triangle A B C.
 red in |- *; intros; apply H2.
@@ -281,6 +304,7 @@ Lemma centre_gravite_mediane_vecteur :
  I = milieu B C :>PO ->
  G = centre_gravite A B C :>PO ->
  vec A G = mult_PP (/ 3) (mult_PP 2 (vec A I)) :>PP.
+Proof.
 unfold centre_gravite in |- *; intros.
 rewrite <- H in H0.
 cut (3 <> 0); intros; auto with real.

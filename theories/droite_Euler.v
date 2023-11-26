@@ -26,6 +26,7 @@ Lemma vec_OAplusOBplusOC_orthogonal :
  circonscrit O A B C ->
  vec O M = add_PP (vec O A) (add_PP (vec O B) (vec O C)) ->
  orthogonal (vec A M) (vec B C).
+Proof.
 intros.
 cut (orthogonal (vec O A') (vec B C)); intros.
 replace (vec A M) with (add_PP (mult_PP (-1) (vec O A)) (vec O M));
@@ -43,6 +44,7 @@ Lemma vec_OAplusOBplusOC_orthocentre :
  circonscrit O A B C ->
  vec O M = add_PP (vec O A) (add_PP (vec O B) (vec O C)) ->
  M = orthocentre A B C.
+Proof.
 intros.
 deroule_triangle A B C.
 soit_milieu B C A'.
@@ -72,6 +74,7 @@ Lemma centre_gravite_prop_vecteur :
  forall A B C G O : PO,
  G = centre_gravite A B C ->
  add_PP (vec O A) (add_PP (vec O B) (vec O C)) = mult_PP 3 (vec O G).
+Proof.
 unfold centre_gravite in |- *; intros.
 discrimine B C.
 replace 3 with (1 + 2) by ring.
@@ -95,6 +98,7 @@ Theorem droite_Euler_fort :
  G = centre_gravite A B C ->
  circonscrit O A B C ->
  H = orthocentre A B C -> vec O H = mult_PP 3 (vec O G).
+Proof.
 intros.
 rewrite <- (centre_gravite_prop_vecteur (A:=A) (B:=B) (C:=C) (G:=G) O); auto.
 elim
@@ -117,6 +121,7 @@ Theorem droite_Euler :
  triangle A B C ->
  G = centre_gravite A B C ->
  circonscrit O A B C -> H = orthocentre A B C -> alignes O G H.
+Proof.
 intros.
 apply colineaire_alignes with 3; auto.
 apply droite_Euler_fort with (1 := H0); auto.

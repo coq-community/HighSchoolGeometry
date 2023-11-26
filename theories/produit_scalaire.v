@@ -46,6 +46,7 @@ Lemma scalaire_lineaire_g :
  forall (a b : R) (A B C D E F : PO),
  scalaire (add_PP (mult_PP a (vec A B)) (mult_PP b (vec C D))) (vec E F) =
  a * scalaire (vec A B) (vec E F) + b * scalaire (vec C D) (vec E F).
+Proof.
 intros.
 elim
  existence_representant_mult_vecteur with (A := A) (B := A) (C := B) (k := a);
@@ -64,6 +65,7 @@ Lemma scalaire_lineaire_d :
  forall (a b : R) (A B C D E F : PO),
  scalaire (vec E F) (add_PP (mult_PP a (vec A B)) (mult_PP b (vec C D))) =
  a * scalaire (vec E F) (vec A B) + b * scalaire (vec E F) (vec C D).
+Proof.
 intros.
 rewrite scalaire_sym.
 rewrite (scalaire_sym E F C D).
@@ -82,6 +84,7 @@ Lemma scalaire_bilineaire :
    (add_PP (mult_PP c (vec E F)) (mult_PP d (vec G H))) =
  a * c * scalaire (vec A B) (vec E F) + a * d * scalaire (vec A B) (vec G H) +
  (b * c * scalaire (vec C D) (vec E F) + b * d * scalaire (vec C D) (vec G H)).
+Proof.
 intros a b c d A B C D E F G I; try assumption.
 elim
  existence_representant_comb_lin_vecteur
@@ -98,6 +101,7 @@ Lemma scalaire_mult_mult :
  forall (A B C D : PO) (x y : R),
  scalaire (mult_PP x (vec A B)) (mult_PP y (vec C D)) =
  x * y * scalaire (vec A B) (vec C D) :>R.
+Proof.
 intros A B C D x y; try assumption.
 replace (mult_PP x (vec A B)) with
  (add_PP (mult_PP x (vec A B)) (mult_PP 0 (vec C D))).
@@ -112,6 +116,7 @@ Lemma scalaire_mult_d :
  forall (k : R) (A B C D : PO),
  scalaire (vec A B) (mult_PP k (vec C D)) = k * scalaire (vec A B) (vec C D)
  :>R.
+Proof.
 intros.
 replace (mult_PP k (vec C D)) with
  (add_PP (mult_PP k (vec C D)) (mult_PP 0 (vec C D))).
@@ -124,6 +129,7 @@ Lemma scalaire_somme_d :
  forall A B C D E F : PO,
  scalaire (vec A B) (add_PP (vec C D) (vec E F)) =
  scalaire (vec A B) (vec C D) + scalaire (vec A B) (vec E F) :>R.
+Proof.
 intros.
 replace (add_PP (vec C D) (vec E F)) with
  (add_PP (mult_PP 1 (vec C D)) (mult_PP 1 (vec E F))).
@@ -141,6 +147,7 @@ Ltac Simplscal :=
  
 Lemma unitaire_distincts :
  forall A B : PO, scalaire (vec A B) (vec A B) = 1 -> A <> B :>PO.
+Proof.
 intros; unfold not in |- *; intros.
 absurd (scalaire (vec A B) (vec A B) = 1); auto.
 rewrite H0.
@@ -155,6 +162,7 @@ Qed.
  
 Lemma distance_non_nulle :
  forall A B : PO, scalaire (vec A B) (vec A B) <> 0 -> A <> B :>PO.
+Proof.
 intros; unfold not in |- *; intros.
 apply H.
 rewrite H0.
@@ -165,6 +173,7 @@ Qed.
  
 Lemma distance_nulle :
  forall A B : PO, scalaire (vec A B) (vec A B) = 0 :>R -> A = B.
+Proof.
 intros.
 cut (vec A B = zero); intros.
 unfold vec in H0.
@@ -180,6 +189,7 @@ Lemma egalite_scalaire_alignes :
  alignes A B C ->
  alignes A B D ->
  scalaire (vec A B) (vec A C) = scalaire (vec A B) (vec A D) -> C = D.
+Proof.
 intros.
 halignes H0 x.
 halignes H1 x0.

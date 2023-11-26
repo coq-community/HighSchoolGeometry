@@ -30,6 +30,7 @@ Lemma existence_coordonnees :
  exists x : R,
    (exists y : R,
       vec O M = add_PP (mult_PP x (vec O I)) (mult_PP y (vec O J))).
+Proof.
 unfold repere, triangle in |- *; intros.
 assert (coplanaires O I J M); auto with geo.
 hcoplanaires H0 k k'.
@@ -42,6 +43,7 @@ Lemma unicite_coordonnees :
  vec O M = add_PP (mult_PP x (vec O I)) (mult_PP y (vec O J)) ->
  vec O M = add_PP (mult_PP x' (vec O I)) (mult_PP y' (vec O J)) ->
  x = x' /\ y = y'.
+Proof.
 unfold vec, repere in |- *; intros.
 deroule_triangle O I J.
 cut
@@ -61,6 +63,7 @@ Lemma composantes_vecteur :
  exists x : R,
    (exists y : R,
       vec M N = add_PP (mult_PP x (vec O I)) (mult_PP y (vec O J))).
+Proof.
 unfold repere, triangle in |- *; intros.
 assert (coplanaires O I J M); auto with geo.
 hcoplanaires H0 k k'.
@@ -106,6 +109,7 @@ Lemma composantes_vecAB :
  b2 = ordonnee B ->
  vec A B =
  add_PP (mult_PP (b1 + - a1) (vec O I)) (mult_PP (b2 + - a2) (vec O J)) :>PP.
+Proof.
 intros.
 generalize (cart_def (O:=O) (I:=I) (J:=J) (M:=A) (x:=a1) (y:=a2)); intros.
 generalize (cart_def (O:=O) (I:=I) (J:=J) (M:=B) (x:=b1) (y:=b2)); intros.
@@ -146,6 +150,7 @@ Lemma unicite_composantes_vecteur :
  vec A B = add_PP (mult_PP a1 (vec O I)) (mult_PP a2 (vec O J)) :>PP ->
  vec A B = add_PP (mult_PP b1 (vec O I)) (mult_PP b2 (vec O J)) :>PP ->
  a1 = b1 :>R /\ a2 = b2 :>R.
+Proof.
 intros.
 elim existence_representant_vecteur with (A := O) (B := A) (C := B);
  [ intros D H2; try clear existence_representant_vecteur; try exact H2 ].
@@ -164,6 +169,7 @@ Lemma cartvec_AB :
  b1 = abscisse B :>R ->
  b2 = ordonnee B :>R ->
  b1 + - a1 = absvec (vec A B) :>R /\ b2 + - a2 = ordvec (vec A B) :>R.
+Proof.
 intros.
 apply
  (unicite_composantes_vecteur (a1:=b1 + - a1) (a2:=
@@ -177,6 +183,7 @@ Qed.
  
 Lemma absvec_abscisse :
  forall O I J M : PO, repere O I J -> absvec (vec O M) = abscisse M.
+Proof.
 intros.
 elim existence_coordonnees with (O := O) (I := I) (J := J) (M := M);
  [ intros x H0; elim H0; [ intros y H1; try clear H0; try exact H1 ] | auto ].
@@ -185,6 +192,7 @@ Qed.
  
 Lemma ordvec_ordonnee :
  forall O I J M : PO, repere O I J -> ordvec (vec O M) = ordonnee M.
+Proof.
 intros.
 elim existence_coordonnees with (O := O) (I := I) (J := J) (M := M);
  [ intros x H0; elim H0; [ intros y H1; try clear H0; try exact H1 ] | auto ].

@@ -21,23 +21,27 @@ Unset Strict Implicit.
 Definition isocele (A B C : PO) : Prop := distance A B = distance A C.
  
 Lemma isocele_permute : forall A B C : PO, isocele A B C -> isocele A C B.
+Proof.
 unfold isocele in |- *; intros; auto.
 Qed.
 #[export] Hint Immediate isocele_permute: geo.
  
 Lemma isocele_mediatrice :
  forall A B C : PO, isocele A B C -> mediatrice B C A.
+Proof.
 unfold isocele, mediatrice in |- *; intros; auto.
 Qed.
  
 Lemma mediatrice_isocele :
  forall A B C : PO, mediatrice B C A -> isocele A B C.
+Proof.
 unfold isocele, mediatrice in |- *; intros; auto.
 Qed.
  
 Lemma mediane_hauteur_isocele :
  forall A B C I : PO,
  I = milieu B C -> orthogonal (vec B C) (vec I A) -> isocele A B C.
+Proof.
 intros.
 apply mediatrice_isocele.
 discrimine B C.
@@ -48,6 +52,7 @@ Qed.
 Lemma mediane_isocele_hauteur :
  forall A B C I : PO,
  I = milieu B C -> isocele A B C -> orthogonal (vec I A) (vec B C).
+Proof.
 intros.
 discrimine B C.
 VReplace (vec C C) zero.
@@ -61,6 +66,7 @@ Lemma hauteur_isocele_mediane :
  B <> C ->
  orthogonal (vec B C) (vec I A) ->
  isocele A B C -> alignes B C I -> I = milieu B C.
+Proof.
 intros A B C I H0 H1 H2 H3; try assumption.
 soit_projete B C A H.
 apply mediatrice_projete_milieu with A; auto.
@@ -74,6 +80,7 @@ Lemma isocele_mediane_bissectrice :
  B <> C ->
  I = milieu B C ->
  isocele A B C -> cons_AV (vec A B) (vec A I) = cons_AV (vec A I) (vec A C).
+Proof.
 intros.
 apply mediatrice_milieu_angles; auto.
 Qed.
@@ -84,6 +91,7 @@ Lemma isocele_angles_base :
  A <> C ->
  B <> C ->
  isocele A B C -> cons_AV (vec B C) (vec B A) = cons_AV (vec C A) (vec C B).
+Proof.
 intros A B C H H0 H1; try assumption.
 soit_milieu B C K.
 elim (classic (A = K)); intros.
@@ -133,6 +141,7 @@ Lemma diametre_rectangle :
  A <> B ->
  C' = milieu A B ->
  distance C' C = distance C' A -> orthogonal (vec C A) (vec C B).
+Proof.
 intros.
 discrimine C A.
 apply ortho_sym.

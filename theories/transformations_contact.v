@@ -25,6 +25,7 @@ Lemma translation_isometrie :
  forall A A' B B' C C' : PO,
  B' = translation A A' B ->
  C' = translation A A' C -> distance B' C' = distance B C.
+Proof.
 intros.
 apply Rsqr_inj; auto with real geo.
 unfold Rsqr in |- *.
@@ -40,6 +41,7 @@ Lemma translation_conserve_orthogonalite :
  B' = translation I J B ->
  M' = translation I J M ->
  orthogonal (vec A B) (vec A M) -> orthogonal (vec A' B') (vec A' M').
+Proof.
 intros.
 rewrite <-
  (translation_bipoint (I:=I) (J:=J) (A:=A) (A':=A') (B:=M) (B':=M'))
@@ -56,6 +58,7 @@ Lemma translation_conserve_contact_cercle_droite :
  M' = translation I J M ->
  O' = translation I J O ->
  tangente_cercle O A B M -> tangente_cercle O' A' B' M'.
+Proof.
 icercle.
 rewrite
  (translation_isometrie (A:=I) (A':=J) (B:=O) (B':=O') (C:=A) (C':=A'))
@@ -77,6 +80,7 @@ Lemma translation_conserve_contact_cercle_cercle :
  K' = translation I J K ->
  O' = translation I J O ->
  cercles_tangents O A K B -> cercles_tangents O' A' K' B'.
+Proof.
 intros.
 elim
  cercles_tangents_tangente_commune with (O := O) (A := A) (O' := K) (A' := B);
@@ -123,6 +127,7 @@ Lemma homothetie_conserve_orthogonalite :
  B' = homothetie k I B :>PO ->
  M' = homothetie k I M :>PO ->
  orthogonal (vec A B) (vec A M) -> orthogonal (vec A' B') (vec A' M').
+Proof.
 intros.
 generalize (homothetie_bipoint (k:=k) (I:=I) (A:=A) (B:=B) (A':=A') (B':=B'));
  intros.
@@ -141,6 +146,7 @@ Lemma homothetie_conserve_contact_cercle_droite :
  M' = homothetie k I M :>PO ->
  O' = homothetie k I O ->
  tangente_cercle O A B M -> tangente_cercle O' A' B' M'.
+Proof.
 icercle.
 rewrite (distance_homothetie (k:=k) (I:=I) (A:=O) (A':=O') (B:=A) (B':=A'));
  auto.
@@ -155,6 +161,7 @@ Qed.
 Lemma produit_distance_distinct :
  forall (A B C D : PO) (k : R),
  k <> 0 -> A <> B -> distance C D = k * distance A B -> C <> D.
+Proof.
 intros.
 contrapose H0.
 assert (distance A B = 0); auto with geo.
@@ -177,6 +184,7 @@ Lemma homothetie_conserve_contact_cercle_cercle :
  K' = homothetie k I K ->
  O' = homothetie k I O ->
  cercles_tangents O A K B -> cercles_tangents O' A' K' B'.
+Proof.
 intros.
 elim
  cercles_tangents_tangente_commune with (O := O) (A := A) (O' := K) (A' := B);
@@ -209,6 +217,7 @@ Lemma reflexion_conserve_orthogonalite :
  B' = reflexion I J B :>PO ->
  M' = reflexion I J M :>PO ->
  orthogonal (vec A B) (vec A M) -> orthogonal (vec A' B') (vec A' M').
+Proof.
 intros.
 assert (distance A' B' = distance A B).
 rewrite <-
@@ -252,6 +261,7 @@ Lemma reflexion_conserve_contact_cercle_droite :
  M' = reflexion I J M ->
  O' = reflexion I J O ->
  tangente_cercle O A B M -> tangente_cercle O' A' B' M'.
+Proof.
 icercle.
 rewrite <-
  (reflexion_isometrie (A:=I) (B:=J) (M:=O) (M':=O') (N:=A) (N':=A'))
@@ -274,6 +284,7 @@ Lemma reflexion_conserve_contact_cercle_cercle :
  K' = reflexion I J K ->
  O' = reflexion I J O ->
  cercles_tangents O A K B -> cercles_tangents O' A' K' B'.
+Proof.
 intros.
 elim
  cercles_tangents_tangente_commune with (O := O) (A := A) (O' := K) (A' := B);
@@ -319,6 +330,7 @@ Lemma rotation_conserve_orthogonalite :
  B' = rotation I a B ->
  M' = rotation I a M ->
  orthogonal (vec A B) (vec A M) -> orthogonal (vec A' B') (vec A' M').
+Proof.
 intros.
 assert (distance A' B' = distance A B).
 rewrite <- (rotation_isometrie (I:=I) (A:=A) (B:=B) (A':=A') (B':=B') (a:=a));
@@ -355,6 +367,7 @@ Lemma rotation_conserve_contact_cercle_droite :
  M' = rotation I a M ->
  O' = rotation I a O ->
  tangente_cercle O A B M -> tangente_cercle O' A' B' M'.
+Proof.
 icercle.
 rewrite (rotation_isometrie (I:=I) (A:=O) (B:=A) (A':=O') (B':=A') (a:=a));
  auto.
@@ -374,6 +387,7 @@ Lemma rotation_conserve_contact_cercle_cercle :
  K' = rotation I a K ->
  O' = rotation I a O ->
  cercles_tangents O A K B -> cercles_tangents O' A' K' B'.
+Proof.
 intros.
 elim
  cercles_tangents_tangente_commune with (O := O) (A := A) (O' := K) (A' := B);
@@ -411,6 +425,7 @@ Lemma similitude_conserve_orthogonalite :
  B' = similitude I k a B ->
  M' = similitude I k a M ->
  orthogonal (vec A B) (vec A M) -> orthogonal (vec A' B') (vec A' M').
+Proof.
 intros.
 assert (distance A' B' = k * distance A B).
 rewrite <-
@@ -457,6 +472,7 @@ Lemma similitude_conserve_contact_cercle_droite :
  M' = similitude I k a M ->
  O' = similitude I k a O ->
  tangente_cercle O A B M -> tangente_cercle O' A' B' M'.
+Proof.
 icercle.
 rewrite
  (distance_similitude (k:=k) (a:=a) (I:=I) (A:=O) (B:=A) (A':=O') (B':=A'))
@@ -480,6 +496,7 @@ Lemma similitude_conserve_contact_cercle_cercle :
  K' = similitude I k a K ->
  O' = similitude I k a O ->
  cercles_tangents O A K B -> cercles_tangents O' A' K' B'.
+Proof.
 intros.
 elim
  cercles_tangents_tangente_commune with (O := O) (A := A) (O' := K) (A' := B);

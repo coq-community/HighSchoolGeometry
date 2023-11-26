@@ -24,6 +24,7 @@ Lemma homothetique_orthocentre :
  triangle A B C ->
  G = centre_gravite A B C ->
  circonscrit O A B C -> H = orthocentre A B C -> O = homothetie (- / 2) G H.
+Proof.
 intros.
 apply vecteur_homothetie.
 cut (vec O H = mult_PP 3 (vec O G)); intros.
@@ -47,6 +48,7 @@ Lemma homothetique_centre_circonscrit :
  G = centre_gravite A B C ->
  circonscrit O A B C ->
  H = orthocentre A B C -> I = milieu O H -> I = homothetie (- / 2) G O.
+Proof.
 intros.
 apply vecteur_homothetie.
 cut (vec O H = mult_PP 3 (vec O G)); intros.
@@ -72,6 +74,7 @@ Lemma centre_circonscrit_triangle_homothetique :
  G = centre_gravite A B C ->
  circonscrit O A B C ->
  H = orthocentre A B C -> I = milieu O H -> circonscrit I A' B' C'.
+Proof.
 intros.
 generalize H5; unfold circonscrit, isocele in |- *; intros.
 elim H8; intros H9 H10; try clear H8; try exact H10.
@@ -127,6 +130,7 @@ Lemma symetrique_milieu_cercle :
  circonscrit O A B C ->
  H = orthocentre A B C ->
  I = milieu O H -> J = symetrie I A' -> sont_cocycliques A' B' C' J.
+Proof.
 unfold symetrie in |- *; intros.
 unfold sont_cocycliques, circonscrit, isocele in |- *.
 exists I.
@@ -154,6 +158,7 @@ Lemma symetrique_milieu_milieu :
  circonscrit O A B C ->
  H = orthocentre A B C ->
  I = milieu O H -> J = milieu A H -> J = symetrie I A'.
+Proof.
 unfold symetrie in |- *; intros.
 Comments Image
   "file://C:/Documents and Settings/Frédérique Guilhot/.pcoq/figures/f1043312519.gif".
@@ -190,6 +195,7 @@ Lemma milieu_sommet_orthocentre_cercle :
  circonscrit O A B C ->
  H = orthocentre A B C ->
  I = milieu O H -> J = milieu A H -> sont_cocycliques A' B' C' J.
+Proof.
 intros.
 apply
  (symetrique_milieu_cercle (A:=A) (B:=B) (C:=C) (A':=A') (B':=B') (C':=C')
@@ -211,6 +217,7 @@ Lemma pied_hauteur_cercle :
  I = milieu O H ->
  J = milieu A H ->
  HA = projete_orthogonal B C A -> sont_cocycliques A' B' C' HA.
+Proof.
 intros.
 generalize
  (orthogonal_diametre_cercle (A:=A') (B:=B') (C:=C') (A':=J) (O:=I));
@@ -293,6 +300,7 @@ Theorem cercle_neuf_points :
  (sont_cocycliques A' B' C' J /\ sont_cocycliques A' B' C' H1) /\
  (sont_cocycliques A' B' C' K /\ sont_cocycliques A' B' C' H2) /\
  sont_cocycliques A' B' C' L /\ sont_cocycliques A' B' C' H3.
+Proof.
 intros.
 split; [ try assumption | idtac ].
 split; [ try assumption | idtac ].

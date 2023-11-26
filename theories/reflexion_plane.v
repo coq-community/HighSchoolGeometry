@@ -35,6 +35,7 @@ Axiom
  
 Lemma reflexion_axe :
  forall A B M : PO, A <> B -> alignes A B M -> M = reflexion A B M.
+Proof.
 intros A B M H2 H0; try assumption.
 elim existence_projete_orthogonal with (A := A) (B := B) (C := M);
  [ intros H H3; try clear existence_projete_orthogonal; try exact H3 | auto ].
@@ -52,6 +53,7 @@ Lemma reflexion_projete_orthogonal_milieu :
  forall A B M M' H : PO,
  A <> B ->
  H = projete_orthogonal A B M -> M' = reflexion A B M -> H = milieu M M'.
+Proof.
 intros.
 generalize (reflexion_def (A:=A) (B:=B) (M:=M) (M':=M') (H:=H)); intros H5.
 cut (2 <> 0); intros.
@@ -68,6 +70,7 @@ Qed.
  
 Lemma reflexion_image_distinct :
  forall A B M M' : PO, ~ alignes A B M -> M' = reflexion A B M -> M <> M'.
+Proof.
 intros A B M M' H0 H1; try assumption.
 cut (A <> B); intros H2; [ idtac | auto with geo ].
 elim existence_projete_orthogonal with (A := A) (B := B) (C := M);
@@ -93,6 +96,7 @@ Lemma reflexion_mediatrice :
  forall A B M M' : PO,
  ~ alignes A B M ->
  M' = reflexion A B M -> mediatrice M M' A /\ mediatrice M M' B.
+Proof.
 intros A B M M' H1 H3; try assumption.
 cut (A <> B); intros H0; [ idtac | auto with geo ].
 elim existence_projete_orthogonal with (A := A) (B := B) (C := M);
@@ -143,6 +147,7 @@ Qed.
 Lemma reflexion_axe_orthogonal_segment :
  forall A B M M' : PO,
  ~ alignes A B M -> M' = reflexion A B M -> orthogonal (vec M M') (vec A B).
+Proof.
 intros.
 assert (A <> B); auto with geo.
 apply ortho_sym; auto.
@@ -156,6 +161,7 @@ Lemma projete_orthogonal_image :
  A <> B ->
  H = projete_orthogonal A B M ->
  M' = reflexion A B M -> H = projete_orthogonal A B M'.
+Proof.
 intros.
 generalize (reflexion_def (A:=A) (B:=B) (M:=M) (M':=M') (H:=H)); intros H5.
 generalize
@@ -171,6 +177,7 @@ Qed.
 Lemma non_axe_image_non_axe :
  forall A B M M' : PO,
  ~ alignes A B M -> M' = reflexion A B M -> ~ alignes A B M'.
+Proof.
 intros A B M M' H0 H2; try assumption.
 cut (A <> B); intros H1; [ idtac | auto with geo ].
 elim existence_projete_orthogonal with (A := A) (B := B) (C := M);
@@ -201,6 +208,7 @@ Qed.
  
 Lemma reflexion_symetrie :
  forall A B M M' : PO, A <> B -> M' = reflexion A B M -> M = reflexion A B M'.
+Proof.
 intros A B M M' H1 H0; try assumption.
 elim (classic (alignes A B M)); intros H20.
 rewrite H0.
@@ -222,6 +230,7 @@ Qed.
  
 Lemma reflexion_isocele :
  forall A B M M' : PO, A <> B -> M' = reflexion A B M -> isocele A M M'.
+Proof.
 intros.
 elim (classic (alignes A B M)); intros.
 replace M' with M; auto.
@@ -235,6 +244,7 @@ Lemma axe_reflexion_droite :
  forall A B C M M' : PO,
  A <> B ->
  A <> C -> alignes A B C -> M' = reflexion A B M -> M' = reflexion C A M.
+Proof.
 intros A B C M M' H10 H0 H1 H2; try assumption.
 elim existence_projete_orthogonal with (A := A) (B := B) (C := M);
  [ intros H H4; try clear existence_projete_orthogonal; try exact H3 | auto ].
@@ -280,6 +290,7 @@ Theorem axe_reflexion_bissectrice :
  ~ alignes A B M ->
  M' = reflexion A B M ->
  cons_AV (vec A M) (vec A B) = cons_AV (vec A B) (vec A M').
+Proof.
 intros A B M M' H1 H2; try assumption.
 cut (A <> B); intros H0; [ idtac | auto with geo ].
 elim existence_projete_orthogonal with (A := A) (B := B) (C := M);
@@ -379,6 +390,7 @@ Qed.
  
 Lemma reflexion_isocele2 :
  forall A B M M' : PO, A <> B -> M' = reflexion A B M -> isocele B M M'.
+Proof.
 intros.
 apply reflexion_isocele with A; auto.
 apply axe_reflexion_droite with B; auto with geo.
@@ -391,6 +403,7 @@ Lemma reflexion_inverse_angle :
  M <> B ->
  M' = reflexion A B M ->
  cons_AV (vec M' A) (vec M' B) = opp (cons_AV (vec M A) (vec M B)).
+Proof.
 intros.
 elim (classic (alignes A B M)); intros.
 replace M' with M; auto.
@@ -435,6 +448,7 @@ Lemma reflexion_isometrie :
  A <> B ->
  M' = reflexion A B M ->
  N' = reflexion A B N -> distance M N = distance M' N'.
+Proof.
 intros.
 discrimine M N.
 rewrite H2 in H0.
@@ -517,6 +531,7 @@ Lemma reflexion_inverse_AMN :
  M' = reflexion A B M ->
  N' = reflexion A B N ->
  cons_AV (vec A M') (vec A N') = opp (cons_AV (vec A M) (vec A N)).
+Proof.
 intros.
 elim (classic (alignes A B M)); intros.
 replace M' with M; auto.
@@ -588,6 +603,7 @@ Theorem reflexion_anti_deplacement :
  N' = reflexion A B N ->
  P' = reflexion A B P ->
  cons_AV (vec M' N') (vec M' P') = opp (cons_AV (vec M N) (vec M P)).
+Proof.
 intros.
 cut (M' <> N'); intros.
 cut (M' <> P'); intros.
@@ -698,6 +714,7 @@ Lemma mediatrices_reflexion :
  M <> M' ->
  ~ alignes A B M ->
  mediatrice M M' A -> mediatrice M M' B -> M' = reflexion A B M.
+Proof.
 intros A B M M' H0 H1 H2 H3; try assumption.
 cut (A <> B); intros H; [ idtac | auto with geo ].
 soit_milieu M M' K.
@@ -722,6 +739,7 @@ Qed.
  
 Lemma existence_reflexion_AB :
  forall A B M : PO, A <> B -> exists M' : PO, M' = reflexion A B M.
+Proof.
 intros A B M H1; try assumption.
 elim existence_projete_orthogonal with (A := A) (B := B) (C := M);
  [ intros H H4; try clear existence_projete_orthogonal; try exact H3 | auto ].

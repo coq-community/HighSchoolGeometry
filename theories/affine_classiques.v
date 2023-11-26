@@ -23,6 +23,7 @@ Lemma triangle_droite_milieu_paralleles :
  triangle A B C ->
  A' = milieu B C :>PO ->
  B' = milieu A C :>PO -> paralleles (droite A B) (droite A' B').
+Proof.
 intros A B C A' B' H H0 H1; try assumption.
 deroule_triangle A B C.
 apply colineaires_paralleles with (-2); auto.
@@ -34,6 +35,7 @@ Qed.
  
 Lemma milieu_parallelogrammme :
  forall A B C D I : PO, vec A B = vec D C -> I = milieu A C -> I = milieu B D.
+Proof.
 unfold vec in |- *; intros.
 elim cons_inj with (a := 2) (b := 2) (A := I) (B := milieu B D); intros; auto;
  try discrR.
@@ -46,6 +48,7 @@ Qed.
  
 Lemma milieu_parallelogrammme_rec:
  forall (A B C D I : PO), I = milieu A C -> I = milieu B D ->  vec A B = vec D C.
+Proof.
 unfold vec; intros.
 assert (add_PP (cons 1 B) (cons 1 D) = add_PP (cons 1 A) (cons 1 C)).
 repeat rewrite add_PP_milieu.
@@ -57,6 +60,7 @@ Qed.
 
 Lemma caract_milieu_parallelogramme:
  forall (A B C D : PO),  (milieu A C = milieu B D <-> parallelogramme A B C D).
+Proof.
 intros.
 elim (existence_milieu A C); [intros I H; (try clear existence_milieu)].
 rewrite <- H.
@@ -72,6 +76,7 @@ Lemma Thales_PP :
  paralleles (droite A C) (droite B D) ->
  exists k : R,
    add_PP (cons 1 A) (cons k B) = add_PP (cons 1 C) (cons k D) :>PP.
+Proof.
 intros A B C D H10 H11 H; try assumption.
 elim def_paralleles2 with (3 := H); auto.
 intros k H2.
@@ -86,6 +91,7 @@ Lemma reciproque_Thales_PP :
  B <> D :>PO ->
  add_PP (cons 1 A) (cons k B) = add_PP (cons 1 C) (cons k D) ->
  paralleles (droite A C) (droite B D).
+Proof.
 intros A B C D k H10 H11 H; try assumption.
 apply def_paralleles with (- k); auto.
 replace (- - k) with k; try ring.
@@ -102,6 +108,7 @@ Theorem Thales_expl :
  (exists k : R,
     (exists I : PO,
        vec I A = mult_PP k (vec I B) /\ vec I C = mult_PP k (vec I D))).
+Proof.
 intros A B C D H11 H10 H; try assumption.
 elim Thales_PP with (3 := H); auto.
 intros k H2.
@@ -168,6 +175,7 @@ Theorem reciproque_Thales_expl :
  B <> D :>PO ->
  vec I A = mult_PP k (vec I B) :>PP ->
  vec I C = mult_PP k (vec I D) :>PP -> paralleles (droite A C) (droite B D).
+Proof.
 unfold vec in |- *; intros A B C D I k H10 H11 H H0.
 apply reciproque_Thales_PP with (- k); auto.
 RingPP2 H.
@@ -186,6 +194,7 @@ Lemma trapeze_complet_PP :
    (fun k : R =>
     add_PP (cons 1 A) (cons k C) = add_PP (cons 1 B) (cons k D) :>PP /\
     add_PP (cons 1 A) (cons k C) = add_PP (cons 1 J) (cons k I) :>PP).
+Proof.
 intros A B C D I J H10 H11 H H0 H1; try assumption.
 elim Thales_PP with (3 := H); auto.
 intros x H2; try assumption.
@@ -213,6 +222,7 @@ Lemma trapeze_complet_expl :
  I = milieu C D ->
  J = milieu A B ->
  vec C A = vec D B /\ vec C A = vec I J \/ concours_3 A C B D J I.
+Proof.
 intros A B C D I J H10 H11 H H0 H1; try assumption.
 unfold concours_3, vec in |- *; intros.
 elim
@@ -259,6 +269,7 @@ Lemma trapeze_complet_expl2 :
  I = milieu C D ->
  J = milieu A B ->
  vec D A = vec C B /\ vec D A = vec I J \/ concours_3 A D B C J I.
+Proof.
 intros.
 elim (trapeze_complet_expl (A:=A) (B:=B) (C:=D) (D:=C) (I:=I) (J:=J));
  auto with geo; intros.
@@ -285,6 +296,7 @@ Theorem Desargues :
  paralleles (droite A B) (droite A1 B1) ->
  paralleles (droite A C) (droite A1 C1) ->
  paralleles (droite B C) (droite B1 C1).
+Proof.
 intros.
 deroule_triangle A A1 B.
 deroule_triangle A A1 C.
@@ -358,6 +370,7 @@ Lemma Thales_concours :
  vec A I = mult_PP k (vec A B) :>PP ->
  paralleles (droite B C) (droite I J) ->
  alignes A C J -> vec A J = mult_PP k (vec A C) :>PP.
+Proof.
 intros k A B C I J H H0 H2 H3 H4; try assumption.
 elim (classic (k = 1)); intros.
 cut (B = I); intros.
@@ -508,6 +521,7 @@ Lemma reciproque_droite_milieu :
  triangle A B C ->
  I = milieu A B :>PO ->
  paralleles (droite B C) (droite I J) -> alignes A C J -> J = milieu A C :>PO.
+Proof.
 intros.
 apply vecteur_milieu.
 apply (Thales_concours (k:=/ 2) (A:=A) (B:=B) (C:=C) (I:=I) (J:=J)); auto.

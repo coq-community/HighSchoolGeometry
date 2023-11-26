@@ -37,6 +37,7 @@ Lemma definition_inversion :
  k <> 0 ->
  I <> A ->
  (B = inversion I k A <-> alignes I A B /\ scalaire (vec I A) (vec I B) = k).
+Proof.
 intros; red in |- *; try split; intros.
 apply inversion_def; auto.
 apply inversion_def2; tauto.
@@ -45,6 +46,7 @@ Qed.
 Lemma image_distinct_pole :
  forall (I A B : PO) (k : R),
  k <> 0 -> I <> A -> B = inversion I k A -> I <> B.
+Proof.
 intros.
 elim (inversion_def (I:=I) (A:=A) (B:=B) (k:=k)); intros; auto.
 red in |- *; intros; apply H.
@@ -61,6 +63,7 @@ Ltac deroule_inversion I A B k :=
 Lemma inversion_involution :
  forall (I A B : PO) (k : R),
  k <> 0 -> I <> A -> B = inversion I k A -> A = inversion I k B.
+Proof.
 intros.
 deroule_inversion I A B k.
 apply inversion_def2; auto.
@@ -78,6 +81,7 @@ Lemma inversion_droite_pole :
  alignes I A M ->
  A' = inversion I k A ->
  M' = inversion I k M -> alignes I A A' /\ alignes I A' M'.
+Proof.
 intros.
 deroule_inversion I M M' k.
 deroule_inversion I A A' k.
@@ -97,6 +101,7 @@ Lemma inversion_homothetie :
  k <> 0 ->
  I <> A ->
  B = inversion I k A -> B = homothetie (/ Rsqr (distance I A) * k) I A.
+Proof.
 intros.
 deroule_inversion I A B k.
 apply vecteur_homothetie.
@@ -117,6 +122,7 @@ Lemma homothetie_inversion :
  k <> 0 ->
  I <> A ->
  B = homothetie (/ Rsqr (distance I A) * k) I A -> B = inversion I k A.
+Proof.
 intros.
 generalize (homothetie_vecteur H1); intros.
 apply inversion_def2; auto.
@@ -131,6 +137,7 @@ Lemma inversion_est_homothetie :
  k <> 0 ->
  I <> A ->
  (B = inversion I k A <-> B = homothetie (/ Rsqr (distance I A) * k) I A).
+Proof.
 intros; red in |- *; try split; intros.
 apply inversion_homothetie; auto.
 apply homothetie_inversion; auto.
@@ -142,6 +149,7 @@ Lemma inversion_pole_vecteur :
  O <> M ->
  M' = inversion O k M :>PO ->
  vec O M' = mult_PP (/ Rsqr (distance O M) * k) (vec O M) :>PP.
+Proof.
 intros.
 apply homothetie_vecteur.
 apply inversion_homothetie; auto.
@@ -150,6 +158,7 @@ Qed.
 Lemma existence_inversion :
  forall (I A : PO) (k : R),
  k <> 0 -> I <> A -> exists A' : PO, A' = inversion I k A.
+Proof.
 intros.
 elim
  existence_homothetique
@@ -163,6 +172,7 @@ Lemma inversion_oppose_puissance :
  forall (I A B C : PO) (k : R),
  k <> 0 ->
  I <> A -> B = inversion I k A -> C = symetrie I A -> B = inversion I (- k) C.
+Proof.
 intros.
 generalize H2; unfold symetrie in |- *; intros.
 assert (I <> C).
@@ -196,6 +206,7 @@ Theorem inversion_cocyclicite :
  C <> D ->
  triangle A B C ->
  B = inversion I k A -> D = inversion I k C -> sont_cocycliques A B C D.
+Proof.
 intros.
 deroule_inversion I A B k.
 deroule_inversion I C D k.
@@ -216,6 +227,7 @@ Theorem inversion_cercle_diametre_pole :
  A' = inversion I k A ->
  M' = inversion I k M ->
  cercle_diametre I A M -> droite_perpendiculaire I A A' M'.
+Proof.
 unfold droite_perpendiculaire in |- *; intros A M A' M' I k H H0 H2 H3 H1.
 generalize H1; unfold cercle_diametre in |- *; intros.
 elim H4;
@@ -262,6 +274,7 @@ Theorem inversion_droite_non_pole :
  alignes A B M ->
  M' = inversion I k M ->
  exists C : PO, orthogonal (vec A B) (vec I C) /\ cercle_diametre I C M'.
+Proof.
 intros.
 deroule_triangle A B I.
 soit_projete A B I K.
@@ -331,6 +344,7 @@ Lemma cercle_inversion_homothetie :
  B1 = inversion I k B ->
  A1 = homothetie (k * / scalaire (vec I A) (vec I A')) I A' /\
  B1 = homothetie (k * / scalaire (vec I A) (vec I A')) I B'.
+Proof.
 intros.
 assert (scalaire (vec I A) (vec I A') = scalaire (vec I B) (vec I B')).
 apply puissance_cercle; auto.
@@ -410,6 +424,7 @@ Lemma cercle_tangente_inversion_homothetie :
  M' = inversion I k M ->
  A' = homothetie (k * / scalaire (vec I A) (vec I B)) I B /\
  M' = homothetie (k * / scalaire (vec I A) (vec I B)) I M.
+Proof.
 intros.
 assert
  (scalaire (vec I A) (vec I B) = Rsqr (distance I O) + - Rsqr (distance O A)).
@@ -476,6 +491,7 @@ Theorem inversion_cercle_non_pole :
  A' = inversion I k A ->
  B' = inversion I k B ->
  M' = inversion I k M -> cercle_diametre A B M -> cercle_diametre A' B' M'.
+Proof.
 intros A B M A' B' M' I k H H50 H0 H1 H2 H3 H4 H5; try assumption.
 assert (I <> A).
 red in |- *; intros; apply H0.

@@ -36,6 +36,7 @@ Axiom
  
 Lemma vec_directeur_trivial :
  forall A B : PO, A <> B -> vec_directeur (vec A B) (droite A B).
+Proof.
 intros.
 apply vec_directeur_def2; auto.
 apply determinant_colinearite with 1; auto.
@@ -46,6 +47,7 @@ Lemma existence_vec_directeur :
  forall A B : PO,
  A <> B ->
  exists C : PO, (exists D : PO, vec_directeur (vec C D) (droite A B)).
+Proof.
 intros.
 exists A; exists B.
 apply vec_directeur_trivial; auto.
@@ -56,6 +58,7 @@ Lemma vec_directeur_permute :
  A <> B ->
  C <> D ->
  vec_directeur (vec A B) (droite C D) -> vec_directeur (vec C D) (droite A B).
+Proof.
 intros.
 apply vec_directeur_def2; auto.
 rewrite determinant_antisymetrique.
@@ -68,6 +71,7 @@ Lemma paralleles_vec_directeur :
  A <> B ->
  C <> D ->
  paralleles (droite A B) (droite C D) -> vec_directeur (vec A B) (droite C D).
+Proof.
 intros.
 apply vec_directeur_def2; auto.
 elim paralleles_vecteur with (A := C) (B := D) (C := A) (D := B);
@@ -85,6 +89,7 @@ Lemma vec_directeur_paralleles :
  A <> B ->
  C <> D ->
  vec_directeur (vec A B) (droite C D) -> paralleles (droite A B) (droite C D).
+Proof.
 intros.
 elim determinant_nul_colinearite with (A := C) (B := D) (C := A) (D := B);
  [ intros k H4; try clear determinant_nul_colinearite; try exact H4
@@ -106,6 +111,7 @@ Lemma vec_directeur_calcul :
  b = ordvec (vec A B) ->
  vec_directeur (vec A B) (droite C D) ->
  b * (x + - x0) + - (a * (y + - y0)) = 0.
+Proof.
 intros A B C D x y x0 y0 a b H H0 H1 H2 H3 H4 H5 H6 H7; try assumption.
 cut
  (vec C D =
@@ -134,6 +140,7 @@ Lemma equation_droite_parallele :
  b = ordvec (vec A B) ->
  paralleles (droite A B) (droite C D) ->
  b * (x + - x0) + - (a * (y + - y0)) = 0.
+Proof.
 intros.
 apply vec_directeur_calcul with (1 := H) (2 := H0); auto with geo.
 Qed.
@@ -147,6 +154,7 @@ Lemma alignes_equation_cartesienne :
  exists a : R,
    (exists b : R,
       (exists c : R, a * x + (b * y + c) = 0 /\ ~ (a = 0 /\ b = 0))).
+Proof.
 intros A B M x y H20 H30 H0 H1; try assumption.
 cut (vec O M = add_PP (mult_PP x (vec O I)) (mult_PP y (vec O J)));
  [ intros H | auto with geo ].
@@ -183,6 +191,7 @@ Lemma equation_cartesienne_alignes :
  ~ (a = 0 /\ b = 0) ->
  a * x + (b * y + c) = 0 ->
  exists A : _, (exists B : _, A <> B /\ alignes A B M).
+Proof.
 intros M x y a b c H20 H30 H0 H1; try assumption.
 cut (vec O M = add_PP (mult_PP x (vec O I)) (mult_PP y (vec O J)));
  [ intros H | auto with geo ].
@@ -320,6 +329,7 @@ From HighSchoolGeometry Require Export angles_droites.
 Lemma existence_vec_normal :
  forall A B : PO,
  A <> B -> exists C : PO, (exists D : PO, vec_normal (vec C D) (droite A B)).
+Proof.
 intros.
 soit_orthogonal A B D.
 exists A; exists D; auto with geo.
@@ -330,6 +340,7 @@ Lemma vec_normal_permute :
  A <> B ->
  C <> D ->
  vec_normal (vec A B) (droite C D) -> vec_normal (vec C D) (droite A B).
+Proof.
 intros.
 eauto with geo.
 Qed.
@@ -342,6 +353,7 @@ Lemma vec_normal_directeur_orthogonaux :
  E <> F ->
  vec_normal (vec C D) (droite A B) ->
  vec_directeur (vec E F) (droite A B) -> orthogonal (vec C D) (vec E F).
+Proof.
 intros.
 apply vec_normal_def; auto.
 elim determinant_nul_colinearite with (A := A) (B := B) (C := E) (D := F);
@@ -360,6 +372,7 @@ Lemma vec_normal_orthogonal_directeur :
  E <> F ->
  vec_normal (vec C D) (droite A B) ->
  orthogonal (vec C D) (vec E F) -> vec_directeur (vec E F) (droite A B).
+Proof.
 intros.
 apply paralleles_vec_directeur; auto.
 elim
@@ -380,6 +393,7 @@ Lemma vec_directeur_orthogonal_normal :
  E <> F ->
  vec_directeur (vec E F) (droite A B) ->
  orthogonal (vec C D) (vec E F) -> vec_normal (vec C D) (droite A B).
+Proof.
 intros.
 apply vec_normal_def2; auto.
 apply ortho_sym.
@@ -397,6 +411,7 @@ Lemma paralleles_l_vec_normal :
  E <> F ->
  paralleles (droite A B) (droite E F) ->
  vec_normal (vec A B) (droite C D) -> vec_normal (vec E F) (droite C D).
+Proof.
 intros.
 elim paralleles_vecteur with (A := E) (B := F) (C := A) (D := B);
  [ intros k H4; try clear paralleles_vecteur | auto | auto | auto with geo ].
@@ -411,6 +426,7 @@ Lemma vec_normal_paralleles_l :
  E <> F ->
  vec_normal (vec A B) (droite C D) ->
  vec_normal (vec E F) (droite C D) -> paralleles (droite A B) (droite E F).
+Proof.
 intros.
 elim
  orthogonal_colineaires
@@ -430,6 +446,7 @@ Lemma vec_normal_paralleles_r :
  E <> F ->
  vec_normal (vec A B) (droite C D) ->
  vec_normal (vec A B) (droite E F) -> paralleles (droite C D) (droite E F).
+Proof.
 intros.
 elim
  orthogonal_colineaires
@@ -449,6 +466,7 @@ Lemma paralleles_r_vec_normal :
  E <> F ->
  paralleles (droite C D) (droite E F) ->
  vec_normal (vec A B) (droite C D) -> vec_normal (vec A B) (droite E F).
+Proof.
 intros.
 elim paralleles_vecteur with (A := E) (B := F) (C := C) (D := D);
  [ intros k H4; try clear paralleles_vecteur | auto | auto | auto with geo ].
@@ -468,6 +486,7 @@ Lemma vec_normal_calcul :
  a = absvec (vec A B) ->
  b = ordvec (vec A B) ->
  vec_normal (vec A B) (droite C D) -> a * (x + - x0) + b * (y + - y0) = 0.
+Proof.
 intros A B C D x y x0 y0 a b H H0 H1 H2 H3 H4 H5 H6 H7; try assumption.
 elim existence_representant_vecteur with (A := O) (B := A) (C := B);
  [ intros M H10 ].
@@ -500,6 +519,7 @@ Lemma equation_droite_orthogonal :
  a = absvec (vec A B) ->
  b = ordvec (vec A B) ->
  orthogonal (vec A B) (vec C D) -> a * (x + - x0) + b * (y + - y0) = 0.
+Proof.
 intros.
 apply vec_normal_calcul with (1 := H) (2 := H0); auto with geo.
 Qed.
@@ -513,6 +533,7 @@ Lemma orthogonal_equation_cartesienne :
  exists a : R,
    (exists b : R,
       (exists c : R, a * x + (b * y + c) = 0 /\ ~ (a = 0 /\ b = 0))).
+Proof.
 intros A B M x y H20 H30 H0 H1; try assumption.
 cut (vec O M = add_PP (mult_PP x (vec O I)) (mult_PP y (vec O J)));
  [ intros H | auto with geo ].
@@ -553,6 +574,7 @@ Lemma equation_cartesienne_orthogonal :
  ~ (a = 0 /\ b = 0) ->
  a * x + (b * y + c) = 0 ->
  exists A : _, (exists B : _, A <> B /\ orthogonal (vec A B) (vec A M)).
+Proof.
 intros M x y a b c H20 H30 H0 H1; try assumption.
 cut (vec O M = add_PP (mult_PP x (vec O I)) (mult_PP y (vec O J)));
  [ intros H | auto with geo ].

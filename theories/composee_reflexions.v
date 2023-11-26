@@ -28,6 +28,7 @@ Theorem composee_reflexions_axes_paralleles :
  D = translation A B C ->
  E = translation A C C ->
  M1 = reflexion A B M -> M' = reflexion C D M1 -> M' = translation A E M.
+Proof.
 intros A B C D E M M' M1 H11 H0 H6 H2 H3 H4 H5; try assumption.
 generalize (translation_vecteur (I:=A) (J:=C) (A:=C) (A':=E)); intros H21.
 generalize (translation_vecteur (I:=A) (J:=B) (A:=C) (A':=D)); intros H22.
@@ -179,6 +180,7 @@ Theorem composee_reflexions_axes_secants :
  A <> C ->
  image_angle a = cons_AV (vec A B) (vec A C) ->
  M1 = reflexion A B M -> M' = reflexion A C M1 -> M' = rotation A (a + a) M.
+Proof.
 intros A B C M M' M1 a H H0 H1 H2 H3; try assumption.
 elim (classic (A = M)).
 intros H5; try assumption.

@@ -22,26 +22,31 @@ Axiom OIJ : repere_orthonormal_direct O I J.
 #[export] Hint Resolve OIJ: geo.
  
 Lemma OIJ_repere_ortho : repere_orthonormal O I J.
+Proof.
 auto with geo.
 Qed.
  
 Lemma OIJ_repere : repere O I J.
+Proof.
 auto with geo.
 Qed.
  
 Lemma OI_distincts : O <> I.
+Proof.
 elim OIJ; intros.
 auto with geo.
 elim H0; intros; auto with geo.
 Qed.
  
 Lemma OJ_distincts : O <> J.
+Proof.
 elim OIJ; intros.
 elim H0; intros; auto with geo.
 Qed.
 #[export] Hint Resolve OIJ_repere_ortho OIJ_repere OI_distincts OJ_distincts: geo.
  
 Lemma IJ_distincts : I <> J.
+Proof.
 cut (repere_orthonormal O I J); intros; auto with geo.
 elim H; intros.
 apply non_alignes_distincts2 with O; auto.
@@ -82,16 +87,19 @@ Axiom
  
 Lemma affixe_image_vecteur :
  forall (z : C) (M : PO), vec O M = image_vec z -> z = affixe_vec (vec O M).
+Proof.
 intros; eauto with geo.
 Qed.
  
 Lemma image_affixe_vecteur :
  forall (z : C) (M : PO), z = affixe_vec (vec O M) -> vec O M = image_vec z.
+Proof.
 intros; eauto with geo.
 Qed.
  
 Lemma existence_image_vecteur_complexe :
  forall z : C, exists M : PO, vec O M = image_vec z.
+Proof.
 intros.
 elim existence_image_complexe with (z := z); intros M H;
  try clear existence_image_complexe; try exact H.
@@ -100,6 +108,7 @@ Qed.
  
 Lemma existence_affixe_vecteur_point :
  forall M : PO, exists z : C, z = affixe_vec (vec O M).
+Proof.
 intros.
 elim existence_affixe_point with (M := M); intros z H;
  try clear existence_affixe_point; try exact H.
@@ -126,6 +135,7 @@ Lemma cart_point_complexe2 :
  forall (z : C) (a b : R) (M : PO),
  vec O M = add_PP (mult_PP a (vec O I)) (mult_PP b (vec O J)) :>PP ->
  M = image z -> z = cons_cart a b.
+Proof.
 intros.
 eauto with geo.
 Qed.
@@ -135,6 +145,7 @@ Lemma complexe_cart_point2 :
  z = cons_cart a b ->
  M = image z ->
  vec O M = add_PP (mult_PP a (vec O I)) (mult_PP b (vec O J)) :>PP.
+Proof.
 intros.
 eauto with geo.
 Qed.
@@ -142,6 +153,7 @@ Qed.
  
 Lemma existence_parties_relles_imaginaires :
  forall z : C, exists a : R, (exists b : R, z = cons_cart a b).
+Proof.
 intros.
 elim existence_image_complexe with (z := z); intros M H1;
  try clear existence_image_complexe; try exact H1.
@@ -154,6 +166,7 @@ Qed.
 Lemma unicite_parties_relles_imaginaires :
  forall (z : C) (a b a' b' : R),
  z = cons_cart a b -> z = cons_cart a' b' -> a = a' /\ b = b'.
+Proof.
 intros.
 elim existence_image_complexe with (z := z); intros M H1;
  try clear existence_image_complexe; try exact H1.
@@ -165,6 +178,7 @@ Qed.
 Lemma egalite_point_image :
  forall (z z' : C) (M M' : PO),
  z = affixe M -> z' = affixe M' -> M = M' -> z = z'.
+Proof.
 intros.
 elim existence_parties_relles_imaginaires with (z := z); intros a H2; elim H2;
  intros b H3; try clear H2; try exact H3.
@@ -198,6 +212,7 @@ Qed.
 Lemma egalite_affixe_point :
  forall (z z' : C) (M M' : PO),
  z = affixe M -> z' = affixe M' -> z = z' -> M = M'.
+Proof.
 intros.
 elim existence_parties_relles_imaginaires with (z := z); intros a H2; elim H2;
  intros b H3; try clear H2; try exact H3.
@@ -221,6 +236,7 @@ apply complexe_cart_point with z'; auto.
 Qed.
  
 Lemma egalite_affixe : forall z z' : C, image z = image z' -> z = z'.
+Proof.
 intros.
 elim existence_image_complexe with (z := z); intros M H0; try exact H0.
 elim existence_image_complexe with (z := z'); intros M'; intros.

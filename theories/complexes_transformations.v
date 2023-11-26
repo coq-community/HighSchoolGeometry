@@ -21,6 +21,7 @@ Unset Strict Implicit.
 Lemma equation_equiv :
  forall a b z : C,
  z = Cplus (Cmult a z) b -> Cmult (Cplus oneC (Copp a)) z = b.
+Proof.
 intros.
 replace b with (Cplus z (Copp (Cmult a z))).
 ring.
@@ -31,12 +32,14 @@ Qed.
 Lemma equation_equiv2 :
  forall a b z : C,
  Cmult (Cplus oneC (Copp a)) z = b -> z = Cplus (Cmult a z) b.
+Proof.
 intros.
 rewrite <- H; ring.
 Qed.
  
 Lemma nonzero_amoins_un :
  forall a : C, a <> oneC -> Cplus oneC (Copp a) <> zeroC.
+Proof.
 intros.
 red in |- *; intros; apply H.
 replace a with (Cplus a zeroC); [ idtac | ring ].
@@ -46,6 +49,7 @@ Qed.
  
 Lemma existence_solution_equation :
  forall a b : C, a <> oneC -> exists z : C, z = Cplus (Cmult a z) b.
+Proof.
 intros.
 cut (Cplus oneC (Copp a) <> zeroC); intros; auto with geo.
 cut (exists z : C, Cmult (Cplus oneC (Copp a)) z = b); intros.
@@ -63,6 +67,7 @@ Qed.
 Lemma unicite_solution_equation :
  forall a b z z' : C,
  a <> oneC -> z = Cplus (Cmult a z) b -> z' = Cplus (Cmult a z') b -> z = z'.
+Proof.
 intros.
 cut (Cplus z (Copp z') = zeroC); intros.
 replace z with (Cplus (Cplus z (Copp z')) z'); [ idtac | ring ].
@@ -82,6 +87,7 @@ Lemma existence_point_fixe_complexe :
  forall (a b : C) (f : C -> C),
  a <> oneC ->
  (forall z : C, f z = Cplus (Cmult a z) b) -> exists j : C, f j = j.
+Proof.
 intros.
 elim existence_solution_equation with (a := a) (b := b);
  [ intros z0 H1; try clear existence_solution_equation; try exact H1 | auto ].
@@ -96,6 +102,7 @@ Axiom
     forall (f : C -> C) (M : PO), transforme f M = image (f (affixe M)).
  
 Lemma image_affixe : forall M : PO, image (affixe M) = M.
+Proof.
 intros.
 elim existence_affixe_point with (M := M); intros z H;
  try clear existence_affixe_point; try exact H.
@@ -103,6 +110,7 @@ rewrite <- H; symmetry  in |- *; auto with geo.
 Qed.
  
 Lemma affixe_image : forall z : C, affixe (image z) = z.
+Proof.
 intros.
 elim existence_image_complexe with (z := z); intros M H;
  try clear existence_image_complexe; try exact H.
@@ -112,18 +120,21 @@ Qed.
  
 Lemma transforme_image :
  forall (f : C -> C) (z : C), transforme f (image z) = image (f z).
+Proof.
 intros.
 rewrite transforme_def; rewrite affixe_image; auto.
 Qed.
  
 Lemma affixe_transforme :
  forall (f : C -> C) (M : PO), affixe (transforme f M) = f (affixe M).
+Proof.
 intros.
 rewrite transforme_def; auto with geo.
 Qed.
  
 Lemma f_fonction_transforme :
  forall (f : C -> C) (z : C), f z = affixe (transforme f (image z)).
+Proof.
 intros.
 rewrite affixe_transforme; rewrite affixe_image; auto with geo.
 Qed.
@@ -136,12 +147,14 @@ Axiom g_def : forall M : PO, g M = transforme f M.
 Lemma explicitation :
  forall (z z' : C) (M M' : PO),
  z = affixe M -> z' = affixe M' -> M' = g M -> z' = Cplus (Cmult a z) b.
+Proof.
 intros.
 rewrite H0; rewrite H1; rewrite g_def.
 rewrite affixe_transforme; rewrite <- H; rewrite f_def; auto.
 Qed.
  
 Lemma existence_point_fixe_g : a <> oneC -> exists J : PO, g J = J.
+Proof.
 intros.
 elim existence_point_fixe_complexe with (a := a) (b := b) (f := f);
  [ intros j H0; try clear existence_point_fixe_complexe; try exact H0
@@ -155,6 +168,7 @@ Qed.
 Lemma equation_solution :
  forall z z' j : C,
  z' = f z -> f j = j -> Cplus z' (Copp j) = Cmult a (Cplus z (Copp j)).
+Proof.
 intros z z' j; try assumption.
 repeat rewrite f_def; intros.
 rewrite H.
@@ -163,6 +177,7 @@ rewrite <- H0; ring.
 Qed.
  
 Lemma point_fixe_gf : forall M : PO, g M = M -> f (affixe M) = affixe M.
+Proof.
 intros M; try assumption.
 repeat rewrite g_def; intros.
 pattern M at 2 in |- *.
@@ -174,6 +189,7 @@ Lemma un_module_a_rotation :
  forall x : R,
  a <> oneC ->
  a = cons_pol 1 x -> exists J : PO, (forall M : PO, g M = rotation J x M).
+Proof.
 intros.
 elim existence_point_fixe_g;
  [ intros J H1; try clear existence_point_fixe_g; try exact H1 | auto ].
@@ -193,6 +209,7 @@ Qed.
  
 Lemma a_oneC_translation :
  a = oneC -> exists A : PO, (forall M : PO, g M = translation O A M).
+Proof.
 intros.
 elim existence_image_complexe with (z := b); intros A H1;
  try clear existence_image_complexe; try exact H1.
@@ -210,6 +227,7 @@ Lemma un_module_a_deplacement :
  module a = 1 ->
  (exists A : PO, (forall M : PO, g M = translation O A M)) \/
  (exists J : PO, (exists x : R, (forall M : PO, g M = rotation J x M))).
+Proof.
 intros.
 elim (classic (a = oneC)); intros.
 left; try assumption.
@@ -234,6 +252,7 @@ Lemma cas_a_reel_homothetie :
  forall x : R,
  a <> oneC ->
  a = Rinj x -> ex (fun J : PO => forall M : PO, g M = homothetie x J M).
+Proof.
 intros.
 elim existence_point_fixe_g;
  [ intros J H1; try clear existence_point_fixe_g; try exact H1 | auto ].
@@ -257,6 +276,7 @@ Lemma cas_a_nonzero_nonone :
  a <> oneC ->
  a = cons_pol r x ->
  ex (fun J : PO => forall M : PO, g M = similitude J r x M).
+Proof.
 intros r x H H20 H0; try assumption.
 elim existence_point_fixe_g;
  [ intros J H1; try clear existence_point_fixe_g; try exact H1 | auto ].
@@ -280,6 +300,7 @@ Theorem cas_general_deplacement_similitude :
   ex (fun J : PO => ex (fun x : R => forall M : PO, g M = rotation J x M))) \/
  (exists r : R,
     (exists x : R, (exists J : PO, (forall M : PO, g M = similitude J r x M)))).
+Proof.
 intros.
 elim existence_forme_polaire with (z := a);
  [ intros r H0; elim H0; intros x H1; elim H1; intros H2 H3; try clear H1 H0;

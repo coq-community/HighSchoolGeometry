@@ -20,6 +20,7 @@ Unset Strict Implicit.
  
 Lemma Rinv_calcul :
  forall x y : R, x <> 0 :>R -> x * y = 1 :>R -> / x = y :>R.
+Proof.
 intros.
 apply Rmult_eq_reg_l with x; auto.
 rewrite H0; auto with real.
@@ -36,6 +37,7 @@ Axiom
 Lemma Cplus_algebrique :
  forall x1 y1 x2 y2 : R,
  Cplus (cons_cart x1 y1) (cons_cart x2 y2) = cons_cart (x1 + x2) (y1 + y2).
+Proof.
 intros.
 rewrite
  (Cplus_def (z1:=cons_cart x1 y1) (z2:=cons_cart x2 y2) (x1:=x1) (y1:=y1)
@@ -44,6 +46,7 @@ Qed.
 #[export] Hint Resolve Cplus_algebrique: geo.
  
 Lemma Cplus_commutative : forall z1 z2 : C, Cplus z1 z2 = Cplus z2 z1.
+Proof.
 intros.
 elim existence_parties_relles_imaginaires with (z := z1); intros x1 H; elim H;
  intros y1 H0; try clear H; try exact H0.
@@ -58,6 +61,7 @@ replace (y1 + y2) with (y2 + y1); [ auto | ring ].
 Qed.
  
 Lemma Cplus_z_zeroC : forall z : C, Cplus z zeroC = z.
+Proof.
 intros.
 elim existence_parties_relles_imaginaires with (z := z); intros x1 H; elim H;
  intros y1 H0; try clear H; try exact H0.
@@ -69,6 +73,7 @@ Qed.
  
 Lemma Cplus_associative :
  forall z1 z2 z3 : C, Cplus z1 (Cplus z2 z3) = Cplus (Cplus z1 z2) z3.
+Proof.
 intros.
 elim existence_parties_relles_imaginaires with (z := z1); intros x1 H; elim H;
  intros y1 H0; try clear H; try exact H0.
@@ -100,11 +105,13 @@ Axiom
  
 Lemma Copp_algebrique :
  forall x y : R, Copp (cons_cart x y) = cons_cart (- x) (- y).
+Proof.
 intros.
 rewrite (Copp_def (z:=cons_cart x y) (x:=x) (y:=y)); auto.
 Qed.
  
 Lemma Cplus_z_oppz : forall z : C, Cplus z (Copp z) = zeroC.
+Proof.
 intros.
 elim existence_parties_relles_imaginaires with (z := z); intros x1 H; elim H;
  intros y1 H0; try clear H; try exact H0.
@@ -127,12 +134,14 @@ Axiom
     z' <> zeroC -> argument (Cmult z z') = plus (argument z) (argument z').
  
 Lemma Cmult_zeroC_z : forall z : C, Cmult zeroC z = zeroC.
+Proof.
 intros.
 apply module_nul_zeroC.
 rewrite Cmult_module; rewrite module_zeroC; ring.
 Qed.
  
 Lemma Cmult_z_zeroC : forall z : C, Cmult z zeroC = zeroC.
+Proof.
 intros.
 apply module_nul_zeroC.
 rewrite Cmult_module; rewrite module_zeroC; ring.
@@ -140,6 +149,7 @@ Qed.
  
 Lemma nonzero_produit :
  forall z z' : C, z <> zeroC -> z' <> zeroC -> Cmult z z' <> zeroC.
+Proof.
 intros.
 apply nonzero_module.
 rewrite Cmult_module.
@@ -155,6 +165,7 @@ Lemma Cmult_z_z' :
  z' <> zeroC ->
  z = cons_pol r a ->
  z' = cons_pol r' a' -> Cmult z z' = cons_pol (r * r') (a + a').
+Proof.
 intros.
 apply forme_polaire_def; auto with geo.
 rewrite Cmult_module.
@@ -167,6 +178,7 @@ Qed.
 #[export] Hint Resolve Cmult_z_z': geo.
  
 Lemma Cmult_commutative : forall z z' : C, Cmult z z' = Cmult z' z.
+Proof.
 intros.
 elim (classic (z = zeroC)); intros.
 rewrite H; rewrite Cmult_zeroC_z; rewrite Cmult_z_zeroC; auto.
@@ -190,6 +202,7 @@ Qed.
  
 Lemma Cmult_associative :
  forall z1 z2 z3 : C, Cmult z1 (Cmult z2 z3) = Cmult (Cmult z1 z2) z3.
+Proof.
 intros.
 elim (classic (z1 = zeroC)); intros.
 rewrite H.
@@ -218,6 +231,7 @@ replace (a + (a0 + a1)) with (a + a0 + a1); [ auto | ring ].
 Qed.
  
 Lemma Cmult_z_oneC : forall z : C, Cmult z oneC = z.
+Proof.
 intros.
 elim (classic (z = zeroC)); intros.
 rewrite H.
@@ -232,6 +246,7 @@ Definition Csqr (z : C) := Cmult z z.
 #[export] Hint Unfold Csqr: geo.
  
 Lemma i_carre : Csqr i = Rinj (-1).
+Proof.
 unfold Csqr in |- *.
 apply egalite_forme_polaire; auto with geo.
 rewrite Cmult_module; rewrite module_opp_un; rewrite module_i; ring.
@@ -244,6 +259,7 @@ Theorem Cmult_algebrique :
  forall x1 y1 x2 y2 : R,
  Cmult (cons_cart x1 y1) (cons_cart x2 y2) =
  cons_cart (x1 * x2 + - (y1 * y2)) (y1 * x2 + x1 * y2).
+Proof.
 intros.
 elim (classic (cons_cart x1 y1 = zeroC)); intros.
 elim algebrique_zeroC with (a := x1) (b := y1);
@@ -304,6 +320,7 @@ Qed.
 Theorem Cmult_distributive :
  forall z1 z2 z3 : C,
  Cmult z1 (Cplus z2 z3) = Cplus (Cmult z1 z2) (Cmult z1 z3).
+Proof.
 intros.
 elim existence_parties_relles_imaginaires with (z := z1); intros a1 H; elim H;
  intros b1 H0; try clear H; try exact H0.
@@ -322,12 +339,14 @@ replace (b1 * (a2 + a3) + a1 * (b2 + b3)) with
 Qed.
  
 Lemma Cplus_zeroC_z : forall z : C, Cplus zeroC z = z.
+Proof.
 intros.
 rewrite Cplus_commutative; auto with geo.
 Qed.
 #[export] Hint Resolve Cmult_z_oneC: geo.
  
 Lemma Cmult_oneC_z : forall z : C, Cmult oneC z = z.
+Proof.
 intros.
 rewrite Cmult_commutative; auto with geo.
 Qed.
@@ -335,6 +354,7 @@ Qed.
 Lemma Cmult_distributive_r :
  forall z1 z2 z3 : C,
  Cmult (Cplus z1 z2) z3 = Cplus (Cmult z1 z3) (Cmult z2 z3).
+Proof.
 intros.
 rewrite Cmult_commutative; rewrite Cmult_distributive.
 rewrite Cmult_commutative; rewrite (Cmult_commutative z3 z2); auto with geo.
@@ -342,6 +362,7 @@ Qed.
  
 Lemma CTheory :
  ring_theory zeroC oneC Cplus Cmult Cminus Copp (eq(A:=C)).
+Proof.
 split.
 exact Cplus_zeroC_z.
 exact Cplus_commutative.
@@ -357,6 +378,7 @@ Add Ring Cring : CTheory.
  
 Lemma algebrique_operations :
  forall x y : R, cons_cart x y = Cplus (Rinj x) (Cmult i (Rinj y)).
+Proof.
 unfold i in |- *; unfold Rinj in |- *; intros.
 rewrite Cmult_algebrique; rewrite Cplus_algebrique.
 replace (x + (0 * y + - (1 * 0))) with x; [ idtac | ring ].
@@ -365,6 +387,7 @@ Qed.
  
 Lemma existence_inverse :
  forall z : C, z <> zeroC -> exists z' : C, Cmult z z' = oneC.
+Proof.
 intros.
 elim existence_forme_polaire with (z := z);
  [ intros r H1; elim H1; intros a H2; elim H2; intros H3 H4; try clear H2 H1;
@@ -389,6 +412,7 @@ Qed.
 Lemma unicite_inverse :
  forall z z1 z2 : C,
  z <> zeroC -> Cmult z z1 = oneC -> Cmult z z2 = oneC -> z1 = z2.
+Proof.
 intros.
 cut (module z * module z1 = 1); intros.
 cut (module z * module z2 = 1); intros.
@@ -419,6 +443,7 @@ rewrite H2; discrR.
 rewrite <- Cmult_module; rewrite H1; rewrite <- module_oneC; auto.
 rewrite <- Cmult_module; rewrite H0; rewrite <- module_oneC; auto.
 Qed.
+
 Parameter Cinv : C -> C.
  
 Axiom Cinv_def : forall z : C, z <> zeroC -> Cmult z (Cinv z) = oneC.
@@ -427,6 +452,7 @@ Axiom
   Cinv_def2 : forall z z' : C, z <> zeroC -> Cmult z z' = oneC -> Cinv z = z'.
  
 Lemma Cinv_l : forall z : C, z <> zeroC -> Cmult (Cinv z) z = oneC.
+Proof.
 intros.
 rewrite <- (Cinv_def (z:=z)); auto.
 ring.
@@ -434,6 +460,7 @@ Qed.
 #[export] Hint Resolve Cinv_def Cinv_def2 Cinv_l: geo.
  
 Lemma Cinv_module : forall z : C, z <> zeroC -> module (Cinv z) = / module z.
+Proof.
 intros.
 cut (module z * module (Cinv z) = 1); intros.
 cut (module z <> 0); intros; auto with geo.
@@ -444,6 +471,7 @@ Qed.
 #[export] Hint Resolve Cinv_module: geo.
  
 Lemma inv_nonzero : forall z : C, z <> zeroC -> Cinv z <> zeroC.
+Proof.
 intros.
 apply nonzero_module.
 rewrite Cinv_module; auto with geo.
@@ -454,6 +482,7 @@ Qed.
  
 Lemma Cinv_argument :
  forall z : C, z <> zeroC -> argument (Cinv z) = opp (argument z).
+Proof.
 intros.
 cut (Cinv z <> zeroC); intros; auto with geo.
 cut (plus (argument z) (argument (Cinv z)) = image_angle 0); intros.
@@ -470,6 +499,7 @@ Axiom
  
 Lemma Cdiv_module :
  forall z z' : C, z' <> zeroC -> module (Cdiv z z') = module z * / module z'.
+Proof.
 intros.
 rewrite Cdiv_def; auto with geo.
 rewrite Cmult_module; rewrite Cinv_module; auto.
@@ -480,6 +510,7 @@ Lemma Cdiv_argument :
  forall z z' : C,
  z <> zeroC ->
  z' <> zeroC -> argument (Cdiv z z') = plus (argument z) (opp (argument z')).
+Proof.
 intros.
 rewrite Cdiv_def; auto with geo.
 rewrite Cmult_argument; auto with geo.
@@ -489,6 +520,7 @@ Qed.
  
 Lemma Cintegre :
  forall z z' : C, z <> zeroC -> Cmult z z' = zeroC -> z' = zeroC.
+Proof.
 intros.
 replace z' with (Cmult (Cmult (Cinv z) z) z')
   by (rewrite Cinv_l; trivial; ring).
@@ -498,23 +530,27 @@ rewrite H0; ring.
 Qed.
  
 Lemma module_un_nonzero : forall a : R, cons_pol 1 a <> zeroC.
+Proof.
 intros.
 apply polaire_non_nul; try discrR.
 Qed.
 #[export] Hint Resolve module_un_nonzero: geo.
  
 Lemma module_un_trivial : forall a : R, module (cons_pol 1 a) = 1.
+Proof.
 intros; auto with geo.
 Qed.
  
 Lemma argument_module_un :
  forall a : R, argument (cons_pol 1 a) = image_angle a.
+Proof.
 intros.
 rewrite (complexe_polaire_argument (r:=1) a); intros; auto with geo.
 Qed.
  
 Lemma polaire_produit :
  forall r a : R, r <> 0 -> cons_pol r a = Cmult (Rinj r) (cons_pol 1 a).
+Proof.
 intros.
 apply egalite_forme_polaire; auto with geo.
 rewrite Cmult_module; rewrite module_un_trivial; rewrite module_reel;
@@ -536,6 +572,7 @@ Qed.
 Lemma affixe_vec_AB :
  forall (a b : C) (A B : PO),
  a = affixe A -> b = affixe B -> Cplus b (Copp a) = affixe_vec (vec A B).
+Proof.
 intros.
 elim existence_parties_relles_imaginaires with (z := a); intros a1 H2;
  elim H2; intros a2 H3; try clear H2; try exact H3.
@@ -566,6 +603,7 @@ Qed.
  
 Lemma affixe_vec_AB_affixes :
  forall A B : PO, affixe_vec (vec A B) = Cplus (affixe B) (Copp (affixe A)).
+Proof.
 intros.
 elim existence_affixe_point with (M := A); intros a H; try exact H.
 elim existence_affixe_point with (M := B); intros b; intros.
@@ -577,6 +615,7 @@ Qed.
 Lemma module_difference :
  forall (a b : C) (A B : PO),
  a = affixe A -> b = affixe B -> module (Cplus b (Copp a)) = distance A B.
+Proof.
 intros.
 cut (Cplus b (Copp a) = affixe_vec (vec A B)); intros.
 elim existence_representant_vecteur with (A := O) (B := A) (C := B);
@@ -593,6 +632,7 @@ Lemma argument_difference :
  A <> B ->
  a = affixe A ->
  b = affixe B -> argument (Cplus b (Copp a)) = cons_AV (vec O I) (vec A B).
+Proof.
 intros.
 cut (Cplus b (Copp a) = affixe_vec (vec A B)); intros.
 elim existence_representant_vecteur with (A := O) (B := A) (C := B); intros D;
@@ -612,6 +652,7 @@ Qed.
 Lemma diff_nonzero :
  forall (a b : C) (A B : PO),
  a = affixe A -> b = affixe B -> A <> B :>PO -> Cplus b (Copp a) <> zeroC.
+Proof.
 intros.
 apply nonzero_module.
 rewrite (module_difference (a:=a) (b:=b) (A:=A) (B:=B)); auto with geo.
@@ -627,6 +668,7 @@ Lemma module_quotient :
  e = affixe E ->
  module (Cdiv (Cplus b (Copp a)) (Cplus e (Copp d))) =
  distance A B * / distance D E.
+Proof.
 intros.
 rewrite Cdiv_def.
 rewrite Cmult_module; rewrite Cinv_module; auto with geo.
@@ -647,6 +689,7 @@ Lemma argument_quotient :
  e = affixe E ->
  argument (Cdiv (Cplus b (Copp a)) (Cplus e (Copp d))) =
  cons_AV (vec D E) (vec A B).
+Proof.
 intros.
 cut (Cplus b (Copp a) <> zeroC); intros.
 cut (Cplus e (Copp d) <> zeroC); intros.

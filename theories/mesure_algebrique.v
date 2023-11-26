@@ -31,6 +31,7 @@ Axiom
     col_vec A B C D -> vec C D = mult_PP k (vec A B) :>PP.
  
 Lemma mes_alg_BA : forall A B : PO, mes_alg B A = - mes_alg A B :>R.
+Proof.
 intros.
 RReplace (- mes_alg A B) (-1 * mes_alg A B).
 apply def_mes_alg.
@@ -38,6 +39,7 @@ Ringvec.
 Qed.
  
 Lemma mes_alg_nulle : forall A B : PO, mes_alg A B = 0 :>R -> A = B.
+Proof.
 intros.
 apply vecteur_nul_conf.
 replace zero with (mult_PP 0 (vec A B)).
@@ -50,6 +52,7 @@ Ringvec.
 Qed.
  
 Lemma mes_alg_conf : forall A B : PO, A = B -> mes_alg A B = 0 :>R.
+Proof.
 intros.
 rewrite H.
 replace 0 with (0 * mes_alg A A).
@@ -61,6 +64,7 @@ Qed.
  
 Lemma Chasles_mes_alg :
  forall A B C : PO, alignes A B C -> mes_alg A B + mes_alg B C = mes_alg A C.
+Proof.
 intros.
 halignes H k.
 rewrite (mes_alg_conf (A:=B) (B:=B)); auto; ring.
@@ -78,6 +82,7 @@ Qed.
 Lemma existence_mes_algebrique :
  forall (k : R) (A B : PO),
  exists C : PO, alignes A B C /\ mes_alg A C = k * mes_alg A B.
+Proof.
 intros.
 elim
  existence_representant_mult_vecteur with (A := A) (B := A) (C := B) (k := k);
@@ -92,6 +97,7 @@ Qed.
 Lemma vecteur_quotient_mes_algebrique :
  forall (A B C D : PO) (k : R),
  A <> B -> vec C D = mult_PP k (vec A B) -> mes_alg C D / mes_alg A B = k.
+Proof.
 intros.
 rewrite (def_mes_alg H0); auto.
 field.
@@ -104,6 +110,7 @@ Lemma quotient_mes_algebrique_vecteur :
  A <> B ->
  col_vec A B C D ->
  mes_alg C D / mes_alg A B = k -> vec C D = mult_PP k (vec A B).
+Proof.
 intros.
 apply def_mes_alg2; auto.
 assert (mes_alg A B <> 0).
@@ -121,6 +128,7 @@ Lemma colineaire_mes_alg_conf :
  col_vec A B A C ->
  col_vec A B A D ->
  mes_alg A C = k * mes_alg A B -> mes_alg A D = k * mes_alg A B -> C = D.
+Proof.
 intros.
 assert (vec A C = mult_PP k (vec A B)); auto with geo.
 assert (vec A D = mult_PP k (vec A B)); auto with geo.
@@ -134,6 +142,7 @@ Lemma barycentre_mes_alg :
  a + b <> 0 :>R ->
  G = barycentre (cons a A) (cons b B) :>PO ->
  a * mes_alg G A + b * mes_alg G B = 0 :>R.
+Proof.
 intros.
 cut (a <> 0 \/ b <> 0); intros.
 elim H1; [ intros H2; try clear H1 | intros H2; try clear H1; try exact H2 ].

@@ -28,6 +28,7 @@ Lemma double_Chasles :
  plus (double_AV (cons_AV (vec A B) (vec C D)))
    (double_AV (cons_AV (vec C D) (vec E F))) =
  double_AV (cons_AV (vec A B) (vec E F)) :>AV.
+Proof.
 unfold double_AV in |- *.
 intros.
 replace
@@ -48,6 +49,7 @@ Lemma double_opp :
  C <> D :>PO ->
  double_AV (opp (cons_AV (vec A B) (vec C D))) =
  opp (double_AV (cons_AV (vec A B) (vec C D))) :>AV.
+Proof.
 unfold double_AV in |- *; intros.
 rewrite <- opp_plus_plus_opp; auto.
 Qed.
@@ -58,6 +60,7 @@ Lemma zero_plus_double :
  C <> D :>PO ->
  plus (image_angle 0) (double_AV (cons_AV (vec A B) (vec C D))) =
  double_AV (cons_AV (vec A B) (vec C D)) :>AV.
+Proof.
 intros.
 replace (image_angle 0) with (double_AV (cons_AV (vec A B) (vec A B))).
 rewrite double_Chasles; auto.
@@ -73,6 +76,7 @@ Lemma angle_alignes :
  A <> B :>PO ->
  A <> C :>PO ->
  alignes A B C -> double_AV (cons_AV (vec A B) (vec A C)) = image_angle 0.
+Proof.
 intros A B C H H0 H1; unfold double_AV in |- *.
 rewrite angles_representants_unitaires; auto.
 elim alignes_representant_unitaire with (A := A) (B := B) (C := C);
@@ -108,6 +112,7 @@ Lemma angle_droites_paralleles :
  C <> D :>PO ->
  paralleles (droite C D) (droite A B) ->
  double_AV (cons_AV (vec A B) (vec C D)) = image_angle 0.
+Proof.
 intros.
 elim paralleles_vecteur with (A := C) (B := D) (C := A) (D := B);
  [ intros k H3; try clear paralleles_vecteur; auto | auto | auto | auto ].
@@ -138,6 +143,7 @@ Lemma alignement_et_angles :
  alignes D E F ->
  double_AV (cons_AV (vec A B) (vec D E)) =
  double_AV (cons_AV (vec A C) (vec D F)) :>AV.
+Proof.
 intros; unfold double_AV in |- *.
 rewrite angles_representants_unitaires; auto.
 rewrite angles_representants_unitaires; auto.
@@ -271,6 +277,7 @@ Lemma egalite_angles_droites :
  alignes A B C ->
  alignes D E F ->
  cons_AD (droite A B) (droite D E) = cons_AD (droite A C) (droite D F) :>AD.
+Proof.
 intros.
 apply AV_vers_AD; auto.
 apply alignement_et_angles; auto.
@@ -285,6 +292,7 @@ Lemma angles_droites_colinearite :
  vec E F = mult_PP k1 (vec A B) :>PP ->
  vec G I = mult_PP k2 (vec C D) :>PP ->
  cons_AD (droite A B) (droite C D) = cons_AD (droite E F) (droite G I) :>AD.
+Proof.
 intros.
 apply AV_vers_AD; auto.
 cut (k1 <> 0); intros.
@@ -331,6 +339,7 @@ Lemma angles_et_colinearite :
  vec G I = mult_PP k2 (vec C D) :>PP ->
  double_AV (cons_AV (vec A B) (vec C D)) =
  double_AV (cons_AV (vec E F) (vec G I)) :>AV.
+Proof.
 intros A B C D E F G I k1 k2 H H0 H1 H2 H3 H4; try assumption.
 cut (k1 <> 0); intros.
 cut (k2 <> 0).
@@ -376,6 +385,7 @@ Lemma angles_et_paralleles :
  paralleles (droite G I) (droite C D) ->
  double_AV (cons_AV (vec A B) (vec C D)) =
  double_AV (cons_AV (vec E F) (vec G I)) :>AV.
+Proof.
 intros A B C D E F G I H H0 H1 H2 H3 H4; try assumption.
 elim (paralleles_vecteur (A:=E) (B:=F) (C:=A) (D:=B)); auto.
 intros x H5; try assumption.
@@ -393,6 +403,7 @@ Lemma angles_droites_paralleles :
  paralleles (droite E F) (droite A B) ->
  paralleles (droite G I) (droite C D) ->
  cons_AD (droite A B) (droite C D) = cons_AD (droite E F) (droite G I) :>AD.
+Proof.
 intros A B C D E F G I H H0 H1 H2 H3 H4; try assumption.
 elim (paralleles_vecteur (A:=E) (B:=F) (C:=A) (D:=B)); auto.
 intros x H5; try assumption.
@@ -407,6 +418,7 @@ Lemma angle_non_paralleles :
  C <> D :>PO ->
  double_AV (cons_AV (vec A B) (vec C D)) <> image_angle 0 :>AV ->
  ~ paralleles (droite C D) (droite A B).
+Proof.
 intros; red in |- *; intros.
 apply H1; apply angle_droites_paralleles; auto.
 Qed.
@@ -423,6 +435,7 @@ Lemma existence_orthogonal :
  forall A B : PO,
  A <> B :>PO ->
  ex (fun C : PO => A <> C :>PO /\ orthogonal (vec A B) (vec A C)).
+Proof.
 intros.
 elim existence_representant_unitaire with (A := A) (B := B);
  [ intros D H0; try clear existence_representant_unitaire; try exact H0
@@ -453,6 +466,7 @@ Lemma orthogonal_angles :
  C <> D :>PO ->
  orthogonal (vec A B) (vec C D) ->
  double_AV (cons_AV (vec A B) (vec C D)) = image_angle pi.
+Proof.
 intros.
 elim existence_representant_unitaire with (A := A) (B := B);
  [ intros E H2; try clear existence_representant_unitaire; try exact H2
@@ -493,6 +507,7 @@ Lemma angles_orthogonal :
  C <> D :>PO ->
  double_AV (cons_AV (vec A B) (vec C D)) = image_angle pi :>AV ->
  orthogonal (vec A B) (vec C D).
+Proof.
 intros.
 soit_orthogonal A B E.
 apply ortho_sym.
@@ -518,6 +533,7 @@ Lemma angles_droites_orthogonales :
  orthogonal (vec C D) (vec G I) ->
  double_AV (cons_AV (vec E F) (vec G I)) =
  double_AV (cons_AV (vec A B) (vec C D)).
+Proof.
 unfold double_AV in |- *; intros.
 replace (cons_AV (vec A B) (vec C D)) with
  (plus (plus (cons_AV (vec A B) (vec E F)) (cons_AV (vec E F) (vec G I)))
@@ -559,6 +575,7 @@ Lemma angles_droites_droites_orthogonales :
  orthogonal (vec A B) (vec E F) ->
  orthogonal (vec C D) (vec G I) ->
  cons_AD (droite E F) (droite G I) = cons_AD (droite A B) (droite C D).
+Proof.
 intros.
 apply AV_vers_AD; auto.
 apply angles_droites_orthogonales; auto.
@@ -569,6 +586,7 @@ Lemma alignes_angle :
  A <> B :>PO ->
  A <> C :>PO ->
  double_AV (cons_AV (vec A B) (vec A C)) = image_angle 0 -> alignes A B C.
+Proof.
 intros.
 cut (paralleles (droite A B) (droite A C)); intros.
 elim (paralleles_vecteur (A:=A) (B:=B) (C:=A) (D:=C)); auto; intros.
@@ -583,6 +601,7 @@ Lemma non_alignes_angle :
  A <> C :>PO ->
  ~ alignes A B C ->
  double_AV (cons_AV (vec A B) (vec A C)) <> image_angle 0 :>AV.
+Proof.
 red in |- *; intros.
 apply H1.
 apply alignes_angle; auto with geo.
@@ -594,6 +613,7 @@ Lemma angle_non_alignes :
  A <> C :>PO ->
  double_AV (cons_AV (vec A B) (vec A C)) <> image_angle 0 :>AV ->
  ~ alignes A B C.
+Proof.
 intros.
 cut (~ paralleles (droite A C) (droite A B)); intros.
 red in |- *; intros; apply H2.
@@ -607,6 +627,7 @@ Lemma alignement_triangle :
  A <> D :>PO ->
  A <> E :>PO ->
  triangle A B C -> alignes A B D -> alignes A C E -> triangle A D E.
+Proof.
 intros.
 deroule_triangle A B C.
 apply angle_non_alignes; auto with geo.

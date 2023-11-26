@@ -8,6 +8,7 @@ forall (A B C M N :PO),
          vecEntreDeuxVec A B C M -> A<>N->
          cons_AV ( vec A B) (vec A M) = cons_AV (vec A N) (vec A C) ->
          vecEntreDeuxVec A B C N.
+Proof.
 intros A B C M N H H0 H1.
 unfold vecEntreDeuxVec in *.
 assert (H2: A<>B /\ A<>C /\ A<>M).
@@ -37,6 +38,7 @@ Qed.
 Lemma EntreDeuxPoint :
 forall ( A B M :PO),
           positifColineaire A B M -> positifColineaire B A M -> distance A B = distance A M + distance M B.
+Proof.
 intros A B M H0 H1.
 destruct H0 as [k [H2 [H3 H4]]].
 destruct H1 as [k' [H5 [H6 H7]]].
@@ -90,6 +92,7 @@ droites_non_paralleles *)
 forall (A B C D :PO),
           vecEntreDeuxVec A B C D ->
           exists E :PO, alignes A D E /\ alignes B C E.
+Proof.
 intros A B C D H.
 assert (H0 : ~alignes A D B /\ A <>D)
  by(destruct H as [[_ [H2 _]]|[_ [_ H2]]];deroule_orient H2;auto with geo).
@@ -149,6 +152,7 @@ Lemma  angles_representants_unitaires_r :
     cons_AV (vec A B) (vec C D) =
     cons_AV  (vec A B)
       (representant_unitaire (vec C D)).
+Proof.
 intros A B C D E F H H0.
 assert (H1: cons_AV (vec A B)(vec C D) =
     cons_AV (representant_unitaire (vec A B))(representant_unitaire(vec C D))).
@@ -181,6 +185,7 @@ Lemma  angles_representants_unitaires2 :
     C <> D ->
     cons_AV (vec A B) (vec C D) =
     cons_AV (representant_unitaire (vec A B)) (vec C D).
+Proof.
 intros A B C D E F H H0.
 assert (H1: cons_AV (vec A B)(vec C D) =
     cons_AV (representant_unitaire (vec A B))(representant_unitaire(vec C D))).
@@ -212,6 +217,7 @@ forall (A B C D :PO),
           vecEntreDeuxVec A B C D ->
           exists E :PO, cons_AV ( vec A B) (vec A E) = cons_AV (vec A D) (vec A C)
                                /\  positifColineaire B C E /\ positifColineaire C B E.
+Proof.
 intros A B C D H.
 assert (H1: A<>B /\ A<>C /\ A<>D).
 elim H;intros [H2[H3 H4]];
@@ -266,6 +272,7 @@ end.
 Lemma sont_cocycliques_avec_ordre_cycle:
 forall (A B C D :PO),
          sont_cocycliques A B C D ->sont_cocycliques B C D A.
+Proof.
 intros A B C D H.
 deroule_sont_cocycliques .
 unfold sont_cocycliques .
@@ -281,6 +288,7 @@ Qed.
 Lemma sont_cocycliques_avec_ordre_permute:
 forall (A B C D :PO),
          sont_cocycliques A B C D ->sont_cocycliques A B D C.
+Proof.
 intros A B C D H.
 deroule_sont_cocycliques .
 unfold sont_cocycliques .
@@ -296,7 +304,8 @@ forall (A B C D : PO),
          orient A B C -> orient A B D -> orient C D A -> orient C D B ->
          sont_cocycliques A B C D ->
          (distance A B  * distance C D ) + (distance B C *distance D A) =
-              distance A C  * distance B D .
+              distance A C  * distance B D.
+Proof.
 intros A B C D H0 H1 H2 H3 H4.
 assert ( H5: A<>B /\ A<>C /\ ~alignes A B C).
 deroule_orient H0;repeat split;auto.

@@ -23,6 +23,7 @@ Definition mediatrice (A B M : PO) := distance M A = distance M B :>R.
  
 Lemma mediatrice_permute :
  forall A B M : PO, mediatrice A B M -> mediatrice B A M.
+Proof.
 unfold mediatrice in |- *; intros.
 rewrite H; auto.
 Qed.
@@ -30,6 +31,7 @@ Qed.
  
 Lemma milieu_mediatrice :
  forall A B M : PO, M = milieu A B :>PO -> mediatrice A B M.
+Proof.
 red in |- *; intros.
 cut (vec A M = vec M B); intros; auto with geo.
 Qed.
@@ -37,6 +39,7 @@ Qed.
 Lemma alignes_mediatrice_milieu :
  forall A B M : PO,
  A <> B -> alignes A B M -> mediatrice A B M -> M = milieu A B :>PO.
+Proof.
 unfold mediatrice in |- *; intros.
 halignes H0 k.
 cut (k = / 2); intros.
@@ -74,6 +77,7 @@ Lemma mediatrice_projete_orthogonal :
  A <> B :>PO ->
  H = projete_orthogonal A B M :>PO ->
  mediatrice A B M -> distance H A = distance H B :>R.
+Proof.
 unfold mediatrice in |- *; intros.
 generalize (Pythagore_projete_orthogonal (A:=A) (B:=B) (C:=M) (H:=H)); intros.
 elim H3; [ try clear H3; intros | auto | auto ].
@@ -93,6 +97,7 @@ Lemma mediatrice_projete_milieu :
  forall A B M H : PO,
  A <> B :>PO ->
  H = projete_orthogonal A B M :>PO -> mediatrice A B M -> H = milieu A B :>PO.
+Proof.
 intros.
 generalize (def_projete_orthogonal2 (A:=A) (B:=B) (C:=M) (H:=H)); intros.
 elim H3; [ intros; clear H3 | auto | auto ].
@@ -106,6 +111,7 @@ Lemma mediatrice_orthogonale_segment_milieu :
  A <> B :>PO ->
  M <> N :>PO ->
  M = milieu A B :>PO -> mediatrice A B N -> orthogonal (vec A B) (vec M N).
+Proof.
 intros A B M N H3 H0 H1 H2; try assumption.
 elim existence_projete_orthogonal with (A := A) (B := B) (C := N);
  [ intros H H4; try clear existence_projete_orthogonal; auto | auto ].
@@ -119,6 +125,7 @@ Lemma mediatrice_orthogonale_segment :
  forall A B M N : PO,
  A <> B :>PO ->
  mediatrice A B M -> mediatrice A B N -> orthogonal (vec M N) (vec A B).
+Proof.
 intros.
 discrimine M N.
 VReplace (vec N N) zero.
@@ -150,6 +157,7 @@ Lemma orthogonale_segment_milieu_mediatrice :
  forall A B M N : PO,
  A <> B :>PO ->
  M = milieu A B :>PO -> orthogonal (vec A B) (vec M N) -> mediatrice A B N.
+Proof.
 unfold mediatrice in |- *; intros.
 apply carre_egalite_distance.
 repeat rewrite <- carre_scalaire_distance.
@@ -179,6 +187,7 @@ Qed.
  
 Lemma mediatrice_distinct_extremite :
  forall A B M : PO, A <> B -> mediatrice A B M -> M <> A /\ M <> B.
+Proof.
 unfold mediatrice in |- *; intros.
 cut (~ (M = A \/ M = B)); intros.
 intuition.
@@ -206,6 +215,7 @@ Qed.
 Lemma existence_mediatrice :
  forall A B : PO,
  A <> B :>PO -> ex (fun J : PO => milieu A B <> J :>PO /\ mediatrice A B J).
+Proof.
 intros.
 soit_milieu A B M.
 soit_orthogonal M A J.
@@ -238,6 +248,7 @@ Lemma mediatrice_milieu_angles :
  M = milieu A B ->
  mediatrice A B N ->
  cons_AV (vec N A) (vec N M) = cons_AV (vec N M) (vec N B) :>AV.
+Proof.
 intros.
 elim mediatrice_distinct_extremite with (A := A) (B := B) (M := N);
  (auto; intros).
@@ -270,6 +281,7 @@ Lemma mediatrices_triangle_concours :
  I <> K :>PO ->
  J <> L :>PO ->
  mediatrice A B K -> mediatrice B C L -> concours (droite I K) (droite J L).
+Proof.
 intros.
 deroule_triangle A B C.
 lapply (position_relative_droites_coplanaires (A:=I) (B:=K) (C:=J) (D:=L));
@@ -296,6 +308,7 @@ Lemma mediatrice_droite :
  forall A B I J K : PO,
  A <> B :>PO ->
  I = milieu A B :>PO -> mediatrice A B J -> mediatrice A B K -> alignes I J K.
+Proof.
 intros.
 discrimine I J.
 discrimine J K.
